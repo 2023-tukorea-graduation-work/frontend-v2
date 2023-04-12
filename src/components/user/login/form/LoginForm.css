@@ -1,0 +1,33 @@
+MuiInput-root {
+    font-family: "NotoSansLight" !important;
+    border-radius: 3px;
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.05);
+    border: solid 1px #d6d6d6;
+    height: 4rem;
+    padding-left: 0.5%;
+  }
+  .MuiInputAdornment-root {
+    margin-left: 0.5rem;
+  }
+  .MuiButton-root {
+    height: 4rem;
+    color: #fff !important;
+  }
+  .menteee {
+    padding-left: 0.9rem;
+    font-size: 0.4rem;
+    color: #a7a7a7;
+  }
+  .MuiInputBase-input {
+    background-color: white;
+  }
+  
+  /* 밑에는 자동완성시 css가 변경되는걸 방지코드
+  https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete
+   */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+  }ß
