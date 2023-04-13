@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
-import { useAppSelector } from "../../../app/hook";
+import { useAppSelector } from "../../../store/hooks";
 
 interface ButtonProps {
   increaseStep: () => void;

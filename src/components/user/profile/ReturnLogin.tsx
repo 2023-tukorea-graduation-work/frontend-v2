@@ -41,5 +41,4 @@ const WhiteBox = styled.div`
   border-top-right-radius: 4rem;
   flex-direction: column;
 `;
-xw
 export default ReturnLogin;

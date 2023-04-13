@@ -1,12 +1,12 @@
 .MuiToggleButton-root {
-    background-color: #ebebeb !important;
-    border-radius: 10px !important;
-    color: #777777 !important;
-    border: 0 !important;
-    font-size: 1rem !important;
-    height: 2.438rem !important;
-  }
-  .Mui-selected {
-    background-color: #fff !important;
-    color: #ff6900 !important;
-  }
+  background-color: #ebebeb !important;
+  border-radius: 10px !important;
+  color: #777777 !important;
+  border: 0 !important;
+  font-size: 1rem !important;
+  height: 2.438rem !important;
+}
+.Mui-selected {
+  background-color: #fff !important;
+  color: #ff6900 !important;
+}

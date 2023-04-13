@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import leftbarReducer from "../features/leftBarSlice/leftBarSlice";
-import programListReducer from "../features/programListSlice/programListSlice";
-import programDetailReducer from "../features/programListDetailSlice/programListDetailSlice";
-import loginReducer from "../features/loginSlice/loginSlice";
+import leftbarReducer from "../slice/common/leftBarSlice";
+import programListReducer from "../slice/program/programListSlice";
+import programDetailReducer from "../slice/program/programDetailSlice";
+import loginReducer from "../slice/user/loginSlice";
 import {
   FLUSH,
   PAUSE,

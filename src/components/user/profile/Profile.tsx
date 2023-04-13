@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
 import ToggleButton from "@mui/material/ToggleButton";
-import "./MyPage.css";
-import MyProjectPreview from "./MyProjectPreview";
+import "./Profile.css";
 import { Button } from "@mui/material";
 import { lineHeight } from "@mui/system";
+import UserProfileProgram from "./UserProfileProgram";
 
 const Profile = () => {
   return (
@@ -47,13 +47,12 @@ const Profile = () => {
           </ToggleButton>
         </ToggleButtonGroup>
         <MyProjectList>
-          <MyProjectPreview></MyProjectPreview>
-          <MyProjectPreview></MyProjectPreview>
-          <MyProjectPreview></MyProjectPreview>
-          <MyProjectPreview></MyProjectPreview>
-          <MyProjectPreview></MyProjectPreview>
-          <MyProjectPreview></MyProjectPreview>
-          <MyProjectPreview></MyProjectPreview>
+          <UserProfileProgram></UserProfileProgram>
+          <UserProfileProgram></UserProfileProgram>
+          <UserProfileProgram></UserProfileProgram>
+          <UserProfileProgram></UserProfileProgram>
+          <UserProfileProgram></UserProfileProgram>
+          <UserProfileProgram></UserProfileProgram>
         </MyProjectList>
       </MyProject>
 

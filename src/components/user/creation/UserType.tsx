@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-const UserType = (props) => {
+const UserType = (props: any) => {
   return (
     <BasicForm>
       <HellowStyle>환형합니다. 멘토/멘티를 선택해주세요</HellowStyle>
@@ -19,32 +19,26 @@ const UserType = (props) => {
             props.increaseStep();
           }}
         >
-         <ImageStyle>
-               <img
-                src="/images/mento.png"
-                alt="logo"
-                style={{ height: "24vh", objectFit: "contain"}}
-              /> 
-            </ImageStyle>
+          <ImageStyle>
+            <img
+              src="/images/mento.png"
+              alt="logo"
+              style={{ height: "24vh", objectFit: "contain" }}
+            />
+          </ImageStyle>
 
-          <Testbox2>
-          멘토
-          </Testbox2>
+          <Testbox2>멘토</Testbox2>
         </Test>
         <Test onClick={props.increaseStep} style={{ marginLeft: "5rem" }}>
+          <ImageStyle>
+            <img
+              src="/images/mentee.png"
+              alt="logo"
+              style={{ height: "24vh", objectFit: "contain" }}
+            />
+          </ImageStyle>
 
-        <ImageStyle>
-               <img
-                src="/images/mentee.png"
-                alt="logo"
-                style={{ height: "24vh", objectFit: "contain" }}
-              /> 
-            </ImageStyle>
-          
-          <Testbox>
-          멘티
-          </Testbox>
-
+          <Testbox>멘티</Testbox>
         </Test>
       </div>
     </BasicForm>
@@ -52,9 +46,9 @@ const UserType = (props) => {
 };
 
 const ImageStyle = styled.div`
-height: calc();
-width: 100%;
-object-fit: contain;
+  height: calc();
+  width: 100%;
+  object-fit: contain;
 `;
 const BasicForm = styled.div`
   height: 100%;
@@ -70,34 +64,34 @@ const HellowStyle = styled.div`
   font-family: "NotoSansMedium";
   font-size: 1rem;
   color: #000;
-  font-weight:normal;
+  font-weight: normal;
 `;
 const Test = styled.div`
-width: 35%;
-height: 80%;
-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
-background-color: #fff;
-border-top-right-radius: 4rem;
-cursor: pointer;
-text-align: center;
-font-size:1rem;
-font-weight:bold;
+  width: 35%;
+  height: 80%;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-top-right-radius: 4rem;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
 `;
 const Testbox = styled.div`
-  width:100%;
-  height:30%;
-  background-color:#FFB07A;
-  color:#FFFFFF;
-  line-height:10vh;
+  width: 100%;
+  height: 30%;
+  background-color: #ffb07a;
+  color: #ffffff;
+  line-height: 10vh;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
-  `;
-  const Testbox2 = styled.div`
-  width:100%;
-  height:30%;
-  background-color:#83C2C5;
-  color:#FFFFFF;
-  line-height:10vh;
+`;
+const Testbox2 = styled.div`
+  width: 100%;
+  height: 30%;
+  background-color: #83c2c5;
+  color: #ffffff;
+  line-height: 10vh;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
-  `;
+`;
 
 export default UserType;

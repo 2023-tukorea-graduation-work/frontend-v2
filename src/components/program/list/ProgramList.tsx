@@ -10,11 +10,10 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import Pagination from "react-js-pagination";
-import ItemBox from "./ItemBox";
-import dummy from "../../dummyData/ProList.json";
-import FilterButton from "./FilterButton";
-import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { loadItemListAsync } from "../../features/programListSlice/programListSlice";
+import FilterButton from "./Filter";
+import ProgramListProgram from "./ProgramListProgram";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { loadItemListAsync } from "../../../slice/program/programListSlice";
 
 const ProgramList = () => {
   const dispatch = useAppDispatch();
@@ -24,10 +23,6 @@ const ProgramList = () => {
     setPage(page);
   };
   const handlePageUp = () => {
-    console.log(Boolean(page < Math.trunc(dummy.data.length / 5)));
-    console.log(page);
-    console.log(Math.trunc(dummy.data.length / 5));
-    console.log(dummy.data.length);
     if (page < Math.trunc(postList.length / 5))
       setPage((state) => (state = state + 1));
   };
@@ -68,7 +63,7 @@ const ProgramList = () => {
             <>
               {postList.slice((page - 1) * 8, 8 * page).map((value) => {
                 return (
-                  <ItemBox
+                  <ProgramListProgram
                     key={value.PROGRAM_NO}
                     PROGRAM_NO={value.PROGRAM_NO}
                     ACT_PLACE={value.ACT_PLACE}
@@ -83,7 +78,7 @@ const ProgramList = () => {
                     PRO_START_DATE={value.PRO_START_DATE}
                     ROW_NUM={value.ROW_NUM}
                     SUBJECT={value.SUBJECT}
-                  ></ItemBox>
+                  ></ProgramListProgram>
                 );
               })}
             </>

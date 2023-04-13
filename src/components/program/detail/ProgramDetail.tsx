@@ -6,15 +6,14 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import { FaHome, FaEye, FaRegBookmark, FaRegEnvelope } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { loadItemDetailAsync } from "../../features/programListDetailSlice/programListDetailSlice";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { loadItemDetailAsync } from "../../../slice/program/programDetailSlice";
 
 interface WEEK {
   DETAIL: string;
 }
-
 const ProgramDetail = () => {
   const { PROGRAM_NO } = useParams() as any;
   const dispatch = useAppDispatch();
@@ -117,7 +116,8 @@ const ProgramDetail = () => {
       <ProgramPlan>
         <TableContainer>
           <Table aria-label="a dense table">
-            {programDetail.WEEKS.map((value: WEEK, index: number) => {
+            {/* {programDetail.WEEKS.map((value: WEEK, index: number) => {  전체적으로 옮기는데 갑자기 에러 */}
+            {programDetail.WEEKS.map((value: any, index: number) => {
               return (
                 <TableRow sx={{ height: "10vh" }}>
                   <TableCell align="center" width="10%">

@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/common/header/Header";
+import MainPage from "./page/main/MainPage";
+import ProgramProgressPage from "./page/program/ProgramProgressPage";
+import ProgramCreationPage from "./page/program/ProgramCreationPage";
+import ProgramListPage from "./page/program/ProgramListPage";
+import ProgramDetail from "./components/program/detail/ProgramDetail";
+import UserCreationPage from "./page/user/UserCreationPage";
+import ProfilePage from "./page/user/ProfilePage";
+import LoginPage from "./page/user/LoginPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/main" element={<MainPage />}></Route>
+          <Route
+            path="/projectProgress"
+            element={<ProgramProgressPage />}
+          ></Route>
+          <Route
+            path="/programCreation"
+            element={<ProgramCreationPage />}
+          ></Route>
+          <Route path="/programList" element={<ProgramListPage />} />
+          <Route
+            path="/programListDetail/:PROGRAM_NO"
+            element={<ProgramDetail />}
+          ></Route>
+          <Route path="/userCreation" element={<UserCreationPage />}></Route>
+          <Route path="/profile" element={<ProfilePage />}></Route>
+          <Route path="/" element={<LoginPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+      ;
+    </>
   );
 }
 

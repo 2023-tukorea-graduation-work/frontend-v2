@@ -2,9 +2,9 @@ import React from "react";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Unstable_Grid2";
 import "./Header.css";
-import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { logOut } from "../../features/loginSlice/loginSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useNavigate } from "react-router-dom";
+import { logOut } from "../../../slice/user/loginSlice";
 
 const Header = () => {
   const dispatch = useAppDispatch();

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import "./ProgramList.css";
-import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
   interestSelect,
   placeSelect,
   teachTypeSelect,
-} from "../../features/programListSlice/programListSlice";
+} from "../../../slice/program/programListSlice";
 
 const Filter = () => {
   const userGb = useAppSelector((state) => state.login.object.user_gb);

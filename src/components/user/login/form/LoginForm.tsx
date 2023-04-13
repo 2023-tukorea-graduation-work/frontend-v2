@@ -7,9 +7,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Button, Checkbox, FormControlLabel, Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import "./LoginForm.css";
-import { useAppDispatch, useAppSelector } from "../../../app/hook";
-import { loginAsync } from "../../../features/loginSlice/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { loginAsync } from "../../../../slice/user/loginSlice";
 
 const LoginForm = () => {
   const navigate = useNavigate();

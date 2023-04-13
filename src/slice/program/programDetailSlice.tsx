@@ -56,7 +56,7 @@ const initialState: initial = {
   },
 };
 
-export const programDetalSlice = createSlice({
+export const programListDetalSlice = createSlice({
   name: "programlist",
   initialState,
   reducers: {},
@@ -67,4 +67,4 @@ export const programDetalSlice = createSlice({
     });
   },
 });
-export default programDetalSlice.reducer;
+export default programListDetalSlice.reducer;

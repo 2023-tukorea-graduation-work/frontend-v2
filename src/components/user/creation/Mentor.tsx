@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { Button, FormControl, Input, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 
-const Mentor = (props) => {
+const Mentor = (props: any) => {
   const {
     control,
     register,
@@ -14,7 +14,7 @@ const Mentor = (props) => {
   } = useForm();
   const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     const formData = new FormData();
     formData.append("file", data.image[0]);
     delete data.image;
@@ -44,7 +44,7 @@ const Mentor = (props) => {
       });
   };
 
-  const onError = (error) => {
+  const onError = (error: any) => {
     console.log(error);
   };
 
@@ -71,12 +71,12 @@ const Mentor = (props) => {
       <div style={{ display: "flex", height: "42.5%" }}>
         <ImageUpload>
           <ImageShow>프로필 사진</ImageShow>
-          <Input
+          {/* <Input
             {...register("image")}
             type="file"
             accept="image/*"
             variant="contained"
-            color="primary"
+            // color="primary"
             sx={{
               marginTop: "8%",
               width: "80%",
@@ -86,9 +86,9 @@ const Mentor = (props) => {
               fontFamily: "NotoSansLight",
               boxShadow: "0",
             }}
-          >
-            첨부
-          </Input>
+          > */}
+          첨부
+          {/* </Input> */}
         </ImageUpload>
         <InformationBox>
           <InformationBoxLine>
