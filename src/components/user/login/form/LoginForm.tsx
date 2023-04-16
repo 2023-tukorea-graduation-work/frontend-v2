@@ -23,7 +23,7 @@ const LoginForm = () => {
   const loginState = useAppSelector((state) => state.login.status);
   useEffect(() => {
     if (loginState === "SUCCESS") {
-      navigate("/ProgramListjs");
+      navigate("/programList");
     }
   }, [loginState]);
   const {

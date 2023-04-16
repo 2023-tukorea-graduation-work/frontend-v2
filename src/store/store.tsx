@@ -14,12 +14,14 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
+import creationReducer from "../slice/user/creactionSlice";
 
 const reducers = combineReducers({
   leftBar: leftbarReducer,
   programList: programListReducer,
   programDetail: programDetailReducer,
   login: loginReducer,
+  creation: creationReducer,
 });
 
 const persistConfig = {
