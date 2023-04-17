@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Unstable_Grid2";
 import "./Header.css";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { logOut } from "../../../slice/user/loginSlice";
 
 const Header = () => {
@@ -11,11 +11,26 @@ const Header = () => {
   const userNo = useAppSelector((state) => state.login.object.USER_NO);
   const userGb = useAppSelector((state) => state.login.object.user_gb);
   const navigate = useNavigate();
+  const location = useLocation();
+  const NavStyle = styled.div`
+    width: 35%;
+    display: flex;
+    font-family: Inter;
+    font-size: 110%;
+    color: ${location.pathname === "/projectProgress" ? "black" : "#ffffff"};
+    justify-content: space-between;
+  `;
+
   const HeaderColor = styled.div`
     width: 100%;
     height: 10vh;
-    background-color: ${userGb === "MENTO" ? "#399DA3" : "#ffb07a"};
+    background-color: ${location.pathname === "/projectProgress"
+      ? "white"
+      : userGb === "MENTO"
+      ? "#399DA3"
+      : "#ffb07a"};
   `;
+
   return (
     <>
       <HeaderColor>
@@ -63,14 +78,7 @@ const LogoStyle = styled.div`
   height: 80px;
   background-color: green;
 `;
-const NavStyle = styled.div`
-  width: 35%;
-  display: flex;
-  font-family: Inter;
-  font-size: 110%;
-  color: #ffffff;
-  justify-content: space-between;
-`;
+
 const ImageStyle = styled.div`
   cursor: pointer;
   height: 2.5rem;

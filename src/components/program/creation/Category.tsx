@@ -15,7 +15,6 @@ interface ButtonProps {
 }
 
 const Category = (props: ButtonProps) => {
-  //이거 any쓰는건 좋지않은 방법이여서 다른해결방법을 더 찾아봐야할듯!
   return (
     <BasicForm>
       <p style={{ marginTop: "5rem", marginLeft: "3rem", fontSize: "1rem" }}>
@@ -103,7 +102,7 @@ const Category = (props: ButtonProps) => {
       <Button
         variant="contained"
         color="secondary"
-        style={{ fontSize: "1rem", left: "45%", marginTop: "14.3rem" }}
+        style={{ fontSize: "1rem", left: "45%", marginTop: "8.3rem" }}
         sx={{ height: "2.2rem", width: "11rem" }}
         onClick={props.increaseStep}
       >

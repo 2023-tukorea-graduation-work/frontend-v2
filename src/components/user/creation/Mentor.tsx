@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import styled from "@emotion/styled";
 import { Button, FormControl, Input, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { creationAsync } from "../../../slice/user/creactionSlice";
+import { useAppDispatch } from "../../../store/hooks";
 
 const Mentor = (props: any) => {
+  const [preImg, setPreImg]: any = useState(null);
+  const dispatch = useAppDispatch();
   const {
     control,
     register,
@@ -13,39 +17,37 @@ const Mentor = (props: any) => {
     handleSubmit,
   } = useForm();
   const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
-
+  const imageInput = useRef<HTMLInputElement>(null);
   const onSubmit = (data: any) => {
     const formData = new FormData();
-    formData.append("file", data.image[0]);
+    if (imageInput.current?.files != null) {
+      formData.append("file", imageInput.current?.files[0]);
+    }
     delete data.image;
     delete data.password2;
+    console.log(formData);
     formData.append(
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
-    console.log(data);
-    // for (let key of formData.keys()) {
-    //   console.log(key);
-    // }
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    //   value.text().then((x) => console.log(x));
-    // }
-    axios({
-      url: "/api/v1/mento",
-      method: "post",
-      data: formData,
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    dispatch(creationAsync({ userInfo: formData, userGB: "mentee" }));
   };
 
   const onError = (error: any) => {
     console.log(error);
+  };
+  const preShowImg = () => {
+    if (
+      imageInput.current?.files?.length !== 0 &&
+      imageInput.current?.files != null
+    ) {
+      const imgFile = imageInput.current.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(imgFile);
+      reader.onload = () => {
+        setPreImg(reader.result);
+      };
+    }
   };
 
   return (
@@ -70,13 +72,19 @@ const Mentor = (props: any) => {
 
       <div style={{ display: "flex", height: "42.5%" }}>
         <ImageUpload>
-          <ImageShow>프로필 사진</ImageShow>
-          {/* <Input
+          <ImageShow src={preImg}></ImageShow>
+          <input
             {...register("image")}
             type="file"
             accept="image/*"
+            style={{ display: "none" }}
+            onChange={preShowImg}
+            ref={imageInput}
+          />
+          <Button
+            type="button"
             variant="contained"
-            // color="primary"
+            color="primary"
             sx={{
               marginTop: "8%",
               width: "80%",
@@ -86,9 +94,12 @@ const Mentor = (props: any) => {
               fontFamily: "NotoSansLight",
               boxShadow: "0",
             }}
-          > */}
-          첨부
-          {/* </Input> */}
+            onClick={() => {
+              imageInput.current?.click();
+            }}
+          >
+            첨부하기
+          </Button>
         </ImageUpload>
         <InformationBox>
           <InformationBoxLine>
@@ -111,7 +122,6 @@ const Mentor = (props: any) => {
                 required: "이름은 필수입력입니다.",
               })}
             />
-            {/*  나이로 바꿔주셈 -> age */}
             출생연도
             <FormControl>
               <Controller
@@ -188,7 +198,7 @@ const Mentor = (props: any) => {
                 fontSize: "0.9rem",
               }}
               placeholder="직접입력"
-              {...register("college", {
+              {...register("school", {
                 required: "학교는 필수입력입니다.",
               })}
             />
@@ -207,7 +217,7 @@ const Mentor = (props: any) => {
             />
           </InformationBoxLine>
           <InformationBoxLine style={{ justifyContent: "start" }}>
-            학과
+            희망 학과
             <Input
               disableUnderline={true}
               sx={{
@@ -217,12 +227,12 @@ const Mentor = (props: any) => {
                 border: "solid 0.8px #d6d6d6",
                 boxShadow: "0",
                 fontSize: "0.9rem",
-                marginLeft: "2.2rem",
+                marginLeft: "0.6rem",
                 marginRight: "0.8rem",
               }}
               placeholder="학과"
               {...register("major", {
-                required: "학교는 필수입력입니다.",
+                required: "희망학과는 필수입력입니다.",
               })}
             />
             학년
@@ -266,7 +276,7 @@ const Mentor = (props: any) => {
             </FormControl>
           </InformationBoxLine>
           <InformationBoxLine>
-            수업방식
+            활동장소
             <div
               style={{
                 justifyContent: "space-evenly",
@@ -286,7 +296,7 @@ const Mentor = (props: any) => {
                     type="radio"
                     value={value}
                     {...register("act_place", {
-                      required: "수업방식은 필수입력입니다.",
+                      required: "활동장소는 필수입력입니다.",
                     })}
                   ></input>
                   {value}
@@ -407,9 +417,7 @@ const ImageUpload = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const ImageShow = styled.div`
-  width: 100%;
-  height: 80%;
+const ImageShow = styled.img`
   background-color: #ececec;
   display: flex;
   align-items: center;
@@ -422,6 +430,9 @@ const ImageShow = styled.div`
   text-align: center;
   color: #afafaf;
   font-family: "NotoSansLight";
+  object-fit: contain;
+  width: 100%;
+  height: 80%;
 `;
 const InformationBox = styled.div`
   margin-top: 3%;
