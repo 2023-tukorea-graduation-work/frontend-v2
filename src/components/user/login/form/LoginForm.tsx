@@ -9,18 +9,34 @@ import { useForm } from "react-hook-form";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { loginAsync } from "../../../../slice/user/loginSlice";
+import { changeNumber, loginAsync } from "../../../../slice/user/loginSlice";
 
 const LoginForm = () => {
+  const [status, setStatus] = useState(false);
+  const renderSwitchGate = () => (
+    <FormControlLabel
+      control={
+        <Switch
+          name="way"
+          id="way"
+          onChange={(e) => {
+            setStatus(!status);
+          }}
+          checked={status}
+          color="primary"
+        />
+      }
+      label="External"
+      labelPlacement="start"
+    />
+  );
   const navigate = useNavigate();
-  const [toggleValue, setToggleValue] = useState<string>("MENTEE");
   const toggleOnChange = () => {
-    setToggleValue((state) =>
-      state === "MENTEE" ? (state = "MENTO") : (state = "MENTEE")
-    );
+    dispatch(changeNumber());
   };
   const dispatch = useAppDispatch();
   const loginState = useAppSelector((state) => state.login.status);
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   useEffect(() => {
     if (loginState === "SUCCESS") {
       navigate("/programList");
@@ -34,7 +50,7 @@ const LoginForm = () => {
     handleSubmit,
   } = useForm();
   const onSubmit = (data: any) => {
-    data.user_gb = toggleValue;
+    data.user_gb = user_gb;
     dispatch(loginAsync(data));
   };
   const onError = (error: any) => {
@@ -57,12 +73,13 @@ const LoginForm = () => {
               fontSize: "0.7rem",
             }}
             control={<Switch onChange={toggleOnChange} defaultChecked />}
-            label={toggleValue === "MENTEE" ? "MENTEE" : "MENTO"}
+            label={user_gb}
           />
           <Input
             id="email"
             placeholder="이메일주소 OR 전화번호 입력"
             fullWidth={true}
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
             startAdornment={
               <InputAdornment position="start">
                 <PersonOutlineOutlinedIcon fontSize="medium" />
@@ -77,6 +94,7 @@ const LoginForm = () => {
             placeholder="비밀번호 입력"
             sx={{ marginTop: "1rem" }}
             fullWidth={true}
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
             startAdornment={
               <InputAdornment position="start">
                 <LockOutlinedIcon fontSize="medium" />
@@ -94,7 +112,7 @@ const LoginForm = () => {
             type="submit"
             disabled={isSubmitting}
             variant="contained"
-            color="primary"
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
             fullWidth={true}
             sx={{ fontSize: "1rem", fontFamily: "NotoSansMedium" }}
           >
