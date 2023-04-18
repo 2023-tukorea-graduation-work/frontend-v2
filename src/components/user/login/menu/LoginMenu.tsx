@@ -11,7 +11,7 @@ const LoginMenu = () => {
       <div
         style={{ display: "inline", cursor: "pointer" }}
         onClick={() => {
-          navigate("/register");
+          navigate("/userCreation");
         }}
       >
         회원가입
@@ -31,7 +31,7 @@ const OptionStyled = styled.div`
   line-height: normal;
   letter-spacing: normal;
   color: #777;
-  font-size:0.7rem;
+  font-size: 0.7rem;
 `;
 
 export default LoginMenu;

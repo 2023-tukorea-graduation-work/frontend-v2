@@ -38,7 +38,7 @@ const ProgramListProgram = ({
   return (
     <Box
       onClick={() => {
-        navigate("/ProgramListDetailjs/" + PROGRAM_NO);
+        navigate("/programListDetail/" + PROGRAM_NO);
       }}
     >
       <ItemFirst>

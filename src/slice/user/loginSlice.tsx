@@ -16,7 +16,7 @@ interface loginInfo {
 }
 const initialState: loginSuccess = {
   message: "",
-  object: { USER_NO: null, user_gb: "" },
+  object: { USER_NO: null, user_gb: "MENTEE" },
   status: "",
 };
 export const loginAsync = createAsyncThunk<loginSuccess, loginInfo>(
@@ -47,6 +47,11 @@ export const loginSlice = createSlice({
       state.object = { USER_NO: null, user_gb: "" };
       state.status = "";
     },
+    changeNumber: (state) => {
+      state.object.user_gb === "MENTO"
+        ? (state.object.user_gb = "MENTEE")
+        : (state.object.user_gb = "MENTO");
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(loginAsync.fulfilled, (state, { payload }) => {
@@ -57,5 +62,5 @@ export const loginSlice = createSlice({
     });
   },
 });
-export const { logOut } = loginSlice.actions;
+export const { logOut, changeNumber } = loginSlice.actions;
 export default loginSlice.reducer;

@@ -3,9 +3,12 @@ import axios from "axios";
 import styled from "@emotion/styled";
 import { Button, FormControl, Input, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { useAppDispatch } from "../../../store/hooks";
+import { creationAsync } from "../../../slice/user/creactionSlice";
 
 const Mentee = (props: any) => {
   const [preImg, setPreImg]: any = useState(null);
+  const dispatch = useAppDispatch();
   const {
     control,
     register,
@@ -16,7 +19,6 @@ const Mentee = (props: any) => {
   const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
   const imageInput = useRef<HTMLInputElement>(null);
   const onSubmit = (data: any) => {
-    console.log(data);
     const formData = new FormData();
     if (imageInput.current?.files != null) {
       formData.append("file", imageInput.current?.files[0]);
@@ -28,18 +30,7 @@ const Mentee = (props: any) => {
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
-    console.log(data);
-    axios({
-      url: "/api/v1/mentee",
-      method: "post",
-      data: formData,
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    dispatch(creationAsync({ userInfo: formData, userGB: "mentee" }));
   };
 
   const onError = (error: any) => {
