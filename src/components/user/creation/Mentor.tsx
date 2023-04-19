@@ -84,7 +84,7 @@ const Mentor = (props: any) => {
           <Button
             type="button"
             variant="contained"
-            color="primary"
+            color="secondary"
             sx={{
               marginTop: "8%",
               width: "80%",
@@ -388,7 +388,7 @@ const Mentor = (props: any) => {
           type="submit"
           disabled={isSubmitting}
           variant="contained"
-          color="primary"
+          color="secondary"
           sx={{
             width: "20%",
             height: "100%",

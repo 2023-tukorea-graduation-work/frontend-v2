@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import styled from "@emotion/styled";
-import ProgramCreationLeftBar from "../../components/program/creation/ProgramCreationLeftBar";
 import Category from "../../components/program/creation/Category";
 import Detail from "../../components/program/creation/Detail";
 import Complete from "../../components/program/creation/ProgramCreationComplete";
+import LeftBar from "../../components/common/leftbar/LeftBar";
 
 const ProgramCreationPage = () => {
   const [countStep, setCountStep] = useState(0);
@@ -17,13 +17,13 @@ const ProgramCreationPage = () => {
         style={{
           width: "100%",
           height: "30vh",
-          backgroundColor: "#83C2C5",
+          backgroundColor: "#399DA3",
         }}
       >
         <Grid container>
           <Grid xs={1}></Grid>
           <Grid xs={10} sx={{ display: "flex" }}>
-            <ProgramCreationLeftBar
+            <LeftBar
               countStep={countStep}
               orderProcess={["01.분야 설정", "02.상세정보입력", "03.생성완료"]}
             />

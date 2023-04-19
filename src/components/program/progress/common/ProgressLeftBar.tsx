@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { indexChange } from "../../../../slice/common/leftBarSlice";
 
-const LeftBar = () => {
+const ProgressLeftBar = () => {
   const dispatch = useAppDispatch();
   const selectIndex = useAppSelector((state) => state.leftBar.indexNumber);
   const barArray = ["전체게시판", "출석", "질문", "자료", "공지", "일정"];
@@ -65,4 +65,4 @@ const SelectedTab = styled.div`
   cursor: pointer;
 `;
 
-export default LeftBar;
+export default ProgressLeftBar;

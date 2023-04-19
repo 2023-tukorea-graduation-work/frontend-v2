@@ -47,10 +47,12 @@ export const loginSlice = createSlice({
       state.object = { USER_NO: null, user_gb: "" };
       state.status = "";
     },
-    changeNumber: (state) => {
-      state.object.user_gb === "MENTO"
-        ? (state.object.user_gb = "MENTEE")
-        : (state.object.user_gb = "MENTO");
+    changeUserGB: (state, { payload }) => {
+      state.object.user_gb = payload;
+      console.log(state.object.user_gb);
+      // state.object.user_gb === "MENTO"
+      //   ? (state.object.user_gb = "MENTEE")
+      //   : (state.object.user_gb = "MENTO");
     },
   },
   extraReducers: (builder) => {
@@ -62,5 +64,5 @@ export const loginSlice = createSlice({
     });
   },
 });
-export const { logOut, changeNumber } = loginSlice.actions;
+export const { logOut, changeUserGB } = loginSlice.actions;
 export default loginSlice.reducer;
