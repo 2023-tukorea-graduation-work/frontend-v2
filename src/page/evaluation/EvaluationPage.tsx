@@ -3,6 +3,9 @@ import LeftBar from "../../components/common/leftbar/LeftBar";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useAppSelector } from "../../store/hooks";
+import Lecture from "../../components/evaluation/Lecture";
+import MentoOrMentee from "../../components/evaluation/MentoOrMentee";
+import SystemWithReview from "../../components/evaluation/SystemWithReview";
 const EvaluationPage = () => {
   const [countStep, setCountStep] = useState(0);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
@@ -26,11 +29,19 @@ const EvaluationPage = () => {
             />
             <WhiteBox>
               {
-                countStep === 0 && <div></div>
+                countStep === 0 && (
+                  <Lecture increaseStep={increaseStep}></Lecture>
+                )
                 // <UserType increaseStep={increaseStep} isMento={isMento} />
               }
-              {countStep === 1 && <div></div>}
-              {countStep === 2 && <div></div>}
+              {countStep === 1 && (
+                <MentoOrMentee increaseStep={increaseStep}></MentoOrMentee>
+              )}
+              {countStep === 2 && (
+                <SystemWithReview
+                  increaseStep={increaseStep}
+                ></SystemWithReview>
+              )}
             </WhiteBox>
           </Grid>
           <Grid xs={1}></Grid>
