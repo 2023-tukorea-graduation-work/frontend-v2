@@ -22,6 +22,11 @@ interface CategoryValue {
 const Category = (props: ButtonProps) => {
   const [firstCategory, setFirstCategory] = useState([]);
   const firstCategoryChange = (change: any) => {
+    if (
+      firstCategory.some((val: CategoryValue) => val.label === change.label)
+    ) {
+      console.log(1);
+    }
     setFirstCategory(change);
     console.log(firstCategory);
   };
@@ -64,7 +69,6 @@ const Category = (props: ButtonProps) => {
                 isMulti
                 value={value}
                 onChange={(newValue, actionMeta) => {
-                  firstCategoryChange(newValue);
                   if (
                     value?.length > 0 &&
                     value !== undefined &&
@@ -81,11 +85,14 @@ const Category = (props: ButtonProps) => {
                           val.label !== actionMeta.option.label
                       );
                       onChange(result);
+                      firstCategoryChange(result);
                     } else {
                       onChange(newValue);
+                      firstCategoryChange(newValue);
                     }
                   } else {
                     onChange(newValue);
+                    firstCategoryChange(newValue);
                   }
                 }}
               />
