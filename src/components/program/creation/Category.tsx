@@ -57,14 +57,36 @@ const Category = (props: ButtonProps) => {
           <Controller
             control={control}
             name="colors"
-            render={({ field: { onChange, ...field } }) => (
+            render={({ field: { onChange, value, ...field } }) => (
               <Select
                 {...field}
                 options={stateOptions}
                 isMulti
-                onChange={(change, data) => {
-                  firstCategoryChange(change);
-                  onChange(change);
+                value={value}
+                onChange={(newValue, actionMeta) => {
+                  firstCategoryChange(newValue);
+                  if (
+                    value?.length > 0 &&
+                    value !== undefined &&
+                    actionMeta.action === "select-option"
+                  ) {
+                    if (
+                      value?.some(
+                        (val: CategoryValue) =>
+                          val.label === actionMeta.option.label
+                      )
+                    ) {
+                      const result = value.filter(
+                        (val: CategoryValue) =>
+                          val.label !== actionMeta.option.label
+                      );
+                      onChange(result);
+                    } else {
+                      onChange(newValue);
+                    }
+                  } else {
+                    onChange(newValue);
+                  }
                 }}
               />
             )}
