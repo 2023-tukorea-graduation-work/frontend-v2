@@ -2,11 +2,24 @@ import React from "react";
 import styled from "@emotion/styled";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { indexChange } from "../../../../slice/common/leftBarSlice";
+import {
+  FaRegCheckCircle,
+  FaUserCircle,
+  FaRegWindowClose,
+} from "react-icons/fa";
 
 const LeftBar = () => {
   const dispatch = useAppDispatch();
   const selectIndex = useAppSelector((state) => state.leftBar.indexNumber);
-  const barArray = ["전체게시판", "출석", "질문", "자료", "공지", "일정"];
+  const barArray = [
+    "전체게시판",
+    "출석",
+    "질문",
+    "자료",
+    "공지",
+    "일정",
+    "온라인강의",
+  ];
   return (
     <Box>
       {barArray.map((val, idx) => {

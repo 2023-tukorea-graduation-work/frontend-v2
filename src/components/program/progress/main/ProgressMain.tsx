@@ -4,7 +4,7 @@ import Attendance from "./Attendance";
 
 const ProgressMain = () => {
   const program_no = 6;
-  
+
   return (
     <>
       <div style={{ display: "flex" }}>
@@ -12,9 +12,9 @@ const ProgressMain = () => {
           <Title>프로젝트주제</Title>
           <Box2>
             <Attendance />
-            <QuestionBox></QuestionBox>
-            <DownloadingBox></DownloadingBox>
-            <NoticeBox></NoticeBox>
+            <NoticematerBox>1</NoticematerBox>
+            <QuestionBox>2</QuestionBox>
+            <OnlineclassBox></OnlineclassBox>
           </Box2>
         </Box>
         <CalanderBox>2</CalanderBox>
@@ -24,13 +24,11 @@ const ProgressMain = () => {
 };
 
 const Box = styled.div`
-  background-color: red;
   width: 68%;
   height: 83vh;
-  margin-right: 2%;
+  margin-right: 1.2%;
 `;
 const Box2 = styled.div`
-  background-color: skyblue;
   width: 100%;
   height: 90%;
   display: flex;
@@ -40,43 +38,43 @@ const Box2 = styled.div`
 `;
 
 const Title = styled.div`
-  background-color: green;
   width: 100%;
   height: 10%;
+  font-size: 1.1rem;
   border-radius: 25px;
+  font-weight: bold;
   display: flex;
   align-items: center;
 `;
 
-const QuestionBox = styled.div`
+const NoticematerBox = styled.div`
   margin-right: 2%;
   margin-top: 2%;
-  background-color: orange;
-  width: 45%;
-  height: 50.6%;
+  background-color: #f5f5f5;
+  width: 50%;
+  height: 65%;
   border-radius: 25px;
 `;
 
-const DownloadingBox = styled.div`
-  background-color: Purple;
-  width: 45%;
-  height: 35%;
+const QuestionBox = styled.div`
+  background-color: #f5f5f5;
+  width: 48%;
+  height: 40%;
   border-radius: 25px;
 `;
 
-const NoticeBox = styled.div`
+const OnlineclassBox = styled.div`
   margin-top: 2%;
-  background-color: yellow;
-  width: 45%;
-  height: 50.6%;
+  background-color: #f5f5f5;
+  width: 48%;
+  height: 57.5%;
   border-radius: 25px;
 `;
 const CalanderBox = styled.div`
-  background-color: blue;
   width: 30%;
   height: 83vh;
   border-radius: 25px;
-  background-color: pink;
+  background-color: #f5f5f5;
 `;
 
 export default ProgressMain;
