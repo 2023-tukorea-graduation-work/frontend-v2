@@ -7,6 +7,13 @@ import axios from "axios";
 import { Button, Input, Switch, FormControlLabel } from "@mui/material";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../../../store/hooks";
+import {
+  FaUserCircle,
+  FaRegWindowClose,
+  FaPlus,
+  FaCalendarAlt,
+} from "react-icons/fa";
+import { TextField } from "@mui/material";
 
 // --------------------------------------------------------다른사람 일정 가져오는거-----------
 // const fetchEvents = async (): Promise<any[]> => {
@@ -14,6 +21,74 @@ import { useAppSelector } from "../../../../store/hooks";
 //   return response.data;
 // };
 // --------------------------------------------------------
+const HorizonLine = () => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        textAlign: "center",
+        borderBottom: "1px solid #d6d6d6",
+        lineHeight: "0.1em",
+        margin: "8px 0 10px",
+      }}
+    ></div>
+  );
+};
+const CalRecrodPopup = () => {
+  const [ReisOpen, ResetIsOpen] = useState(true);
+
+  const RetogglePopup = () => {
+    ResetIsOpen(!ReisOpen);
+  };
+  return (
+    <div>
+      {ReisOpen && (
+        <CPopupbox>
+          <CPopupinner>
+            <CPopupFrom>
+              <CPopupStudent>
+                <FaCalendarAlt size="20" color="#777777"></FaCalendarAlt>
+                <p style={{ fontSize: "1rem" }}>활동일지작성하기</p>
+                <p>2023.05.23</p>
+              </CPopupStudent>
+              <FaRegWindowClose
+                cursor="pointer"
+                size="20"
+                color="#777777"
+                onClick={RetogglePopup}
+              ></FaRegWindowClose>
+            </CPopupFrom>
+            <HorizonLine></HorizonLine>
+            <p style={{ fontSize: "0.9rem", color: "#777777" }}>
+              [2차시] 수학1 멘토링
+            </p>
+            <HorizonLine></HorizonLine>
+            <Redetailbox>
+              <p>활동 진행 상세 내용</p>
+              <Redetailcontext>text입력 이미지 업로드</Redetailcontext>
+              <p>Q&A</p>
+              <RedetailQnA>
+                <ReQbox>질문 입력</ReQbox>
+                <ReAbox>답변 입력</ReAbox>
+              </RedetailQnA>
+              <p>특이사항</p>
+              <Redatilelse>text입력</Redatilelse>
+              <p>다음차시 계획</p>
+              <Redtailnext>다음차시계획작성</Redtailnext>
+            </Redetailbox>
+            <hr
+              style={{
+                marginTop: "2rem",
+                color: "#d6d6d6",
+              }}
+            ></hr>
+            <Redetailbutton>활동일지 등록하기</Redetailbutton>
+          </CPopupinner>
+        </CPopupbox>
+      )}
+    </div>
+  );
+};
 
 const localizer = momentLocalizer(moment);
 interface MyEvent extends Event {
@@ -107,8 +182,17 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form style={{ backgroundColor: "skyblue" }} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Calbutton>
+        <p
+          style={{
+            marginLeft: "1rem",
+            lineHeight: "2.5rem",
+            fontSize: "0.9rem",
+          }}
+        >
+          일정제목&내용:
+        </p>
         <Input
           type="text"
           placeholder="일정"
@@ -117,9 +201,10 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
           onChange={handleChange}
           style={{
             backgroundColor: "white",
-            width: "7rem",
+            width: "20rem",
             height: "2.5rem",
-            marginRight: "1rem",
+            marginRight: "2rem",
+            marginLeft: "0.5rem",
           }}
         />
         <Input
@@ -136,7 +221,15 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
             marginRight: "1rem",
           }}
         />
-        <p>~</p>
+        <p
+          style={{
+            marginLeft: "0.6rem",
+            marginRight: "1rem",
+            lineHeight: "2.5rem",
+          }}
+        >
+          ~
+        </p>
         <Input
           type="datetime-local"
           value={moment(event.schedule_finish_datetime).format(
@@ -155,11 +248,19 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
           sx={{
             fontFamily: "NotoSansLight",
             fontSize: "0.7rem",
+            marginLeft: "0.5rem",
+            marginRight: "2rem",
           }}
           control={<Switch onChange={toggleOnChange} defaultChecked />}
           label={toggleValue === "ToDoList" ? "ToDoList" : "수업일정"}
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          variant="contained"
+          color="primary"
+          sx={{ width: "7rem", height: "4vh" }}
+        >
           추가하기
         </Button>
       </Calbutton>
@@ -210,7 +311,10 @@ const BigCalander = () => {
       },
     };
   };
-
+  const [ReisOpen, ResetIsOpen] = useState(false);
+  const RetogglePopup = () => {
+    ResetIsOpen(!ReisOpen);
+  };
   // -------------------------------------------------------------------------------------
   return (
     <>
@@ -225,11 +329,21 @@ const BigCalander = () => {
         endAccessor="end"
         onSelectEvent={handleSelect}
         eventPropGetter={eventStyleGetter}
-        style={{ height: 500, backgroundColor: "white", marginTop: "3rem" }}
+        style={{ height: 500, backgroundColor: "white" }}
         selectable
       />
 
       <Confirmbox>
+        <div>
+          <a
+            href="#"
+            style={{ cursor: "pointer", fontSize: "0.9rem", color: "#07858C" }}
+            onClick={RetogglePopup}
+          >
+            활동일지작성하기
+          </a>
+          {ReisOpen && <CalRecrodPopup />}
+        </div>
         {selectedEvent && (
           <div>
             {/* <h3>{selectedEvent.title}</h3>
@@ -247,10 +361,113 @@ export default BigCalander;
 
 const Calbutton = styled.div`
   display: flex;
+  border: 0.5px solid #777777;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 `;
 const Confirmbox = styled.div`
   width: 100%;
-  height: 10vh;
-  background-color: yellow;
+  height: 12vh;
+  display: flex;
+  border: 0.5px solid #777777;
+`;
+const CPopupbox = styled.div`
+  position: fixed;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const CPopupFrom = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+`;
+const CPopupinner = styled.div`
+  background-color: white;
+  width: 50%;
+  height: 94%;
+  padding: 1rem;
+  border-radius: 20px;
+`;
+const CPopupStudent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 23%;
+  margin-right: 73%;
+  color: #777777;
+`;
+const Redetailbox = styled.div`
+  margin-top: 1.5%;
+  margin-left: 3%;
+  width: 94%;
+  height: 80%;
+  font-size: 0.9rem;
+`;
+const Redetailcontext = styled.div`
+  width: 100%;
+  height: 33%;
+  margin-top: 1%;
+  margin-bottom: 1.5%;
+  border: 0.5px solid #777777;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 12rem;
+`;
+const RedetailQnA = styled.div`
+  width: 100%;
+  height: 13%;
+  margin-top: 1%;
+  margin-bottom: 1.5%;
+  display: flex;
+  flex-direction: row;
+  line-height: 5rem;
+`;
+const ReQbox = styled.div`
+  width: 49.2%;
+  height: 100%;
+  border: 0.5px solid #777777;
+  border-radius: 5px;
+  padding-left: 1rem;
+`;
+const ReAbox = styled.div`
+  width: 49.2%;
+  height: 100%;
+  margin-left: 1.6%;
+  border: 0.5px solid #777777;
+  border-radius: 5px;
+  padding-left: 1rem;
+`;
+const Redatilelse = styled.div`
+  width: 100%;
+  height: 17%;
+  margin-top: 1%;
+  margin-bottom: 1.5%;
+  border: 0.5px solid #777777;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 7rem;
+`;
+const Redtailnext = styled.div`
+  width: 100%;
+  height: 17%;
+  margin-top: 1%;
+  border: 0.5px solid #777777;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 7rem;
+`;
+const Redetailbutton = styled.div`
+  color: #07858c;
+  cursor: pointer;
+  margin-top: 2.3%;
+  margin-left: 44%;
 `;
 const Selecteddate = styled.div``;
