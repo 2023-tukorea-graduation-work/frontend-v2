@@ -7,7 +7,7 @@ import Radio from "@mui/material/Radio";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "@mui/material";
 import { useAppSelector } from "../../store/hooks";
-import { first, secondMentor } from "../../docs/Docs";
+import { first, first2, secondMentor } from "../../docs/Docs";
 interface ButtonProps {
   increaseStep: () => void;
 }
@@ -45,9 +45,53 @@ const Lecture = (props: ButtonProps) => {
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <TableQuestion colSpan={4}>수업만족도</TableQuestion>
+            </tr>
             {first.map((value: string, index: number) => (
               <tr key={index}>
-                <TableQuestion>{`${index}. ${value}`}</TableQuestion>
+                <TableQuestion>{`${index + 1}. ${value}`}</TableQuestion>
+                <Controller
+                  name={value}
+                  control={control}
+                  rules={{ required: "필수선택입니다." }}
+                  render={({ field: { value, ...field } }) => (
+                    <>
+                      <TableAnswer>
+                        <Radio
+                          {...field}
+                          value="그렇다"
+                          checked={value === "그렇다"}
+                          color={user_gb === "MENTEE" ? "primary" : "secondary"}
+                        />
+                      </TableAnswer>
+                      <TableAnswer>
+                        <Radio
+                          {...field}
+                          value="보통이다"
+                          checked={value === "보통이다"}
+                          color={user_gb === "MENTEE" ? "primary" : "secondary"}
+                        />
+                      </TableAnswer>
+                      <TableAnswer>
+                        <Radio
+                          {...field}
+                          value="그렇지않다"
+                          checked={value === "그렇지않다"}
+                          color={user_gb === "MENTEE" ? "primary" : "secondary"}
+                        />
+                      </TableAnswer>
+                    </>
+                  )}
+                />
+              </tr>
+            ))}
+            <tr>
+              <TableQuestion colSpan={4}>관계 만족도</TableQuestion>
+            </tr>
+            {first2.map((value: string, index: number) => (
+              <tr key={index}>
+                <TableQuestion>{`${index + 1}. ${value}`}</TableQuestion>
                 <Controller
                   name={value[0] + value[8]}
                   control={control}

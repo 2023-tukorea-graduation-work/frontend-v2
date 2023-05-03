@@ -5,7 +5,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { useForm, Controller } from "react-hook-form";
-import { Button, TextField } from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import { useAppSelector } from "../../store/hooks";
 import {
   first,
@@ -42,81 +42,79 @@ const SystemWithReview = (props: ButtonProps) => {
               <TableQuestionHeader user_gb={user_gb}>
                 평가내용
               </TableQuestionHeader>
-              <TableAnswerHeader user_gb={user_gb}>그렇다</TableAnswerHeader>
-              <TableAnswerHeader user_gb={user_gb}>보통이다</TableAnswerHeader>
-              <TableAnswerHeader user_gb={user_gb}>
-                그렇지 않다
-              </TableAnswerHeader>
             </tr>
           </thead>
           <tbody>
-            {thirdSystem.map((value: string, index: number) => (
-              <tr key={index}>
-                <TableQuestion>{`${index}. ${value}`}</TableQuestion>
-                <Controller
-                  name={value[0] + value[8]}
-                  control={control}
-                  rules={{ required: "출생년도는 필수선택입니다." }}
-                  render={({ field: { value, ...field } }) => (
-                    <>
-                      <TableAnswer>
-                        <Radio
-                          {...field}
-                          value="그렇다"
-                          checked={value === "그렇다"}
-                          color={user_gb === "MENTEE" ? "primary" : "secondary"}
-                        />
-                      </TableAnswer>
-                      <TableAnswer>
-                        <Radio
-                          {...field}
-                          value="보통이다"
-                          checked={value === "보통이다"}
-                          color={user_gb === "MENTEE" ? "primary" : "secondary"}
-                        />
-                      </TableAnswer>
-                      <TableAnswer>
-                        <Radio
-                          {...field}
-                          value="그렇지않다"
-                          checked={value === "그렇지않다"}
-                          color={user_gb === "MENTEE" ? "primary" : "secondary"}
-                        />
-                      </TableAnswer>
-                    </>
-                  )}
+            <tr>
+              <TableQuestion colSpan={4}>멘토링 소감및 후기</TableQuestion>
+            </tr>
+            <tr>
+              <td colSpan={1}>
+                <TextField
+                  {...register("한줄평")}
+                  multiline
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">한줄평</InputAdornment>
+                    ),
+                  }}
+                  rows={1}
+                  sx={{
+                    border: "1px solid #b7b7b7",
+                    width: "99.8%",
+                    height: "100%",
+                    boxShadow: "0",
+                    fontSize: "0.8rem",
+                    padding: "0",
+                    "&:hover": {
+                      backgroundColor: "white",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "white", // default
+                      },
+                      "&.Mui-focused fieldset": {
+                        border: "0px",
+                      },
+                      "&:hover fieldset": {
+                        border: "0px",
+                      },
+                    },
+                  }}
                 />
-                <td>
-                  <TextField
-                    {...register(`programWeeks.${index}.detail`)}
-                    multiline
-                    rows={5}
-                    sx={{
-                      width: "100%",
-                      height: "100%",
-                      border: "0",
-                      boxShadow: "0",
-                      fontSize: "0.8rem",
-                      "&:hover": {
-                        borderColor: "blue",
-                        backgroundColor: "white",
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={1}>
+                <TextField
+                  {...register("내용")}
+                  multiline
+                  rows={5}
+                  sx={{
+                    border: "1px solid #b7b7b7",
+                    width: "99.8%",
+                    height: "100%",
+                    boxShadow: "0",
+                    fontSize: "0.8rem",
+                    padding: "0",
+                    "&:hover": {
+                      backgroundColor: "white",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "white", // default
                       },
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "white", // default
-                        },
-                        "&.Mui-focused fieldset": {
-                          border: "0px",
-                        },
-                        "&:hover fieldset": {
-                          border: "0px",
-                        },
+                      "&.Mui-focused fieldset": {
+                        border: "0px",
                       },
-                    }}
-                  />
-                </td>
-              </tr>
-            ))}
+                      "&:hover fieldset": {
+                        border: "0px",
+                      },
+                    },
+                  }}
+                />
+              </td>
+            </tr>
           </tbody>
         </table>
 
@@ -145,7 +143,7 @@ const SystemWithReview = (props: ButtonProps) => {
 };
 const TableQuestionHeader = styled.th<{ user_gb: string }>`
   height: 2rem;
-  width: 73%;
+  width: 50rem;
   border: 1px solid #b7b7b7;
   text-align: center;
   vertical-align: middle;

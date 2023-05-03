@@ -51,14 +51,14 @@ const Category = (props: ButtonProps) => {
           카테고리 선택하기
         </p>
         <div style={{ marginTop: "1rem", marginLeft: "3rem" }}>
-          <Select
+          {/* <Select
             isMulti
             name="colors"
             options={stateOptions}
             className="basic-multi-select"
             classNamePrefix="select"
             onChange={(change) => firstCategoryChange(change)}
-          />
+          /> */}
           <Controller
             control={control}
             name="colors"
@@ -116,12 +116,20 @@ const Category = (props: ButtonProps) => {
                 <FaBook style={{ marginRight: "0.3rem", color: "#399DA3" }} />
                 {value.label}
               </p>
-              <Select
-                isMulti
-                name="colors"
-                options={value.value}
-                className="basic-multi-select"
-                classNamePrefix="select"
+              <Controller
+                control={control}
+                name={value.label}
+                render={({ field: { onChange, ...field } }) => (
+                  <Select
+                    {...field}
+                    isMulti
+                    name={value.label}
+                    options={value.value}
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                    onChange={(change) => onChange(change)}
+                  />
+                )}
               />
             </div>
           );
