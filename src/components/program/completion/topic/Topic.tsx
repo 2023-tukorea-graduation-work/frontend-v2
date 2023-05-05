@@ -70,6 +70,7 @@ const Title = styled.div`
 const ReviewBox = styled.div`
   height: 35rem;
   width: 50rem;
+  padding: 1rem;
   background-color: white;
   margin-top: 2.5rem;
   border-radius: 5px;
