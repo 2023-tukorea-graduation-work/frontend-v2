@@ -10,6 +10,7 @@ import UserCreationPage from "./page/user/UserCreationPage";
 import ProfilePage from "./page/user/ProfilePage";
 import LoginPage from "./page/user/LoginPage";
 import EvaluationPage from "./page/evaluation/EvaluationPage";
+import ProgramCompletion from "./page/program/ProgramCompletion";
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
           <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="/evaluation" element={<EvaluationPage />}></Route>
           <Route path="/" element={<LoginPage />}></Route>
+          <Route
+            path="/programCompletion"
+            element={<ProgramCompletion />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>

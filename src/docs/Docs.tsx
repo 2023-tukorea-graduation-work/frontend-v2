@@ -72,7 +72,7 @@ export const stateOptions: readonly StateOption[] = [
   // { value: "창업관련", label: "창업관련" },
   // { value: "자격증", label: "자격증" },
 ];
-export const first = [
+export const classSatisfaction = [
   "주제에 알맞은 교육매체를 적절히 활용하였다.",
   "학습내용이 학습계획서대로 진행되었다.",
   "수업 진행은 체계적이었다.",
@@ -81,17 +81,18 @@ export const first = [
   "나는 이 멘토링을 통해 많은 지식을 얻었다.",
   "나는 이 멘토링이 전체적으로 우수하다고 평가한다",
 ];
-export const first2 = [
+export const relationshipSatisfaction = [
   "멘토님꼐서 학습내용을 성실하게 가르쳐 주신다.",
   "멘토님께서 나에게 친절히 설명해주신다.",
   "강의 피드백(질문답변, 출석문의 등)은 신속, 정확하였다.",
   "나는 이 멘토링을 다른 사람에게 추천 하고싶다.",
   "나는 다음에도 이 멘토님의 멘토링 수업을 듣고싶다.",
 ];
-export const secondMentor = [
-  "주제에 알맞은 교육매체를 적절히 활용하였다",
-  "학습내용이 학습계획서대로 진행되었다.",
-  "수업 진행은 체계적이었다.",
+export const systemSatisfaction = [
+  "이 시스템은 멘토링을 진행하는데 많은 도움을 주었다.",
+  "이 시스템은 멘토링을 관리하기에 편리하였다.",
+  "이 시스템의 기능을 잘 활용하였다.",
+  "이 시스템을 다음 멘토링 진행할 때에도 사용하고 싶다.",
 ];
 export const secondMentee = [
   "나는 이 멘토링을 통해 많은 지식을 얻었다.",

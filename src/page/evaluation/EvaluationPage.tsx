@@ -35,12 +35,12 @@ const EvaluationPage = () => {
                 // <UserType increaseStep={increaseStep} isMento={isMento} />
               }
               {countStep === 1 && (
-                <MentoOrMentee increaseStep={increaseStep}></MentoOrMentee>
-              )}
-              {countStep === 2 && (
                 <SystemWithReview
                   increaseStep={increaseStep}
                 ></SystemWithReview>
+              )}
+              {countStep === 2 && (
+                <MentoOrMentee increaseStep={increaseStep}></MentoOrMentee>
               )}
             </WhiteBox>
           </Grid>

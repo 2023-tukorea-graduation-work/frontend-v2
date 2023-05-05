@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
-import FormControl from "@mui/material/FormControl";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "@mui/material";
 import { useAppSelector } from "../../store/hooks";
-import { first, first2, secondMentor } from "../../docs/Docs";
+import { classSatisfaction, relationshipSatisfaction } from "../../docs/Docs";
 interface ButtonProps {
   increaseStep: () => void;
 }
@@ -48,7 +45,7 @@ const Lecture = (props: ButtonProps) => {
             <tr>
               <TableQuestion colSpan={4}>수업만족도</TableQuestion>
             </tr>
-            {first.map((value: string, index: number) => (
+            {classSatisfaction.map((value: string, index: number) => (
               <tr key={index}>
                 <TableQuestion>{`${index + 1}. ${value}`}</TableQuestion>
                 <Controller
@@ -89,7 +86,7 @@ const Lecture = (props: ButtonProps) => {
             <tr>
               <TableQuestion colSpan={4}>관계 만족도</TableQuestion>
             </tr>
-            {first2.map((value: string, index: number) => (
+            {relationshipSatisfaction.map((value: string, index: number) => (
               <tr key={index}>
                 <TableQuestion>{`${index + 1}. ${value}`}</TableQuestion>
                 <Controller

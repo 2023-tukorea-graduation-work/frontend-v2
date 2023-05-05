@@ -1,18 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import FormControl from "@mui/material/FormControl";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
 import { useForm, Controller } from "react-hook-form";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { useAppSelector } from "../../store/hooks";
-import {
-  first,
-  secondMentee,
-  secondMentor,
-  thirdSystem,
-} from "../../docs/Docs";
 interface ButtonProps {
   increaseStep: () => void;
 }
@@ -150,15 +140,7 @@ const TableQuestionHeader = styled.th<{ user_gb: string }>`
   background-color: ${(props) =>
     props.user_gb === "MENTEE" ? "#FFB07A" : "#91d7da"};
 `;
-const TableAnswerHeader = styled.th<{ user_gb: string }>`
-  height: 2rem;
-  width: 9%;
-  border: 1px solid #b7b7b7;
-  text-align: center;
-  vertical-align: middle;
-  background-color: ${(props) =>
-    props.user_gb === "MENTEE" ? "#FFB07A" : "#91d7da"};
-`;
+
 const TableQuestion = styled.td`
   height: 2rem;
   width: 73%;
@@ -166,11 +148,5 @@ const TableQuestion = styled.td`
   text-align: left;
   vertical-align: middle;
 `;
-const TableAnswer = styled.td`
-  height: 2rem;
-  width: 9%;
-  border: 1px solid #b7b7b7;
-  text-align: center;
-  vertical-align: middle;
-`;
+
 export default SystemWithReview;
