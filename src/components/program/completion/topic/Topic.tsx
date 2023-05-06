@@ -13,6 +13,7 @@ const Topic = () => {
             fontFamily: "NotoSansBold",
             fontSize: "2.5rem",
             lineHeight: "4rem",
+            width: "40rem",
           }}
         >
           PROGRAM(주제)
