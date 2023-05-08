@@ -300,6 +300,28 @@ const Detail = (props: ButtonProps) => {
                     }}
                   >
                     {index}주차
+                    <div
+                      style={{
+                        width: "6rem",
+                        height: "1rem",
+                        marginRight: "-200px",
+                        marginLeft: "20px",
+                      }}
+                    >
+                      <Controller
+                        control={control}
+                        name={`programWeeks.${index}.date`}
+                        render={({ field }) => (
+                          <InputDate
+                            {...field}
+                            dateFormat="yyyy년 MM월 dd일"
+                            selected={field.value}
+                            onChange={(date: any) => field.onChange(date)}
+                            locale={ko}
+                          />
+                        )}
+                      />
+                    </div>
                   </td>
                   <td
                     style={{
@@ -399,6 +421,6 @@ const InputDate = styled(DatePicker)`
   border-radius: 4.2px;
   border: solid 0.8px #d6d6d6;
   boxshadow: 0;
-  margin-right: 100px;
 `;
+
 export default Detail;
