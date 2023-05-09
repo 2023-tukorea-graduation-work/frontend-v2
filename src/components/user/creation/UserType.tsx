@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useAppDispatch } from "../../../store/hooks";
+import { changeUserGB } from "../../../slice/user/loginSlice";
 
 const UserType = (props: any) => {
+  const dispatch = useAppDispatch();
   return (
     <BasicForm>
       <HellowStyle>환형합니다. 멘토/멘티를 선택해주세요</HellowStyle>
@@ -15,6 +18,7 @@ const UserType = (props: any) => {
       >
         <Test
           onClick={() => {
+            dispatch(changeUserGB("MENTO"));
             props.isMento();
             props.increaseStep();
           }}
@@ -29,7 +33,13 @@ const UserType = (props: any) => {
 
           <Testbox2>멘토</Testbox2>
         </Test>
-        <Test onClick={props.increaseStep} style={{ marginLeft: "5rem" }}>
+        <Test
+          onClick={() => {
+            dispatch(changeUserGB("MENTEE"));
+            props.increaseStep();
+          }}
+          style={{ marginLeft: "5rem" }}
+        >
           <ImageStyle>
             <img
               src="/images/mentee.png"

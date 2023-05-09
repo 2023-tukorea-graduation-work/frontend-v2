@@ -8,7 +8,7 @@ import {
   FaRegWindowClose,
 } from "react-icons/fa";
 
-const LeftBar = () => {
+const ProgressLeftBar = () => {
   const dispatch = useAppDispatch();
   const selectIndex = useAppSelector((state) => state.leftBar.indexNumber);
   const barArray = [
@@ -78,4 +78,4 @@ const SelectedTab = styled.div`
   cursor: pointer;
 `;
 
-export default LeftBar;
+export default ProgressLeftBar;

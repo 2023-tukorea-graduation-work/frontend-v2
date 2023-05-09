@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import ToggleButton from "@mui/material/ToggleButton";
 import "./Profile.css";
 import { Button } from "@mui/material";
 import { lineHeight } from "@mui/system";
 import UserProfileProgram from "./UserProfileProgram";
+import { useAppSelector } from "../../../store/hooks";
 
 const Profile = () => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const [btnSelect, setBtnSelect] = useState("ProgressBefore");
+  const onChangeBtn = (event: any) => {
+    setBtnSelect(event.target.value);
+  };
   return (
     <WhiteBox>
       <LeftNav></LeftNav>
@@ -23,24 +29,30 @@ const Profile = () => {
           M&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;&nbsp;R&nbsp;&nbsp;O&nbsp;&nbsp;J&nbsp;&nbsp;E&nbsp;&nbsp;C&nbsp;&nbsp;T
         </div>
         <ToggleButtonGroup>
-          <ToggleButton
+          <Custom
+            user_gb={user_gb}
             sx={{ width: "8.313rem" }}
-            color="primary"
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
+            onClick={(event: any) => onChangeBtn(event)}
+            selected={"ProgressBefore" === btnSelect ? true : false}
             value="ProgressBefore"
-            selected={true}
           >
             진행예정
-          </ToggleButton>
+          </Custom>
           <ToggleButton
             sx={{ width: "11.813rem", marginLeft: "2%" }}
-            color="primary"
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
+            onClick={(event: any) => onChangeBtn(event)}
+            selected={"Progressing" === btnSelect ? true : false}
             value="Progressing"
           >
             진행중 프로젝트
           </ToggleButton>
           <ToggleButton
             sx={{ width: "10.375rem", marginLeft: "2%" }}
-            color="primary"
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
+            onClick={(event: any) => onChangeBtn(event)}
+            selected={"ProgressEnd" === btnSelect ? true : false}
             value="ProgressEnd"
           >
             완료 프로젝트
@@ -84,7 +96,7 @@ const Profile = () => {
         <div style={{ marginLeft: "60%", color: "#777777" }}>LOGOUT</div>
         <Button
           variant="contained"
-          color="secondary"
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
           sx={{
             height: "2.5rem",
             width: "80%",
@@ -97,7 +109,7 @@ const Profile = () => {
         </Button>
         <Button
           variant="contained"
-          color="secondary"
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
           sx={{
             height: "2.5rem",
             width: "80%",
@@ -127,7 +139,7 @@ const LeftNav = styled.div`
 `;
 const MyProject = styled.div`
   height: 100%;
-  background-color: rgba(255, 199, 160, 0.3);
+  background-color: rgba(7, 133, 140, 0.1);
   width: 65%;
   overflow: auto;
   overflow-x: hidden;
@@ -161,5 +173,18 @@ const ImageStyle = styled.div`
   border-radius: 50%;
   object-fit: fill;
 `;
-
+const Custom = styled(ToggleButton)<{ user_gb: string }>`
+  .MuiToggleButton-root {
+    background-color: #ebebeb !important;
+    border-radius: 10px !important;
+    color: #777777 !important;
+    border: 0 !important;
+    font-size: 1rem !important;
+    height: 2.438rem !important;
+  }
+  &.Mui-selected {
+    background-color: #fff !important;
+    color: ${(props) => (props.user_gb === "MENTEE" ? "#ff6900" : "#07858C")};
+  }
+`;
 export default Profile;

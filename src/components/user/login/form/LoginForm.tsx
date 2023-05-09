@@ -9,39 +9,25 @@ import { useForm } from "react-hook-form";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { changeNumber, loginAsync } from "../../../../slice/user/loginSlice";
+import { changeUserGB, loginAsync } from "../../../../slice/user/loginSlice";
 
 const LoginForm = () => {
-  const [status, setStatus] = useState(false);
-  const renderSwitchGate = () => (
-    <FormControlLabel
-      control={
-        <Switch
-          name="way"
-          id="way"
-          onChange={(e) => {
-            setStatus(!status);
-          }}
-          checked={status}
-          color="primary"
-        />
-      }
-      label="External"
-      labelPlacement="start"
-    />
-  );
   const navigate = useNavigate();
-  const toggleOnChange = () => {
-    dispatch(changeNumber());
-  };
   const dispatch = useAppDispatch();
   const loginState = useAppSelector((state) => state.login.status);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const [toggle, setToggle] = useState(user_gb);
+  const toggleOnChange = () => {
+    toggle === "MENTEE" ? setToggle("MENTO") : setToggle("MENTEE");
+  };
   useEffect(() => {
     if (loginState === "SUCCESS") {
       navigate("/programList");
     }
   }, [loginState]);
+  useEffect(() => {
+    dispatch(changeUserGB(toggle));
+  }, [toggle]);
   const {
     control,
     register,
@@ -50,7 +36,7 @@ const LoginForm = () => {
     handleSubmit,
   } = useForm();
   const onSubmit = (data: any) => {
-    data.user_gb = user_gb;
+    data.user_gb = toggle;
     dispatch(loginAsync(data));
   };
   const onError = (error: any) => {
@@ -72,7 +58,12 @@ const LoginForm = () => {
               color: "#777",
               fontSize: "0.7rem",
             }}
-            control={<Switch onChange={toggleOnChange} defaultChecked />}
+            control={
+              <Switch
+                onChange={toggleOnChange}
+                checked={user_gb === "MENTEE"}
+              />
+            }
             label={user_gb}
           />
           <Input

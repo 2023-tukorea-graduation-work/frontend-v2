@@ -2,7 +2,12 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const UserProfileProgram = () => {
-  return <Preview></Preview>;
+  return (
+    <Preview>
+      <Title>프로그램 이름</Title>
+      <MentoInfo>멘토이름 | 멘토학교 | 멘토학과</MentoInfo>
+    </Preview>
+  );
 };
 
 const Preview = styled.div`
@@ -20,6 +25,9 @@ const Preview = styled.div`
   @media (max-width: 1300px) {
     width: 100%;
   }
+  display: flex;
+  flex-direction: column;
 `;
-
+const Title = styled.div``;
+const MentoInfo = styled.div``;
 export default UserProfileProgram;
