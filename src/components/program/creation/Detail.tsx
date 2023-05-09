@@ -14,7 +14,6 @@ import {
 import axios from "axios";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useAppSelector } from "../../../store/hooks";
-
 interface ButtonProps {
   increaseStep: () => void;
 }
@@ -145,10 +144,14 @@ const Detail = (props: ButtonProps) => {
             <Controller
               control={control}
               name="pro_start_date"
+              rules={{ required: "날짜는 필수선택입니다." }}
               render={({ field }) => (
                 <InputDate
                   {...field}
                   dateFormat="yyyy년 MM월 dd일"
+                  disabledKeyboardNavigation
+                  placeholderText="날짜를 선택하세요"
+                  autoComplete="off"
                   selected={field.value}
                   onChange={(date: any) => field.onChange(date)}
                   locale={ko}
@@ -161,10 +164,14 @@ const Detail = (props: ButtonProps) => {
             <Controller
               control={control}
               name="pro_finish_date"
+              rules={{ required: "날짜는 필수선택입니다." }}
               render={({ field }) => (
                 <InputDate
                   {...field}
                   dateFormat="yyyy년 MM월 dd일"
+                  disabledKeyboardNavigation
+                  placeholderText="날짜를 선택하세요"
+                  autoComplete="off"
                   selected={field.value}
                   onChange={(date: any) => field.onChange(date)}
                   locale={ko}
@@ -250,15 +257,19 @@ const Detail = (props: ButtonProps) => {
               />
             </FormControl>
           </div>
-          <div style={{ width: "5rem" }}>활동가능기간</div>
+          <div style={{ width: "5rem" }}>모집기간</div>
           <div style={{ width: "8rem", marginRight: "1rem" }}>
             <Controller
               control={control}
               name="recruit_start_date"
+              rules={{ required: "날짜는 필수선택입니다." }}
               render={({ field }) => (
                 <InputDate
                   {...field}
                   dateFormat="yyyy년 MM월 dd일"
+                  disabledKeyboardNavigation
+                  placeholderText="날짜를 선택하세요"
+                  autoComplete="off"
                   selected={field.value}
                   onChange={(date: any) => field.onChange(date)}
                   locale={ko}
@@ -271,10 +282,14 @@ const Detail = (props: ButtonProps) => {
             <Controller
               control={control}
               name="recruit_finish_date"
+              rules={{ required: "날짜는 필수선택입니다." }}
               render={({ field }) => (
                 <InputDate
                   {...field}
                   dateFormat="yyyy년 MM월 dd일"
+                  disabledKeyboardNavigation
+                  placeholderText="날짜를 선택하세요"
+                  autoComplete="off"
                   selected={field.value}
                   onChange={(date: any) => field.onChange(date)}
                   locale={ko}
@@ -295,33 +310,29 @@ const Detail = (props: ButtonProps) => {
                   <td
                     style={{
                       border: "solid 1px #d6d6d6",
+                      width: "10rem",
                       textAlign: "center",
                       verticalAlign: "middle",
                     }}
                   >
-                    {index}주차
-                    <div
-                      style={{
-                        width: "6rem",
-                        height: "1rem",
-                        marginRight: "-200px",
-                        marginLeft: "20px",
-                      }}
-                    >
-                      <Controller
-                        control={control}
-                        name={`programWeeks.${index}.date`}
-                        render={({ field }) => (
-                          <InputDate
-                            {...field}
-                            dateFormat="yyyy년 MM월 dd일"
-                            selected={field.value}
-                            onChange={(date: any) => field.onChange(date)}
-                            locale={ko}
-                          />
-                        )}
-                      />
-                    </div>
+                    <p>{index}주차</p>
+                    <Controller
+                      control={control}
+                      name={`programWeeks.${index}.date`}
+                      rules={{ required: "주간날짜는 필수선택입니다." }}
+                      render={({ field }) => (
+                        <LearningPlanInputDate
+                          {...field}
+                          dateFormat="yyyy년 MM월 dd일"
+                          disabledKeyboardNavigation
+                          placeholderText="날짜를 선택하세요"
+                          autoComplete="off"
+                          selected={field.value}
+                          onChange={(date: any) => field.onChange(date)}
+                          locale={ko}
+                        />
+                      )}
+                    />
                   </td>
                   <td
                     style={{
@@ -372,7 +383,6 @@ const Detail = (props: ButtonProps) => {
       </button>
       <Button
         type="submit"
-        disabled={isSubmitting}
         variant="contained"
         color="secondary"
         sx={{
@@ -418,6 +428,15 @@ const LearningPlan = styled.div`
 const InputDate = styled(DatePicker)`
   height: 1.5rem;
   width: 100%;
+  border-radius: 4.2px;
+  border: solid 0.8px #d6d6d6;
+  boxshadow: 0;
+`;
+
+const LearningPlanInputDate = styled(DatePicker)`
+  height: 1.5rem;
+  width: 78%;
+  margin-top: 1rem;
   border-radius: 4.2px;
   border: solid 0.8px #d6d6d6;
   boxshadow: 0;

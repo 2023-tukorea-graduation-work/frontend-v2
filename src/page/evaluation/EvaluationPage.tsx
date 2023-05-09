@@ -22,9 +22,9 @@ const EvaluationPage = () => {
             <LeftBar
               countStep={countStep}
               orderProcess={[
-                "01.강의평가",
-                "02.멘토/멘티평가",
-                "03.시스템평가 및 후기",
+                "01.만족도 평가",
+                "02.멘토링 후기",
+                "03.팝업식 설문조사",
               ]}
             />
             <WhiteBox>

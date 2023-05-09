@@ -50,7 +50,8 @@ const SystemWithReview = (props: ButtonProps) => {
                   }}
                   rows={1}
                   sx={{
-                    border: "1px solid #b7b7b7",
+                    borderRight: "1px solid #b7b7b7",
+                    borderLeft: "1px solid #b7b7b7",
                     width: "99.8%",
                     height: "100%",
                     boxShadow: "0",
