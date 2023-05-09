@@ -28,9 +28,9 @@ const AttendenceDetail = () => {
     <AttendForm>
       <p
         style={{
-          marginTop: "2.5rem",
-          fontSize: "1.2rem",
+          marginTop: "2rem",
           fontWeight: "bold",
+          fontSize: "1.1rem",
         }}
       >
         출석
@@ -67,7 +67,7 @@ const AttendenceDetail = () => {
         </Studentbox>
 
         <Checklist>
-          <p style={{ fontSize: "1rem" }}>날짜 :</p>
+          <p style={{ fontSize: "0.8rem" }}>날짜 :</p>
           <p>2022.02.31</p>
           <p>진행차시 : 1차시 / 9차시</p>
           <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
@@ -195,9 +195,10 @@ const Checklist = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 40rem;
+  width: 45%;
   margin-top: 3.5%;
   margin-bottom: 2%;
+  font-size: 0.9rem;
 `;
 
 const Attendbox = styled.div`

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
-import {
-  FaRegCheckCircle,
-  FaUserCircle,
-  FaRegWindowClose,
-} from "react-icons/fa";
-import TestEditorForm from "../qna/TestEditorForm";
+import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
+import NoticeEditorForm from "./NoticeEditorForm";
 
 const HorizonLine = () => {
   return (
@@ -15,12 +11,13 @@ const HorizonLine = () => {
         textAlign: "center",
         borderBottom: "1px solid #d6d6d6",
         lineHeight: "0.1em",
-        margin: "8px 0 20px",
+        margin: "8px 0 10px",
       }}
     ></div>
   );
 };
-const SubmitPopup = () => {
+
+const NoticeSubmitPopup = () => {
   const [sisOpen, ssetIsOpen] = useState(true);
   const subtogglePopup = () => {
     ssetIsOpen(!sisOpen);
@@ -28,23 +25,23 @@ const SubmitPopup = () => {
   return (
     <div>
       {sisOpen && (
-        <SubmitPopupbox>
-          <SubmitPopupinner>
+        <NSubmitPopupbox>
+          <NSubmitPopupinner>
             <FaRegWindowClose
               size="15"
               style={{ marginLeft: "99%" }}
               cursor="pointer"
               onClick={subtogglePopup}
             ></FaRegWindowClose>
-            <TestEditorForm></TestEditorForm>
-          </SubmitPopupinner>
-        </SubmitPopupbox>
+            <NoticeEditorForm></NoticeEditorForm>
+          </NSubmitPopupinner>
+        </NSubmitPopupbox>
       )}
     </div>
   );
 };
 
-const Popup = () => {
+const NoticePopup = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const togglePopup = () => {
@@ -53,42 +50,40 @@ const Popup = () => {
   return (
     <div>
       {isOpen && (
-        <Popupbox>
-          <Popupinner>
-            <PopupFrom>
-              <PopupStudent>
+        <NPopupbox>
+          <NPopupinner>
+            <NPopupFrom>
+              <NPopupStudent>
                 <FaUserCircle size="20" color="#777777"></FaUserCircle>
                 <p>박서영</p>
                 <p style={{ fontSize: "0.6rem" }}>2023.03.15</p>
-              </PopupStudent>
+              </NPopupStudent>
               <FaRegWindowClose
                 cursor="pointer"
                 size="20"
                 color="#777777"
                 onClick={togglePopup}
               ></FaRegWindowClose>
-            </PopupFrom>
+            </NPopupFrom>
             <HorizonLine></HorizonLine>
-            <p>질문제목</p>
+            <p style={{ marginTop: "1rem" }}>공지제목</p>
             <p
               style={{
-                marginTop: "0.5rem",
+                marginTop: "1rem",
                 marginLeft: "1rem",
                 marginBottom: "6rem",
               }}
             >
-              질문내용
+              공지내용
             </p>
-            <HorizonLine></HorizonLine>
-            <p>질문답변</p>
-          </Popupinner>
-        </Popupbox>
+          </NPopupinner>
+        </NPopupbox>
       )}
     </div>
   );
 };
 
-const QnaDetail = () => {
+const NoticeDetail = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
   const togglePopup = () => {
@@ -98,7 +93,7 @@ const QnaDetail = () => {
     ssetIsOpen(!sisOpen);
   };
   return (
-    <QnaForm>
+    <NoticeForm>
       <p
         style={{
           marginTop: "2rem",
@@ -106,83 +101,77 @@ const QnaDetail = () => {
           fontWeight: "bold",
         }}
       >
-        질문
+        공지
       </p>
-      <Qnabox>
-        <Qnatext>
-          <Qnatextinfo>
+      <Noticebox>
+        <Noticetext>
+          <Noticetextinfo>
             <p style={{ fontSize: "0.9rem" }}>날짜 :</p>
             <p>2022.02.31</p>
             <p>진행차시 : 1차시 / 9차시</p>
             <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
-          </Qnatextinfo>
-          <p style={{ color: "#07858C" }}>
-            답변안한 질문만 보기{" "}
-            <FaRegCheckCircle color="#07858C"></FaRegCheckCircle>
-          </p>
-        </Qnatext>
-        <Qnalistbox>
-          <QnaTotal>
-            <Qnalist>
-              <p>질문제목</p>
-            </Qnalist>
-            <QnaStudent>
+          </Noticetextinfo>
+          <div>
+            <p
+              style={{ color: "#07858C", cursor: "pointer" }}
+              onClick={subtooglePopup}
+            >
+              공지올리기 <FaPlus color="#07858C"></FaPlus>
+            </p>
+            {sisOpen && <NoticeSubmitPopup />}
+          </div>
+        </Noticetext>
+        <Noticelistbox>
+          <NoticeTotal>
+            <Noticelist>
+              <p>공지제목</p>
+            </Noticelist>
+            <NoticeStudent>
               <p>박서영</p>
               <p>
                 <FaUserCircle></FaUserCircle>
               </p>
               <p>2023.03.15</p>
-            </QnaStudent>
-          </QnaTotal>
+            </NoticeStudent>
+          </NoticeTotal>
           <HorizonLine />
-          <p style={{ marginLeft: "1.5%" }}>질문에 대한 답변</p>
+          <p style={{ marginLeft: "1.5%" }}>공지내용</p>
           <div>
             <a
               href="#"
+              style={{
+                marginLeft: "93%",
+                color: "#07858C",
+              }}
               onClick={togglePopup}
-              style={{ marginLeft: "93%", color: "#07858C" }}
             >
               자세히보기
             </a>
-            {isOpen && <Popup />}
+            {isOpen && <NoticePopup />}
           </div>
-        </Qnalistbox>
-        <Qnalistbox>
-          <QnaTotal>
-            <Qnalist>
-              <p>질문제목</p>
-            </Qnalist>
-            <QnaStudent>
-              <p>박서영</p>
-              <p>
-                <FaUserCircle></FaUserCircle>
-              </p>
-              <p>2023.03.15</p>
-            </QnaStudent>
-          </QnaTotal>
-          <HorizonLine />
-          <p style={{ marginLeft: "1.5%" }}>질문에 대한 답변</p>
-          <a
-            href="#"
-            onClick={subtooglePopup}
-            style={{ marginLeft: "93%", color: "#07858C" }}
-          >
-            답변작성하기{" "}
-          </a>
-          {sisOpen && <SubmitPopup />}
-        </Qnalistbox>
-      </Qnabox>
-    </QnaForm>
+          <div style={{ marginTop: "0.5rem" }}>
+            <a
+              href="#"
+              style={{
+                color: "#07858C",
+                marginLeft: "93%",
+              }}
+            >
+              수정하기
+            </a>
+          </div>
+        </Noticelistbox>
+      </Noticebox>
+    </NoticeForm>
   );
 };
-
-const QnaForm = styled.div`
+const NoticeForm = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 `;
-const Qnatext = styled.div`
+const Noticetext = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -190,13 +179,13 @@ const Qnatext = styled.div`
   margin-bottom: 2%;
   font-size: 0.9rem;
 `;
-const Qnabox = styled.div`
+const Noticebox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-top: 1.7rem;
 `;
-const Qnalistbox = styled.div`
+const Noticelistbox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -206,12 +195,12 @@ const Qnalistbox = styled.div`
   margin-bottom: 2%;
   font-size: 0.8rem;
 `;
-const Qnalist = styled.div`
+const Noticelist = styled.div`
   margin-left: 1.5%;
   margin-top: 1.5%;
   width: 15%;
 `;
-const QnaStudent = styled.div`
+const NoticeStudent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -219,11 +208,17 @@ const QnaStudent = styled.div`
   margin-left: 71%;
   margin-top: 2%;
 `;
-const QnaTotal = styled.div`
+const NoticeTotal = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const Popupbox = styled.div`
+const Noticetextinfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 40%;
+`;
+const NPopupbox = styled.div`
   position: fixed;
   top: 10%;
   left: 0;
@@ -235,20 +230,20 @@ const Popupbox = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const PopupFrom = styled.div`
+const NPopupFrom = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 0.5rem;
   font-size: 0.8rem;
 `;
-const Popupinner = styled.div`
+const NPopupinner = styled.div`
   background-color: white;
   width: 50%;
-  height: 60%;
+  height: 50%;
   padding: 1rem;
   border-radius: 20px;
 `;
-const PopupStudent = styled.div`
+const NPopupStudent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -256,7 +251,7 @@ const PopupStudent = styled.div`
   margin-right: 84%;
   color: #777777;
 `;
-const SubmitPopupbox = styled.div`
+const NSubmitPopupbox = styled.div`
   position: fixed;
   top: 8%;
   left: 0;
@@ -268,15 +263,9 @@ const SubmitPopupbox = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SubmitPopupinner = styled.div`
+const NSubmitPopupinner = styled.div`
   background-color: white;
   width: 100%;
   height: 100%;
 `;
-const Qnatextinfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 40%;
-`;
-export default QnaDetail;
+export default NoticeDetail;

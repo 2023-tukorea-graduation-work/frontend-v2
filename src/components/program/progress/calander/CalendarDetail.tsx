@@ -8,11 +8,10 @@ const CalenderDetail = () => {
       <Calenderbox>
         <p
           style={{
-            marginTop: "2.5rem",
-            fontSize: "1.2rem",
+            marginTop: "2rem",
             fontWeight: "bold",
-            marginLeft: "1rem",
-            marginBottom: "2rem",
+            fontSize: "1.1rem",
+            marginBottom: "1.5rem",
           }}
         >
           일정
@@ -35,7 +34,6 @@ const Calenderbox = styled.div`
 
 const Tablebox = styled.div`
   width: 100%;
-  background-color: skyblue;
 `;
 
 export default CalenderDetail;
