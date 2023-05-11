@@ -8,7 +8,31 @@ import {
   FaRegWindowClose,
   FaUserCircle,
 } from "react-icons/fa";
-import { TextField, Checkbox } from "@mui/material";
+import { TextField, Checkbox, Input } from "@mui/material";
+
+const OnlineclassFileUpload = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    setSelectedFile(file || null);
+  };
+
+  const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (selectedFile) {
+      console.log("Selected file:", selectedFile);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleFileSubmit}>
+        <input type="file" onChange={handleFileChange} />
+      </form>
+    </div>
+  );
+};
 
 const HorizonLine = () => {
   return (
@@ -51,28 +75,43 @@ const OnlinelivePopup = () => {
               ></FaRegWindowClose>
             </OnlinelivePopupFrom>
             <HorizonLine></HorizonLine>
-            <TextField
-              label="통화방이름"
-              variant="standard"
-              sx={{ width: "100%", height: "16%" }}
-            ></TextField>
-            <TextField
-              label="참여인원수"
-              variant="standard"
-              sx={{ width: "100%", height: "16%" }}
-            ></TextField>
-            <TextField
-              label="시작예정시간"
-              variant="standard"
-              sx={{ width: "100%", height: "16%" }}
-            ></TextField>
-            <TextField
-              label="비밀번호"
-              variant="standard"
-              sx={{ width: "100%", height: "16%" }}
-            ></TextField>
+            <Input
+              placeholder="통화방이름"
+              color="secondary"
+              sx={{ width: "100%", height: "12%", border: "none" }}
+            ></Input>
+            <Input
+              placeholder="참여인원수"
+              color="secondary"
+              sx={{
+                width: "100%",
+                height: "12%",
+                border: "none",
+                marginTop: "0.5rem",
+              }}
+            ></Input>
+            <Input
+              placeholder="시작예정시간"
+              color="secondary"
+              sx={{
+                width: "100%",
+                height: "12%",
+                border: "none",
+                marginTop: "0.5rem",
+              }}
+            ></Input>
+            <Input
+              placeholder="비밀번호"
+              color="secondary"
+              sx={{
+                width: "100%",
+                height: "12%",
+                border: "none",
+                marginTop: "0.5rem",
+              }}
+            ></Input>
             <Onlinelock>
-              <Checkbox style={{ width: "1rem" }} />
+              <Checkbox style={{ width: "1rem" }} color="secondary" />
               <p
                 style={{
                   fontSize: "0.8rem",
@@ -83,12 +122,13 @@ const OnlinelivePopup = () => {
                 잠금
               </p>
             </Onlinelock>
-
+            <HorizonLine></HorizonLine>
             <p
               style={{
                 color: "#07858C",
                 cursor: "pointer",
                 marginLeft: "37%",
+                marginTop: "1.5rem",
               }}
             >
               화상통화방 생성하기
@@ -127,12 +167,29 @@ const OnlineclassPopup = () => {
               ></FaRegWindowClose>
             </OnlineclassPopupFrom>
             <HorizonLine></HorizonLine>
-
+            <Input
+              placeholder="강의제목입력"
+              color="secondary"
+              sx={{ width: "100%", height: "14%", border: "none" }}
+            ></Input>
+            <Input
+              placeholder="강의내용입력"
+              color="secondary"
+              sx={{
+                width: "100%",
+                height: "45%",
+                border: "none",
+                marginBottom: "0.5rem",
+              }}
+            ></Input>
+            <OnlineclassFileUpload></OnlineclassFileUpload>
+            <HorizonLine></HorizonLine>
             <p
               style={{
                 color: "#07858C",
                 cursor: "pointer",
-                marginLeft: "37%",
+                marginLeft: "45%",
+                marginTop: "1rem",
               }}
             >
               자료올리기
@@ -200,6 +257,7 @@ const OnlineclassDetail = () => {
                 fontWeight: "bold",
                 lineHeight: "1rem",
                 marginRight: "3rem",
+                marginLeft: "0.2rem",
               }}
             >
               REC
@@ -228,6 +286,7 @@ const OnlineclassDetail = () => {
                 fontWeight: "bold",
                 lineHeight: "1rem",
                 marginRight: "3rem",
+                marginLeft: "0.2rem",
               }}
             >
               REC
@@ -256,6 +315,7 @@ const OnlineclassDetail = () => {
                 fontWeight: "bold",
                 lineHeight: "1rem",
                 marginRight: "3rem",
+                marginLeft: "0.2rem",
               }}
             >
               REC
@@ -279,7 +339,7 @@ const OnlineclassDetail = () => {
           <FaCaretSquareRight size="20"></FaCaretSquareRight>
           <p
             style={{
-              marginRight: "80%",
+              marginRight: "82%",
               lineHeight: "1.2rem",
             }}
           >
@@ -570,8 +630,8 @@ const OnlineclassPopupFrom = styled.div`
 `;
 const OnlineclassPopupinner = styled.div`
   background-color: white;
-  width: 25%;
-  height: 44%;
+  width: 50%;
+  height: 35%;
   padding: 1rem;
   border-radius: 20px;
 `;
@@ -579,8 +639,8 @@ const OnlineclassPopupStudent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 38%;
-  margin-right: 59%;
+  width: 15%;
+  margin-right: 82%;
   color: #777777;
 `;
 export default OnlineclassDetail;

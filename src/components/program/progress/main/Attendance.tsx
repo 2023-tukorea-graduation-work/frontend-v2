@@ -5,7 +5,16 @@ import { FaUserCheck } from "react-icons/fa";
 const Attendance = () => {
   return (
     <AttendanceBox>
-      <FaUserCheck></FaUserCheck>
+      <FaUserCheck size="22"></FaUserCheck>
+      <img
+        src="img/77.png"
+        style={{
+          width: "83%",
+          height: "17vh",
+          marginLeft: "1rem",
+          marginTop: "3.5rem",
+        }}
+      ></img>
     </AttendanceBox>
   );
 };

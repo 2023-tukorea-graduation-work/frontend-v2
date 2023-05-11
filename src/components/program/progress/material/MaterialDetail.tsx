@@ -1,7 +1,31 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
-import { TextField } from "@mui/material";
+import { TextField, Input } from "@mui/material";
+
+const FileUpload = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    setSelectedFile(file || null);
+  };
+
+  const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (selectedFile) {
+      console.log("Selected file:", selectedFile);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleFileSubmit}>
+        <input type="file" onChange={handleFileChange} />
+      </form>
+    </div>
+  );
+};
 
 const HorizonLine = () => {
   return (
@@ -41,25 +65,28 @@ const MaterialPopup = () => {
               ></FaRegWindowClose>
             </MPopupFrom>
             <HorizonLine></HorizonLine>
-            <TextField
-              label="자료제목입력"
-              variant="standard"
-              sx={{ width: "100%", height: "16%" }}
-            ></TextField>
-            <TextField
-              style={{
-                marginTop: "0.5rem",
-                marginLeft: "1rem",
-                marginBottom: "6rem",
+            <Input
+              placeholder="자료제목입력"
+              color="secondary"
+              sx={{ width: "100%", height: "14%", border: "none" }}
+            ></Input>
+            <Input
+              placeholder="자료내용입력"
+              color="secondary"
+              sx={{
+                width: "100%",
+                height: "45%",
+                border: "none",
+                marginBottom: "0.5rem",
               }}
-            >
-              자료내용
-            </TextField>
+            ></Input>
+            <FileUpload></FileUpload>
             <HorizonLine></HorizonLine>
             <p
               style={{
                 color: "#07858C",
                 cursor: "pointer",
+                marginTop: "1rem",
                 marginLeft: "47%",
               }}
             >
@@ -96,7 +123,7 @@ const MaterialDetailPopup = () => {
               ></FaRegWindowClose>
             </MdetailPopupFrom>
             <HorizonLine></HorizonLine>
-            <p style={{ marginTop: "1rem" }}>공지제목</p>
+            <p style={{ marginTop: "1rem" }}>자료제목</p>
             <p
               style={{
                 marginTop: "1rem",
@@ -104,7 +131,7 @@ const MaterialDetailPopup = () => {
                 marginBottom: "6rem",
               }}
             >
-              공지내용
+              자료내용
             </p>
           </MdetailPopupinner>
         </MdetailPopupbox>
@@ -271,7 +298,7 @@ const MPopupFrom = styled.div`
 const MPopupinner = styled.div`
   background-color: white;
   width: 50%;
-  height: 40%;
+  height: 35%;
   padding: 1rem;
   border-radius: 20px;
 `;

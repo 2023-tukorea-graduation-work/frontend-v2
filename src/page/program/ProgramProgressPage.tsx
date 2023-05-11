@@ -10,6 +10,7 @@ import QnaDetail from "../../components/program/progress/qna/QnaDetail";
 import NoticeDetail from "../../components/program/progress/notice/NoticeDetail";
 import MaterialDetail from "../../components/program/progress/material/MaterialDetail";
 import OnlineclassDetail from "../../components/program/progress/onlineclass/OnlineclassDetail";
+import TestDetail from "../../components/program/progress/test/TestDetail";
 
 const ProgramProgressPage = () => {
   const selectIndex = useAppSelector((state) => state.leftBar.indexNumber);
@@ -31,6 +32,7 @@ const ProgramProgressPage = () => {
       content: <CalenderDetail />,
     },
     { title: <div>온라인강의</div>, content: <OnlineclassDetail /> },
+    { title: <div>과제/시험</div>, content: <TestDetail /> },
   ];
 
   useEffect(() => {

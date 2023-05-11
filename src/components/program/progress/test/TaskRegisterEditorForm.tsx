@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { EditorState, ContentState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
+
+import { Button } from "@mui/material";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const HorizonLine = () => {
   return (
@@ -19,7 +22,7 @@ const HorizonLine = () => {
   );
 };
 
-const TestEditorForm = () => {
+const TaskRegisterEditorForm = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (
@@ -27,19 +30,50 @@ const TestEditorForm = () => {
   ) => {
     setEditorState(editorState);
   };
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const handleStartDateChange = (date: any) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date: any) => {
+    setEndDate(date);
+  };
 
   return (
     <MyBlock>
-      <TestEdinfo>
-        <p>질문제목</p>
-        <TestEdinfosub>
+      <TaskRegisterEdinfo>
+        <p>[1차시] 과제 제목</p>
+        <TaskRegisterEdinfosub>
           <FaUser></FaUser>
           <p>박서영</p>
           <p>2023.03.15</p>
-        </TestEdinfosub>
-      </TestEdinfo>
+        </TaskRegisterEdinfosub>
+      </TaskRegisterEdinfo>
       <HorizonLine></HorizonLine>
-      <p style={{ marginLeft: "1.5%" }}>질문내용</p>
+      <p>과제제출기간</p>
+      <TaskRegistersubmit>
+        <DatePicker
+          selected={startDate}
+          onChange={handleStartDateChange}
+          selectsStart
+          startDate={startDate}
+          endDate={endDate}
+          placeholderText="Start Date"
+        />
+        <p style={{ marginRight: "0.5rem", lineHeight: "1.5rem" }}>~</p>
+        <DatePicker
+          selected={endDate}
+          onChange={handleEndDateChange}
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          placeholderText="End Date"
+        />
+      </TaskRegistersubmit>
+      <HorizonLine></HorizonLine>
+      <p>과제작성칸</p>
       <Editor
         wrapperClassName="wrapper-class"
         editorClassName="editor"
@@ -61,7 +95,7 @@ const TestEditorForm = () => {
         color="secondary"
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
       >
-        답변제출하기
+        과제등록하기
       </Button>
     </MyBlock>
   );
@@ -71,7 +105,7 @@ const MyBlock = styled.div`
     width: 100%;
     margin: 0 auto;
     margin-bottom: 4rem;
-    margin-top: 6rem;
+    margin-top: 1rem;
   }
   .editor {
     height: 100% !important;
@@ -80,16 +114,24 @@ const MyBlock = styled.div`
     border-radius: 2px !important;
   }
 `;
-const TestEdinfo = styled.div`
+const TaskRegisterEdinfo = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 1.5rem;
+  font-size: 0.8rem;
 `;
-const TestEdinfosub = styled.div`
+const TaskRegisterEdinfosub = styled.div`
   display: flex;
   flex-direction: row;
   width: 10%;
   justify-content: space-between;
-  margin-left: 86%;
+  margin-left: 83%;
 `;
-export default TestEditorForm;
+const TaskRegistersubmit = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 27%;
+  margin-top: 1rem;
+`;
+
+export default TaskRegisterEditorForm;
