@@ -58,7 +58,7 @@ const NoticeEditorForm = () => {
       />
       <Button
         variant="contained"
-        color="primary"
+        color="secondary"
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
       >
         공지올리기

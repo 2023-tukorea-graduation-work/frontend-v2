@@ -113,7 +113,10 @@ const NoticeDetail = () => {
           </Noticetextinfo>
           <div>
             <p
-              style={{ color: "#07858C", cursor: "pointer" }}
+              style={{
+                color: "#07858C",
+                cursor: "pointer",
+              }}
               onClick={subtooglePopup}
             >
               공지올리기 <FaPlus color="#07858C"></FaPlus>

@@ -68,7 +68,9 @@ const CalRecrodPopup = () => {
               <Redetailcontext>text입력 이미지 업로드</Redetailcontext>
               <p>Q&A</p>
               <RedetailQnA>
-                <ReQbox>질문 입력</ReQbox>
+                <ReQbox>
+                  <TextField>질문 입력</TextField>
+                </ReQbox>
                 <ReAbox>답변 입력</ReAbox>
               </RedetailQnA>
               <p>특이사항</p>
@@ -196,12 +198,13 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
         <Input
           type="text"
           placeholder="일정"
+          color="secondary"
           {...register("content", { required: "일정" })}
           value={event.content}
           onChange={handleChange}
           style={{
             backgroundColor: "white",
-            width: "20rem",
+            width: "28.5rem",
             height: "2.5rem",
             marginRight: "2rem",
             marginLeft: "0.5rem",
@@ -209,6 +212,7 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
         />
         <Input
           type="datetime-local"
+          color="secondary"
           value={moment(event.schedule_start_datetime).format(
             "YYYY-MM-DDTHH:mm"
           )}
@@ -244,22 +248,13 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
             marginRight: "1rem",
           }}
         />
-        <FormControlLabel
-          sx={{
-            fontFamily: "NotoSansLight",
-            fontSize: "0.7rem",
-            marginLeft: "0.5rem",
-            marginRight: "2rem",
-          }}
-          control={<Switch onChange={toggleOnChange} defaultChecked />}
-          label={toggleValue === "ToDoList" ? "ToDoList" : "수업일정"}
-        />
+
         <Button
           type="submit"
           disabled={isSubmitting}
           variant="contained"
-          color="primary"
-          sx={{ width: "7rem", height: "4vh" }}
+          color="secondary"
+          sx={{ width: "7rem", height: "4vh", marginLeft: "1rem" }}
         >
           추가하기
         </Button>
@@ -327,9 +322,15 @@ const BigCalander = () => {
         events={events}
         startAccessor="start"
         endAccessor="end"
+        views={{
+          month: true, // 월간 뷰를 허용
+          week: true, // 주간 뷰를 허용
+          day: false, // 일간 뷰를 비허용
+          agenda: true,
+        }}
         onSelectEvent={handleSelect}
         eventPropGetter={eventStyleGetter}
-        style={{ height: 500, backgroundColor: "white" }}
+        style={{ height: 500, backgroundColor: "white", zIndex: "0" }}
         selectable
       />
 
@@ -382,12 +383,14 @@ const CPopupbox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 `;
 const CPopupFrom = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 0.5rem;
   font-size: 0.8rem;
+  z-index: 1;
 `;
 const CPopupinner = styled.div`
   background-color: white;
@@ -395,6 +398,7 @@ const CPopupinner = styled.div`
   height: 94%;
   padding: 1rem;
   border-radius: 20px;
+  z-index: 1;
 `;
 const CPopupStudent = styled.div`
   display: flex;
@@ -403,6 +407,7 @@ const CPopupStudent = styled.div`
   width: 23%;
   margin-right: 73%;
   color: #777777;
+  z-index: 1;
 `;
 const Redetailbox = styled.div`
   margin-top: 1.5%;

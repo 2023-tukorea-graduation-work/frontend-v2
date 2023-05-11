@@ -135,7 +135,7 @@ const AttendenceDetail = () => {
       <div style={{ display: "inlineBlock", float: "right" }}>
         <Button
           variant="contained"
-          color="primary"
+          color="secondary"
           fullWidth={true}
           sx={{
             fontSize: "1rem",

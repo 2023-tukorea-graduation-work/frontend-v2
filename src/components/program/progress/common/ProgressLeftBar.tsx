@@ -19,6 +19,7 @@ const ProgressLeftBar = () => {
     "공지",
     "일정",
     "온라인강의",
+    "과제/시험",
   ];
   return (
     <Box>
