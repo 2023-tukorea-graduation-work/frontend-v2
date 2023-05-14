@@ -31,7 +31,7 @@ const Profile = () => {
         <ToggleButtonGroup>
           <Custom
             user_gb={user_gb}
-            sx={{ width: "8.313rem" }}
+            sx={{ width: "8.313rem", fontFamily: "NotoSansRegular" }}
             color={user_gb === "MENTEE" ? "primary" : "secondary"}
             onClick={(event: any) => onChangeBtn(event)}
             selected={"ProgressBefore" === btnSelect ? true : false}
@@ -40,7 +40,11 @@ const Profile = () => {
             진행예정
           </Custom>
           <ToggleButton
-            sx={{ width: "11.813rem", marginLeft: "2%" }}
+            sx={{
+              width: "11.813rem",
+              marginLeft: "2%",
+              fontFamily: "NotoSansRegular",
+            }}
             color={user_gb === "MENTEE" ? "primary" : "secondary"}
             onClick={(event: any) => onChangeBtn(event)}
             selected={"Progressing" === btnSelect ? true : false}
@@ -49,7 +53,11 @@ const Profile = () => {
             진행중 프로젝트
           </ToggleButton>
           <ToggleButton
-            sx={{ width: "10.375rem", marginLeft: "2%" }}
+            sx={{
+              width: "10.375rem",
+              marginLeft: "2%",
+              fontFamily: "NotoSansRegular",
+            }}
             color={user_gb === "MENTEE" ? "primary" : "secondary"}
             onClick={(event: any) => onChangeBtn(event)}
             selected={"ProgressEnd" === btnSelect ? true : false}
