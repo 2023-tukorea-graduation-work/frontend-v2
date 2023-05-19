@@ -1,10 +1,10 @@
 .MuiToggleButton-root {
-  background-color: #ebebeb !important;
-  border-radius: 10px !important;
+  /* background-color: #ebebeb !important;
+
   /* color: #777777 !important; */
-  border: 0 !important;
+  /* border: 0 !important;
   font-size: 1rem !important;
-  height: 2.438rem !important;
+  height: 2.438rem; */
 }
 .Mui-selected {
   background-color: #fff !important;
