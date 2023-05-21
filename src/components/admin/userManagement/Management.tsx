@@ -1,7 +1,29 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Input,
+  MenuItem,
+  Select,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import SearchIcon from "@mui/icons-material/Search";
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    neutral: true;
+  }
+}
 const Management = () => {
+  const {
+    control,
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm();
   const [btnSelect, setBtnSelect] = useState("TheWhole");
   const onChangeBtn = (event: any) => {
     setBtnSelect(event.target.value);
@@ -9,7 +31,7 @@ const Management = () => {
   return (
     <GrayBox>
       <Tite>USER Management</Tite>
-      <ToggleButtonGroup>
+      <ToggleButtonGroup sx={{ width: "100%" }}>
         <Custom
           sx={{ fontFamily: "NotoSansRegular" }}
           onClick={(event: any) => onChangeBtn(event)}
@@ -39,6 +61,78 @@ const Management = () => {
           완료 프로젝트
         </Custom>
       </ToggleButtonGroup>
+      <SearchBox>
+        <FormControl>
+          <Controller
+            defaultValue=""
+            control={control}
+            name="capacity"
+            rules={{ required: "인원은 필수선택입니다." }}
+            render={({ field }) => (
+              <Select
+                disableUnderline
+                {...field}
+                sx={{
+                  height: "30px",
+                  width: "150%",
+                  border: "solid 1px #d6d6d6",
+                  boxShadow: "0",
+                  paddingLeft: "20%",
+                  fontSize: "0.8rem",
+                  backgroundColor: "white",
+                }}
+                displayEmpty
+                variant="standard"
+              >
+                <MenuItem
+                  disabled
+                  value=""
+                  sx={{
+                    display: "none",
+                  }}
+                >
+                  <em>종류</em>
+                </MenuItem>
+                <MenuItem sx={{ fontSize: "0.8rem" }} value={1}>
+                  날짜
+                </MenuItem>
+                <MenuItem sx={{ fontSize: "0.8rem" }} value={2}>
+                  이름
+                </MenuItem>
+                <MenuItem sx={{ fontSize: "0.8rem" }} value={3}>
+                  아이디
+                </MenuItem>
+                <MenuItem sx={{ fontSize: "0.8rem" }} value={4}>
+                  년도
+                </MenuItem>
+              </Select>
+            )}
+          />
+        </FormControl>
+        <Input
+          sx={{
+            height: "30px",
+            width: "15rem",
+            border: "solid 1px #d6d6d6",
+            boxShadow: "0",
+            fontSize: "0.8rem",
+            backgroundColor: "white",
+            marginLeft: "1.8rem",
+            marginRight: "0.2rem",
+          }}
+          value="검색 내용"
+          disableUnderline={true}
+        />
+        <SearchIcon
+          sx={{
+            backgroundColor: "white",
+            height: "28px",
+            width: "1.5rem",
+            borderRadius: "3px",
+            border: "solid 1px #d6d6d6",
+          }}
+        />
+      </SearchBox>
       <ListTitle>
         <DATE>DATE</DATE>
         <ID>ID</ID>
@@ -57,7 +151,14 @@ const Management = () => {
         <SCHOOL>한국공학대학교/IT경영학과</SCHOOL>
         <STYLE>온라인&오프라인 병행</STYLE>
         <CERTIFICATE>재학증명서_홍길동.PDF</CERTIFICATE>
-        <ACCEPTDENY>ACCEPT/DENYACCEPT</ACCEPTDENY>
+        <ACCEPTDENY>
+          <DenyButton variant="contained" color="neutral">
+            ACCEPT
+          </DenyButton>
+          <DenyButton variant="contained" color="primary">
+            DENY
+          </DenyButton>
+        </ACCEPTDENY>
       </List>
     </GrayBox>
   );
@@ -75,6 +176,7 @@ const Tite = styled.p`
   font-size: 1.5rem;
 `;
 const Custom = styled(ToggleButton)`
+  display: flex;
   &.MuiToggleButton-root {
     width: 16.063rem;
     height: 6.25rem;
@@ -90,6 +192,7 @@ const Custom = styled(ToggleButton)`
     border: solid 3px #0070a3 !important;
   }
 `;
+
 const ListTitle = styled.div`
   width: 88rem;
   height: 2.875rem;
@@ -139,5 +242,18 @@ const CERTIFICATE = styled.p`
 `;
 const ACCEPTDENY = styled.p`
   width: 10rem;
+`;
+const SearchBox = styled.div`
+  height: 2.4rem;
+  width: 26rem;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const DenyButton = styled(Button)`
+  width: 3rem;
+  height: 2rem;
+  font-family: "NotoSansBold";
 `;
 export default Management;
