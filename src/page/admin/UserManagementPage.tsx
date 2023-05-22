@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Management from "../../components/admin/userManagement/Management";
 const UserManagementPage = () => {
   return (
-    <div style={{ backgroundColor: "#FFB07A", display: "flex" }}>
+    <div style={{ backgroundColor: "#399DA3", display: "flex" }}>
       <Block />
       <WhiteBox>
         <Management></Management>

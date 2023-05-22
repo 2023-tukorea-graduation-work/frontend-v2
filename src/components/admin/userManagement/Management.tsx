@@ -14,7 +14,8 @@ import SearchIcon from "@mui/icons-material/Search";
 
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
-    neutral: true;
+    accept: true;
+    deny: true;
   }
 }
 const Management = () => {
@@ -25,40 +26,41 @@ const Management = () => {
     handleSubmit,
   } = useForm();
   const [btnSelect, setBtnSelect] = useState("TheWhole");
-  const onChangeBtn = (event: any) => {
-    setBtnSelect(event.target.value);
+  const onChangeBtn = (event: React.MouseEvent<HTMLElement>, value: string) => {
+    if (value == null) {
+      return;
+    }
+    setBtnSelect(value);
   };
   return (
     <GrayBox>
       <Tite>USER Management</Tite>
-      <ToggleButtonGroup sx={{ width: "100%" }}>
-        <Custom
-          sx={{ fontFamily: "NotoSansRegular" }}
-          onClick={(event: any) => onChangeBtn(event)}
-          selected={"TheWhole" === btnSelect ? true : false}
-          value="TheWhole"
-        >
-          숫자
+      <ToggleButtonGroup
+        sx={{ width: "100%" }}
+        exclusive
+        onChange={onChangeBtn}
+        value={btnSelect}
+      >
+        <Custom value="TheWhole">
+          <img alt="icon" src="img/whole.png" />
+          <CustomWrite>
+            <div>100</div>
+            <p>전체/The Whole</p>
+          </CustomWrite>
         </Custom>
-        <Custom
-          sx={{
-            fontFamily: "NotoSansRegular",
-          }}
-          onClick={(event: any) => onChangeBtn(event)}
-          selected={"New" === btnSelect ? true : false}
-          value="New"
-        >
-          진행중 프로젝트
+        <Custom value="New">
+          <img alt="icon" src="img/new.png" />
+          <CustomWrite>
+            <div>50</div>
+            <p>신규등록/New</p>
+          </CustomWrite>
         </Custom>
-        <Custom
-          sx={{
-            fontFamily: "NotoSansRegular",
-          }}
-          onClick={(event: any) => onChangeBtn(event)}
-          selected={"Deny" === btnSelect ? true : false}
-          value="Deny"
-        >
-          완료 프로젝트
+        <Custom value="Deny">
+          <img alt="icon" src="img/deny.png" />
+          <CustomWrite>
+            <div>10</div>
+            <div>거절/Deny</div>
+          </CustomWrite>
         </Custom>
       </ToggleButtonGroup>
       <SearchBox>
@@ -120,7 +122,7 @@ const Management = () => {
             marginLeft: "1.8rem",
             marginRight: "0.2rem",
           }}
-          value="검색 내용"
+          placeholder="검색 내용"
           disableUnderline={true}
         />
         <SearchIcon
@@ -152,12 +154,12 @@ const Management = () => {
         <STYLE>온라인&오프라인 병행</STYLE>
         <CERTIFICATE>재학증명서_홍길동.PDF</CERTIFICATE>
         <ACCEPTDENY>
-          <DenyButton variant="contained" color="neutral">
+          <DenyWithAcceptButton variant="contained" color="accept">
             ACCEPT
-          </DenyButton>
-          <DenyButton variant="contained" color="primary">
+          </DenyWithAcceptButton>
+          <DenyWithAcceptButton variant="contained" color="deny">
             DENY
-          </DenyButton>
+          </DenyWithAcceptButton>
         </ACCEPTDENY>
       </List>
     </GrayBox>
@@ -174,8 +176,11 @@ const GrayBox = styled.div`
 const Tite = styled.p`
   font-family: NotoSansBold;
   font-size: 1.5rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 `;
 const Custom = styled(ToggleButton)`
+  font-family: "NotoSansMedium";
   display: flex;
   &.MuiToggleButton-root {
     width: 16.063rem;
@@ -192,7 +197,14 @@ const Custom = styled(ToggleButton)`
     border: solid 3px #0070a3 !important;
   }
 `;
-
+const CustomWrite = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.2rem;
+  width: 9rem;
+  justify-content: start;
+  align-items: start;
+`;
 const ListTitle = styled.div`
   width: 88rem;
   height: 2.875rem;
@@ -233,7 +245,6 @@ const YEARBIRTH = styled.p`
 const SCHOOL = styled.p`
   width: 17rem;
 `;
-
 const STYLE = styled.p`
   width: 10rem;
 `;
@@ -250,10 +261,15 @@ const SearchBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 `;
-const DenyButton = styled(Button)`
+const DenyWithAcceptButton = styled(Button)`
   width: 3rem;
   height: 2rem;
   font-family: "NotoSansBold";
+  color: black !important;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 `;
 export default Management;

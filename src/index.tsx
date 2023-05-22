@@ -11,11 +11,13 @@ import "./index.css";
 
 declare module "@mui/material/styles" {
   interface Palette {
-    neutral: Palette["primary"];
+    accept: Palette["primary"];
+    deny: Palette["primary"];
   }
 
   interface PaletteOptions {
-    neutral: PaletteOptions["primary"];
+    accept: PaletteOptions["primary"];
+    deny: PaletteOptions["primary"];
   }
 }
 
@@ -27,9 +29,12 @@ const theme = createTheme({
     secondary: {
       main: "#399DA3",
     },
-    neutral: {
-      main: "#64748B",
-      contrastText: "#fff",
+    accept: {
+      main: "rgba(131, 194, 197, 0.5)",
+      contrastText: "#000000",
+    },
+    deny: {
+      main: "#FBBBBB",
     },
   },
 });
