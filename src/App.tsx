@@ -11,7 +11,7 @@ import ProfilePage from "./page/user/ProfilePage";
 import LoginPage from "./page/user/LoginPage";
 import EvaluationPage from "./page/evaluation/EvaluationPage";
 import ProgramCompletion from "./page/program/ProgramCompletion";
-
+import ProgramOnlineLivePage from "./page/program/ProgramOnlineLive";
 function App() {
   return (
     <>
@@ -23,6 +23,7 @@ function App() {
             path="/projectProgress"
             element={<ProgramProgressPage />}
           ></Route>
+          <Route path="onlineLive" element={<ProgramOnlineLivePage />}></Route>
           <Route
             path="/programCreation"
             element={<ProgramCreationPage />}

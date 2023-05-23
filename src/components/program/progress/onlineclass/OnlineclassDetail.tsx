@@ -223,53 +223,50 @@ const OnlineclassDetail = () => {
       </p>
       <Onlineclassbox>
         <Onlinelivetext>
-          <FaChalkboardTeacher size="20"></FaChalkboardTeacher>
           <p
             style={{
               marginLeft: "0.5rem",
-              marginRight: "82%",
-              lineHeight: "1.2rem",
             }}
           >
             실시간 강의
           </p>
-          <div>
-            <p
-              style={{
-                color: "#07858C",
-                lineHeight: "1.2rem",
-                cursor: "pointer",
-              }}
-              onClick={togglePopup}
-            >
-              화상통화방 생성하기
-            </p>
-            {isOpen && <OnlinelivePopup />}
-          </div>
-          <FaPlus color="#07858C"></FaPlus>
+
+          <p
+            style={{
+              color: "#07858C",
+              lineHeight: "1.2rem",
+              cursor: "pointer",
+            }}
+            onClick={togglePopup}
+          >
+            화상통화방 생성하기<FaPlus color="#07858C"></FaPlus>
+          </p>
+          {isOpen && <OnlinelivePopup />}
         </Onlinelivetext>
         <Onlinelivelistbox>
           <Onlinelivelist>
-            <FaCircle></FaCircle>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                fontWeight: "bold",
-                lineHeight: "1rem",
-                marginRight: "3rem",
-                marginLeft: "0.2rem",
-              }}
-            >
-              REC
-            </p>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                fontWeight: "bold",
-              }}
-            >
-              [1차시] 수학1 멘토링 강의
-            </p>
+            <Onlinelivelisttitle>
+              <FaCircle></FaCircle>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  fontWeight: "bold",
+                  lineHeight: "1rem",
+                  marginRight: "3rem",
+                  marginLeft: "0.2rem",
+                }}
+              >
+                REC
+              </p>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  fontWeight: "bold",
+                }}
+              >
+                [1차시] 수학1 멘토링 강의
+              </p>
+            </Onlinelivelisttitle>
             <Onlinelivelisttext>
               <p>시작예정시간: 2023.03.13 16:00</p>
               <p>참여인원 : 4</p>
@@ -279,26 +276,28 @@ const OnlineclassDetail = () => {
         </Onlinelivelistbox>
         <Onlinelivelistbox>
           <Onlinelivelist>
-            <FaCircle></FaCircle>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                fontWeight: "bold",
-                lineHeight: "1rem",
-                marginRight: "3rem",
-                marginLeft: "0.2rem",
-              }}
-            >
-              REC
-            </p>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                fontWeight: "bold",
-              }}
-            >
-              [1차시] 수학1 멘토링 강의
-            </p>
+            <Onlinelivelisttitle>
+              <FaCircle></FaCircle>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  fontWeight: "bold",
+                  lineHeight: "1rem",
+                  marginRight: "3rem",
+                  marginLeft: "0.2rem",
+                }}
+              >
+                REC
+              </p>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  fontWeight: "bold",
+                }}
+              >
+                [1차시] 수학1 멘토링 강의
+              </p>
+            </Onlinelivelisttitle>
             <Onlinelivelisttext>
               <p>시작예정시간: 2023.03.13 16:00</p>
               <p>참여인원 : 4</p>
@@ -308,26 +307,28 @@ const OnlineclassDetail = () => {
         </Onlinelivelistbox>
         <Onlinelivelistbox>
           <Onlinelivelist>
-            <FaCircle></FaCircle>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                fontWeight: "bold",
-                lineHeight: "1rem",
-                marginRight: "3rem",
-                marginLeft: "0.2rem",
-              }}
-            >
-              REC
-            </p>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                fontWeight: "bold",
-              }}
-            >
-              [1차시] 수학1 멘토링 강의
-            </p>
+            <Onlinelivelisttitle>
+              <FaCircle></FaCircle>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  fontWeight: "bold",
+                  lineHeight: "1rem",
+                  marginRight: "3rem",
+                  marginLeft: "0.2rem",
+                }}
+              >
+                REC
+              </p>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  fontWeight: "bold",
+                }}
+              >
+                [1차시] 수학1 멘토링 강의
+              </p>
+            </Onlinelivelisttitle>
             <Onlinelivelisttext>
               <p>시작예정시간: 2023.03.13 16:00</p>
               <p>참여인원 : 4</p>
@@ -336,159 +337,193 @@ const OnlineclassDetail = () => {
           </Onlinelivelist>
         </Onlinelivelistbox>
         <Onlineclasstext>
-          <FaCaretSquareRight size="20"></FaCaretSquareRight>
-          <p
-            style={{
-              marginRight: "82%",
-              lineHeight: "1.2rem",
-            }}
-          >
-            온라인 강의목록
-          </p>
+          <p>온라인 강의목록</p>
           <div>
             <p
               style={{
                 color: "#07858C",
-                lineHeight: "1.2rem",
                 cursor: "pointer",
               }}
               onClick={classtogglePopup}
             >
-              녹화 강의 올리기
+              녹화 강의 올리기 <FaPlus color="#07858C"></FaPlus>
             </p>
             {classisOpen && <OnlineclassPopup />}
           </div>
-          <FaPlus color="#07858C"></FaPlus>
         </Onlineclasstext>
         <Onlineclasslist>
-          <Onlineclasslistbox>
-            <p style={{ marginBottom: "5.5rem" }}>영상 썸네일</p>
-            <HorizonLine />
-            <Listboxtext>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  marginRight: "1rem",
-                  marginTop: "0.3rem",
-                }}
-              >
-                23.03.13
-              </p>
-              <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
-            </Listboxtext>
-          </Onlineclasslistbox>
-          <Onlineclasslistbox>
-            <p style={{ marginBottom: "5.5rem" }}>영상 썸네일</p>
-            <HorizonLine />
-            <Listboxtext>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  marginRight: "1rem",
-                  marginTop: "0.3rem",
-                }}
-              >
-                23.03.13
-              </p>
-              <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
-            </Listboxtext>
-          </Onlineclasslistbox>
-          <Onlineclasslistbox>
-            <p style={{ marginBottom: "5.5rem" }}>영상 썸네일</p>
-            <HorizonLine />
-            <Listboxtext>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  marginRight: "1rem",
-                  marginTop: "0.3rem",
-                }}
-              >
-                23.03.13
-              </p>
-              <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
-            </Listboxtext>
-          </Onlineclasslistbox>
-          <Onlineclasslistbox>
-            <p style={{ marginBottom: "5.5rem" }}>영상 썸네일</p>
-            <HorizonLine />
-            <Listboxtext>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  marginRight: "1rem",
-                  marginTop: "0.3rem",
-                }}
-              >
-                23.03.13
-              </p>
-              <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
-            </Listboxtext>
-          </Onlineclasslistbox>
-          <Onlineclasslistbox>
-            <p style={{ marginBottom: "5.5rem" }}>영상 썸네일</p>
-            <HorizonLine />
-            <Listboxtext>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  marginRight: "1rem",
-                  marginTop: "0.3rem",
-                }}
-              >
-                23.03.13
-              </p>
-              <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
-            </Listboxtext>
-          </Onlineclasslistbox>
-          <Onlineclasslistbox>
-            <p style={{ marginBottom: "5.5rem" }}>영상 썸네일</p>
-            <HorizonLine />
-            <Listboxtext>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  marginRight: "1rem",
-                  marginTop: "0.3rem",
-                }}
-              >
-                23.03.13
-              </p>
-              <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
-            </Listboxtext>
-          </Onlineclasslistbox>
-          <Onlineclasslistbox>
-            <p style={{ marginBottom: "5.5rem" }}>영상 썸네일</p>
-            <HorizonLine />
-            <Listboxtext>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  marginRight: "1rem",
-                  marginTop: "0.3rem",
-                }}
-              >
-                23.03.13
-              </p>
-              <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
-            </Listboxtext>
-          </Onlineclasslistbox>
-          <Onlineclasslistbox>
-            <p style={{ marginBottom: "5.5rem" }}>영상 썸네일</p>
-            <HorizonLine />
-            <Listboxtext>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  marginRight: "1rem",
-                  marginTop: "0.3rem",
-                }}
-              >
-                23.03.13
-              </p>
-              <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
-            </Listboxtext>
-          </Onlineclasslistbox>
+          <Onlineclasslist1>
+            <Onlineclasslistbox>
+              <Onlineclassimage>
+                <p>영상 썸네일</p>
+              </Onlineclassimage>
+
+              <Listbox>
+                <Listboxtitle>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "0.3rem",
+                    }}
+                  >
+                    23.03.13
+                  </p>
+                </Listboxtitle>
+                <Listboxtext>
+                  <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
+                </Listboxtext>
+              </Listbox>
+            </Onlineclasslistbox>
+            <Onlineclasslistbox>
+              <Onlineclassimage>
+                <p>영상 썸네일</p>
+              </Onlineclassimage>
+
+              <Listbox>
+                <Listboxtitle>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "0.3rem",
+                    }}
+                  >
+                    23.03.13
+                  </p>
+                </Listboxtitle>
+                <Listboxtext>
+                  <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
+                </Listboxtext>
+              </Listbox>
+            </Onlineclasslistbox>
+            <Onlineclasslistbox>
+              <Onlineclassimage>
+                <p>영상 썸네일</p>
+              </Onlineclassimage>
+
+              <Listbox>
+                <Listboxtitle>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "0.3rem",
+                    }}
+                  >
+                    23.03.13
+                  </p>
+                </Listboxtitle>
+                <Listboxtext>
+                  <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
+                </Listboxtext>
+              </Listbox>
+            </Onlineclasslistbox>
+            <Onlineclasslistbox>
+              <Onlineclassimage>
+                <p>영상 썸네일</p>
+              </Onlineclassimage>
+
+              <Listbox>
+                <Listboxtitle>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "0.3rem",
+                    }}
+                  >
+                    23.03.13
+                  </p>
+                </Listboxtitle>
+                <Listboxtext>
+                  <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
+                </Listboxtext>
+              </Listbox>
+            </Onlineclasslistbox>
+          </Onlineclasslist1>
+          <Onlineclasslist2>
+            <Onlineclasslistbox>
+              <Onlineclassimage>
+                <p>영상 썸네일</p>
+              </Onlineclassimage>
+
+              <Listbox>
+                <Listboxtitle>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "0.3rem",
+                    }}
+                  >
+                    23.03.13
+                  </p>
+                </Listboxtitle>
+                <Listboxtext>
+                  <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
+                </Listboxtext>
+              </Listbox>
+            </Onlineclasslistbox>
+            <Onlineclasslistbox>
+              <Onlineclassimage>
+                <p>영상 썸네일</p>
+              </Onlineclassimage>
+
+              <Listbox>
+                <Listboxtitle>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "0.3rem",
+                    }}
+                  >
+                    23.03.13
+                  </p>
+                </Listboxtitle>
+                <Listboxtext>
+                  <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
+                </Listboxtext>
+              </Listbox>
+            </Onlineclasslistbox>
+            <Onlineclasslistbox>
+              <Onlineclassimage>
+                <p>영상 썸네일</p>
+              </Onlineclassimage>
+
+              <Listbox>
+                <Listboxtitle>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "0.3rem",
+                    }}
+                  >
+                    23.03.13
+                  </p>
+                </Listboxtitle>
+                <Listboxtext>
+                  <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
+                </Listboxtext>
+              </Listbox>
+            </Onlineclasslistbox>
+            <Onlineclasslistbox>
+              <Onlineclassimage>
+                <p>영상 썸네일</p>
+              </Onlineclassimage>
+
+              <Listbox>
+                <Listboxtitle>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      marginTop: "0.3rem",
+                    }}
+                  >
+                    23.03.13
+                  </p>
+                </Listboxtitle>
+                <Listboxtext>
+                  <p style={{ fontSize: "0.9rem" }}>1차시_멘토링주제</p>
+                </Listboxtext>
+              </Listbox>
+            </Onlineclasslistbox>
+          </Onlineclasslist2>
         </Onlineclasslist>
       </Onlineclassbox>
     </OnlineclassForm>
@@ -512,6 +547,7 @@ const Onlinelivetext = styled.div`
   width: 100%;
   margin-bottom: 2%;
   font-size: 0.9rem;
+  justify-content: space-between;
 `;
 const Onlinelivelistbox = styled.div`
   display: flex;
@@ -529,16 +565,21 @@ const Onlinelivelist = styled.div`
   width: 100%;
   margin-left: 1.5rem;
   margin-top: 1.4rem;
+  justify-content: space-between;
 `;
 const Onlinelivelisttext = styled.div`
   display: flex;
   flex-direction: row;
   font-size: 0.7rem;
-  margin-left: 38.5%;
   width: 40%;
   line-height: 1.5rem;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
+const Onlinelivelisttitle = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const Onlineclasstext = styled.div`
   display: flex;
   flex-direction: row;
@@ -550,28 +591,48 @@ const Onlineclasstext = styled.div`
 `;
 const Onlineclasslist = styled.div`
   display: inline-flex;
-  flex-direction: colum;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
   width: 100%;
   height: 40vh;
   background-color: #f5f5f5;
   border-radius: 15px;
 `;
+const Onlineclasslist1 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+const Onlineclasslist2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
 const Onlineclasslistbox = styled.div`
   width: 19%;
-  height: 39%;
-  margin-top: 1.3rem;
-  margin-left: 4rem;
+  height: 14vh;
+
   box-shadow: 1px 1px 3px 1px #dadce0;
   border: 1px solid #d6d6d6;
   background-color: white;
   border-radius: 10px;
 `;
+const Onlineclassimage = styled.div`
+  width: 100%;
+  height: 9vh;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 1px solid #d6d6d6;
+`;
 const Listboxtext = styled.div`
+  margin-top: 0.8rem;
+`;
+const Listboxtitle = styled.div`
+  margin-top: ;
+`;
+const Listbox = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 2.5rem;
-  margin-top: 0.8rem;
+  justify-content: space-around;
 `;
 const OnlinelivePopupbox = styled.div`
   position: fixed;
@@ -610,6 +671,7 @@ const Onlinelock = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
 const OnlineclassPopupbox = styled.div`
   position: fixed;
   top: 10%;
