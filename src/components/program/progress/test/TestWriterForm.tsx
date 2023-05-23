@@ -69,18 +69,13 @@ const TestWriterForm = () => {
           <Input></Input>
         </Testtext>
         <TestNumber>
-          <TestA>
-            <Input></Input>
-          </TestA>
-          <TestB>
-            <Input></Input>
-          </TestB>
-          <TestC>
-            <Input></Input>
-          </TestC>
-          <TestD>
-            <Input></Input>
-          </TestD>
+          <Input></Input>
+
+          <Input></Input>
+
+          <Input></Input>
+
+          <Input></Input>
         </TestNumber>
       </TestWrite>
       <TestWriterplus>
