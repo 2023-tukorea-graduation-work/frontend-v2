@@ -76,7 +76,7 @@ const Management = () => {
                 {...field}
                 sx={{
                   height: "30px",
-                  width: "150%",
+                  width: "5rem",
                   border: "solid 1px #d6d6d6",
                   boxShadow: "0",
                   paddingLeft: "20%",
@@ -119,7 +119,7 @@ const Management = () => {
             boxShadow: "0",
             fontSize: "0.8rem",
             backgroundColor: "white",
-            marginLeft: "1.8rem",
+            marginLeft: "0.5rem",
             marginRight: "0.2rem",
           }}
           placeholder="검색 내용"
