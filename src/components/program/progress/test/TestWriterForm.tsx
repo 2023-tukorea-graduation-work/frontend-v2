@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 import { Button, Input } from "@mui/material";
-import { FaPlus } from "react-icons/fa";
+import {
+  FaPlus,
+  FaTrashAlt,
+  FaRegSave,
+  FaRegFileAlt,
+  FaRegQuestionCircle,
+} from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -21,20 +27,57 @@ const TestWriterForm = () => {
   return (
     <TestWriterform>
       <TestWriterbox>
-        <DatePicker
-          selected={startDate}
-          onChange={handleStartDateChange}
-          selectsStart
-          startDate={startDate}
-          endDate={endDate}
-          placeholderText="Start Date"
-        />
-        <TWTitle>
+        <Testdatebox>
+          <DatePicker
+            selected={startDate}
+            onChange={handleStartDateChange}
+            selectsStart
+            startDate={startDate}
+            endDate={endDate}
+            placeholderText="Start Date"
+          />
+          <p style={{ marginRight: "0.5rem", lineHeight: "1.5rem" }}>~</p>
+          <DatePicker
+            selected={endDate}
+            onChange={handleEndDateChange}
+            selectsEnd
+            startDate={startDate}
+            endDate={endDate}
+            placeholderText="End Date"
+          />
           <Input></Input>
-          <p>사용방법</p>
+        </Testdatebox>
+        <TWTitle>
+          <FaRegQuestionCircle></FaRegQuestionCircle>
+          <FaRegSave></FaRegSave>
+          <FaRegFileAlt></FaRegFileAlt>
+          <FaTrashAlt></FaTrashAlt>
         </TWTitle>
       </TestWriterbox>
-      <TestWriterlist></TestWriterlist>
+      <TestWriterlist>
+        <p>1번문항</p>
+        <TWselectbox>
+          <TWselect></TWselect>
+          <TWselectscore>
+            <p>배점</p>
+            <Input></Input>
+          </TWselectscore>
+        </TWselectbox>
+      </TestWriterlist>
+      <TestWrite>
+        <Testtext>
+          <Input></Input>
+        </Testtext>
+        <TestNumber>
+          <Input></Input>
+
+          <Input></Input>
+
+          <Input></Input>
+
+          <Input></Input>
+        </TestNumber>
+      </TestWrite>
       <TestWriterplus>
         <FaPlus
           size="20"
@@ -57,6 +100,12 @@ const TestWriterbox = styled.div`
   border: 3px solid #80b7d1;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+`;
+const Testdatebox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 const TestWriterlist = styled.div`
     width;100%;
@@ -69,5 +118,27 @@ const TestWriterplus = styled.div`
   margin-left: 49%;
   margin-top: 1rem;
 `;
-const TWTitle = styled.div``;
+const TWTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+const TWselectbox = styled.div`
+  border: 1px solid blue;
+  width: 15%;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+`;
+const TWselect = styled.div`
+  width: 10%;
+  height: 8vh;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+`;
+const TestWrite = styled.div``;
+const Testtext = styled.div``;
+const TestNumber = styled.div``;
+const TWselectscore = styled.div``;
 export default TestWriterForm;

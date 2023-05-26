@@ -142,7 +142,7 @@ const TestDetail = () => {
         <p style={{ marginLeft: "51%" }}>시험</p>
       </TaskTestTitle>
       <BoxTotal>
-        <Taskbox>
+        <Boxtitle>
           <p
             style={{
               color: "#07858C",
@@ -156,60 +156,11 @@ const TestDetail = () => {
             과제등록하기<FaPlus></FaPlus>
           </p>
           {TaskRegisterisOpen && <TaskRegisterPopup />}
-          <Tasklist>
-            <Taskcheck>
-              <FaCheckCircle
-                size="40"
-                style={{
-                  marginTop: "38%",
-                  marginLeft: "32%",
-                  cursor: "pointer",
-                  color: "#07858C",
-                }}
-              ></FaCheckCircle>
-            </Taskcheck>
-            <Taskname>
-              <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                [1차시]과제제목
-              </p>
-              {TaskScoreisOpen && <TaskscorePopup />}
-              <Taskdetail>
-                <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                <p style={{ marginTop: "0.5rem" }}>
-                  과제제출자: 이름, 이름, 이름
-                </p>
-              </Taskdetail>
-            </Taskname>
-          </Tasklist>
-          <Tasklist>
-            <Taskcheck>
-              <FaCheckCircle
-                size="40"
-                style={{
-                  marginTop: "38%",
-                  marginLeft: "32%",
-                  cursor: "pointer",
-                  color: "#07858C",
-                }}
-              ></FaCheckCircle>
-            </Taskcheck>
-            <Taskname>
-              <p>[1차시]과제제목</p>
-              <Taskdetail>
-                <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                <p style={{ marginTop: "0.5rem" }}>
-                  과제제출자: 이름, 이름, 이름
-                </p>
-              </Taskdetail>
-            </Taskname>
-          </Tasklist>
-        </Taskbox>
-        <Testbox>
           <p
             style={{
               color: "#07858C",
               fontSize: "0.9rem",
-              marginLeft: "31rem",
+              marginLeft: "37rem",
               marginBottom: "0.5rem",
               cursor: "pointer",
             }}
@@ -218,71 +169,128 @@ const TestDetail = () => {
             시험출제하기<FaPlus></FaPlus>
           </p>
           {TestWriterisOpen && <TestWritePopup />}
-          <Testlist>
-            <Testcheck>
-              <Testscore>
-                <p
+        </Boxtitle>
+        <TestTaskbox>
+          <Taskbox>
+            <Tasklist>
+              <Taskcheck>
+                <FaCheckCircle
+                  size="40"
                   style={{
-                    marginTop: "0.9rem",
-                    fontSize: "0.6rem",
-                    marginLeft: "0.7rem",
+                    marginTop: "38%",
+                    marginLeft: "32%",
+                    cursor: "pointer",
+                    color: "#07858C",
                   }}
-                >
-                  AVERAGE
+                ></FaCheckCircle>
+              </Taskcheck>
+              <Taskname>
+                <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
+                  [1차시]과제제목
                 </p>
-                <p
+                {TaskScoreisOpen && <TaskscorePopup />}
+                <Taskdetail>
+                  <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
+                  <p style={{ marginTop: "0.5rem" }}>
+                    과제제출자: 이름, 이름, 이름
+                  </p>
+                </Taskdetail>
+              </Taskname>
+            </Tasklist>
+            <Tasklist>
+              <Taskcheck>
+                <FaCheckCircle
+                  size="40"
                   style={{
-                    marginTop: "0.3rem",
-                    marginLeft: "1.3rem",
-                    fontSize: "1.4rem",
-                    fontWeight: "bold",
+                    marginTop: "38%",
+                    marginLeft: "32%",
+                    cursor: "pointer",
+                    color: "#07858C",
                   }}
-                >
-                  85
-                </p>
-              </Testscore>
-            </Testcheck>
-            <Testname>
-              <p>1차 시험</p>
-              <Testdetail>
-                <p>시험시간: 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                <p style={{ marginTop: "0.5rem" }}>참여자: 이름, 이름, 이름</p>
-              </Testdetail>
-            </Testname>
-          </Testlist>
-          <Testlist>
-            <Testcheck>
-              <Testscore>
-                <p
-                  style={{
-                    marginTop: "0.9rem",
-                    fontSize: "0.6rem",
-                    marginLeft: "0.7rem",
-                  }}
-                >
-                  AVERAGE
-                </p>
-                <p
-                  style={{
-                    marginTop: "0.3rem",
-                    marginLeft: "1.3rem",
-                    fontSize: "1.4rem",
-                    fontWeight: "bold",
-                  }}
-                >
-                  85
-                </p>
-              </Testscore>
-            </Testcheck>
-            <Testname>
-              <p>1차 시험</p>
-              <Testdetail>
-                <p>시험시간: 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                <p style={{ marginTop: "0.5rem" }}>참여자: 이름, 이름, 이름</p>
-              </Testdetail>
-            </Testname>
-          </Testlist>
-        </Testbox>
+                ></FaCheckCircle>
+              </Taskcheck>
+              <Taskname>
+                <p>[1차시]과제제목</p>
+                <Taskdetail>
+                  <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
+                  <p style={{ marginTop: "0.5rem" }}>
+                    과제제출자: 이름, 이름, 이름
+                  </p>
+                </Taskdetail>
+              </Taskname>
+            </Tasklist>
+          </Taskbox>
+          <Testbox>
+            <Testlist>
+              <Testcheck>
+                <Testscore>
+                  <p
+                    style={{
+                      marginTop: "0.9rem",
+                      fontSize: "0.6rem",
+                      marginLeft: "0.7rem",
+                    }}
+                  >
+                    AVERAGE
+                  </p>
+                  <p
+                    style={{
+                      marginTop: "0.3rem",
+                      marginLeft: "1.3rem",
+                      fontSize: "1.4rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    85
+                  </p>
+                </Testscore>
+              </Testcheck>
+              <Testname>
+                <p>1차 시험</p>
+                <Testdetail>
+                  <p>시험시간: 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
+                  <p style={{ marginTop: "0.5rem" }}>
+                    참여자: 이름, 이름, 이름
+                  </p>
+                </Testdetail>
+              </Testname>
+            </Testlist>
+            <Testlist>
+              <Testcheck>
+                <Testscore>
+                  <p
+                    style={{
+                      marginTop: "0.9rem",
+                      fontSize: "0.6rem",
+                      marginLeft: "0.7rem",
+                    }}
+                  >
+                    AVERAGE
+                  </p>
+                  <p
+                    style={{
+                      marginTop: "0.3rem",
+                      marginLeft: "1.3rem",
+                      fontSize: "1.4rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    85
+                  </p>
+                </Testscore>
+              </Testcheck>
+              <Testname>
+                <p>1차 시험</p>
+                <Testdetail>
+                  <p>시험시간: 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
+                  <p style={{ marginTop: "0.5rem" }}>
+                    참여자: 이름, 이름, 이름
+                  </p>
+                </Testdetail>
+              </Testname>
+            </Testlist>
+          </Testbox>
+        </TestTaskbox>
       </BoxTotal>
     </TestForm>
   );
@@ -303,11 +311,18 @@ const TaskTestTitle = styled.div`
 `;
 const BoxTotal = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 const Taskbox = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 48%;
   height: 50vh;
+`;
+const Boxtitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 const Testbox = styled.div`
   margin-left: 5.5rem;
@@ -315,6 +330,10 @@ const Testbox = styled.div`
   height: 50vh;
   display: flex;
   flex-direction: column;
+`;
+const TestTaskbox = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 const Tasklist = styled.div`
   width: 99%;
