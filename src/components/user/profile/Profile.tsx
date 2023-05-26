@@ -39,7 +39,8 @@ const Profile = () => {
           >
             진행예정
           </Custom>
-          <ToggleButton
+          <Custom
+            user_gb={user_gb}
             sx={{
               width: "11.813rem",
               marginLeft: "2%",
@@ -51,8 +52,9 @@ const Profile = () => {
             value="Progressing"
           >
             진행중 프로젝트
-          </ToggleButton>
-          <ToggleButton
+          </Custom>
+          <Custom
+            user_gb={user_gb}
             sx={{
               width: "10.375rem",
               marginLeft: "2%",
@@ -64,7 +66,7 @@ const Profile = () => {
             value="ProgressEnd"
           >
             완료 프로젝트
-          </ToggleButton>
+          </Custom>
         </ToggleButtonGroup>
         <MyProjectList>
           <UserProfileProgram></UserProfileProgram>
@@ -182,7 +184,7 @@ const ImageStyle = styled.div`
   object-fit: fill;
 `;
 const Custom = styled(ToggleButton)<{ user_gb: string }>`
-  .MuiToggleButton-root {
+  &.MuiToggleButton-root {
     background-color: #ebebeb !important;
     border-radius: 10px !important;
     color: #777777 !important;

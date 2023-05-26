@@ -42,7 +42,7 @@ const Header = () => {
     setIsOpen(false);
   };
   const NavStyle = styled.div`
-    width: 35%;
+    width: 70%;
     display: flex;
     font-family: Inter;
     font-size: 110%;
@@ -69,9 +69,11 @@ const Header = () => {
             <HeaderStyle>
               <LogoStyle>1</LogoStyle>
               <NavStyle>
-                <div>P R O G R A M</div>
-                <div>S E A R C H</div>
-                <div>C L A S S</div>
+                <div>메인페이지</div>
+                <div>플젝구인게시판</div>
+                <div>플젝완료게시판</div>
+                <div>과외구인게시판</div>
+                <div>프로젝트소개</div>
               </NavStyle>
               <AlertWithLogin>
                 <CircleStyle onClick={modalOn}>Alert</CircleStyle>
