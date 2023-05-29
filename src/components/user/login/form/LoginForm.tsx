@@ -76,6 +76,7 @@ const LoginForm = () => {
                 <PersonOutlineOutlinedIcon fontSize="medium" />
               </InputAdornment>
             }
+            disableUnderline={true}
             {...register("email", {
               required: "이메일은 필수입력입니다.",
             })}
@@ -91,6 +92,7 @@ const LoginForm = () => {
                 <LockOutlinedIcon fontSize="medium" />
               </InputAdornment>
             }
+            disableUnderline={true}
             {...register("password", {
               required: "비밀번호은 필수입력입니다.",
             })}

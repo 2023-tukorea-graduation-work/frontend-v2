@@ -14,7 +14,7 @@ import FilterButton from "./Filter";
 import ProgramListProgram from "./ProgramListProgram";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loadItemListAsync } from "../../../slice/program/programListSlice";
-
+import dummy from "../../../docs/DummyList.json";
 const ProgramList = () => {
   const dispatch = useAppDispatch();
   const postList = useAppSelector((state) => state.programList.post);
@@ -23,14 +23,16 @@ const ProgramList = () => {
     setPage(page);
   };
   const handlePageUp = () => {
-    if (page < Math.trunc(postList.length / 5))
+    // if (page < Math.trunc(postList.length / 5))
+    //   setPage((state) => (state = state + 1));
+    if (page < Math.trunc(dummy.data.length / 5))
       setPage((state) => (state = state + 1));
   };
   const handlePageDown = () => {
     if (page !== 1) setPage((state) => (state = state - 1));
   };
   useEffect(() => {
-    dispatch(loadItemListAsync(""));
+    // dispatch(loadItemListAsync(""));
   }, []);
   return (
     <ListForm>
@@ -59,7 +61,7 @@ const ProgramList = () => {
           onClick={handlePageDown}
         ></FaChevronLeft>
         <ListItem>
-          {postList.length !== 0 ? (
+          {/* {postList.length !== 0 ? (
             <>
               {postList.slice((page - 1) * 8, 8 * page).map((value) => {
                 return (
@@ -84,12 +86,12 @@ const ProgramList = () => {
             </>
           ) : (
             <></>
-          )}
-          {/* {dummy.data.length !== 0 ? (
+          )} */}
+          {dummy.data.length !== 0 ? (
             <>
               {dummy.data.slice((page - 1) * 8, 8 * page).map((value) => {
                 return (
-                  <ItemBox
+                  <ProgramListProgram
                     key={value.PROGRAM_NO}
                     PROGRAM_NO={value.PROGRAM_NO}
                     ACT_PLACE={value.ACT_PLACE}
@@ -104,13 +106,13 @@ const ProgramList = () => {
                     PRO_START_DATE={value.PRO_START_DATE}
                     ROW_NUM={value.ROW_NUM}
                     SUBJECT={value.SUBJECT}
-                  ></ItemBox>
+                  ></ProgramListProgram>
                 );
               })}
             </>
           ) : (
             <></>
-          )} */}
+          )}
         </ListItem>
         <FaChevronRight
           style={{ width: "2%", marginLeft: "2rem", cursor: "pointer" }}
@@ -123,7 +125,8 @@ const ProgramList = () => {
         <Pagination
           activePage={page}
           itemsCountPerPage={8}
-          totalItemsCount={postList.length}
+          // totalItemsCount={postList.length}
+          totalItemsCount={dummy.data.length}
           pageRangeDisplayed={5}
           onChange={handlePageChange}
         />
