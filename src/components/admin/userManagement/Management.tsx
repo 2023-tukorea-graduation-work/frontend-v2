@@ -69,7 +69,7 @@ const Management = () => {
             defaultValue=""
             control={control}
             name="capacity"
-            rules={{ required: "인원은 필수선택입니다." }}
+            rules={{ required: "옵션은 필수선택입니다." }}
             render={({ field }) => (
               <Select
                 disableUnderline

@@ -231,4 +231,5 @@ const Line = styled.hr`
   width: 99.7%;
   border-top: 1px solid #b7b7b7;
 `;
+
 export default MentoOrMentee;
