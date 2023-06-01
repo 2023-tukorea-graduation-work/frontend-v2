@@ -23,8 +23,7 @@ const SystemWithReview = (props: ButtonProps) => {
     handleSubmit,
   } = useForm();
   return (
-    <>
-      03.시스템 평가및 후기
+    <TableCss>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <table>
           <thead>
@@ -125,11 +124,11 @@ const SystemWithReview = (props: ButtonProps) => {
               marginBottom: "2rem",
             }}
           >
-            다음
+            평가 완료하기
           </Button>
         </div>
       </form>
-    </>
+    </TableCss>
   );
 };
 const TableQuestionHeader = styled.th<{ user_gb: string }>`
@@ -148,6 +147,14 @@ const TableQuestion = styled.td`
   border: 1px solid #b7b7b7;
   text-align: left;
   vertical-align: middle;
+  padding-left: 1.4rem;
 `;
-
+const TableCss = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-left: 5rem;
+  font-family: "NotoSansRegular";
+`;
 export default SystemWithReview;

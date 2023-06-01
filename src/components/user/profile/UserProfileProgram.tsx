@@ -1,13 +1,28 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 const UserProfileProgram = () => {
+  const navigate = useNavigate();
   return (
     <Preview>
       <Top>
         <Title>프로그램 이름</Title>
         <MentoInfo>멘토이름 | 멘토학교 | 멘토학과</MentoInfo>
-        <Link>프로젝트관리하기</Link>
+        <Link
+          onClick={() => {
+            navigate("/projectProgress");
+          }}
+        >
+          프로젝트관리하기
+        </Link>
+        <Link
+          onClick={() => {
+            navigate("/programCompletion");
+          }}
+        >
+          결과보기
+        </Link>
       </Top>
       <Bottom>
         <BottomP>주제</BottomP>
@@ -15,7 +30,13 @@ const UserProfileProgram = () => {
         <BottomP>모집인원</BottomP>
         <BottomP>모집기간</BottomP>
         <BottomP>프로젝트기간</BottomP>
-        <Link>후기작성하기{`->`}</Link>
+        <Link
+          onClick={() => {
+            navigate("/evaluation");
+          }}
+        >
+          후기작성하기{`->`}
+        </Link>
       </Bottom>
     </Preview>
   );
@@ -65,6 +86,7 @@ const Link = styled.p`
   font-family: "NotoSansRegular";
   float: right;
   margin-right: 1rem;
+  cursor: pointer;
 `;
 const Bottom = styled.div`
   width: 100%;

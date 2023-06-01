@@ -25,8 +25,7 @@ const Lecture = (props: ButtonProps) => {
     handleSubmit,
   } = useForm();
   return (
-    <>
-      01.강의평가
+    <TableCss>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <table>
           <thead>
@@ -43,7 +42,12 @@ const Lecture = (props: ButtonProps) => {
           </thead>
           <tbody>
             <tr>
-              <TableQuestion colSpan={4}>수업만족도</TableQuestion>
+              <TableQuestion
+                style={{ fontFamily: "NotoSansMedium", fontSize: "1.15rem" }}
+                colSpan={4}
+              >
+                수업만족도
+              </TableQuestion>
             </tr>
             {classSatisfaction.map((value: string, index: number) => (
               <tr key={index}>
@@ -84,7 +88,12 @@ const Lecture = (props: ButtonProps) => {
               </tr>
             ))}
             <tr>
-              <TableQuestion colSpan={4}>관계 만족도</TableQuestion>
+              <TableQuestion
+                style={{ fontFamily: "NotoSansMedium", fontSize: "1.15rem" }}
+                colSpan={4}
+              >
+                관계 만족도
+              </TableQuestion>
             </tr>
             {relationshipSatisfaction.map((value: string, index: number) => (
               <tr key={index}>
@@ -147,7 +156,7 @@ const Lecture = (props: ButtonProps) => {
           </Button>
         </div>
       </form>
-    </>
+    </TableCss>
   );
 };
 const TableQuestionHeader = styled.th<{ user_gb: string }>`
@@ -174,6 +183,7 @@ const TableQuestion = styled.td`
   border: 1px solid #b7b7b7;
   text-align: left;
   vertical-align: middle;
+  padding-left: 1rem;
 `;
 const TableAnswer = styled.td`
   height: 2rem;
@@ -181,5 +191,13 @@ const TableAnswer = styled.td`
   border: 1px solid #b7b7b7;
   text-align: center;
   vertical-align: middle;
+`;
+const TableCss = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-left: 5rem;
+  font-family: "NotoSansRegular";
 `;
 export default Lecture;

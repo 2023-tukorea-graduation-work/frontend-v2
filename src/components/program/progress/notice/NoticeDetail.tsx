@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
 import NoticeEditorForm from "./NoticeEditorForm";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const HorizonLine = () => {
   return (
     <div
@@ -33,7 +34,9 @@ const NoticeSubmitPopup = () => {
               cursor="pointer"
               onClick={subtogglePopup}
             ></FaRegWindowClose>
-            <NoticeEditorForm></NoticeEditorForm>
+            <NoticeEditorForm
+              subtogglePopup={subtogglePopup}
+            ></NoticeEditorForm>
           </NSubmitPopupinner>
         </NSubmitPopupbox>
       )}
@@ -66,7 +69,7 @@ const NoticePopup = () => {
               ></FaRegWindowClose>
             </NPopupFrom>
             <HorizonLine></HorizonLine>
-            <p style={{ marginTop: "1rem" }}>공지제목</p>
+            <p style={{ marginTop: "1rem" }}>공지123제목</p>
             <p
               style={{
                 marginTop: "1rem",

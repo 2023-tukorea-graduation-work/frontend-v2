@@ -6,8 +6,10 @@ import { Button } from "@mui/material";
 import { lineHeight } from "@mui/system";
 import UserProfileProgram from "./UserProfileProgram";
 import { useAppSelector } from "../../../store/hooks";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [btnSelect, setBtnSelect] = useState("ProgressBefore");
   const onChangeBtn = (event: any) => {
@@ -113,6 +115,9 @@ const Profile = () => {
             marginTop: "2rem",
             boxShadow: "0 3px 10px 0 rgba(0, 0, 0, 0.25)",
             borderRadius: "10px",
+          }}
+          onClick={() => {
+            navigate("/programCreation");
           }}
         >
           프로젝트 생성하기+

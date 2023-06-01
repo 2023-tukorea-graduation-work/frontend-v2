@@ -8,7 +8,11 @@ import { logOut } from "../../../slice/user/loginSlice";
 import ClearIcon from "@mui/icons-material/Clear";
 import Modal from "react-modal";
 import AlertModal from "./AlertModal";
-import { alertModalChange } from "../../../slice/common/headerSlice";
+import {
+  alertModalChange,
+  profileModalChange,
+} from "../../../slice/common/headerSlice";
+import ProfileModal from "./ProfileModal";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +22,9 @@ const Header = () => {
   const location = useLocation();
   const modalOn = () => {
     dispatch(alertModalChange({ value: true }));
+  };
+  const profileModalOn = () => {
+    dispatch(profileModalChange({ value: true }));
   };
 
   const NavStyle = styled.div`
@@ -33,7 +40,7 @@ const Header = () => {
     width: 100%;
     height: 10vh;
     background-color: ${location.pathname === "/projectProgress"
-      ? "white"
+      ? ""
       : userGb === "MENTO"
       ? "#399DA3"
       : "#ffb07a"};
@@ -85,16 +92,15 @@ const Header = () => {
                 </div>
               </NavStyle>
               <AlertWithLogin>
-                <CircleStyle onClick={modalOn}>Alert</CircleStyle>
-                <AlertModal></AlertModal>
+                <CircleStyle onClick={modalOn}>
+                  <img alt="icon" src="img/bell3.png" />
+                </CircleStyle>
+                <AlertModal />
                 {userNo === null ? (
-                  <CircleStyle
-                    onClick={() => {
-                      navigate("/");
-                    }}
-                  >
-                    Login
-                  </CircleStyle>
+                  <>
+                    <CircleStyle onClick={profileModalOn}>Login</CircleStyle>
+                    <ProfileModal />
+                  </>
                 ) : (
                   <CircleStyle onClick={() => dispatch(logOut())}>
                     {userNo}
@@ -127,7 +133,6 @@ const CircleStyle = styled.div`
   cursor: pointer;
   height: 2.5rem;
   width: 2.5rem;
-  border: 3px solid #d9d9d9;
   border-radius: 50%;
   object-fit: fill;
   line-height: 5vh;
@@ -135,6 +140,10 @@ const CircleStyle = styled.div`
   text-align: center;
   font-weight: bold;
   margin-right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
 `;
 const AlertWithLogin = styled.div`
   display: flex;

@@ -5,7 +5,10 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState } from "draft-js";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
-
+import { toast } from "react-toastify";
+interface Props {
+  subtogglePopup(): void;
+}
 const HorizonLine = () => {
   return (
     <div
@@ -20,7 +23,7 @@ const HorizonLine = () => {
   );
 };
 
-const NoticeEditorForm = () => {
+const NoticeEditorForm = ({ subtogglePopup }: Props) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (
@@ -60,6 +63,10 @@ const NoticeEditorForm = () => {
         variant="contained"
         color="secondary"
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
+        onClick={() => {
+          toast.success("게시글작성 성공");
+          subtogglePopup();
+        }}
       >
         공지올리기
       </Button>

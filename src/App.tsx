@@ -13,7 +13,8 @@ import EvaluationPage from "./page/evaluation/EvaluationPage";
 import ProgramCompletion from "./page/program/ProgramCompletion";
 import UserManagementPage from "./page/admin/UserManagementPage";
 import ProgramOnlineLivePage from "./page/program/ProgramOnlineLive";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <>
@@ -49,6 +50,18 @@ function App() {
           ></Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer
+        position="bottom-right" // 알람 위치 지정
+        autoClose={1000} // 자동 off 시간
+        hideProgressBar={false} // 진행시간바 숨김
+        closeOnClick // 클릭으로 알람 닫기
+        rtl={false} // 알림 좌우 반전
+        pauseOnFocusLoss // 화면을 벗어나면 알람 정지
+        draggable // 드래그 가능
+        pauseOnHover // 마우스를 올리면 알람 정지
+        theme="light"
+      />
+      ;
     </>
   );
 }
