@@ -92,7 +92,9 @@ const Header = () => {
                 </div>
               </NavStyle>
               <AlertWithLogin>
-                <CircleStyle onClick={modalOn}>Alert</CircleStyle>
+                <CircleStyle onClick={modalOn}>
+                  <img alt="icon" src="img/bell3.png" />
+                </CircleStyle>
                 <AlertModal />
                 {userNo === null ? (
                   <>
@@ -131,7 +133,6 @@ const CircleStyle = styled.div`
   cursor: pointer;
   height: 2.5rem;
   width: 2.5rem;
-  border: 3px solid #d9d9d9;
   border-radius: 50%;
   object-fit: fill;
   line-height: 5vh;
@@ -139,6 +140,10 @@ const CircleStyle = styled.div`
   text-align: center;
   font-weight: bold;
   margin-right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
 `;
 const AlertWithLogin = styled.div`
   display: flex;

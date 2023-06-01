@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
 import { TextField, Input } from "@mui/material";
+import { toast } from "react-toastify";
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -88,6 +89,10 @@ const MaterialPopup = () => {
                 cursor: "pointer",
                 marginTop: "1rem",
                 marginLeft: "47%",
+              }}
+              onClick={() => {
+                toast.success("자료올리기 성공");
+                togglePopup();
               }}
             >
               자료올리기

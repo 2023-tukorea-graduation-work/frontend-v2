@@ -15,7 +15,11 @@ const MainPage = () => {
 const BackgroundColor = styled.div<{ user_gb: string }>`
   width: 100%;
   height: 80vh;
-  background-image: linear-gradient(to bottom, #399da3, #fff 90%);
+  background-image: ${(props) =>
+    props.user_gb === "MENTEE"
+      ? "linear-gradient(to bottom, #FFB07A, #fff 90%)"
+      : "linear-gradient(to bottom, #399da3, #fff 90%)"};
+
   background-color: ${(props) =>
     props.user_gb === "MENTEE" ? "#FFB07A" : "#399DA3"};
 `;
