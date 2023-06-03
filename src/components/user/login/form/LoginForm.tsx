@@ -139,12 +139,12 @@ const LogoStyled = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 6rem;
-  border: 1px solid red;
+  // border: 1px solid red;
   width: 100%;
   height: 1rem;
 `;
 const Logo = styled.div`
-  border: 1px solid blue;
+  // border: 1px solid blue;
   width: 10rem;
   height: 6rem;
   text-align: center;

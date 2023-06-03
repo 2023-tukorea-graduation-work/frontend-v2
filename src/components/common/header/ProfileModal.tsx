@@ -61,22 +61,22 @@ const ProfileModal = () => {
       <ModalDate>
         <p>프로필</p>
       </ModalDate>
-      <button
+      <TestButton
         onClick={() => {
           navigate("/profile");
           modalOff();
         }}
       >
         프로필보기
-      </button>
-      <button
+      </TestButton>
+      <TestButton
         onClick={() => {
           navigate("/");
           modalOff();
         }}
       >
         로그아웃
-      </button>
+      </TestButton>
     </Modal>
   );
 };
@@ -96,5 +96,19 @@ const ModalDate = styled.div`
   font-size: 0.5rem;
   color: #676767;
 `;
-
+const TestButton = styled.button`
+  width: 100%;
+  hieght: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ececec;
+  height: 2rem;
+  font-family: Inter;
+  font-size: 0.5rem;
+  color: #676767;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+`;
 export default ProfileModal;

@@ -15,6 +15,7 @@ import UserManagementPage from "./page/admin/UserManagementPage";
 import ProgramOnlineLivePage from "./page/program/ProgramOnlineLive";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import AdminLoginPage from "./page/admin/AdminLoginPage";
 function App() {
   return (
     <>
@@ -48,6 +49,7 @@ function App() {
             path="/userManagementPage"
             element={<UserManagementPage />}
           ></Route>
+          <Route path="/adminLoginPage" element={<AdminLoginPage />}></Route>
         </Routes>
       </BrowserRouter>
       <ToastContainer
