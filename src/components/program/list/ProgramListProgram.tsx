@@ -45,7 +45,7 @@ const ProgramListProgram = ({
         <ItemImage>
           <img
             alt="img"
-            src="/images/mentee.png"
+            src="/img/mentee.png"
             style={{ width: "100%", height: "100%", objectFit: "fill" }}
           />
         </ItemImage>

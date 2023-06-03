@@ -4,6 +4,8 @@ import { Button } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
+import TableBody from "@mui/material/TableBody";
+import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { FaHome, FaEye, FaRegBookmark, FaRegEnvelope } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -15,12 +17,13 @@ interface WEEK {
   DETAIL: string;
 }
 const ProgramDetail = () => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const { PROGRAM_NO } = useParams() as any;
   const dispatch = useAppDispatch();
   const programDetail = useAppSelector((state) => state.programDetail.detail);
   const mentee_no = useAppSelector((state) => state.login.object.USER_NO);
   useEffect(() => {
-    dispatch(loadItemDetailAsync(PROGRAM_NO));
+    // dispatch(loadItemDetailAsync(PROGRAM_NO));
   }, []);
   const Submit = () => {
     axios({
@@ -116,17 +119,20 @@ const ProgramDetail = () => {
       <ProgramPlan>
         <TableContainer>
           <Table aria-label="a dense table">
-            {/* {programDetail.WEEKS.map((value: WEEK, index: number) => {  전체적으로 옮기는데 갑자기 에러 */}
-            {programDetail.WEEKS.map((value: any, index: number) => {
-              return (
-                <TableRow sx={{ height: "10vh" }}>
-                  <TableCell align="center" width="10%">
-                    {index}주차
-                  </TableCell>
-                  <TableCell align="left">{value.DETAIL}</TableCell>
-                </TableRow>
-              );
-            })}
+            <TableHead></TableHead>
+            <TableBody>
+              {/* {programDetail.WEEKS.map((value: WEEK, index: number) => {  전체적으로 옮기는데 갑자기 에러 */}
+              {programDetail.WEEKS.map((value: any, index: number) => {
+                return (
+                  <TableRow sx={{ height: "10vh" }} key={index}>
+                    <TableCell align="center" width="10%">
+                      {index}주차
+                    </TableCell>
+                    <TableCell align="left">{value.DETAIL}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
           </Table>
         </TableContainer>
       </ProgramPlan>
@@ -134,7 +140,7 @@ const ProgramDetail = () => {
       <div>
         <Button
           variant="contained"
-          color="primary"
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
           sx={{
             height: "2.4rem",
             width: "11rem",

@@ -10,6 +10,7 @@ import TaskRegisterEditorForm from "./TaskRegisterEditorForm";
 import TestWriterForm from "./TestWriterForm";
 import TestScoreForm from "./TestScoreForm";
 import TestIcon from "./TestIcon";
+import { useAppSelector } from "../../../../store/hooks";
 
 const TaskRegisterPopup = () => {
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(true);
@@ -130,6 +131,7 @@ const TaskscorePopup = () => {
 };
 
 const TestDetail = () => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(false);
   const [TestWriterisOpen, TestWritersetIsOpen] = useState(false);
   const [TaskScoreisOpen, TaskScoresetIsOpen] = useState(false);
@@ -150,36 +152,42 @@ const TestDetail = () => {
       </TaskTestTitle>
       <BoxTotal>
         <Boxtitle>
-          <p
-            style={{
-              color: "#07858C",
-              fontSize: "0.9rem",
-              marginBottom: "1.5rem",
-              float: "right",
-              cursor: "pointer",
-            }}
-            onClick={TaskRegistersPopup}
-          >
-            과제등록하기<FaPlus></FaPlus>
-          </p>
+          {user_gb === "MENTO" && (
+            <p
+              style={{
+                color: "#07858C",
+                fontSize: "0.9rem",
+                marginBottom: "1.5rem",
+                float: "right",
+                cursor: "pointer",
+              }}
+              onClick={TaskRegistersPopup}
+            >
+              과제등록하기<FaPlus></FaPlus>
+            </p>
+          )}
+
           {TaskRegisterisOpen && <TaskRegisterPopup />}
-          <p
-            style={{
-              color: "#07858C",
-              fontSize: "0.9rem",
-              marginLeft: "37rem",
-              marginBottom: "0.5rem",
-              cursor: "pointer",
-            }}
-            onClick={TestWritersPopup}
-          >
-            시험출제하기<FaPlus></FaPlus>
-          </p>
+          {user_gb === "MENTO" && (
+            <p
+              style={{
+                color: "#07858C",
+                fontSize: "0.9rem",
+                marginLeft: "37rem",
+                marginBottom: "0.5rem",
+                cursor: "pointer",
+              }}
+              onClick={TestWritersPopup}
+            >
+              시험출제하기<FaPlus></FaPlus>
+            </p>
+          )}
+
           {TestWriterisOpen && <TestWritePopup />}
         </Boxtitle>
         <TestTaskbox>
           <Taskbox>
-            <Tasklist>
+            <Tasklist user_gb={user_gb}>
               <Taskcheck>
                 <TestIcon></TestIcon>
               </Taskcheck>
@@ -196,7 +204,7 @@ const TestDetail = () => {
                 </Taskdetail>
               </Taskname>
             </Tasklist>
-            <Tasklist>
+            <Tasklist user_gb={user_gb}>
               <Taskcheck>
                 <TestIcon></TestIcon>
               </Taskcheck>
@@ -212,9 +220,9 @@ const TestDetail = () => {
             </Tasklist>
           </Taskbox>
           <Testbox>
-            <Testlist>
+            <Testlist user_gb={user_gb}>
               <Testcheck>
-                <Testscore>
+                <Testscore user_gb={user_gb}>
                   <p
                     style={{
                       marginTop: "0.9rem",
@@ -246,9 +254,9 @@ const TestDetail = () => {
                 </Testdetail>
               </Testname>
             </Testlist>
-            <Testlist>
+            <Testlist user_gb={user_gb}>
               <Testcheck>
-                <Testscore>
+                <Testscore user_gb={user_gb}>
                   <p
                     style={{
                       marginTop: "0.9rem",
@@ -326,12 +334,15 @@ const TestTaskbox = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const Tasklist = styled.div`
+const Tasklist = styled.div<{ user_gb: string }>`
   width: 99%;
   height: 12vh;
   margin-top: 1rem;
   border-radius: 10px;
-  border: 4px solid #b5dadd;
+  border: ${(props) =>
+    props.user_gb === "MENTEE"
+      ? "4px solid rgba(255, 142, 65, 0.3)"
+      : "4px solid #b5dadd"};
   display: flex;
   flex-direction: row;
 `;
@@ -349,12 +360,16 @@ const Taskdetail = styled.div`
   margin-top: 1rem;
   color: #777777;
 `;
-const Testlist = styled.div`
+const Testlist = styled.div<{ user_gb: string }>`
   width: 99%;
   height: 12vh;
   margin-top: 1rem;
   border-radius: 10px;
-  border: 4px solid #80b7d1;
+  border: ${(props) =>
+    props.user_gb === "MENTEE"
+      ? " 4px solid rgba(232, 94, 46, 0.3);"
+      : "  4px solid #80b7d1"};
+
   display: flex;
   flex-direction: row;
 `;
@@ -363,8 +378,9 @@ const Testcheck = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Testscore = styled.div`
-  background-color: #80b7d1;
+const Testscore = styled.div<{ user_gb: string }>`
+  background-color: ${(props) =>
+    props.user_gb === "MENTEE" ? "rgba(232, 94, 46, 0.3);" : "#80b7d1"};
   width: 65%;
   height: 7vh;
   border-radius: 47px;

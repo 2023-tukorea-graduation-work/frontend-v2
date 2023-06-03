@@ -16,6 +16,7 @@ import ProgramOnlineLivePage from "./page/program/ProgramOnlineLive";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import AdminLoginPage from "./page/admin/AdminLoginPage";
+import ProgramListDetailPage from "./page/program/ProgramDetailPage";
 function App() {
   return (
     <>
@@ -35,7 +36,7 @@ function App() {
           <Route path="/programList" element={<ProgramListPage />} />
           <Route
             path="/programListDetail/:PROGRAM_NO"
-            element={<ProgramDetail />}
+            element={<ProgramListDetailPage />}
           ></Route>
           <Route path="/userCreation" element={<UserCreationPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>

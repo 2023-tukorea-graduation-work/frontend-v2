@@ -13,7 +13,7 @@ import {
   profileModalChange,
 } from "../../../slice/common/headerSlice";
 import ProfileModal from "./ProfileModal";
-
+import bell3 from "../../../assets/bell3.png";
 const Header = () => {
   const dispatch = useAppDispatch();
   const userNo = useAppSelector((state) => state.login.object.USER_NO);
@@ -93,7 +93,7 @@ const Header = () => {
               </NavStyle>
               <AlertWithLogin>
                 <CircleStyle onClick={modalOn}>
-                  <img alt="icon" src="img/bell3.png" />
+                  <img alt="iconError" src={bell3} />
                 </CircleStyle>
                 <AlertModal />
                 {userNo === null ? (
