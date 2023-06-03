@@ -20,7 +20,10 @@ const ProgramProgressPage = () => {
 
   const barArray = [
     { title: <div>0</div>, content: <ProgressMain /> },
-    { title: <div>출석</div>, content: <AttendenceDetail /> },
+    {
+      title: <div>출석</div>,
+      content: <AttendenceDetail />,
+    },
     {
       title: <div>질문</div>,
       content: <QnaDetail />,

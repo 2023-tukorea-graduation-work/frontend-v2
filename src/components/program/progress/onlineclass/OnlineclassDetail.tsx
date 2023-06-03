@@ -9,6 +9,8 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 import { TextField, Checkbox, Input } from "@mui/material";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const OnlineclassFileUpload = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -130,6 +132,10 @@ const OnlinelivePopup = () => {
                 marginLeft: "37%",
                 marginTop: "1.5rem",
               }}
+              onClick={() => {
+                toast.success("화상통화방생성 완료");
+                togglePopup();
+              }}
             >
               화상통화방 생성하기
             </p>
@@ -191,6 +197,10 @@ const OnlineclassPopup = () => {
                 marginLeft: "45%",
                 marginTop: "1rem",
               }}
+              onClick={() => {
+                toast.success("녹화강의업로드 완료");
+                classtogglePopup();
+              }}
             >
               자료올리기
             </p>
@@ -202,6 +212,7 @@ const OnlineclassPopup = () => {
 };
 
 const OnlineclassDetail = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [classisOpen, classsetIsOpen] = useState(false);
   const togglePopup = () => {
@@ -244,7 +255,12 @@ const OnlineclassDetail = () => {
           {isOpen && <OnlinelivePopup />}
         </Onlinelivetext>
         <Onlinelivelistbox>
-          <Onlinelivelist>
+          <Onlinelivelist
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              navigate("/onlinelive");
+            }}
+          >
             <Onlinelivelisttitle>
               <FaCircle></FaCircle>
               <p

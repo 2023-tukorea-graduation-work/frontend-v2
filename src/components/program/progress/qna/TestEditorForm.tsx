@@ -4,6 +4,11 @@ import { EditorState, ContentState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
+
+interface Props {
+  subtogglePopup(): void;
+}
 
 const HorizonLine = () => {
   return (
@@ -19,7 +24,7 @@ const HorizonLine = () => {
   );
 };
 
-const TestEditorForm = () => {
+const TestEditorForm = ({ subtogglePopup }: Props) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (
@@ -60,6 +65,10 @@ const TestEditorForm = () => {
         variant="contained"
         color="secondary"
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
+        onClick={() => {
+          toast.success("답변제출 성공");
+          subtogglePopup();
+        }}
       >
         답변제출하기
       </Button>

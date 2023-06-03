@@ -3,6 +3,11 @@ import styled from "@emotion/styled";
 
 import { Button, Input } from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
+
+interface Props {
+  subtogglePopup(): void;
+}
 
 const HorizonLine = () => {
   return (
@@ -17,7 +22,7 @@ const HorizonLine = () => {
   );
 };
 
-const TestScoreForm = () => {
+const TestScoreForm = ({ subtogglePopup }: Props) => {
   const [scoretext, scoresetText] = useState("2");
   const [scoreediting, scoresetEditing] = useState(false);
 
@@ -104,6 +109,10 @@ const TestScoreForm = () => {
             marginLeft: "30rem",
             marginTop: "0.7rem",
             textDecoration: "none",
+          }}
+          onClick={() => {
+            toast.success("과제평가 완료");
+            subtogglePopup();
           }}
         >
           평가완료하기

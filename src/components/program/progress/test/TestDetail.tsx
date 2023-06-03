@@ -9,6 +9,7 @@ import {
 import TaskRegisterEditorForm from "./TaskRegisterEditorForm";
 import TestWriterForm from "./TestWriterForm";
 import TestScoreForm from "./TestScoreForm";
+import TestIcon from "./TestIcon";
 
 const TaskRegisterPopup = () => {
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(true);
@@ -39,7 +40,9 @@ const TaskRegisterPopup = () => {
               cursor="pointer"
               onClick={TaskRegistertogglePopup}
             ></FaRegWindowClose>
-            <TaskRegisterEditorForm></TaskRegisterEditorForm>
+            <TaskRegisterEditorForm
+              subtogglePopup={TaskRegistertogglePopup}
+            ></TaskRegisterEditorForm>
           </TaskRegisterPopupinner>
         </TaskRegisterPopupbox>
       )}
@@ -77,7 +80,9 @@ const TestWritePopup = () => {
               onClick={TestWritetogglePopup}
             ></FaRegWindowClose>
 
-            <TestWriterForm></TestWriterForm>
+            <TestWriterForm
+              subtogglePopup={TestWritetogglePopup}
+            ></TestWriterForm>
           </TestWriterPopupinner>
         </TestWriterPopupbox>
       )}
@@ -114,7 +119,9 @@ const TaskscorePopup = () => {
               cursor="pointer"
               onClick={TaskScoretogglePopup}
             ></FaRegWindowClose>
-            <TestScoreForm></TestScoreForm>
+            <TestScoreForm
+              subtogglePopup={TaskScoretogglePopup}
+            ></TestScoreForm>
           </TaskScorePopupinner>
         </TaskScorePopupbox>
       )}
@@ -174,15 +181,7 @@ const TestDetail = () => {
           <Taskbox>
             <Tasklist>
               <Taskcheck>
-                <FaCheckCircle
-                  size="40"
-                  style={{
-                    marginTop: "38%",
-                    marginLeft: "32%",
-                    cursor: "pointer",
-                    color: "#07858C",
-                  }}
-                ></FaCheckCircle>
+                <TestIcon></TestIcon>
               </Taskcheck>
               <Taskname>
                 <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
@@ -199,15 +198,7 @@ const TestDetail = () => {
             </Tasklist>
             <Tasklist>
               <Taskcheck>
-                <FaCheckCircle
-                  size="40"
-                  style={{
-                    marginTop: "38%",
-                    marginLeft: "32%",
-                    cursor: "pointer",
-                    color: "#07858C",
-                  }}
-                ></FaCheckCircle>
+                <TestIcon></TestIcon>
               </Taskcheck>
               <Taskname>
                 <p>[1차시]과제제목</p>

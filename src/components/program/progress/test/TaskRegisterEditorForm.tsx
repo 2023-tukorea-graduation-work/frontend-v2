@@ -8,6 +8,12 @@ import { Button } from "@mui/material";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { toast } from "react-toastify";
+
+interface Props {
+  subtogglePopup(): void;
+}
+
 const HorizonLine = () => {
   return (
     <div
@@ -22,7 +28,7 @@ const HorizonLine = () => {
   );
 };
 
-const TaskRegisterEditorForm = () => {
+const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (
@@ -94,6 +100,10 @@ const TaskRegisterEditorForm = () => {
         variant="contained"
         color="secondary"
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
+        onClick={() => {
+          toast.success("과제등록 완료");
+          subtogglePopup();
+        }}
       >
         과제등록하기
       </Button>

@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import {
-  FaRegCheckCircle,
-  FaUserCircle,
-  FaRegWindowClose,
-} from "react-icons/fa";
+import { FaUserCircle, FaRegWindowClose } from "react-icons/fa";
 import TestEditorForm from "../qna/TestEditorForm";
+import QnaIcon from "./QnaIcon";
 
 const HorizonLine = () => {
   return (
@@ -36,7 +33,7 @@ const SubmitPopup = () => {
               cursor="pointer"
               onClick={subtogglePopup}
             ></FaRegWindowClose>
-            <TestEditorForm></TestEditorForm>
+            <TestEditorForm subtogglePopup={subtogglePopup}></TestEditorForm>
           </SubmitPopupinner>
         </SubmitPopupbox>
       )}
@@ -116,10 +113,10 @@ const QnaDetail = () => {
             <p>진행차시 : 1차시 / 9차시</p>
             <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
           </Qnatextinfo>
-          <p style={{ color: "#07858C" }}>
-            답변안한 질문만 보기{" "}
-            <FaRegCheckCircle color="#07858C"></FaRegCheckCircle>
-          </p>
+          <Qnaiconbox>
+            <p style={{ lineHeight: "1.5rem" }}>답변안한 질문만 보기</p>
+            <QnaIcon></QnaIcon>
+          </Qnaiconbox>
         </Qnatext>
         <Qnalistbox>
           <QnaTotal>
@@ -278,5 +275,9 @@ const Qnatextinfo = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 40%;
+`;
+const Qnaiconbox = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 export default QnaDetail;

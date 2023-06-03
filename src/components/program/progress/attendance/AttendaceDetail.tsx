@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { FaRegCheckCircle } from "react-icons/fa";
 import axios from "axios";
 import { Button } from "@mui/material";
+import Icon from "./Icon";
 
 const Attend = {
   mento_no: null,
@@ -81,25 +82,18 @@ const AttendenceDetail = () => {
             <p>25세</p>
           </Studentlist>
           <StudentAttendCheck>
-            <p>
-              출석
-              <FaRegCheckCircle
-                size="1rem"
-                style={{ marginTop: "0.2rem", marginLeft: "0.3rem" }}
-              ></FaRegCheckCircle>
-            </p>
-            <p>
-              지각
-              <FaRegCheckCircle
-                style={{ marginTop: "0.2rem", marginLeft: "0.3rem" }}
-              ></FaRegCheckCircle>
-            </p>
-            <p>
-              결석
-              <FaRegCheckCircle
-                style={{ marginTop: "0.2rem", marginLeft: "0.3rem" }}
-              ></FaRegCheckCircle>
-            </p>
+            <Attendanceicon>
+              <p style={{ lineHeight: "1.5rem" }}>출석</p>
+              <Icon></Icon>
+            </Attendanceicon>
+            <Perceiveicon>
+              <p style={{ lineHeight: "1.5rem" }}>지각</p>
+              <Icon></Icon>
+            </Perceiveicon>
+            <Absenticon>
+              <p style={{ lineHeight: "1.5rem" }}>결석</p>
+              <Icon></Icon>
+            </Absenticon>
           </StudentAttendCheck>
         </Studentbox>
         <Studentbox>
@@ -110,25 +104,18 @@ const AttendenceDetail = () => {
             <p>25세</p>
           </Studentlist>
           <StudentAttendCheck>
-            <p>
-              출석
-              <FaRegCheckCircle
-                size="1rem"
-                style={{ marginTop: "0.2rem", marginLeft: "0.3rem" }}
-              ></FaRegCheckCircle>
-            </p>
-            <p>
-              지각
-              <FaRegCheckCircle
-                style={{ marginTop: "0.2rem", marginLeft: "0.3rem" }}
-              ></FaRegCheckCircle>
-            </p>
-            <p>
-              결석
-              <FaRegCheckCircle
-                style={{ marginTop: "0.2rem", marginLeft: "0.3rem" }}
-              ></FaRegCheckCircle>
-            </p>
+            <Attendanceicon>
+              <p style={{ lineHeight: "1.5rem" }}>출석</p>
+              <Icon></Icon>
+            </Attendanceicon>
+            <Perceiveicon>
+              <p style={{ lineHeight: "1.5rem" }}>지각</p>
+              <Icon></Icon>
+            </Perceiveicon>
+            <Absenticon>
+              <p style={{ lineHeight: "1.5rem" }}>결석</p>
+              <Icon></Icon>
+            </Absenticon>
           </StudentAttendCheck>
         </Studentbox>
       </Attendbox>
@@ -206,5 +193,17 @@ const Attendbox = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 1.7rem;
+`;
+const Attendanceicon = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const Perceiveicon = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const Absenticon = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 export default AttendenceDetail;
