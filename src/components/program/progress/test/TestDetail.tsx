@@ -57,7 +57,7 @@ const TestWritePopup = () => {
     TestWritesetIsOpen(!TestWriteisOpen);
   };
   return (
-    <div>
+    <div style={{ backgroundColor: "white" }}>
       {TestWriteisOpen && (
         <TestWriterPopupbox>
           <TestWriterPopupinner>
@@ -421,7 +421,7 @@ const TestWriterPopupbox = styled.div`
   position: fixed;
   top: 8%;
   left: 0;
-  width: 74%;
+  width: 76%;
   height: 75%;
   margin-top: 2%;
   margin-left: 21%;
@@ -429,6 +429,7 @@ const TestWriterPopupbox = styled.div`
   justify-content: center;
   align-items: center;
   overflow: scroll;
+  background-color: white;
 `;
 const TestWriterPopupinner = styled.div`
   background-color: white;
