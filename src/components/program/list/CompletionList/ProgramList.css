@@ -1,0 +1,303 @@
+.online {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 35%;
+    height: 45%;
+    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 190%;
+    margin-right: 4%;
+    margin-bottom: 0.6rem;
+    font-family: "NotoSansRegular";
+  }
+  .online.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .online.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .offline {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 45%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+  }
+  .offline.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .offline.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .onlineWithOffline {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 90%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+  }
+  .onlineWithOffline.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .onlineWithOffline.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  /* kindbox css */
+  .typeAll {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 35%;
+    height: 45%;
+    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 190%;
+    margin-right: 4%;
+    margin-bottom: 0.6rem;
+  }
+  .typeAll.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .typeAll.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .tutoring {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 35%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+  }
+  .tutoring.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .tutoring.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .mentoWithMentee {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 45%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+  }
+  .mentoWithMentee.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .mentoWithMentee.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  
+  /* fieldbox.css */
+  
+  .interestAll {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    height: 45%;
+    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 190%;
+    margin-bottom: 0.6rem;
+    margin-right: 2%;
+  }
+  .interestAll.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .interestAll.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .learning {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+    margin-right: 2%;
+  }
+  .learning.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .learning.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .hobby {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+    margin-right: 2%;
+  }
+  .hobby.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .hobby.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .major {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    height: 45%;
+    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 190%;
+    margin-bottom: 0.6rem;
+    margin-right: 2%;
+  }
+  .major.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .major.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .career {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+  }
+  .career.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .career.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .introduction {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+    margin-right: 2%;
+  }
+  .introduction.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .introduction.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .advanceUniversity {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+    margin-right: 2%;
+  }
+  .advanceUniversity.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .advanceUniversity.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .startups {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+    margin-right: 2%;
+  }
+  .startups.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .startups.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }
+  .certificate {
+    background-color: #fff;
+    border: 1px solid #dbdee2;
+    color: #404a5c;
+    width: 16.5%;
+    cursor: pointer;
+    text-align: center;
+    height: 45%;
+    line-height: 190%;
+    border-radius: 20px;
+  }
+  .certificate.active {
+    background-color: #ff8e41;
+    color: #fff;
+  }
+  .certificate.active2 {
+    background-color: #07858c;
+    color: #fff;
+  }

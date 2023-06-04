@@ -8,12 +8,15 @@ import { logOut } from "../../../slice/user/loginSlice";
 import ClearIcon from "@mui/icons-material/Clear";
 import Modal from "react-modal";
 import AlertModal from "./AlertModal";
+
 import {
   alertModalChange,
   profileModalChange,
 } from "../../../slice/common/headerSlice";
 import ProfileModal from "./ProfileModal";
 import bell3 from "../../../assets/bell3.png";
+import testLogo from "../../../assets/testLogo.png";
+
 const Header = () => {
   const dispatch = useAppDispatch();
   const userNo = useAppSelector((state) => state.login.object.USER_NO);
@@ -53,7 +56,13 @@ const Header = () => {
           <Grid xs={1}></Grid>
           <Grid xs={10} sx={{ height: "10vh" }}>
             <HeaderStyle>
-              <LogoStyle>1</LogoStyle>
+              <LogoStyle>
+                <img
+                  alt="iconError"
+                  src={testLogo}
+                  style={{ width: "9rem", height: "8rem" }}
+                ></img>
+              </LogoStyle>
               <NavStyle>
                 <div
                   onClick={() => {
@@ -71,7 +80,7 @@ const Header = () => {
                 </div>
                 <div
                   onClick={() => {
-                    navigate("/");
+                    navigate("/ProgramCompletionList");
                   }}
                 >
                   플젝완료게시판
@@ -82,13 +91,6 @@ const Header = () => {
                   }}
                 >
                   과외구인게시판
-                </div>
-                <div
-                  onClick={() => {
-                    navigate("/");
-                  }}
-                >
-                  프로젝트소개
                 </div>
               </NavStyle>
               <AlertWithLogin>
@@ -126,7 +128,9 @@ const HeaderStyle = styled.div`
 const LogoStyle = styled.div`
   width: 4rem;
   height: 80px;
-  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CircleStyle = styled.div`
