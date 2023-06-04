@@ -428,6 +428,7 @@ const TestWriterPopupbox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
 `;
 const TestWriterPopupinner = styled.div`
   background-color: white;

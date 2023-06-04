@@ -9,6 +9,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Typography,
 } from "@mui/material";
 import {
   FaPlus,
@@ -20,6 +21,7 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
+import { useFieldArray, useForm } from "react-hook-form";
 
 interface Props {
   subtogglePopup(): void;
@@ -60,6 +62,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -76,6 +79,17 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
   const handleChange = (event: SelectChangeEvent) => {
     setNumber(event.target.value as string);
   };
+
+  const {
+    control,
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm();
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "programWeeks",
+  });
 
   return (
     <TestWriterform>
@@ -177,13 +191,31 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
         </TWTitle>
         {/* 아이콘 끝  */}
       </TestWriterbox>
+      {fields.map((field, index) => (
+        <TestWriterlist>
+          <TWselectbox>
+            <p style={{ fontSize: "1.2rem" }}>1번문항</p>
 
-      <TestWriterlist>
-        <TWselectbox>
-          <p style={{ fontSize: "1.2rem" }}>1번문항</p>
-
-          <TWselect>
-            <FormControl fullWidth>
+            <TWselect>
+              <TestSelect>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  sx={{ width: "5rem", height: "3vh" }}
+                >
+                  객관식
+                </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
+                >
+                  주관식
+                </Button>
+              </TestSelect>
+              {/* <FormControl fullWidth>
               <InputLabel color="secondary" id="demo-simple-select-label">
                 유형선택
               </InputLabel>
@@ -198,90 +230,95 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                 <MenuItem value={10}>객관식</MenuItem>
                 <MenuItem value={20}>주관식</MenuItem>
               </Select>
-            </FormControl>
-          </TWselect>
+            </FormControl> */}
+            </TWselect>
 
-          <TWselectscore>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                marginTop: "0.8rem",
-                marginRight: "0.3rem",
-              }}
-            >
-              배점
-            </p>
-            <Input
-              placeholder="점수입력"
-              color="secondary"
-              style={{ width: "9rem", height: "4vh" }}
-            ></Input>
-          </TWselectscore>
-        </TWselectbox>
+            <TWselectscore>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  marginTop: "0.8rem",
+                  marginRight: "0.3rem",
+                }}
+              >
+                배점
+              </p>
+              <Input
+                placeholder="점수입력"
+                color="secondary"
+                style={{ width: "9rem", height: "4vh" }}
+              ></Input>
+            </TWselectscore>
+          </TWselectbox>
 
-        <TestWrite>
-          <Testtext>
-            <Input
-              placeholder="문제를 입력하세요"
-              color="secondary"
-              style={{
-                width: "100%",
-                height: "10vh",
-                marginBottom: "0.5rem",
-              }}
-            ></Input>
-          </Testtext>
-          <TestNumber1>
-            <p>A</p>
-            <Input
-              placeholder="선택답안을 입력하세요"
-              color="secondary"
-              style={{
-                width: "100%",
-                height: "5vh",
-                marginBottom: "0.3rem",
-              }}
-            ></Input>
-          </TestNumber1>
-          <TestNumber2>
-            <Input
-              placeholder="선택답안을 입력하세요"
-              color="secondary"
-              style={{
-                width: "100%",
-                height: "5vh",
-                marginBottom: "0.3rem",
-              }}
-            ></Input>
-          </TestNumber2>
-          <TestNumber3>
-            <Input
-              placeholder="선택답안을 입력하세요"
-              color="secondary"
-              style={{
-                width: "100%",
-                height: "5vh",
-                marginBottom: "0.3rem",
-              }}
-            ></Input>
-          </TestNumber3>
-          <TestNumber4>
-            <Input
-              placeholder="선택답안을 입력하세요"
-              color="secondary"
-              style={{
-                width: "100%",
-                height: "5vh",
-              }}
-            ></Input>
-          </TestNumber4>
-        </TestWrite>
-      </TestWriterlist>
+          <TestWrite>
+            <Testtext>
+              <Input
+                placeholder="문제를 입력하세요"
+                color="secondary"
+                style={{
+                  width: "100%",
+                  height: "10vh",
+                  marginBottom: "0.5rem",
+                }}
+              ></Input>
+            </Testtext>
+            <TestNumber1>
+              <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>A</p>
+              <Input
+                placeholder="선택답안을 입력하세요"
+                color="secondary"
+                style={{
+                  width: "100%",
+                  height: "5vh",
+                  marginBottom: "0.3rem",
+                }}
+              ></Input>
+            </TestNumber1>
+            <TestNumber2>
+              <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>B</p>
+              <Input
+                placeholder="선택답안을 입력하세요"
+                color="secondary"
+                style={{
+                  width: "100%",
+                  height: "5vh",
+                  marginBottom: "0.3rem",
+                }}
+              ></Input>
+            </TestNumber2>
+            <TestNumber3>
+              <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>C</p>
+              <Input
+                placeholder="선택답안을 입력하세요"
+                color="secondary"
+                style={{
+                  width: "100%",
+                  height: "5vh",
+                  marginBottom: "0.3rem",
+                }}
+              ></Input>
+            </TestNumber3>
+            <TestNumber4>
+              <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>D</p>
+              <Input
+                placeholder="선택답안을 입력하세요"
+                color="secondary"
+                style={{
+                  width: "100%",
+                  height: "5vh",
+                }}
+              ></Input>
+            </TestNumber4>
+          </TestWrite>
+        </TestWriterlist>
+      ))}
       <TestWriterplus>
         <FaPlus
           size="20"
           color="#80b7d1"
           style={{ cursor: "pointer" }}
+          onClick={() => append({ detail: "" })}
         ></FaPlus>
       </TestWriterplus>
     </TestWriterform>
@@ -290,6 +327,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
 const TestWriterform = styled.div`
   display: flex;
   flex-direction: column;
+  z-index: 1;
 `;
 const TestWriterbox = styled.div`
   width: 99.7%;
@@ -320,6 +358,8 @@ const TestWriterlist = styled.div`
   border: 3px solid #80b7d1;
   display:flex;
   flex-direction:row;
+  z-index:1;
+
 `;
 const TestWriterplus = styled.div`
   margin-left: 49%;
@@ -370,10 +410,26 @@ const TestDelete = styled.div`
   flex-direction: column;
 `;
 const Testtext = styled.div``;
-const TestNumber1 = styled.div``;
-const TestNumber2 = styled.div``;
-const TestNumber3 = styled.div``;
-const TestNumber4 = styled.div``;
+const TestNumber1 = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+`;
+const TestNumber2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+`;
+const TestNumber3 = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+`;
+const TestNumber4 = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+`;
 const TWselectscore = styled.div`
   display: flex;
   flex-direction: row;
@@ -409,5 +465,11 @@ const SavemethodPopupinner = styled.div`
   height: 80%;
   padding: 1rem;
   border-radius: 20px;
+`;
+const TestSelect = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
 `;
 export default TestWriterForm;
