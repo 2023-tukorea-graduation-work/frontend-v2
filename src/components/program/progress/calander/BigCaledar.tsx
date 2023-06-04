@@ -14,6 +14,7 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import { TextField } from "@mui/material";
+import zIndex from "@mui/material/styles/zIndex";
 
 // --------------------------------------------------------다른사람 일정 가져오는거-----------
 // const fetchEvents = async (): Promise<any[]> => {
@@ -38,7 +39,7 @@ const CalRecrodPopup = () => {
   const [ReisOpen, ResetIsOpen] = useState(true);
 
   const RetogglePopup = () => {
-    ResetIsOpen(!ReisOpen);
+    ResetIsOpen(!ReisOpen);    
   };
   return (
     <div>
@@ -383,7 +384,7 @@ const CPopupbox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 5;
 `;
 const CPopupFrom = styled.div`
   display: flex;
