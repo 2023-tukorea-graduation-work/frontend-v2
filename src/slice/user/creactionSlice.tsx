@@ -17,10 +17,11 @@ export const creationAsync = createAsyncThunk<creationSuccess, creationInfo>(
   async (creationData) => {
     try {
       const { data } = await axios({
-        url: `/api/v1/${creationData.userGB}`,
+        url: `/mentor`,
         method: "post",
         data: creationData.userInfo,
       });
+      console.log(data);
       return data;
     } catch (e) {
       console.log(e);

@@ -25,7 +25,10 @@ const Mentor = (props: any) => {
     }
     delete data.image;
     delete data.password2;
+    delete data.major;
+    delete data.act_place;
     console.log(formData);
+    console.log(data);
     formData.append(
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
@@ -127,7 +130,7 @@ const Mentor = (props: any) => {
               <Controller
                 defaultValue=""
                 control={control}
-                name="birth_year"
+                name="age"
                 rules={{ required: "출생년도는 필수선택입니다." }}
                 render={({ field }) => (
                   <Select
@@ -142,7 +145,7 @@ const Mentor = (props: any) => {
                     }}
                     displayEmpty
                     variant="standard"
-                    name="birth_year"
+                    name="age"
                   >
                     <MenuItem
                       disabled
@@ -316,7 +319,7 @@ const Mentor = (props: any) => {
                 boxShadow: "0",
               }}
               placeholder=""
-              {...register("introduction", {
+              {...register("introduce", {
                 required: "소개는 필수입력입니다.",
               })}
             />
