@@ -25,8 +25,6 @@ const Mentor = (props: any) => {
     }
     delete data.image;
     delete data.password2;
-    delete data.major;
-    delete data.act_place;
     console.log(formData);
     console.log(data);
     formData.append(
@@ -298,7 +296,7 @@ const Mentor = (props: any) => {
                   <input
                     type="radio"
                     value={value}
-                    {...register("act_place", {
+                    {...register("lesson", {
                       required: "활동장소는 필수입력입니다.",
                     })}
                   ></input>
