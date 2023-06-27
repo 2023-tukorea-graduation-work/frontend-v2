@@ -138,22 +138,26 @@ const ProgramDetail = () => {
       </ProgramPlan>
 
       <div>
-        <Button
-          variant="contained"
-          color={user_gb === "MENTEE" ? "primary" : "secondary"}
-          sx={{
-            height: "2.4rem",
-            width: "11rem",
-            fontSize: "1rem",
-            fontFamily: "NotoSansRegular",
-            boxShadow: "0",
-            marginTop: "2rem",
-            marginBottom: "2rem",
-          }}
-          onClick={Submit}
-        >
-          프로그램신청하기
-        </Button>
+        {user_gb === "MENTEE" ? (
+          <Button
+            variant="contained"
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
+            sx={{
+              height: "2.4rem",
+              width: "11rem",
+              fontSize: "1rem",
+              fontFamily: "NotoSansRegular",
+              boxShadow: "0",
+              marginTop: "2rem",
+              marginBottom: "2rem",
+            }}
+            onClick={Submit}
+          >
+            프로그램신청하기
+          </Button>
+        ) : (
+          <></>
+        )}
       </div>
     </DetailForm>
   );

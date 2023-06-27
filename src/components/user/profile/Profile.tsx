@@ -106,22 +106,29 @@ const Profile = () => {
           <p>ADDRESS</p>
         </div>
         <div style={{ marginLeft: "60%", color: "#777777" }}>LOGOUT</div>
-        <Button
-          variant="contained"
-          color={user_gb === "MENTEE" ? "primary" : "secondary"}
-          sx={{
-            height: "2.5rem",
-            width: "80%",
-            marginTop: "2rem",
-            boxShadow: "0 3px 10px 0 rgba(0, 0, 0, 0.25)",
-            borderRadius: "10px",
-          }}
-          onClick={() => {
-            navigate("/programCreation");
-          }}
-        >
-          프로젝트 생성하기+
-        </Button>
+        {user_gb === "MENTEE" ? (
+          <></>
+        ) : (
+          <>
+            <Button
+              variant="contained"
+              color={user_gb === "MENTEE" ? "primary" : "secondary"}
+              sx={{
+                height: "2.5rem",
+                width: "80%",
+                marginTop: "2rem",
+                boxShadow: "0 3px 10px 0 rgba(0, 0, 0, 0.25)",
+                borderRadius: "10px",
+              }}
+              onClick={() => {
+                navigate("/programCreation");
+              }}
+            >
+              프로젝트 생성하기+
+            </Button>
+          </>
+        )}
+
         <Button
           variant="contained"
           color={user_gb === "MENTEE" ? "primary" : "secondary"}

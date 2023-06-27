@@ -69,7 +69,6 @@ function App() {
         pauseOnHover // 마우스를 올리면 알람 정지
         theme="light"
       />
-      ;
     </>
   );
 }
