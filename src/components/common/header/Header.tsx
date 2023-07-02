@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Unstable_Grid2";
 import "./Header.css";
@@ -19,17 +19,22 @@ import testLogo from "../../../assets/testLogo.png";
 
 const Header = () => {
   const dispatch = useAppDispatch();
+
   const userNo = useAppSelector((state) => state.login.object.USER_NO);
   const userGb = useAppSelector((state) => state.login.object.user_gb);
   const navigate = useNavigate();
   const location = useLocation();
+  const [test, setTest] = useState(false);
   const modalOn = () => {
     dispatch(alertModalChange({ value: true }));
   };
   const profileModalOn = () => {
     dispatch(profileModalChange({ value: true }));
   };
-
+  const dropDownOff = () => {
+    setTest(false);
+  };
+  const testProfile = () => {};
   const NavStyle = styled.div`
     width: 70%;
     display: flex;
@@ -100,8 +105,24 @@ const Header = () => {
                 <AlertModal />
                 {userNo === null ? (
                   <>
-                    <CircleStyle onClick={profileModalOn}>Login</CircleStyle>
-                    <ProfileModal />
+                    <button
+                      onClick={(e) => {
+                        setTest(!test);
+                      }}
+                    >
+                      Profile
+                    </button>
+                    <ProfileModal
+                      dropDownState={test}
+                      dropDownOff={dropDownOff}
+                    >
+                      <ul>
+                        <li>내 프로필</li>
+                        <li>item 2</li>
+                        <li>item 3</li>
+                        <li>로그아웃</li>
+                      </ul>
+                    </ProfileModal>
                   </>
                 ) : (
                   <CircleStyle onClick={() => dispatch(logOut())}>
@@ -153,3 +174,7 @@ const AlertWithLogin = styled.div`
   display: flex;
 `;
 export default Header;
+{
+  /* <CircleStyle onClick={profileModalOn}>Login</CircleStyle>
+                    <ProfileModal /> */
+}
