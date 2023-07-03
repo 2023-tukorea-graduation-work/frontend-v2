@@ -14,17 +14,17 @@ import { changeUserGB, loginAsync } from "../../../../slice/user/loginSlice";
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const loginState = useAppSelector((state) => state.login.status);
+  // const loginState = useAppSelector((state) => state.login.status);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [toggle, setToggle] = useState(user_gb);
   const toggleOnChange = () => {
     toggle === "MENTEE" ? setToggle("MENTO") : setToggle("MENTEE");
   };
-  useEffect(() => {
-    if (loginState === "SUCCESS") {
-      navigate("/programList");
-    }
-  }, [loginState]);
+  // useEffect(() => {
+  //   if (loginState === "SUCCESS") {
+  //     navigate("/programList");
+  //   }
+  // }, [loginState]);
   useEffect(() => {
     dispatch(changeUserGB(toggle));
   }, [toggle]);
@@ -44,9 +44,7 @@ const LoginForm = () => {
   };
   return (
     <>
-      <LogoStyled>
-        <Logo>{loginState}</Logo>
-      </LogoStyled>
+      <LogoStyled>{/* <Logo>{loginState}</Logo> */}</LogoStyled>
 
       <FormStyled>
         <form onSubmit={handleSubmit(onSubmit, onError)}>

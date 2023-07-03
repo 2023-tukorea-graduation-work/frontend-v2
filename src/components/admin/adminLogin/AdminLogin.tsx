@@ -12,17 +12,17 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 const AdminLogin = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const loginState = useAppSelector((state) => state.login.status);
+  // const loginState = useAppSelector((state) => state.login.status);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [toggle, setToggle] = useState(user_gb);
   const toggleOnChange = () => {
     toggle === "MENTEE" ? setToggle("MENTO") : setToggle("MENTEE");
   };
-  useEffect(() => {
-    if (loginState === "SUCCESS") {
-      navigate("/programList");
-    }
-  }, [loginState]);
+  // useEffect(() => {
+  //   if (loginState === "SUCCESS") {
+  //     navigate("/programList");
+  //   }
+  // }, [loginState]);
   useEffect(() => {}, [toggle]);
   const {
     control,
