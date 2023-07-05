@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { indexChange } from "../../../../slice/common/leftBarSlice";
@@ -6,11 +6,36 @@ import {
   FaRegCheckCircle,
   FaUserCircle,
   FaRegWindowClose,
+  FaUserCheck,
+  FaRegCommentDots,
+  FaBorderAll,
+  FaFileAlt,
+  FaBullhorn,
+  FaChalkboardTeacher,
+  FaRegCalendarAlt,
+  FaEdit,
 } from "react-icons/fa";
 
 const ProgressLeftBar = () => {
   const dispatch = useAppDispatch();
   const selectIndex = useAppSelector((state) => state.leftBar.indexNumber);
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsSmallScreen(window.innerWidth < 1300);
+    }
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const barArray = [
     "전체게시판",
     "출석",
@@ -21,9 +46,22 @@ const ProgressLeftBar = () => {
     "온라인강의",
     "과제/시험",
   ];
+  const iconArray = [
+    <FaBorderAll size="20" />,
+    <FaUserCheck size="20" />,
+    <FaRegCommentDots size="20" />,
+    <FaFileAlt size="20" />,
+    <FaBullhorn size="20" />,
+    <FaRegCalendarAlt size="20" />,
+    <FaChalkboardTeacher size="20" />,
+    <FaEdit />,
+  ];
+
+  const menuArray = isSmallScreen ? iconArray : barArray;
+
   return (
     <Box>
-      {barArray.map((val, idx) => {
+      {menuArray.map((val, idx) => {
         if (idx == selectIndex) {
           return (
             <SelectedTab
@@ -79,4 +117,6 @@ const SelectedTab = styled.div`
   cursor: pointer;
 `;
 
+const Nav = styled.div``;
+const Meunlist = styled.div``;
 export default ProgressLeftBar;

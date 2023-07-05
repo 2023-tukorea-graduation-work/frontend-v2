@@ -4,27 +4,14 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import axios from "axios";
 import { Button } from "@mui/material";
 import Icon from "./Icon";
+import { useAppSelector } from "../../../../store/hooks";
 
 const Attend = {
   mento_no: null,
 };
 
 const AttendenceDetail = () => {
-  useEffect(() => {
-    // axios({
-    //   url: "/api/v1/program",
-    //   method: "post",
-    //   data: {
-    //     mento_no: 5,
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-  }, []);
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   return (
     <AttendForm>
       <p
@@ -122,7 +109,7 @@ const AttendenceDetail = () => {
       <div style={{ display: "inlineBlock", float: "right" }}>
         <Button
           variant="contained"
-          color="secondary"
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
           fullWidth={true}
           sx={{
             fontSize: "1rem",

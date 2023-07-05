@@ -1,15 +1,15 @@
 @media only screen and (max-width: 600px) {
-    .NavStyle {
-      display: none;
-    }
+  .programlistpage {
+    display: none;
   }
-  @media only screen and (max-width: 1050px) {
-    .NavStyle {
-      font-size:80%;
-    }
+}
+@media only screen and (max-width: 800px) {
+  .programcompletionlistpage {
+    display: none;
   }
-  @media only screen and (max-width: 800px) {
-    .NavStyle {
-      font-size:60%;
-    }
+}
+@media only screen and (max-width: 1000px) {
+  .classpage {
+    display: none;
   }
+}

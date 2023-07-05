@@ -60,35 +60,43 @@ const Header = () => {
                 <img
                   alt="iconError"
                   src={testLogo}
-                  style={{ width: "9rem", height: "8rem" }}
+                  style={{ width: "6rem", height: "5rem" }}
                 ></img>
               </LogoStyle>
               <NavStyle>
                 <div
+                  className="mainpage"
                   onClick={() => {
                     navigate("/main");
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   메인페이지
                 </div>
                 <div
+                  className="programlistpage"
                   onClick={() => {
                     navigate("/programList");
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   플젝구인게시판
                 </div>
                 <div
+                  className="programcompletionlistpage"
                   onClick={() => {
                     navigate("/ProgramCompletionList");
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   플젝완료게시판
                 </div>
                 <div
+                  className="classpage"
                   onClick={() => {
                     navigate("/");
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   과외구인게시판
                 </div>

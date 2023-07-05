@@ -127,8 +127,12 @@ const Main = () => {
               <p>학습</p>
             </div>
             <div className="hoverAfter">
-              <p>국어/수학/영어/탐구/제2국어 학습 교과 과목</p>
-              <p>학습</p>
+              <p style={{ fontSize: "1rem" }}>
+                국어 | 수학 | 영어 | 탐구
+                <br />
+                제2국어 | 교과 | 과목
+              </p>
+              <p>[학습]</p>
             </div>
           </IconBox>
 
@@ -141,8 +145,11 @@ const Main = () => {
               <p>취미</p>
             </div>
             <div className="hoverAfter">
-              <p>미술/음악/체육/바둑/체스</p>
-              <p>취미</p>
+              <p style={{ fontSize: "1rem" }}>
+                미술 | 음악 | 체육 <br />
+                바둑 | 체스
+              </p>
+              <p>[취미]</p>
             </div>
           </IconBox>
 
@@ -156,8 +163,12 @@ const Main = () => {
             </div>
 
             <div className="hoverAfter">
-              <p>마케팅/회계 컴퓨터언어/데이터분석 반도체</p>
-              <p>전공</p>
+              <p style={{ fontSize: "1rem" }}>
+                마케팅 | 회계 | 컴퓨터언어
+                <br />
+                데이터분석 | 반도체
+              </p>
+              <p>[전공]</p>
             </div>
           </IconBox>
 
@@ -172,7 +183,7 @@ const Main = () => {
 
             <div className="hoverAfter">
               <p></p>
-              <p>진로</p>
+              <p>[진로]</p>
             </div>
           </IconBox>
 
@@ -186,8 +197,11 @@ const Main = () => {
             </div>
 
             <div className="hoverAfter">
-              <p>고교 / 대학 진학 관련 자소서 작성 및 첨삭</p>
-              <p>자소서</p>
+              <p style={{ fontSize: "1rem" }}>
+                고교 , 대학 <br />
+                진학 자소서 작성 및 첨삭
+              </p>
+              <p>[자소서]</p>
             </div>
           </IconBox>
 
@@ -201,8 +215,8 @@ const Main = () => {
             </div>
 
             <div className="hoverAfter">
-              <p>대학 진학 관련 면접 및 논술</p>
-              <p>대학진학</p>
+              <p style={{ fontSize: "1rem" }}>대학 진학 관련 면접 및 논술</p>
+              <p>[대학진학]</p>
             </div>
           </IconBox>
 
@@ -216,8 +230,8 @@ const Main = () => {
             </div>
 
             <div className="hoverAfter">
-              <p>온라인 마켓 유통채널 입점</p>
-              <p>창업</p>
+              <p style={{ fontSize: "1rem" }}>온라인 마켓 유통채널 입점</p>
+              <p>[창업]</p>
             </div>
           </IconBox>
 
@@ -231,8 +245,8 @@ const Main = () => {
             </div>
 
             <div className="hoverAfter">
-              <p>컴활,정처기,토익/오픽</p>
-              <p>자격증</p>
+              <p style={{ fontSize: "1rem" }}>컴활,정처기 | 토익,오픽</p>
+              <p>[자격증]</p>
             </div>
           </IconBox>
         </IconList>
@@ -284,7 +298,7 @@ const IconBox = styled.div<{ user_gb: string }>`
   align-items: center;
   color: ${(props) => (props.user_gb === "MENTEE" ? "#ff8e41" : "#07858c")};
   line-height: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
   .hoverAfter {
     background-color: ${(props) =>
@@ -312,5 +326,4 @@ const IconBox = styled.div<{ user_gb: string }>`
       props.user_gb === "MENTEE" ? "#ff8e41" : "#07858c"};
   }
 `;
-
 export default Main;
