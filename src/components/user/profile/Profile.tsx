@@ -105,7 +105,9 @@ const Profile = () => {
           <p>EMAIL</p>
           <p>ADDRESS</p>
         </div>
-        <div style={{ marginLeft: "60%", color: "#777777" }}>LOGOUT</div>
+        <div style={{ marginLeft: "60%", color: "#777777", cursor: "pointer" }}>
+          LOGOUT
+        </div>
         {user_gb === "MENTEE" ? (
           <></>
         ) : (
@@ -140,7 +142,7 @@ const Profile = () => {
             borderRadius: "10px",
           }}
         >
-          개인정부 수정하기
+          개인정보 수정하기
         </Button>
       </YourProfile>
     </WhiteBox>

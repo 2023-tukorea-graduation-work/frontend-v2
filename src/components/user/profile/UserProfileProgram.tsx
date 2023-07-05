@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
-
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 const UserProfileProgram = () => {
   const navigate = useNavigate();
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   return (
     <Preview>
       <Top>
@@ -13,6 +14,7 @@ const UserProfileProgram = () => {
           onClick={() => {
             navigate("/projectProgress");
           }}
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
         >
           프로젝트관리하기
         </Link>
@@ -20,6 +22,7 @@ const UserProfileProgram = () => {
           onClick={() => {
             navigate("/programCompletion");
           }}
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
         >
           결과보기
         </Link>
@@ -34,6 +37,7 @@ const UserProfileProgram = () => {
           onClick={() => {
             navigate("/evaluation");
           }}
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
         >
           후기작성하기{`->`}
         </Link>

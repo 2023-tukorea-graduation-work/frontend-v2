@@ -22,7 +22,7 @@ const ProgramCompletion = () => {
           <p
             style={{
               fontFamily: "NotoSansBold",
-              fontSize: "2.5rem",
+              fontSize: "2rem",
               lineHeight: "4rem",
               width: "20rem",
             }}
@@ -44,7 +44,7 @@ const ProgramCompletion = () => {
           <p
             style={{
               fontFamily: "NotoSansBold",
-              fontSize: "2.5rem",
+              fontSize: "2rem",
               lineHeight: "4rem",
               width: "20rem",
             }}

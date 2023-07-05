@@ -115,23 +115,23 @@ const Satisfaction = () => {
   );
 };
 const Title = styled.div`
-  font-size: 1.25rem;
-  width: 90rem;
-  height: 3rem;
+  font-size: 1.2rem;
+  width: 11rem;
+  height: 2.7rem;
   border-radius: 5px;
   background-color: rgba(131, 194, 197, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: NotoSansBold;
-  margin-bottom: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
   margin-top: 3rem;
 `;
 const ChartBox = styled.div`
   width: 90rem;
   height: 30rem;
   border-radius: 5px;
-  border: solid 3px rgba(131, 194, 197, 0.5);
+  border: solid 2px #d6d6d6;
   margin-bottom: 7rem;
 `;
 export default Satisfaction;

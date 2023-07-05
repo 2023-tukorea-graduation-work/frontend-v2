@@ -129,8 +129,10 @@ const CompletionListProgram = ({
 };
 const Box = styled.div`
   cursor: pointer;
-  width: 25%;
+  width: 23.8%;
   height: 48%;
+  margin-left: 0.7rem;
+  margin-bottom: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;
 const ItemFirst = styled.div`
