@@ -30,6 +30,7 @@ const Mentee = (props: any) => {
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
+
     dispatch(creationAsync({ userInfo: formData, userGB: "mentee" }));
   };
 
@@ -127,7 +128,7 @@ const Mentee = (props: any) => {
               <Controller
                 defaultValue=""
                 control={control}
-                name="birth_year"
+                name="age"
                 rules={{ required: "출생년도는 필수선택입니다." }}
                 render={({ field }) => (
                   <Select
@@ -142,7 +143,7 @@ const Mentee = (props: any) => {
                     }}
                     displayEmpty
                     variant="standard"
-                    name="birth_year"
+                    name="age"
                   >
                     <MenuItem
                       disabled
@@ -274,35 +275,6 @@ const Mentee = (props: any) => {
                 )}
               />
             </FormControl>
-          </InformationBoxLine>
-          <InformationBoxLine>
-            활동장소
-            <div
-              style={{
-                justifyContent: "space-evenly",
-                display: "flex",
-                width: "75%",
-                height: "100%",
-                paddingTop: "0.4rem",
-                paddingBottom: "0.4rem",
-                backgroundColor: "#f8f8f8",
-                fontSize: "0.8rem",
-                marginRight: "7.7rem",
-              }}
-            >
-              {teachingStyle.map((value, index) => (
-                <div key={index}>
-                  <input
-                    type="radio"
-                    value={value}
-                    {...register("act_place", {
-                      required: "활동장소는 필수입력입니다.",
-                    })}
-                  ></input>
-                  {value}
-                </div>
-              ))}
-            </div>
           </InformationBoxLine>
           <InformationBoxLine>
             한줄자기소개

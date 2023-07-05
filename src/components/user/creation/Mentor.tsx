@@ -31,6 +31,8 @@ const Mentor = (props: any) => {
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
+    console.log(formData.get("data"));
+    console.log(formData.get("file"));
     dispatch(creationAsync({ userInfo: formData, userGB: "mentor" }));
   };
 
@@ -218,7 +220,7 @@ const Mentor = (props: any) => {
             />
           </InformationBoxLine>
           <InformationBoxLine style={{ justifyContent: "start" }}>
-            희망 학과
+            학과
             <Input
               disableUnderline={true}
               sx={{

@@ -43,9 +43,10 @@ export const loadItemListAsync = createAsyncThunk<itemBox[], string>(
     try {
       const { data } = await axios({
         method: "get",
-        url: "/api/v1/program?",
+        url: "/program",
         params: { keyword: keys },
       });
+      console.log(data);
       return data.object;
     } catch (e) {
       console.log(e);

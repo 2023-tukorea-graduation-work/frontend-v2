@@ -41,21 +41,22 @@ const Detail = (props: ButtonProps) => {
   }
 
   const onSubmit = (data: any) => {
-    console.log(data);
     axios({
-      url: "/api/v1/program",
+      url: "/program",
       method: "post",
       data: {
-        mento_no: mento_no,
+        // memberId: mento_no,
+        memberId: 1,
         subject: `${data.subject}`,
-        pro_place: `${data.act_place}`,
+        programPlace: `${data.act_place}`,
         capacity: `${data.capacity}`,
-        detail: `${data.detail}`,
-        pro_finish_date: `${dateFormat(data.pro_finish_date)}`,
-        pro_start_date: `${dateFormat(data.pro_start_date)}`,
+        // detail: `${data.detail}`,
+        detail: `qweqweq`,
+        programFinishDate: `${dateFormat(data.pro_finish_date)}`,
+        programStartDate: `${dateFormat(data.pro_start_date)}`,
         programWeeks: data.programWeeks,
-        recruit_finish_date: `${dateFormat(data.recruit_finish_date)}`,
-        recruit_start_date: `${dateFormat(data.recruit_start_date)}`,
+        recruitFinishDate: `${dateFormat(data.recruit_finish_date)}`,
+        recruitStartDate: `${dateFormat(data.recruit_start_date)}`,
       },
     })
       .then((response) => {
@@ -318,7 +319,7 @@ const Detail = (props: ButtonProps) => {
                     <p>{index}주차</p>
                     <Controller
                       control={control}
-                      name={`programWeeks.${index}.date`}
+                      name={`programWeeks.${index}.registerDate`}
                       rules={{ required: "주간날짜는 필수선택입니다." }}
                       render={({ field }) => (
                         <LearningPlanInputDate
@@ -341,7 +342,7 @@ const Detail = (props: ButtonProps) => {
                   >
                     <TextField
                       key={field.id}
-                      {...register(`programWeeks.${index}.detail`)}
+                      {...register(`programWeeks.${index}.content`)}
                       multiline
                       rows={5}
                       sx={{
@@ -376,7 +377,7 @@ const Detail = (props: ButtonProps) => {
       </LearningPlan>
       <button
         type="button"
-        onClick={() => append({ detail: "" })}
+        onClick={() => append({ content: "" })}
         style={{ backgroundColor: "#E6F3F3", border: "solid 1px #d6d6d6" }}
       >
         학습계획 추가

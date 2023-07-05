@@ -32,7 +32,7 @@ const ProgramList = () => {
     if (page !== 1) setPage((state) => (state = state - 1));
   };
   useEffect(() => {
-    // dispatch(loadItemListAsync(""));
+    dispatch(loadItemListAsync(""));
   }, []);
   return (
     <ListForm>

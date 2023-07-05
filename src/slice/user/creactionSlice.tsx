@@ -18,6 +18,9 @@ export const creationAsync = createAsyncThunk<creationSuccess, creationInfo>(
     try {
       const { data } = await axios({
         url: `/member/${creationData.userGB}`,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
         method: "post",
         data: creationData.userInfo,
       });
