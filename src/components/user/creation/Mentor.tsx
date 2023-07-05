@@ -31,7 +31,7 @@ const Mentor = (props: any) => {
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
-    dispatch(creationAsync({ userInfo: formData, userGB: "mentee" }));
+    dispatch(creationAsync({ userInfo: formData, userGB: "mentor" }));
   };
 
   const onError = (error: any) => {
@@ -199,7 +199,7 @@ const Mentor = (props: any) => {
                 fontSize: "0.9rem",
               }}
               placeholder="직접입력"
-              {...register("school", {
+              {...register("college", {
                 required: "학교는 필수입력입니다.",
               })}
             />
