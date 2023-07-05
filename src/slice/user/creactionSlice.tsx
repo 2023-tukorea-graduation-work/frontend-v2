@@ -17,7 +17,7 @@ export const creationAsync = createAsyncThunk<creationSuccess, creationInfo>(
   async (creationData) => {
     try {
       const { data } = await axios({
-        url: `/mentor`,
+        url: `/member/${creationData.userGB}`,
         method: "post",
         data: creationData.userInfo,
       });

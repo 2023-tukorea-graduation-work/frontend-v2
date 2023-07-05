@@ -1,114 +1,39 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
-import ClearIcon from "@mui/icons-material/Clear";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { profileModalChange } from "../../../slice/common/headerSlice";
-import { useNavigate } from "react-router-dom";
-const ProfileModal = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const profileModalState = useAppSelector(
-    (state) => state.header.profileModal
-  );
-  const customStyles = {
-    overlay: {
-      background: "rgba(125, 125, 125, 0.2)",
-      backdropFilter: "blur(4px)",
-    },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      borderRadius: "25px",
-      boxShadow: "0 3px 10px 0 rgba(0, 0, 0, 0.15)",
-      width: "23.813rem",
-      height: "47.563rem",
-      backgroundColor: "#f5f5f5",
-      padding: "0",
-    },
-  };
-  const modalOff = () => {
-    dispatch(profileModalChange({ value: false }));
-  };
+interface Props {
+  dropDownOff: () => void;
+  dropDownState: boolean;
+  children: React.ReactNode;
+}
+const ProfileModal = (props: Props) => {
+  const profileRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(e.target as Node)
+      ) {
+        props.dropDownOff();
+      }
+    };
+    window.addEventListener("mousedown", handleClick);
+    return () => window.removeEventListener("mousedown", handleClick);
+  }, [profileRef]);
   return (
-    <Modal
-      isOpen={profileModalState}
-      style={customStyles}
-      ariaHideApp={false}
-      onRequestClose={modalOff}
-      shouldCloseOnOverlayClick={true}
-    >
-      <ModalodalHeader>
-        <div
-          style={{
-            marginLeft: "1.5rem",
-            fontSize: "1.2rem",
-            fontFamily: "NotoSansRegular",
-          }}
-        >
-          프로필
-        </div>
-
-        <ClearIcon
-          onClick={modalOff}
-          sx={{ marginRight: "1.5rem", cursor: "pointer" }}
-        />
-      </ModalodalHeader>
-      <ModalDate>
-        <p>프로필</p>
-      </ModalDate>
-      <TestButton
-        onClick={() => {
-          navigate("/profile");
-          modalOff();
-        }}
-      >
-        프로필보기
-      </TestButton>
-      <TestButton
-        onClick={() => {
-          navigate("/");
-          modalOff();
-        }}
-      >
-        로그아웃
-      </TestButton>
-    </Modal>
+    <ProfileStyle ref={profileRef}>
+      {props.dropDownState && props.children}
+    </ProfileStyle>
   );
 };
-const ModalodalHeader = styled.div`
-  display: flex;
-  height: 3rem;
-  justify-content: space-between;
-  align-items: center;
-`;
-const ModalDate = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ececec;
-  height: 2rem;
-  font-family: Inter;
-  font-size: 0.5rem;
-  color: #676767;
-`;
-const TestButton = styled.button`
-  width: 100%;
-  hieght: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ececec;
-  height: 2rem;
-  font-family: Inter;
-  font-size: 0.5rem;
-  color: #676767;
+
+const ProfileStyle = styled.div`
+  background-color: #f5f5f5;
+  position: absolute;
+  top: 7.5%;
+  right: 8.5%;
+  width: 12rem;
+  box-shadow: 3px 4px 4px 0 rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  border: 0;
-  cursor: pointer;
+  padding-left: 20px;
 `;
 export default ProfileModal;
