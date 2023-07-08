@@ -1,25 +1,26 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 interface itemBox {
-  ACT_PLACE: string;
-  PROGRAM_NO: number;
-  PRO_PLACE: string;
-  CAPACITY: number;
-  GRADE: number;
-  INTRODUCTION: string;
-  COLLEGE: string;
-  DEADLINE: number;
-  MENTO_NO: number;
-  DETAIL: string;
-  MAJOR: string;
-  NAME: string;
-  RECRUIT_FINISH_DATE: string;
-  RECRUIT_START_DATE: string;
-  SUBJECT: string;
-  WEEKS: object[];
+  programId: number;
+  programPlace: string;
+  capacity: number;
+  grade: number;
+  introduce: string;
+  mentorId: number | null;
+  detail: string;
+  major: string;
+  mentorName: string;
+  recruitFinishDate: string;
+  recruitStartDate: string;
+  subject: string;
+  programWeeks: object[];
+  institution: string;
+  lesson: string;
+  programFinishDate: string;
+  programStartDate: string;
 }
 interface initial {
-  detail: itemBox;
+  details: itemBox;
 }
 export const loadItemDetailAsync = createAsyncThunk<itemBox, number>(
   "loadItemDetail",
@@ -27,37 +28,39 @@ export const loadItemDetailAsync = createAsyncThunk<itemBox, number>(
     try {
       const { data } = await axios({
         method: "get",
-        url: `/api/v1/program/${number}`,
+        url: `/program/${number}`,
       });
-      return data.object;
+      console.log(data);
+      return data;
     } catch (e) {
       console.log(e);
     }
   }
 );
 const initialState: initial = {
-  detail: {
-    ACT_PLACE: "경기도 시흥시",
-    PROGRAM_NO: 1,
-    PRO_PLACE: "",
-    CAPACITY: 5,
-    GRADE: 4,
-    INTRODUCTION: "안녕하세요 저희 프로그램 입니다",
-    COLLEGE: "홍길동",
-    DEADLINE: 3,
-    MENTO_NO: 24,
-    DETAIL: "안녕하세요 저희 프로그램입니다",
-    MAJOR: "경영학과",
-    NAME: "홍길동",
-    RECRUIT_FINISH_DATE: "2023-05-02",
-    RECRUIT_START_DATE: "2023-05-01",
-    SUBJECT: "프로그램",
-    WEEKS: [
-      { DETAIL: "프로그램 주차에대한 자세한설명" },
-      { DETAIL: "프로그램 주차에대한 자세한설명" },
-      { DETAIL: "프로그램 주차에대한 자세한설명" },
-      { DETAIL: "프로그램 주차에대한 자세한설명" },
+  details: {
+    programId: 1,
+    programPlace: "",
+    capacity: 5,
+    grade: 4,
+    introduce: "",
+    mentorName: "123",
+    mentorId: 24,
+    detail: "안녕하세요 저희 프로그램입니다",
+    major: "경영학과",
+    recruitFinishDate: "2023-05-02",
+    recruitStartDate: "2023-05-01",
+    subject: "프로그램",
+    programWeeks: [
+      { content: "프로그램 주차에대한 자세한설명" },
+      { content: "프로그램 주차에대한 자세한설명" },
+      { content: "프로그램 주차에대한 자세한설명" },
+      { content: "프로그램 주차에대한 자세한설명" },
     ],
+    institution: "",
+    lesson: "",
+    programFinishDate: "",
+    programStartDate: "",
   },
 };
 
@@ -67,8 +70,8 @@ export const programListDetalSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loadItemDetailAsync.fulfilled, (state, { payload }) => {
-      state.detail = payload;
-      console.log(state.detail);
+      state.details = payload;
+      console.log(state.details);
     });
   },
 });

@@ -61,7 +61,7 @@ const Category = (props: ButtonProps) => {
           /> */}
           <Controller
             control={control}
-            name="colors"
+            name="category"
             render={({ field: { onChange, value, ...field } }) => (
               <Select
                 {...field}

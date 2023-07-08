@@ -5,7 +5,7 @@ import { Button, FormControl, Input, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useAppDispatch } from "../../../store/hooks";
 import { creationAsync } from "../../../slice/user/creactionSlice";
-
+import { CollegeMajor } from "../../../docs/Docs";
 const Mentee = (props: any) => {
   const [preImg, setPreImg]: any = useState(null);
   const dispatch = useAppDispatch();
@@ -219,23 +219,47 @@ const Mentee = (props: any) => {
           </InformationBoxLine>
           <InformationBoxLine style={{ justifyContent: "start" }}>
             희망 학과
-            <Input
-              disableUnderline={true}
-              sx={{
-                height: "100%",
-                width: "24%",
-                borderRadius: "4.2px",
-                border: "solid 0.8px #d6d6d6",
-                boxShadow: "0",
-                fontSize: "0.9rem",
-                marginLeft: "0.6rem",
-                marginRight: "0.8rem",
-              }}
-              placeholder="학과"
-              {...register("major", {
-                required: "희망학과는 필수입력입니다.",
-              })}
-            />
+            <FormControl>
+              <Controller
+                defaultValue=""
+                control={control}
+                name="major"
+                rules={{ required: "학과는 필수선택입니다." }}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    disableUnderline={true}
+                    sx={{
+                      paddingLeft: "0.5rem",
+                      height: "33px",
+                      width: "15rem",
+                      borderRadius: "4.2px",
+                      border: "solid 0.8px #d6d6d6",
+                      boxShadow: "0",
+                      fontSize: "0.9rem",
+                      marginLeft: "2.5rem",
+                    }}
+                    displayEmpty
+                    variant="standard"
+                  >
+                    <MenuItem
+                      disabled
+                      value=""
+                      sx={{
+                        display: "none",
+                      }}
+                    ></MenuItem>
+                    <em>전공</em>
+                    {CollegeMajor.map((value, index) => (
+                      <MenuItem key={index} value={value.value}>
+                        {value.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+            <div style={{ marginLeft: "10px" }}> 학년</div>
             학년
             <FormControl>
               <Controller
