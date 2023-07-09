@@ -11,12 +11,17 @@ import {
   stateOptions,
 } from "../../../docs/Docs";
 import { useForm, Controller } from "react-hook-form";
+import categorySendData from "../../../utils/categorySendData";
 interface ButtonProps {
   increaseStep: () => void;
 }
 interface CategoryValue {
   value: readonly StateOption[] | undefined;
   label: string;
+}
+interface FianlData {
+  parent: string;
+  child: string;
 }
 
 const Category = (props: ButtonProps) => {
@@ -38,7 +43,17 @@ const Category = (props: ButtonProps) => {
     handleSubmit,
   } = useForm();
   const onSubmit = (data: any) => {
-    console.log(data);
+    const finalData: Array<FianlData> = [];
+    for (const [key, value] of Object.entries(data)) {
+      if (key === "category") continue;
+      const test = key;
+      if (Array.isArray(value)) {
+        value.map((value) => {
+          finalData.push({ parent: `${test}`, child: `${value.label}` });
+        });
+      }
+    }
+    console.log(finalData);
     props.increaseStep();
   };
   const onError = (error: any) => {
