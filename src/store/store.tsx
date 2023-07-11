@@ -16,6 +16,7 @@ import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
 import creationReducer from "../slice/user/creactionSlice";
 import headerReducer from "../slice/common/headerSlice";
+import programProgressNoticeReducer from "../slice/program/programProgressNoticeSlice";
 const reducers = combineReducers({
   leftBar: leftbarReducer,
   programList: programListReducer,
@@ -23,6 +24,7 @@ const reducers = combineReducers({
   login: loginReducer,
   creation: creationReducer,
   header: headerReducer,
+  programNotice: programProgressNoticeReducer,
 });
 
 const persistConfig = {
