@@ -4,41 +4,39 @@ import { FaEye, FaRegBookmark, FaRegEnvelope, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  PROGRAM_NO: number;
-  ACT_PLACE: string;
-  CAPACITY: number;
-  COLLEGE: string;
-  DEADLINE: number;
-  DETAIL: string;
-  MAJOR: string;
-  NAME: string;
-  PARTICIPANT: number;
-  PRO_FINISH_DATE: string;
-  PRO_START_DATE: string;
-  ROW_NUM: number;
-  SUBJECT: string;
+  programId: number;
+  capacity: number;
+  institution: string;
+  major: string;
+  memberName: string;
+  totalParticipants: number;
+  programFinishDate: string;
+  programStartDate: string;
+  programPlace: string;
+  subject: string;
+  detail: string;
+  lesson: string;
 };
 
 const ProgramListProgram = ({
-  PROGRAM_NO,
-  ACT_PLACE,
-  CAPACITY,
-  COLLEGE,
-  DEADLINE,
-  DETAIL,
-  MAJOR,
-  NAME,
-  PARTICIPANT,
-  PRO_FINISH_DATE,
-  PRO_START_DATE,
-  ROW_NUM,
-  SUBJECT,
+  programId,
+  capacity,
+  institution,
+  major,
+  memberName,
+  totalParticipants,
+  programFinishDate,
+  programStartDate,
+  programPlace,
+  subject,
+  detail,
+  lesson,
 }: Props) => {
   const navigate = useNavigate();
   return (
     <Box
       onClick={() => {
-        navigate("/programListDetail/" + PROGRAM_NO);
+        navigate("/programListDetail/" + programId);
       }}
     >
       <ItemFirst>
@@ -51,12 +49,12 @@ const ProgramListProgram = ({
         </ItemImage>
         <ItemInfo>
           <p>
-            {`${PROGRAM_NO}`}
-            {`${NAME}`}/{`${COLLEGE}`}/{`${MAJOR}`}
+            {`${programId}`}
+            {`${memberName}`}/{`${institution}`}/{`${major}`}
           </p>
-          <p>{`${ACT_PLACE}`}</p>
+          <p>{`${programPlace}`}</p>
           <p>
-            {`${PRO_START_DATE}`}~ {`${PRO_FINISH_DATE}`}
+            {`${programStartDate}`}~ {`${programFinishDate}`}
           </p>
         </ItemInfo>
       </ItemFirst>
@@ -69,7 +67,7 @@ const ProgramListProgram = ({
             fontWeight: "bold",
           }}
         >
-          {`${SUBJECT}`}
+          {`${subject}`}
         </p>
         <p style={{ fontSize: "0.9rem", marginBottom: "0.6rem" }}>
           프로그램 카테고리(추가필요)
@@ -83,8 +81,8 @@ const ProgramListProgram = ({
           }}
         >
           <p>그룹 종류: 과외 or 프로젝트-추가필요</p>
-          <p>모집인원: {`${CAPACITY}`}명</p>
-          <p>현재 모집된 구성원: {`${PARTICIPANT}`}명</p>
+          <p>모집인원: {`${capacity}`}명</p>
+          <p>현재 모집된 구성원: {`${totalParticipants}`}명</p>
         </div>
       </ItemName>
       <hr
@@ -105,7 +103,7 @@ const ProgramListProgram = ({
             marginRight: "10rem",
           }}
         >
-          D{DEADLINE}
+          D데드라인추가해야함
         </p>
 
         <FaEye size="5%" style={{ marginTop: "0.1rem" }}></FaEye>

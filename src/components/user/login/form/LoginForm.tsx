@@ -14,20 +14,13 @@ import { changeUserGB, loginAsync } from "../../../../slice/user/loginSlice";
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const loginState = useAppSelector((state) => state.login.status);
+  const loginState = useAppSelector((state) => state.login.object.USER_NO);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
-  const [toggle, setToggle] = useState(user_gb);
-  const toggleOnChange = () => {
-    toggle === "MENTEE" ? setToggle("MENTO") : setToggle("MENTEE");
-  };
-  // useEffect(() => {
-  //   if (loginState === "SUCCESS") {
-  //     navigate("/programList");
-  //   }
-  // }, [loginState]);
   useEffect(() => {
-    dispatch(changeUserGB(toggle));
-  }, [toggle]);
+    if (loginState !== null) {
+      navigate("/programList");
+    }
+  }, [loginState]);
   const {
     control,
     register,
@@ -36,7 +29,6 @@ const LoginForm = () => {
     handleSubmit,
   } = useForm();
   const onSubmit = (data: any) => {
-    data.user_gb = toggle;
     dispatch(loginAsync(data));
   };
   const onError = (error: any) => {
@@ -48,25 +40,10 @@ const LoginForm = () => {
 
       <FormStyled>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
-          <FormControlLabel
-            sx={{
-              marginTop: "8rem",
-              width: "100%",
-              fontFamily: "NotoSansLight",
-              color: "#777",
-              fontSize: "0.7rem",
-            }}
-            control={
-              <Switch
-                onChange={toggleOnChange}
-                checked={user_gb === "MENTEE"}
-              />
-            }
-            label={user_gb}
-          />
           <Input
             id="email"
             placeholder="이메일주소 OR 전화번호 입력"
+            sx={{ marginTop: "7rem" }}
             fullWidth={true}
             color={user_gb === "MENTEE" ? "primary" : "secondary"}
             startAdornment={

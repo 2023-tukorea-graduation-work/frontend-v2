@@ -11,36 +11,33 @@ import { FaHome, FaEye, FaRegBookmark, FaRegEnvelope } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { loadItemDetailAsync } from "../../../slice/program/programDetailSlice";
+import {
+  loadItemDetailAsync,
+  programParticipateAsync,
+} from "../../../slice/program/programDetailSlice";
 
 interface WEEK {
   DETAIL: string;
 }
 const ProgramDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
-  const { PROGRAM_NO } = useParams() as any;
+  const { programId } = useParams() as any;
   const dispatch = useAppDispatch();
   const programDetail = useAppSelector((state) => state.programDetail.details);
   const mentee_no = useAppSelector((state) => state.login.object.USER_NO);
   useEffect(() => {
-    dispatch(loadItemDetailAsync(PROGRAM_NO));
+    dispatch(loadItemDetailAsync(programId));
     console.log(programDetail);
+    console.log(programId);
   }, []);
   const Submit = () => {
-    axios({
-      url: "/api/v1/program/parti",
-      method: "post",
-      data: {
-        program_no: PROGRAM_NO,
-        mentee_no: mentee_no,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const menteeWithProgram = {
+      menteeId: Number(mentee_no),
+      programId: Number(programId),
+    };
+    console.log(mentee_no);
+    console.log(programId);
+    dispatch(programParticipateAsync(menteeWithProgram));
   };
   return (
     <DetailForm>

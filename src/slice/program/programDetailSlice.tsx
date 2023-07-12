@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 interface itemBox {
   programId: number;
   programPlace: string;
@@ -22,6 +23,10 @@ interface itemBox {
 interface initial {
   details: itemBox;
 }
+interface menteeWithProgram {
+  menteeId: number | null;
+  programId: number;
+}
 export const loadItemDetailAsync = createAsyncThunk<itemBox, number>(
   "loadItemDetail",
   async (number) => {
@@ -37,19 +42,38 @@ export const loadItemDetailAsync = createAsyncThunk<itemBox, number>(
     }
   }
 );
+export const programParticipateAsync = createAsyncThunk<any, menteeWithProgram>(
+  "programParticipate",
+  async (menteeWithPrograminfo: menteeWithProgram, { rejectWithValue }) => {
+    try {
+      const { data } = await axios({
+        method: "post",
+        url: `/program/participate`,
+        data: {
+          menteeId: `${menteeWithPrograminfo.menteeId}`,
+          programId: `${menteeWithPrograminfo.programId}`,
+        },
+      });
+      console.log(data);
+      return data;
+    } catch (e) {
+      return rejectWithValue(JSON.stringify(e));
+    }
+  }
+);
 const initialState: initial = {
   details: {
-    programId: 1,
+    programId: 0,
     programPlace: "",
-    capacity: 5,
-    grade: 4,
+    capacity: 0,
+    grade: 0,
     introduce: "",
-    mentorName: "123",
-    mentorId: 24,
-    detail: "안녕하세요 저희 프로그램입니다",
+    mentorName: "",
+    mentorId: 0,
+    detail: "",
     major: "경영학과",
-    recruitFinishDate: "2023-05-02",
-    recruitStartDate: "2023-05-01",
+    recruitFinishDate: "",
+    recruitStartDate: "",
     subject: "프로그램",
     programWeeks: [
       { content: "프로그램 주차에대한 자세한설명" },
@@ -72,6 +96,13 @@ export const programListDetalSlice = createSlice({
     builder.addCase(loadItemDetailAsync.fulfilled, (state, { payload }) => {
       state.details = payload;
       console.log(state.details);
+    });
+    builder.addCase(programParticipateAsync.fulfilled, (state) => {
+      console.log("신청완료");
+    });
+    builder.addCase(programParticipateAsync.rejected, (state, action) => {
+      console.log(action);
+      toast.error("신청실패");
     });
   },
 });

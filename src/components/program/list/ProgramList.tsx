@@ -23,9 +23,7 @@ const ProgramList = () => {
     setPage(page);
   };
   const handlePageUp = () => {
-    // if (page < Math.trunc(postList.length / 5))
-    //   setPage((state) => (state = state + 1));
-    if (page < Math.trunc(dummy.data.length / 5))
+    if (page < Math.trunc(postList.length / 5))
       setPage((state) => (state = state + 1));
   };
   const handlePageDown = () => {
@@ -61,51 +59,24 @@ const ProgramList = () => {
           onClick={handlePageDown}
         ></FaChevronLeft>
         <ListItem>
-          {/* {postList.length !== 0 ? (
+          {postList.length !== 0 ? (
             <>
               {postList.slice((page - 1) * 8, 8 * page).map((value) => {
                 return (
                   <ProgramListProgram
-                    key={value.PROGRAM_NO}
-                    PROGRAM_NO={value.PROGRAM_NO}
-                    ACT_PLACE={value.ACT_PLACE}
-                    CAPACITY={value.CAPACITY}
-                    COLLEGE={value.COLLEGE}
-                    DEADLINE={value.DEADLINE}
-                    DETAIL={value.DETAIL}
-                    MAJOR={value.MAJOR}
-                    NAME={value.NAME}
-                    PARTICIPANT={value.PARTICIPANT}
-                    PRO_FINISH_DATE={value.PRO_FINISH_DATE}
-                    PRO_START_DATE={value.PRO_START_DATE}
-                    ROW_NUM={value.ROW_NUM}
-                    SUBJECT={value.SUBJECT}
-                  ></ProgramListProgram>
-                );
-              })}
-            </>
-          ) : (
-            <></>
-          )} */}
-          {dummy.data.length !== 0 ? (
-            <>
-              {dummy.data.slice((page - 1) * 8, 8 * page).map((value) => {
-                return (
-                  <ProgramListProgram
-                    key={value.PROGRAM_NO}
-                    PROGRAM_NO={value.PROGRAM_NO}
-                    ACT_PLACE={value.ACT_PLACE}
-                    CAPACITY={value.CAPACITY}
-                    COLLEGE={value.COLLEGE}
-                    DEADLINE={value.DEADLINE}
-                    DETAIL={value.DETAIL}
-                    MAJOR={value.MAJOR}
-                    NAME={value.NAME}
-                    PARTICIPANT={value.PARTICIPANT}
-                    PRO_FINISH_DATE={value.PRO_FINISH_DATE}
-                    PRO_START_DATE={value.PRO_START_DATE}
-                    ROW_NUM={value.ROW_NUM}
-                    SUBJECT={value.SUBJECT}
+                    key={value.programId}
+                    programId={value.programId}
+                    programPlace={value.programPlace}
+                    capacity={value.capacity}
+                    institution={value.institution}
+                    detail={value.detail}
+                    major={value.major}
+                    memberName={value.memberName}
+                    totalParticipants={value.totalParticipants}
+                    programFinishDate={value.programFinishDate}
+                    programStartDate={value.programStartDate}
+                    subject={value.subject}
+                    lesson={value.lesson}
                   ></ProgramListProgram>
                 );
               })}
@@ -125,8 +96,7 @@ const ProgramList = () => {
         <Pagination
           activePage={page}
           itemsCountPerPage={8}
-          // totalItemsCount={postList.length}
-          totalItemsCount={dummy.data.length}
+          totalItemsCount={postList.length}
           pageRangeDisplayed={5}
           onChange={handlePageChange}
         />

@@ -29,17 +29,25 @@ export const loadNoticeListAsync = createAsyncThunk<Array<NoticeList>>(
 
 export const uploadNoticetAsync = createAsyncThunk<any, NoticeForm>(
   "uploadNoticetAsync",
-  async (formData) => {
+  async (formData, { rejectWithValue }) => {
     try {
-      const data = await axios({
+      const { data } = await axios({
         method: "post",
         url: "/notice",
-        data: {},
+        data: {
+          programId: 0,
+          title: "test",
+        },
       });
       console.log(data);
       return data;
     } catch (e) {
-      console.log(e);
+      let error: any = e;
+      console.log(error.response);
+      if (!error.response) {
+        throw error.response;
+      }
+      return rejectWithValue("No user found");
     }
   }
 );
@@ -53,12 +61,11 @@ export const programNoticeSlice = createSlice({
       state = payload;
       console.log("리스트로드 성공");
     });
-    builder.addCase(uploadNoticetAsync.fulfilled, (state, { payload }) => {
-      console.log("업로드 성공");
-    });
     builder.addCase(uploadNoticetAsync.rejected, (state) => {
       console.log("업로드 실패");
-      console.log("ㅣㅣㅣㅣㅣㅣ");
+    });
+    builder.addCase(uploadNoticetAsync.fulfilled, (state, { payload }) => {
+      console.log("업로드 성공");
     });
   },
 });

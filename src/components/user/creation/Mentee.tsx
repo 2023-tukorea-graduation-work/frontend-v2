@@ -249,7 +249,7 @@ const Mentee = (props: any) => {
                         display: "none",
                       }}
                     ></MenuItem>
-                    <em>전공</em>
+                    <em>희망전공</em>
                     {CollegeMajor.map((value, index) => (
                       <MenuItem key={index} value={value.value}>
                         {value.label}
@@ -277,7 +277,7 @@ const Mentee = (props: any) => {
                       border: "solid 1px #d6d6d6",
                       boxShadow: "0",
                       fontSize: "0.8rem",
-                      marginLeft: "0.6rem",
+                      marginLeft: "0.7rem",
                     }}
                     displayEmpty
                     variant="standard"
@@ -312,7 +312,7 @@ const Mentee = (props: any) => {
                 boxShadow: "0",
               }}
               placeholder=""
-              {...register("introduction", {
+              {...register("introduce", {
                 required: "소개는 필수입력입니다.",
               })}
             />
