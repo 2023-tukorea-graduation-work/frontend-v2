@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose } from "react-icons/fa";
 import TestEditorForm from "../qna/TestEditorForm";
 import QnaIcon from "./QnaIcon";
-import { useAppSelector } from "../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { loadQuestionListAsync } from "../../../../slice/program/programProgressQuestion";
 
 const HorizonLine = () => {
   return (
@@ -87,6 +88,7 @@ const Popup = () => {
 };
 
 const QnaDetail = () => {
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
   const togglePopup = () => {
@@ -95,6 +97,9 @@ const QnaDetail = () => {
   const subtooglePopup = () => {
     ssetIsOpen(!sisOpen);
   };
+  useEffect(() => {
+    dispatch(loadQuestionListAsync());
+  }, [isOpen]);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   return (
     <QnaForm>

@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
 import { TextField, Input } from "@mui/material";
 import { toast } from "react-toastify";
+import { useAppDispatch } from "../../../../store/hooks";
 
-const FileUpload = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+import { uploadMaterialAsync } from "../../../../slice/program/programProgressMaterial";
 
+interface Props {
+  selectedFile: File | null;
+  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
+}
+
+const FileUpload = (props: Props) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
-    setSelectedFile(file || null);
+    props.setSelectedFile(file || null);
   };
 
   const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (selectedFile) {
-      console.log("Selected file:", selectedFile);
+    if (props.selectedFile) {
+      console.log("Selected file:", props.selectedFile);
     }
   };
 
@@ -44,7 +50,9 @@ const HorizonLine = () => {
 
 const MaterialPopup = () => {
   const [isOpen, setIsOpen] = useState(true);
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const imageInput = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
@@ -81,7 +89,10 @@ const MaterialPopup = () => {
                 marginBottom: "0.5rem",
               }}
             ></Input>
-            <FileUpload></FileUpload>
+            <FileUpload
+              selectedFile={selectedFile}
+              setSelectedFile={setSelectedFile}
+            ></FileUpload>
             <HorizonLine></HorizonLine>
             <p
               style={{
@@ -91,7 +102,20 @@ const MaterialPopup = () => {
                 marginLeft: "47%",
               }}
               onClick={() => {
-                toast.success("자료올리기 성공");
+                const test = {
+                  programId: 1,
+                  title: "프로그램 자료 제목1",
+                  detail: "프로그램 자료 상세내용1",
+                };
+                const formData = new FormData();
+                formData.append(
+                  "data",
+                  new Blob([JSON.stringify(test)], { type: "application/json" })
+                );
+                if (selectedFile !== null) {
+                  formData.append("file", selectedFile);
+                }
+                dispatch(uploadMaterialAsync(formData));
                 togglePopup();
               }}
             >
