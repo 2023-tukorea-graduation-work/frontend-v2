@@ -11,35 +11,33 @@ import { FaHome, FaEye, FaRegBookmark, FaRegEnvelope } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { loadItemDetailAsync } from "../../../slice/program/programDetailSlice";
+import {
+  loadItemDetailAsync,
+  programParticipateAsync,
+} from "../../../slice/program/programDetailSlice";
 
 interface WEEK {
   DETAIL: string;
 }
 const ProgramDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
-  const { PROGRAM_NO } = useParams() as any;
+  const { programId } = useParams() as any;
   const dispatch = useAppDispatch();
-  const programDetail = useAppSelector((state) => state.programDetail.detail);
+  const programDetail = useAppSelector((state) => state.programDetail.details);
   const mentee_no = useAppSelector((state) => state.login.object.USER_NO);
   useEffect(() => {
-    // dispatch(loadItemDetailAsync(PROGRAM_NO));
+    dispatch(loadItemDetailAsync(programId));
+    console.log(programDetail);
+    console.log(programId);
   }, []);
   const Submit = () => {
-    axios({
-      url: "/api/v1/program/parti",
-      method: "post",
-      data: {
-        program_no: PROGRAM_NO,
-        mentee_no: mentee_no,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const menteeWithProgram = {
+      menteeId: Number(mentee_no),
+      programId: Number(programId),
+    };
+    console.log(mentee_no);
+    console.log(programId);
+    dispatch(programParticipateAsync(menteeWithProgram));
   };
   return (
     <DetailForm>
@@ -65,17 +63,21 @@ const ProgramDetail = () => {
         </Detailca>
 
         <DetailIntro>
-          <p style={{ width: "6%" }}>{programDetail.NAME}</p>
-          <p style={{ width: "15%" }}>{programDetail.COLLEGE}</p>
-          <p style={{ width: "74%" }}>{programDetail.MAJOR}</p>
-          <p style={{ width: "50%" }}>모집인원 : {programDetail.CAPACITY}</p>
-          <p style={{ width: "50%" }}>활동기간 : 추가필요 ~ 추가필요</p>
+          <p style={{ width: "6%" }}>{programDetail.mentorName}</p>
+          <p style={{ width: "15%" }}>{programDetail.institution}</p>
+          <p style={{ width: "74%" }}>{programDetail.major}</p>
+          <p style={{ width: "50%" }}>모집인원 : {programDetail.capacity}</p>
           <p style={{ width: "50%" }}>
-            모집기간 : {programDetail.RECRUIT_START_DATE} ~{" "}
-            {programDetail.RECRUIT_FINISH_DATE}
+            활동기간 : {programDetail.programStartDate} ~
+            {programDetail.programFinishDate}
           </p>
-          <p style={{ width: "50%" }}>수업방식 : {programDetail.ACT_PLACE}</p>
-          {/* {programDetail.PRO_PLACE}이거랑 둘중 어떤건지 골라야할거같아  */}
+          <p style={{ width: "50%" }}>
+            모집기간 : {programDetail.recruitStartDate} ~
+            {programDetail.recruitFinishDate}
+          </p>
+          <p style={{ width: "50%" }}>
+            수업장소 : {programDetail.programPlace}
+          </p>
         </DetailIntro>
 
         <DetailIcon>
@@ -88,7 +90,7 @@ const ProgramDetail = () => {
               width: "100%",
             }}
           >
-            D-{programDetail.DEADLINE}
+            D-1
           </p>
 
           <FaEye size="10%" color="#8E8E8E"></FaEye>
@@ -113,7 +115,7 @@ const ProgramDetail = () => {
       </Detailbox>
 
       <Programintro>
-        <p>{programDetail.INTRODUCTION}</p>
+        <p>{programDetail.introduce}</p>
       </Programintro>
 
       <ProgramPlan>
@@ -122,7 +124,7 @@ const ProgramDetail = () => {
             <TableHead></TableHead>
             <TableBody>
               {/* {programDetail.WEEKS.map((value: WEEK, index: number) => {  전체적으로 옮기는데 갑자기 에러 */}
-              {programDetail.WEEKS.map((value: any, index: number) => {
+              {programDetail.programWeeks.map((value: any, index: number) => {
                 return (
                   <TableRow sx={{ height: "10vh" }} key={index}>
                     <TableCell align="center" width="10%">

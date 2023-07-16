@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
 import NoticeEditorForm from "./NoticeEditorForm";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { loadNoticeListAsync } from "../../../../slice/program/programProgressNoticeSlice";
+import { useAppDispatch } from "../../../../store/hooks";
 const HorizonLine = () => {
   return (
     <div
@@ -87,6 +89,7 @@ const NoticePopup = () => {
 };
 
 const NoticeDetail = () => {
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
   const togglePopup = () => {
@@ -95,6 +98,9 @@ const NoticeDetail = () => {
   const subtooglePopup = () => {
     ssetIsOpen(!sisOpen);
   };
+  useEffect(() => {
+    dispatch(loadNoticeListAsync());
+  }, [isOpen]);
   return (
     <NoticeForm>
       <p

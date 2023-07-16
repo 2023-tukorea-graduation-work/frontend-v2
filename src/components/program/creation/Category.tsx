@@ -11,6 +11,9 @@ import {
   stateOptions,
 } from "../../../docs/Docs";
 import { useForm, Controller } from "react-hook-form";
+import categorySendData from "../../../utils/categorySendData";
+import { useAppDispatch } from "../../../store/hooks";
+import { addCategories } from "../../../slice/program/programCreationSlice";
 interface ButtonProps {
   increaseStep: () => void;
 }
@@ -18,9 +21,14 @@ interface CategoryValue {
   value: readonly StateOption[] | undefined;
   label: string;
 }
+interface FianlData {
+  parent: string;
+  child: string;
+}
 
 const Category = (props: ButtonProps) => {
   const [firstCategory, setFirstCategory] = useState([]);
+  const dispatch = useAppDispatch();
   const firstCategoryChange = (change: any) => {
     if (
       firstCategory.some((val: CategoryValue) => val.label === change.label)
@@ -28,7 +36,6 @@ const Category = (props: ButtonProps) => {
       console.log(1);
     }
     setFirstCategory(change);
-    console.log(firstCategory);
   };
   const {
     control,
@@ -38,7 +45,18 @@ const Category = (props: ButtonProps) => {
     handleSubmit,
   } = useForm();
   const onSubmit = (data: any) => {
-    console.log(data);
+    const finalData: Array<FianlData> = [];
+    for (const [key, value] of Object.entries(data)) {
+      if (key === "category") continue;
+      const test = key;
+      if (Array.isArray(value)) {
+        value.map((value) => {
+          finalData.push({ parent: `${test}`, child: `${value.label}` });
+        });
+      }
+    }
+    dispatch(addCategories(finalData));
+    console.log(finalData);
     props.increaseStep();
   };
   const onError = (error: any) => {
@@ -61,7 +79,7 @@ const Category = (props: ButtonProps) => {
           /> */}
           <Controller
             control={control}
-            name="colors"
+            name="category"
             render={({ field: { onChange, value, ...field } }) => (
               <Select
                 {...field}

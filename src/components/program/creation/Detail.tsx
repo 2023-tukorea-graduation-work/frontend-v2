@@ -13,7 +13,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { programCreateAsync } from "../../../slice/program/programCreationSlice";
+
 interface ButtonProps {
   increaseStep: () => void;
 }
@@ -29,41 +31,11 @@ const Detail = (props: ButtonProps) => {
     control,
     name: "programWeeks",
   });
+  const dispatch = useAppDispatch();
   const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
-  const mento_no = useAppSelector((state) => state.login.object.USER_NO);
-
-  function dateFormat(date: any) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    month = month >= 10 ? month : "0" + month;
-    day = day >= 10 ? day : "0" + day;
-    return date.getFullYear() + "-" + month + "-" + day;
-  }
-
+  // const mento_no = useAppSelector((state) => state.login.object.USER_NO);
   const onSubmit = (data: any) => {
-    console.log(data);
-    axios({
-      url: "/api/v1/program",
-      method: "post",
-      data: {
-        mento_no: mento_no,
-        subject: `${data.subject}`,
-        pro_place: `${data.act_place}`,
-        capacity: `${data.capacity}`,
-        detail: `${data.detail}`,
-        pro_finish_date: `${dateFormat(data.pro_finish_date)}`,
-        pro_start_date: `${dateFormat(data.pro_start_date)}`,
-        programWeeks: data.programWeeks,
-        recruit_finish_date: `${dateFormat(data.recruit_finish_date)}`,
-        recruit_start_date: `${dateFormat(data.recruit_start_date)}`,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    dispatch(programCreateAsync(data));
   };
   const onError = (error: any) => {
     console.log(error);
@@ -318,7 +290,7 @@ const Detail = (props: ButtonProps) => {
                     <p>{index}주차</p>
                     <Controller
                       control={control}
-                      name={`programWeeks.${index}.date`}
+                      name={`programWeeks.${index}.registerDate`}
                       rules={{ required: "주간날짜는 필수선택입니다." }}
                       render={({ field }) => (
                         <LearningPlanInputDate
@@ -341,7 +313,7 @@ const Detail = (props: ButtonProps) => {
                   >
                     <TextField
                       key={field.id}
-                      {...register(`programWeeks.${index}.detail`)}
+                      {...register(`programWeeks.${index}.content`)}
                       multiline
                       rows={5}
                       sx={{
@@ -376,7 +348,7 @@ const Detail = (props: ButtonProps) => {
       </LearningPlan>
       <button
         type="button"
-        onClick={() => append({ detail: "" })}
+        onClick={() => append({ content: "" })}
         style={{ backgroundColor: "#E6F3F3", border: "solid 1px #d6d6d6" }}
       >
         학습계획 추가

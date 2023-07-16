@@ -4,19 +4,18 @@ export interface PostState {
   post_id: number;
 }
 interface itemBox {
-  PROGRAM_NO: number;
-  ACT_PLACE: string;
-  CAPACITY: number;
-  COLLEGE: string;
-  DEADLINE: number;
-  DETAIL: string;
-  MAJOR: string;
-  NAME: string;
-  PARTICIPANT: number;
-  PRO_FINISH_DATE: string;
-  PRO_START_DATE: string;
-  ROW_NUM: number;
-  SUBJECT: string;
+  programId: number;
+  capacity: number;
+  institution: string;
+  major: string;
+  memberName: string;
+  totalParticipants: number;
+  programFinishDate: string;
+  programStartDate: string;
+  programPlace: string;
+  subject: string;
+  detail: string;
+  lesson: string;
 }
 interface filterList {
   place: string;
@@ -43,10 +42,11 @@ export const loadItemListAsync = createAsyncThunk<itemBox[], string>(
     try {
       const { data } = await axios({
         method: "get",
-        url: "/api/v1/program?",
+        url: "/program",
         params: { keyword: keys },
       });
-      return data.object;
+      console.log(data);
+      return data;
     } catch (e) {
       console.log(e);
     }

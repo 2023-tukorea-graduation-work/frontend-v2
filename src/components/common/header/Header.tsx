@@ -16,6 +16,7 @@ import {
 import ProfileModal from "./ProfileModal";
 import bell3 from "../../../assets/bell3.png";
 import testLogo from "../../../assets/testLogo.png";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +35,6 @@ const Header = () => {
   const dropDownOff = () => {
     setTest(false);
   };
-  const testProfile = () => {};
   const NavStyle = styled.div`
     width: 70%;
     display: flex;
@@ -98,9 +98,6 @@ const Header = () => {
                 </div>
                 <div
                   className="classpage"
-                  onClick={() => {
-                    navigate("/");
-                  }}
                   style={{ cursor: "pointer" }}
                 >
                   과외구인게시판
@@ -113,29 +110,59 @@ const Header = () => {
                 <AlertModal />
                 {userNo === null ? (
                   <>
-                    <button
+                    <>
+                      <CircleStyle
+                        onClick={(e) => {
+                          setTest(!test);
+                        }}
+                      >
+                        <img alt="iconError" src={bell3} />
+                      </CircleStyle>
+                      <ProfileModal
+                        dropDownState={test}
+                        dropDownOff={dropDownOff}
+                      >
+                        <ul>
+                          <li>&nbsp;</li>
+                          <li onClick={() => navigate("/")}>로그인하기</li>
+                          <li>&nbsp;</li>
+                        </ul>
+                      </ProfileModal>
+                    </>
+                  </>
+                ) : (
+                  <>
+                    <CircleStyle
                       onClick={(e) => {
                         setTest(!test);
                       }}
                     >
-                      Profile
-                    </button>
+                      <img alt="iconError" src={bell3} />
+                    </CircleStyle>
                     <ProfileModal
                       dropDownState={test}
                       dropDownOff={dropDownOff}
                     >
                       <ul>
-                        <li>내 프로필</li>
-                        <li>item 2</li>
-                        <li>item 3</li>
-                        <li>로그아웃</li>
+                        <li>&nbsp;</li>
+                        <ProfileModalLi onClick={() => navigate("/profile")}>
+                          내 프로필
+                        </ProfileModalLi>
+                        <ProfileModalLi>item 2</ProfileModalLi>
+                        <ProfileModalLi>item 3</ProfileModalLi>
+                        <ProfileModalLi
+                          onClick={() => {
+                            dispatch(logOut());
+                            toast.success("로그아웃 완료");
+                            navigate("/");
+                          }}
+                        >
+                          로그아웃
+                        </ProfileModalLi>
+                        <li>&nbsp;</li>
                       </ul>
                     </ProfileModal>
                   </>
-                ) : (
-                  <CircleStyle onClick={() => dispatch(logOut())}>
-                    {userNo}
-                  </CircleStyle>
                 )}
               </AlertWithLogin>
             </HeaderStyle>
@@ -181,8 +208,7 @@ const CircleStyle = styled.div`
 const AlertWithLogin = styled.div`
   display: flex;
 `;
+const ProfileModalLi = styled.li`
+  cursor: pointer;
+`;
 export default Header;
-{
-  /* <CircleStyle onClick={profileModalOn}>Login</CircleStyle>
-                    <ProfileModal /> */
-}

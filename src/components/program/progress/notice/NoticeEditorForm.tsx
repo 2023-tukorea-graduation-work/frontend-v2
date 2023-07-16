@@ -6,6 +6,8 @@ import { EditorState } from "draft-js";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useAppDispatch } from "../../../../store/hooks";
+import { uploadNoticetAsync } from "../../../../slice/program/programProgressNoticeSlice";
 interface Props {
   subtogglePopup(): void;
 }
@@ -25,7 +27,7 @@ const HorizonLine = () => {
 
 const NoticeEditorForm = ({ subtogglePopup }: Props) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
+  const dispatch = useAppDispatch();
   const onEditorStateChange = (
     editorState: React.SetStateAction<EditorState>
   ) => {
@@ -64,8 +66,15 @@ const NoticeEditorForm = ({ subtogglePopup }: Props) => {
         color="secondary"
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
         onClick={() => {
-          toast.success("게시글작성 성공");
-          subtogglePopup();
+          dispatch(
+            uploadNoticetAsync({
+              programId: 1,
+              title: "test",
+              content: "testcontent",
+            })
+          );
+          // toast.success("게시글작성 성공");
+          // subtogglePopup();
         }}
       >
         공지올리기

@@ -5,7 +5,7 @@ import { Button, FormControl, Input, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useAppDispatch } from "../../../store/hooks";
 import { creationAsync } from "../../../slice/user/creactionSlice";
-
+import { CollegeMajor } from "../../../docs/Docs";
 const Mentee = (props: any) => {
   const [preImg, setPreImg]: any = useState(null);
   const dispatch = useAppDispatch();
@@ -30,6 +30,7 @@ const Mentee = (props: any) => {
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
+
     dispatch(creationAsync({ userInfo: formData, userGB: "mentee" }));
   };
 
@@ -127,7 +128,7 @@ const Mentee = (props: any) => {
               <Controller
                 defaultValue=""
                 control={control}
-                name="birth_year"
+                name="age"
                 rules={{ required: "출생년도는 필수선택입니다." }}
                 render={({ field }) => (
                   <Select
@@ -142,7 +143,7 @@ const Mentee = (props: any) => {
                     }}
                     displayEmpty
                     variant="standard"
-                    name="birth_year"
+                    name="age"
                   >
                     <MenuItem
                       disabled
@@ -218,23 +219,47 @@ const Mentee = (props: any) => {
           </InformationBoxLine>
           <InformationBoxLine style={{ justifyContent: "start" }}>
             희망 학과
-            <Input
-              disableUnderline={true}
-              sx={{
-                height: "100%",
-                width: "24%",
-                borderRadius: "4.2px",
-                border: "solid 0.8px #d6d6d6",
-                boxShadow: "0",
-                fontSize: "0.9rem",
-                marginLeft: "0.6rem",
-                marginRight: "0.8rem",
-              }}
-              placeholder="학과"
-              {...register("major", {
-                required: "희망학과는 필수입력입니다.",
-              })}
-            />
+            <FormControl>
+              <Controller
+                defaultValue=""
+                control={control}
+                name="major"
+                rules={{ required: "학과는 필수선택입니다." }}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    disableUnderline={true}
+                    sx={{
+                      paddingLeft: "0.5rem",
+                      height: "33px",
+                      width: "15rem",
+                      borderRadius: "4.2px",
+                      border: "solid 0.8px #d6d6d6",
+                      boxShadow: "0",
+                      fontSize: "0.9rem",
+                      marginLeft: "2.5rem",
+                    }}
+                    displayEmpty
+                    variant="standard"
+                  >
+                    <MenuItem
+                      disabled
+                      value=""
+                      sx={{
+                        display: "none",
+                      }}
+                    ></MenuItem>
+                    <em>희망전공</em>
+                    {CollegeMajor.map((value, index) => (
+                      <MenuItem key={index} value={value.value}>
+                        {value.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+            <div style={{ marginLeft: "10px" }}> 학년</div>
             학년
             <FormControl>
               <Controller
@@ -252,7 +277,7 @@ const Mentee = (props: any) => {
                       border: "solid 1px #d6d6d6",
                       boxShadow: "0",
                       fontSize: "0.8rem",
-                      marginLeft: "0.6rem",
+                      marginLeft: "0.7rem",
                     }}
                     displayEmpty
                     variant="standard"
@@ -276,35 +301,6 @@ const Mentee = (props: any) => {
             </FormControl>
           </InformationBoxLine>
           <InformationBoxLine>
-            활동장소
-            <div
-              style={{
-                justifyContent: "space-evenly",
-                display: "flex",
-                width: "75%",
-                height: "100%",
-                paddingTop: "0.4rem",
-                paddingBottom: "0.4rem",
-                backgroundColor: "#f8f8f8",
-                fontSize: "0.8rem",
-                marginRight: "7.7rem",
-              }}
-            >
-              {teachingStyle.map((value, index) => (
-                <div key={index}>
-                  <input
-                    type="radio"
-                    value={value}
-                    {...register("act_place", {
-                      required: "활동장소는 필수입력입니다.",
-                    })}
-                  ></input>
-                  {value}
-                </div>
-              ))}
-            </div>
-          </InformationBoxLine>
-          <InformationBoxLine>
             한줄자기소개
             <Input
               disableUnderline={true}
@@ -316,7 +312,7 @@ const Mentee = (props: any) => {
                 boxShadow: "0",
               }}
               placeholder=""
-              {...register("introduction", {
+              {...register("introduce", {
                 required: "소개는 필수입력입니다.",
               })}
             />

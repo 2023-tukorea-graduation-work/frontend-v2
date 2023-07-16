@@ -36,7 +36,7 @@ function App() {
           ></Route>
           <Route path="/programList" element={<ProgramListPage />} />
           <Route
-            path="/programListDetail/:PROGRAM_NO"
+            path="/programListDetail/:programId"
             element={<ProgramListDetailPage />}
           ></Route>
           <Route path="/userCreation" element={<UserCreationPage />}></Route>

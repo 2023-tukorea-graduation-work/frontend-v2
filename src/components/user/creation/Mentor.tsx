@@ -5,7 +5,7 @@ import { Button, FormControl, Input, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { creationAsync } from "../../../slice/user/creactionSlice";
 import { useAppDispatch } from "../../../store/hooks";
-
+import { CollegeMajor } from "../../../docs/Docs";
 const Mentor = (props: any) => {
   const [preImg, setPreImg]: any = useState(null);
   const dispatch = useAppDispatch();
@@ -31,6 +31,8 @@ const Mentor = (props: any) => {
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
+    console.log(formData.get("data"));
+    console.log(formData.get("file"));
     dispatch(creationAsync({ userInfo: formData, userGB: "mentor" }));
   };
 
@@ -135,6 +137,7 @@ const Mentor = (props: any) => {
                     {...field}
                     disableUnderline={true}
                     sx={{
+                      paddingLeft: "0.5rem",
                       width: "4.8rem",
                       height: "100%",
                       border: "solid 1px #d6d6d6",
@@ -218,25 +221,48 @@ const Mentor = (props: any) => {
             />
           </InformationBoxLine>
           <InformationBoxLine style={{ justifyContent: "start" }}>
-            희망 학과
-            <Input
-              disableUnderline={true}
-              sx={{
-                height: "100%",
-                width: "24%",
-                borderRadius: "4.2px",
-                border: "solid 0.8px #d6d6d6",
-                boxShadow: "0",
-                fontSize: "0.9rem",
-                marginLeft: "0.6rem",
-                marginRight: "0.8rem",
-              }}
-              placeholder="학과"
-              {...register("major", {
-                required: "희망학과는 필수입력입니다.",
-              })}
-            />
-            학년
+            학과
+            <FormControl>
+              <Controller
+                defaultValue=""
+                control={control}
+                name="major"
+                rules={{ required: "학과는 필수선택입니다." }}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    disableUnderline={true}
+                    sx={{
+                      paddingLeft: "0.5rem",
+                      height: "33px",
+                      width: "15rem",
+                      borderRadius: "4.2px",
+                      border: "solid 0.8px #d6d6d6",
+                      boxShadow: "0",
+                      fontSize: "0.9rem",
+                      marginLeft: "2.5rem",
+                    }}
+                    displayEmpty
+                    variant="standard"
+                  >
+                    <MenuItem
+                      disabled
+                      value=""
+                      sx={{
+                        display: "none",
+                      }}
+                    ></MenuItem>
+                    <em>전공</em>
+                    {CollegeMajor.map((value, index) => (
+                      <MenuItem key={index} value={value.value}>
+                        {value.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+            <div style={{ marginLeft: "10px" }}> 학년</div>
             <FormControl>
               <Controller
                 defaultValue=""
@@ -248,12 +274,13 @@ const Mentor = (props: any) => {
                     {...field}
                     disableUnderline={true}
                     sx={{
+                      paddingLeft: "0.5rem",
                       height: "33px",
-                      width: "120%",
+                      width: "4rem",
                       border: "solid 1px #d6d6d6",
                       boxShadow: "0",
                       fontSize: "0.8rem",
-                      marginLeft: "0.6rem",
+                      marginLeft: "1rem",
                     }}
                     displayEmpty
                     variant="standard"
