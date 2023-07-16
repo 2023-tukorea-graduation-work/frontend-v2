@@ -13,7 +13,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { programCreateAsync } from "../../../slice/program/programCreationSlice";
+
 interface ButtonProps {
   increaseStep: () => void;
 }
@@ -29,42 +31,11 @@ const Detail = (props: ButtonProps) => {
     control,
     name: "programWeeks",
   });
+  const dispatch = useAppDispatch();
   const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
-  const mento_no = useAppSelector((state) => state.login.object.USER_NO);
-
-  function dateFormat(date: any) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    month = month >= 10 ? month : "0" + month;
-    day = day >= 10 ? day : "0" + day;
-    return date.getFullYear() + "-" + month + "-" + day;
-  }
-
+  // const mento_no = useAppSelector((state) => state.login.object.USER_NO);
   const onSubmit = (data: any) => {
-    axios({
-      url: "/program",
-      method: "post",
-      data: {
-        // memberId: mento_no,
-        memberId: 1,
-        subject: `${data.subject}`,
-        programPlace: `${data.act_place}`,
-        capacity: `${data.capacity}`,
-        // detail: `${data.detail}`,
-        detail: `qweqweq`,
-        programFinishDate: `${dateFormat(data.pro_finish_date)}`,
-        programStartDate: `${dateFormat(data.pro_start_date)}`,
-        programWeeks: data.programWeeks,
-        recruitFinishDate: `${dateFormat(data.recruit_finish_date)}`,
-        recruitStartDate: `${dateFormat(data.recruit_start_date)}`,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    dispatch(programCreateAsync(data));
   };
   const onError = (error: any) => {
     console.log(error);

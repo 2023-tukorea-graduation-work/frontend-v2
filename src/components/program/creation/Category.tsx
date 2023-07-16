@@ -12,6 +12,8 @@ import {
 } from "../../../docs/Docs";
 import { useForm, Controller } from "react-hook-form";
 import categorySendData from "../../../utils/categorySendData";
+import { useAppDispatch } from "../../../store/hooks";
+import { addCategories } from "../../../slice/program/programCreationSlice";
 interface ButtonProps {
   increaseStep: () => void;
 }
@@ -26,6 +28,7 @@ interface FianlData {
 
 const Category = (props: ButtonProps) => {
   const [firstCategory, setFirstCategory] = useState([]);
+  const dispatch = useAppDispatch();
   const firstCategoryChange = (change: any) => {
     if (
       firstCategory.some((val: CategoryValue) => val.label === change.label)
@@ -33,7 +36,6 @@ const Category = (props: ButtonProps) => {
       console.log(1);
     }
     setFirstCategory(change);
-    console.log(firstCategory);
   };
   const {
     control,
@@ -53,6 +55,7 @@ const Category = (props: ButtonProps) => {
         });
       }
     }
+    dispatch(addCategories(finalData));
     console.log(finalData);
     props.increaseStep();
   };

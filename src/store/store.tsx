@@ -17,10 +17,12 @@ import storageSession from "redux-persist/lib/storage/session";
 import creationReducer from "../slice/user/creactionSlice";
 import headerReducer from "../slice/common/headerSlice";
 import programProgressNoticeReducer from "../slice/program/programProgressNoticeSlice";
+import programCreationReducer from "../slice/program/programCreationSlice";
 const reducers = combineReducers({
   leftBar: leftbarReducer,
   programList: programListReducer,
   programDetail: programDetailReducer,
+  programCreation: programCreationReducer,
   login: loginReducer,
   creation: creationReducer,
   header: headerReducer,
