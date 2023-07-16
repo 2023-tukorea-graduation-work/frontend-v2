@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose } from "react-icons/fa";
 import TestEditorForm from "../qna/TestEditorForm";
 import QnaIcon from "./QnaIcon";
+import { useAppSelector } from "../../../../store/hooks";
 
 const HorizonLine = () => {
   return (
@@ -94,6 +95,7 @@ const QnaDetail = () => {
   const subtooglePopup = () => {
     ssetIsOpen(!sisOpen);
   };
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   return (
     <QnaForm>
       <p

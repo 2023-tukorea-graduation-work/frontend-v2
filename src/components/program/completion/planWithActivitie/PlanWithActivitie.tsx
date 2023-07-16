@@ -49,7 +49,7 @@ const LeftBox = styled.div`
   border-right: 0.13rem solid #d9d9d9;
   float: left;
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   line-height: 3rem;
 `;
 const RightBox = styled.div`
@@ -89,7 +89,7 @@ const Next = styled.div`
   height 20rem;
 `;
 const Title = styled.div`
-  font-size: 1.25rem;
+  font-size: 1rem;
   width: 100%;
   height: 3rem;
   border-radius: 5px;

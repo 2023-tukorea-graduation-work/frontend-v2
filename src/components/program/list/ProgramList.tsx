@@ -32,6 +32,8 @@ const ProgramList = () => {
   useEffect(() => {
     dispatch(loadItemListAsync(""));
   }, []);
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const [toggle, setToggle] = useState(user_gb);
   return (
     <ListForm>
       {/* 필터링해주는 칸 ------------------------------------------------------------------------ */}
@@ -39,6 +41,7 @@ const ProgramList = () => {
       {/* 검색칸----------------------------------------------------- */}
       <SearchForm>
         <TextField
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
           sx={{
             width: "90%",
             fontSize: "0.8rem",
