@@ -28,8 +28,8 @@ interface Subject {
 interface ExamForm {
   programId: number;
   examTitle: string;
-  examStartTime: Date;
-  examFinishTime: Date;
+  examStartTime: string;
+  examFinishTime: string;
   isExamRegistered: boolean;
   examQuestionRegisterRequest: Array<Multiple | Subject>;
 }

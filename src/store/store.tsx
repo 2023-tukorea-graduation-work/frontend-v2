@@ -20,6 +20,7 @@ import programProgressNoticeReducer from "../slice/program/programProgressNotice
 import programCreationReducer from "../slice/program/programCreationSlice";
 import programMaterialReducer from "../slice/program/programProgressMaterial";
 import programQuestionReducer from "../slice/program/programProgressQuestion";
+import programScheduleReducer from "../slice/program/programProgressSchedule";
 const reducers = combineReducers({
   leftBar: leftbarReducer,
   programList: programListReducer,
@@ -31,6 +32,7 @@ const reducers = combineReducers({
   programNotice: programProgressNoticeReducer,
   programMaterial: programMaterialReducer,
   programQuestion: programQuestionReducer,
+  programSchedule: programScheduleReducer,
 });
 
 const persistConfig = {

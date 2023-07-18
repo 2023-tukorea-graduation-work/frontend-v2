@@ -23,17 +23,18 @@ const ProgramList = () => {
     setPage(page);
   };
   const handlePageUp = () => {
-    if (page < Math.trunc(postList.length / 5))
+    if (page < Math.ceil(postList.length / 8))
       setPage((state) => (state = state + 1));
+    console.log(page);
   };
   const handlePageDown = () => {
     if (page !== 1) setPage((state) => (state = state - 1));
+    console.log(page);
   };
   useEffect(() => {
     dispatch(loadItemListAsync(""));
   }, []);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
-  const [toggle, setToggle] = useState(user_gb);
   return (
     <ListForm>
       {/* 필터링해주는 칸 ------------------------------------------------------------------------ */}

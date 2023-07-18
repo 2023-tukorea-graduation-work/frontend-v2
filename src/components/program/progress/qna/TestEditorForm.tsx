@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { EditorState, ContentState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -25,14 +23,6 @@ const HorizonLine = () => {
 };
 
 const TestEditorForm = ({ subtogglePopup }: Props) => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
-  const onEditorStateChange = (
-    editorState: React.SetStateAction<EditorState>
-  ) => {
-    setEditorState(editorState);
-  };
-
   return (
     <MyBlock>
       <TestEdinfo>
@@ -45,22 +35,6 @@ const TestEditorForm = ({ subtogglePopup }: Props) => {
       </TestEdinfo>
       <HorizonLine></HorizonLine>
       <p style={{ marginLeft: "1.5%" }}>질문내용</p>
-      <Editor
-        wrapperClassName="wrapper-class"
-        editorClassName="editor"
-        toolbarClassName="toolbar-class"
-        toolbar={{
-          list: { inDropdown: true },
-          textAlign: { inDropdown: true },
-          link: { inDropdown: true },
-          history: { inDropdown: false },
-        }}
-        localization={{
-          locale: "ko",
-        }}
-        editorState={editorState}
-        onEditorStateChange={onEditorStateChange}
-      />
       <Button
         variant="contained"
         color="secondary"

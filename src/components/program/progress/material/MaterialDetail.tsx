@@ -1,11 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
 import { TextField, Input } from "@mui/material";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 
-import { uploadMaterialAsync } from "../../../../slice/program/programProgressMaterial";
+import {
+  downloadMaterialAsync,
+  loadMaterialAsync,
+  uploadMaterialAsync,
+} from "../../../../slice/program/programProgressMaterial";
 
 interface Props {
   selectedFile: File | null;
@@ -172,12 +176,20 @@ const MaterialDetailPopup = () => {
 const MaterialDetail = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
+  const materialList = useAppSelector(
+    (state) => state.programMaterial.MaterialList
+  );
+  const dispatch = useAppDispatch();
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
   const subtogglePopup = () => {
     ssetIsOpen(!sisOpen);
   };
+  useEffect(() => {
+    dispatch(loadMaterialAsync());
+    console.log(materialList);
+  }, []);
   return (
     <MaterialForm>
       <p
@@ -189,6 +201,7 @@ const MaterialDetail = () => {
       >
         자료
       </p>
+
       <Materialbox>
         <Materialtext>
           <Materialtextinfo>
@@ -207,46 +220,53 @@ const MaterialDetail = () => {
             {isOpen && <MaterialPopup />}
           </div>
         </Materialtext>
-        <Materiallistbox>
-          <MaterialTotal>
-            <Materiallist>
-              <p>자료제목</p>
-            </Materiallist>
-            <MaterialStudent>
-              <p>박서영</p>
-              <p>
-                <FaUserCircle></FaUserCircle>
-              </p>
-              <p>2023.03.15</p>
-            </MaterialStudent>
-          </MaterialTotal>
-          <HorizonLine />
-          <p style={{ marginLeft: "1.5%" }}>자료내용</p>
-          <div>
-            <a
-              href="#"
-              style={{
-                marginLeft: "93%",
-                color: "#07858C",
-              }}
-              onClick={subtogglePopup}
-            >
-              자세히보기
-            </a>
-            {sisOpen && <MaterialDetailPopup />}
-          </div>
-          <div style={{ marginTop: "0.5rem" }}>
-            <a
-              href="#"
-              style={{
-                color: "#07858C",
-                marginLeft: "93%",
-              }}
-            >
-              수정하기
-            </a>
-          </div>
-        </Materiallistbox>
+        <div>11111111111111111</div>
+        {materialList &&
+          materialList.map((value, index) => {
+            return (
+              <>
+                <Materiallistbox>
+                  <MaterialTotal>
+                    <Materiallist>
+                      <p>{value.title}</p>
+                    </Materiallist>
+                    <MaterialStudent>
+                      <p>박서영</p>
+                      <p>
+                        <FaUserCircle></FaUserCircle>
+                      </p>
+                      <p>2023.03.15</p>
+                    </MaterialStudent>
+                  </MaterialTotal>
+                  <HorizonLine />
+                  <p style={{ marginLeft: "1.5%" }}>{value.detail}</p>
+                  <div>
+                    <a
+                      href="#"
+                      style={{
+                        marginLeft: "93%",
+                        color: "#07858C",
+                      }}
+                      onClick={subtogglePopup}
+                    >
+                      자세히보기
+                    </a>
+                    {sisOpen && <MaterialDetailPopup />}
+                  </div>
+                  <div style={{ marginTop: "0.5rem" }}>
+                    <button
+                      onClick={() => {
+                        if (value.materialId)
+                          dispatch(downloadMaterialAsync(value.materialId));
+                      }}
+                    >
+                      수정하기
+                    </button>
+                  </div>
+                </Materiallistbox>
+              </>
+            );
+          })}
       </Materialbox>
     </MaterialForm>
   );

@@ -6,8 +6,8 @@ interface QuestionList {
   questionId: number;
   question: string;
   answer: string;
-  answerCreatedAt: Date;
-  answerUpdatedAt: Date;
+  answerCreatedAt: string;
+  answerUpdatedAt: string;
 }
 interface QustionForm {
   menteeId: number;

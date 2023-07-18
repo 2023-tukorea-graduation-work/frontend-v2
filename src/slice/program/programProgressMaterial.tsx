@@ -2,9 +2,19 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-interface MaterialForm {}
+interface materialForm {
+  materialId: number | null;
+  title: string | null;
+  detail: string | null;
+  fileName: string | null;
+}
 
-const initialState: Array<any> = [];
+interface initialStateType {
+  MaterialList: Array<materialForm>;
+}
+const initialState: initialStateType = {
+  MaterialList: [],
+};
 
 export const uploadMaterialAsync = createAsyncThunk<any, any>(
   "uploadMaterial",
@@ -31,6 +41,33 @@ export const uploadMaterialAsync = createAsyncThunk<any, any>(
   }
 );
 
+export const loadMaterialAsync = createAsyncThunk<any>(
+  "loadMaterial",
+  async () => {
+    const { data } = await axios({
+      method: "get",
+      url: "/material/program/1",
+    });
+    console.log(data);
+    return data;
+  }
+);
+
+export const downloadMaterialAsync = createAsyncThunk<any, number>(
+  "downloadMaterial",
+  async (materailId) => {
+    const data = await axios({
+      method: "get",
+      url: "/material/download",
+      params: {
+        materialId: materailId,
+      },
+    });
+    console.log(data);
+    return data;
+  }
+);
+
 export const programMaterialSlice = createSlice({
   name: "programMaterial",
   initialState,
@@ -41,8 +78,23 @@ export const programMaterialSlice = createSlice({
       console.log("자료올리기 성공");
       toast.success("자료올리기 성공");
     });
+    builder.addCase(loadMaterialAsync.fulfilled, (state, { payload }) => {
+      console.log(payload);
+      state.MaterialList = [...payload];
+      console.log(state);
+      console.log("자료로드 성공");
+    });
     builder.addCase(uploadMaterialAsync.rejected, (state) => {
       console.log("업로드 실패");
+    });
+    builder.addCase(loadMaterialAsync.rejected, (state) => {
+      console.log("자료로드 실패");
+    });
+    builder.addCase(downloadMaterialAsync.rejected, (state) => {
+      console.log("다운로드 실패");
+    });
+    builder.addCase(downloadMaterialAsync.fulfilled, (state, action) => {
+      console.log(action);
     });
   },
 });

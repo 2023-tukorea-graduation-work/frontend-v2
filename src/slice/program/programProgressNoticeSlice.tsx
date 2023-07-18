@@ -37,8 +37,9 @@ export const uploadNoticetAsync = createAsyncThunk<any, NoticeForm>(
         method: "post",
         url: "/notice",
         data: {
-          programId: 0,
-          title: "test",
+          programId: formData.programId,
+          title: `${formData.title}`,
+          content: `${formData.content}`,
         },
       });
       console.log(data);
