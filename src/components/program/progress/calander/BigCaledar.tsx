@@ -7,6 +7,7 @@ import axios from "axios";
 import { Button, Input, Switch, FormControlLabel } from "@mui/material";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../../../store/hooks";
+import { toast } from "react-toastify";
 import {
   FaUserCircle,
   FaRegWindowClose,
@@ -15,6 +16,7 @@ import {
 } from "react-icons/fa";
 import { TextField } from "@mui/material";
 import zIndex from "@mui/material/styles/zIndex";
+import userEvent from "@testing-library/user-event";
 
 // --------------------------------------------------------다른사람 일정 가져오는거-----------
 // const fetchEvents = async (): Promise<any[]> => {
@@ -22,6 +24,11 @@ import zIndex from "@mui/material/styles/zIndex";
 //   return response.data;
 // };
 // --------------------------------------------------------
+
+interface Props {
+  subtogglePopup: () => void;
+}
+
 const HorizonLine = () => {
   return (
     <div
@@ -39,7 +46,7 @@ const CalRecrodPopup = () => {
   const [ReisOpen, ResetIsOpen] = useState(true);
 
   const RetogglePopup = () => {
-    ResetIsOpen(!ReisOpen);    
+    ResetIsOpen(!ReisOpen);
   };
   return (
     <div>
@@ -66,18 +73,46 @@ const CalRecrodPopup = () => {
             <HorizonLine></HorizonLine>
             <Redetailbox>
               <p>활동 진행 상세 내용</p>
-              <Redetailcontext>text입력 이미지 업로드</Redetailcontext>
+              <Redetailcontext>
+                <Input
+                  placeholder="text입력"
+                  color="secondary"
+                  sx={{ width: "100%", height: "22.5vh" }}
+                ></Input>
+              </Redetailcontext>
               <p>Q&A</p>
               <RedetailQnA>
                 <ReQbox>
-                  <TextField>질문 입력</TextField>
+                  <Input
+                    placeholder="질문입력"
+                    color="secondary"
+                    sx={{ width: "100%", height: "9vh" }}
+                  ></Input>
                 </ReQbox>
-                <ReAbox>답변 입력</ReAbox>
+                <ReAbox>
+                  <Input
+                    placeholder="답변입력"
+                    color="secondary"
+                    sx={{ width: "100%", height: "9vh" }}
+                  ></Input>
+                </ReAbox>
               </RedetailQnA>
               <p>특이사항</p>
-              <Redatilelse>text입력</Redatilelse>
+              <Redatilelse>
+                <Input
+                  placeholder="Text입력"
+                  color="secondary"
+                  sx={{ width: "100%", height: "11vh" }}
+                ></Input>
+              </Redatilelse>
               <p>다음차시 계획</p>
-              <Redtailnext>다음차시계획작성</Redtailnext>
+              <Redtailnext>
+                <Input
+                  placeholder="다음차시계획작성"
+                  color="secondary"
+                  sx={{ width: "100%", height: "12vh" }}
+                ></Input>
+              </Redtailnext>
             </Redetailbox>
             <hr
               style={{
@@ -131,6 +166,7 @@ function dateFormat(date: any) {
 
 const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
   const [toggleValue, setToggleValue] = useState<string>("ToDoList");
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const user = useAppSelector((state) => state.login.object);
   const toggleOnChange = () => {
     setToggleValue((state) =>
@@ -254,7 +290,7 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
           type="submit"
           disabled={isSubmitting}
           variant="contained"
-          color="secondary"
+          color={user_gb === "MENTEE" ? "primary" : "secondary"}
           sx={{ width: "7rem", height: "4vh", marginLeft: "1rem" }}
         >
           추가하기
@@ -311,6 +347,7 @@ const BigCalander = () => {
   const RetogglePopup = () => {
     ResetIsOpen(!ReisOpen);
   };
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   // -------------------------------------------------------------------------------------
   return (
     <>
@@ -337,14 +374,22 @@ const BigCalander = () => {
 
       <Confirmbox>
         <div>
-          <a
-            href="#"
-            style={{ cursor: "pointer", fontSize: "0.9rem", color: "#07858C" }}
-            onClick={RetogglePopup}
-          >
-            활동일지작성하기
-          </a>
-          {ReisOpen && <CalRecrodPopup />}
+          {/* {user_gb === "MENTO" && ( */}
+          <div>
+            <a
+              href="#"
+              style={{
+                cursor: "pointer",
+                fontSize: "0.9rem",
+                color: "#07858C",
+              }}
+              onClick={RetogglePopup}
+            >
+              활동일지작성하기
+            </a>
+            {ReisOpen && <CalRecrodPopup />}
+          </div>
+          {/* )} */}
         </div>
         {selectedEvent && (
           <div>
@@ -422,7 +467,6 @@ const Redetailcontext = styled.div`
   height: 33%;
   margin-top: 1%;
   margin-bottom: 1.5%;
-  border: 0.5px solid #777777;
   border-radius: 5px;
   text-align: center;
   line-height: 12rem;
@@ -439,24 +483,20 @@ const RedetailQnA = styled.div`
 const ReQbox = styled.div`
   width: 49.2%;
   height: 100%;
-  border: 0.5px solid #777777;
   border-radius: 5px;
-  padding-left: 1rem;
 `;
 const ReAbox = styled.div`
   width: 49.2%;
   height: 100%;
   margin-left: 1.6%;
-  border: 0.5px solid #777777;
+
   border-radius: 5px;
-  padding-left: 1rem;
 `;
 const Redatilelse = styled.div`
   width: 100%;
   height: 17%;
   margin-top: 1%;
   margin-bottom: 1.5%;
-  border: 0.5px solid #777777;
   border-radius: 5px;
   text-align: center;
   line-height: 7rem;
@@ -465,7 +505,6 @@ const Redtailnext = styled.div`
   width: 100%;
   height: 17%;
   margin-top: 1%;
-  border: 0.5px solid #777777;
   border-radius: 5px;
   text-align: center;
   line-height: 7rem;
