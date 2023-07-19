@@ -11,6 +11,7 @@ import {
 import { TextField, Checkbox, Input } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../../store/hooks";
 
 const OnlineclassFileUpload = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -51,6 +52,7 @@ const HorizonLine = () => {
 };
 
 const OnlinelivePopup = () => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [isOpen, setIsOpen] = useState(true);
 
   const togglePopup = () => {
@@ -212,6 +214,7 @@ const OnlineclassPopup = () => {
 };
 
 const OnlineclassDetail = () => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [classisOpen, classsetIsOpen] = useState(false);
@@ -241,18 +244,21 @@ const OnlineclassDetail = () => {
           >
             실시간 강의
           </p>
-
-          <p
-            style={{
-              color: "#07858C",
-              lineHeight: "1.2rem",
-              cursor: "pointer",
-            }}
-            onClick={togglePopup}
-          >
-            화상통화방 생성하기<FaPlus color="#07858C"></FaPlus>
-          </p>
-          {isOpen && <OnlinelivePopup />}
+          {user_gb === "MENTO" && (
+            <div>
+              <p
+                style={{
+                  color: "#07858C",
+                  lineHeight: "1.2rem",
+                  cursor: "pointer",
+                }}
+                onClick={togglePopup}
+              >
+                화상통화방 생성하기<FaPlus color="#07858C"></FaPlus>
+              </p>
+              {isOpen && <OnlinelivePopup />}
+            </div>
+          )}
         </Onlinelivetext>
         <Onlinelivelistbox>
           <Onlinelivelist
@@ -354,18 +360,20 @@ const OnlineclassDetail = () => {
         </Onlinelivelistbox>
         <Onlineclasstext>
           <p>온라인 강의목록</p>
-          <div>
-            <p
-              style={{
-                color: "#07858C",
-                cursor: "pointer",
-              }}
-              onClick={classtogglePopup}
-            >
-              녹화 강의 올리기 <FaPlus color="#07858C"></FaPlus>
-            </p>
-            {classisOpen && <OnlineclassPopup />}
-          </div>
+          {user_gb === "MENTO" && (
+            <div>
+              <p
+                style={{
+                  color: "#07858C",
+                  cursor: "pointer",
+                }}
+                onClick={classtogglePopup}
+              >
+                녹화 강의 올리기 <FaPlus color="#07858C"></FaPlus>
+              </p>
+              {classisOpen && <OnlineclassPopup />}
+            </div>
+          )}
         </Onlineclasstext>
         <Onlineclasslist>
           <Onlineclasslist1>

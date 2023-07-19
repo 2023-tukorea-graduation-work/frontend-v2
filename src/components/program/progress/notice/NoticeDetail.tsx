@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loadNoticeListAsync } from "../../../../slice/program/programProgressNoticeSlice";
 import { useAppDispatch } from "../../../../store/hooks";
+import { useAppSelector } from "../../../../store/hooks";
 const HorizonLine = () => {
   return (
     <div
@@ -89,6 +90,7 @@ const NoticePopup = () => {
 };
 
 const NoticeDetail = () => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
@@ -120,18 +122,20 @@ const NoticeDetail = () => {
             <p>진행차시 : 1차시 / 9차시</p>
             <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
           </Noticetextinfo>
-          <div>
-            <p
-              style={{
-                color: "#07858C",
-                cursor: "pointer",
-              }}
-              onClick={subtooglePopup}
-            >
-              공지올리기 <FaPlus color="#07858C"></FaPlus>
-            </p>
-            {sisOpen && <NoticeSubmitPopup />}
-          </div>
+          {user_gb === "MENTO" && (
+            <div>
+              <p
+                style={{
+                  color: "#07858C",
+                  cursor: "pointer",
+                }}
+                onClick={subtooglePopup}
+              >
+                공지올리기 <FaPlus color="#07858C"></FaPlus>
+              </p>
+              {sisOpen && <NoticeSubmitPopup />}
+            </div>
+          )}
         </Noticetext>
         <Noticelistbox>
           <NoticeTotal>
@@ -148,30 +152,49 @@ const NoticeDetail = () => {
           </NoticeTotal>
           <HorizonLine />
           <p style={{ marginLeft: "1.5%" }}>공지내용</p>
-          <div>
-            <a
-              href="#"
-              style={{
-                marginLeft: "93%",
-                color: "#07858C",
-              }}
-              onClick={togglePopup}
-            >
-              자세히보기
-            </a>
-            {isOpen && <NoticePopup />}
-          </div>
-          <div style={{ marginTop: "0.5rem" }}>
-            <a
-              href="#"
-              style={{
-                color: "#07858C",
-                marginLeft: "93%",
-              }}
-            >
-              수정하기
-            </a>
-          </div>
+          {user_gb === "MENTO" && (
+            <div>
+              <div>
+                <a
+                  href="#"
+                  style={{
+                    marginLeft: "93%",
+                    color: "#07858C",
+                  }}
+                  onClick={togglePopup}
+                >
+                  자세히보기
+                </a>
+                {isOpen && <NoticePopup />}
+              </div>
+              <div style={{ marginTop: "0.5rem" }}>
+                <a
+                  href="#"
+                  style={{
+                    color: "#07858C",
+                    marginLeft: "93%",
+                  }}
+                >
+                  수정하기
+                </a>
+              </div>
+            </div>
+          )}
+          {user_gb === "MENTEE" && (
+            <div>
+              <a
+                href="#"
+                style={{
+                  marginLeft: "93%",
+                  color: "#FF8E41",
+                }}
+                onClick={togglePopup}
+              >
+                자세히보기
+              </a>
+              {isOpen && <NoticePopup />}
+            </div>
+          )}
         </Noticelistbox>
       </Noticebox>
     </NoticeForm>

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
 import { TextField, Input } from "@mui/material";
 import { toast } from "react-toastify";
+import { useAppSelector } from "../../../../store/hooks";
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -106,6 +107,7 @@ const MaterialPopup = () => {
 
 const MaterialDetailPopup = () => {
   const [sisOpen, ssetIsOpen] = useState(true);
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const subtogglePopup = () => {
     ssetIsOpen(!sisOpen);
   };
@@ -138,6 +140,15 @@ const MaterialDetailPopup = () => {
             >
               자료내용
             </p>
+
+            {user_gb === "MENTEE" && (
+              <div>
+                <HorizonLine></HorizonLine>
+                <a href="#" style={{ color: "#FF8E41" }}>
+                  자료다운받기
+                </a>
+              </div>
+            )}
           </MdetailPopupinner>
         </MdetailPopupbox>
       )}
@@ -146,6 +157,7 @@ const MaterialDetailPopup = () => {
 };
 
 const MaterialDetail = () => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
   const togglePopup = () => {
@@ -173,15 +185,17 @@ const MaterialDetail = () => {
             <p>진행차시 : 1차시 / 9차시</p>
             <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
           </Materialtextinfo>
-          <div>
-            <p
-              style={{ color: "#07858C", cursor: "pointer" }}
-              onClick={togglePopup}
-            >
-              자료올리기 <FaPlus color="#07858C"></FaPlus>
-            </p>
-            {isOpen && <MaterialPopup />}
-          </div>
+          {user_gb === "MENTO" && (
+            <div>
+              <p
+                style={{ color: "#07858C", cursor: "pointer" }}
+                onClick={togglePopup}
+              >
+                자료올리기 <FaPlus color="#07858C"></FaPlus>
+              </p>
+              {isOpen && <MaterialPopup />}
+            </div>
+          )}
         </Materialtext>
         <Materiallistbox>
           <MaterialTotal>
@@ -198,30 +212,49 @@ const MaterialDetail = () => {
           </MaterialTotal>
           <HorizonLine />
           <p style={{ marginLeft: "1.5%" }}>자료내용</p>
-          <div>
-            <a
-              href="#"
-              style={{
-                marginLeft: "93%",
-                color: "#07858C",
-              }}
-              onClick={subtogglePopup}
-            >
-              자세히보기
-            </a>
-            {sisOpen && <MaterialDetailPopup />}
-          </div>
-          <div style={{ marginTop: "0.5rem" }}>
-            <a
-              href="#"
-              style={{
-                color: "#07858C",
-                marginLeft: "93%",
-              }}
-            >
-              수정하기
-            </a>
-          </div>
+          {user_gb === "MEMTO" && (
+            <div>
+              <div>
+                <a
+                  href="#"
+                  style={{
+                    marginLeft: "93%",
+                    color: "#07858C",
+                  }}
+                  onClick={subtogglePopup}
+                >
+                  자세히보기
+                </a>
+                {sisOpen && <MaterialDetailPopup />}
+              </div>
+              <div style={{ marginTop: "0.5rem" }}>
+                <a
+                  href="#"
+                  style={{
+                    color: "#07858C",
+                    marginLeft: "93%",
+                  }}
+                >
+                  수정하기
+                </a>
+              </div>
+            </div>
+          )}
+          {user_gb === "MENTEE" && (
+            <div>
+              <a
+                href="#"
+                style={{
+                  marginLeft: "93%",
+                  color: "#FF8E41",
+                }}
+                onClick={subtogglePopup}
+              >
+                자료다운받기
+              </a>
+              {sisOpen && <MaterialDetailPopup />}
+            </div>
+          )}
         </Materiallistbox>
       </Materialbox>
     </MaterialForm>

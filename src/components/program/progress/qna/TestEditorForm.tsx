@@ -5,6 +5,7 @@ import { Editor } from "react-draft-wysiwyg";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useAppSelector } from "../../../../store/hooks";
 
 interface Props {
   subtogglePopup(): void;
@@ -25,6 +26,7 @@ const HorizonLine = () => {
 };
 
 const TestEditorForm = ({ subtogglePopup }: Props) => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (
@@ -35,16 +37,33 @@ const TestEditorForm = ({ subtogglePopup }: Props) => {
 
   return (
     <MyBlock>
-      <TestEdinfo>
-        <p>질문제목</p>
-        <TestEdinfosub>
-          <FaUser></FaUser>
-          <p>박서영</p>
-          <p>2023.03.15</p>
-        </TestEdinfosub>
-      </TestEdinfo>
-      <HorizonLine></HorizonLine>
-      <p style={{ marginLeft: "1.5%" }}>질문내용</p>
+      {user_gb === "MENTO" && (
+        <p>
+          <TestEdinfo>
+            <p>질문제목</p>
+            <TestEdinfosub>
+              <FaUser></FaUser>
+              <p>박서영</p>
+              <p>2023.03.15</p>
+            </TestEdinfosub>
+          </TestEdinfo>
+          <HorizonLine></HorizonLine>
+          <p style={{ marginLeft: "1.5%" }}>질문내용</p>
+        </p>
+      )}
+      {user_gb === "MENTEE" && (
+        <p>
+          <TestEdinfo>
+            <TestEdinfosub>
+              <FaUser></FaUser>
+              <p>박서영</p>
+              <p>2023.03.15</p>
+            </TestEdinfosub>
+          </TestEdinfo>
+          <HorizonLine></HorizonLine>
+          <p style={{ marginLeft: "1.5%" }}>질문제목과 내용 입력</p>
+        </p>
+      )}
       <Editor
         wrapperClassName="wrapper-class"
         editorClassName="editor"
@@ -63,7 +82,7 @@ const TestEditorForm = ({ subtogglePopup }: Props) => {
       />
       <Button
         variant="contained"
-        color="secondary"
+        color={user_gb === "MENTEE" ? "primary" : "secondary"}
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
         onClick={() => {
           toast.success("답변제출 성공");
