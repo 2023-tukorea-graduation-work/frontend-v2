@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import ToggleButton from "@mui/material/ToggleButton";
 import "./Profile.css";
 import { Button } from "@mui/material";
 import { lineHeight } from "@mui/system";
 import UserProfileProgram from "./UserProfileProgram";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useNavigate } from "react-router-dom";
+import { loadProfileProgramListAsync } from "../../../slice/user/profileSlice";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const userId = useAppSelector((state) => state.login.object.USER_NO);
   const [btnSelect, setBtnSelect] = useState("ProgressBefore");
   const onChangeBtn = (event: any) => {
     setBtnSelect(event.target.value);
   };
+  useEffect(() => {
+    if (userId == null) {
+      console.log("로그인안함");
+    }
+    dispatch(loadProfileProgramListAsync(userId));
+  }, []);
   return (
     <WhiteBox>
       <LeftNav></LeftNav>
