@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import AdminLoginPage from "./page/admin/AdminLoginPage";
 import ProgramListDetailPage from "./page/program/ProgramDetailPage";
 import ProgramCompletionListPage from "./page/program/ProgramCompletionListPage";
+import { Outlet } from "react-router-dom";
 function App() {
   return (
     <>
@@ -29,7 +30,7 @@ function App() {
             path="/projectProgress"
             element={<ProgramProgressPage />}
           ></Route>
-          <Route path="onlineLive" element={<ProgramOnlineLivePage />}></Route>
+
           <Route
             path="/programCreation"
             element={<ProgramCreationPage />}
@@ -56,6 +57,8 @@ function App() {
             path="/ProgramCompletionList"
             element={<ProgramCompletionListPage />}
           ></Route>
+
+          <Route path="onlineLive" element={<ProgramOnlineLivePage />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer
