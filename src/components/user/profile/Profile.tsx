@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import ToggleButton from "@mui/material/ToggleButton";
 import "./Profile.css";
 import { Button } from "@mui/material";
 import { lineHeight } from "@mui/system";
 import UserProfileProgram from "./UserProfileProgram";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useNavigate } from "react-router-dom";
-
+import {
+  loadProfileProgramListAsync,
+  profileProgramList,
+} from "../../../slice/user/profileSlice";
+import { logOut } from "../../../slice/user/loginSlice";
 const Profile = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const userId = useAppSelector((state) => state.login.object.USER_NO);
+  const { profile } = useAppSelector((state) => state);
   const [btnSelect, setBtnSelect] = useState("ProgressBefore");
+  const [test, setTest] = useState("");
   const onChangeBtn = (event: any) => {
     setBtnSelect(event.target.value);
   };
+  useEffect(() => {
+    dispatch(loadProfileProgramListAsync(userId));
+  }, []);
+  useEffect(() => {
+    console.log(profile.imgUrl);
+    console.log(profile.programList);
+  }, [profile]);
   return (
     <WhiteBox>
       <LeftNav></LeftNav>
@@ -71,12 +86,24 @@ const Profile = () => {
           </Custom>
         </ToggleButtonGroup>
         <MyProjectList>
-          <UserProfileProgram></UserProfileProgram>
-          <UserProfileProgram></UserProfileProgram>
-          <UserProfileProgram></UserProfileProgram>
-          <UserProfileProgram></UserProfileProgram>
-          <UserProfileProgram></UserProfileProgram>
-          <UserProfileProgram></UserProfileProgram>
+          {profile.programList?.map((value: profileProgramList, index) => (
+            <>
+              <UserProfileProgram
+                props={value}
+                key={index}
+              ></UserProfileProgram>
+            </>
+          ))}
+          {((Array.isArray(profile.programList) &&
+            profile.programList.length === 0) ||
+            profile.programList === null) && (
+            <>
+              <div>프로젝트 리스트가 없습니다</div>
+              <div>프로젝트 리스트가 없습니다</div>
+              <div>프로젝트 리스트가 없습니다</div>
+              <div>프로젝트 리스트가 없습니다</div>
+            </>
+          )}
         </MyProjectList>
       </MyProject>
 
@@ -92,20 +119,26 @@ const Profile = () => {
         >
           <ImageStyle>
             <img
-              src="/images/Man.jpg"
+              referrerPolicy="no-referrer"
+              src={test}
               alt="logo"
               style={{ width: "3rem", height: "3rem", objectFit: "fill" }}
             />
           </ImageStyle>
           &nbsp;&nbsp;&nbsp;YOUR PROFILE
         </div>
-        <div style={{ marginRight: "60%", lineHeight: "2rem" }}>
-          <p>NAME</p>
-          <p>AGE</p>
-          <p>EMAIL</p>
-          <p>ADDRESS</p>
+        <div style={{ marginRight: "20%", lineHeight: "2rem" }}>
+          <p>NAME: {`${profile.name}`}</p>
+          <p>AGE: {`${profile.age}`}</p>
+          <p>EMAIL: {`${profile.email}`}</p>
         </div>
-        <div style={{ marginLeft: "60%", color: "#777777", cursor: "pointer" }}>
+        <div
+          style={{ marginLeft: "60%", color: "#777777", cursor: "pointer" }}
+          onClick={() => {
+            dispatch(logOut());
+            navigate("/main");
+          }}
+        >
           LOGOUT
         </div>
         {user_gb === "MENTEE" ? (

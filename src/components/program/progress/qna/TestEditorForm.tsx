@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { EditorState, ContentState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";

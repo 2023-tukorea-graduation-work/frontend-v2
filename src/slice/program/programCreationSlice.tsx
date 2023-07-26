@@ -36,19 +36,17 @@ export const programCreateAsync = createAsyncThunk<any, sendInfo>(
         method: "post",
         url: "/program",
         data: {
-          // memberId: mento_no,
-          memberId: 1,
+          memberId: creationInfo.memberId,
           subject: `${creationInfo.subject}`,
           programPlace: `${creationInfo.act_place}`,
           capacity: `${creationInfo.capacity}`,
-          // detail: `${data.detail}`,
-          detail: `qweqweq`,
+          detail: `${creationInfo.detail}`,
           programFinishDate: `${dateFormat(creationInfo.pro_finish_date)}`,
           programStartDate: `${dateFormat(creationInfo.pro_start_date)}`,
           programWeeks: creationInfo.programWeeks,
           recruitFinishDate: `${dateFormat(creationInfo.recruit_finish_date)}`,
           recruitStartDate: `${dateFormat(creationInfo.recruit_start_date)}`,
-          programCategories: `${creationInfo.programCategories}`,
+          programCategories: creationInfo.programCategories,
         },
       });
       console.log(data);
@@ -65,13 +63,10 @@ export const programCreationSlice = createSlice({
   reducers: {
     addCategories: (state, action: PayloadAction<Array<FianlData>>) => {
       state.programCategories = action.payload;
-      console.log(state.programCategories);
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(programCreateAsync.fulfilled, (state, { payload }) => {
-      console.log(payload);
-    });
+    builder.addCase(programCreateAsync.fulfilled, (state, { payload }) => {});
   },
 });
 export const { addCategories } = programCreationSlice.actions;

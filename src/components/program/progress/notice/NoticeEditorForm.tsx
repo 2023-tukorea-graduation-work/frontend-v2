@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState } from "draft-js";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "../../../../store/hooks";
 import { uploadNoticetAsync } from "../../../../slice/program/programProgressNoticeSlice";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 interface Props {
   subtogglePopup(): void;
 }
@@ -26,17 +25,13 @@ const HorizonLine = () => {
 };
 
 const NoticeEditorForm = ({ subtogglePopup }: Props) => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [value, setValue] = useState("");
   const dispatch = useAppDispatch();
-  const onEditorStateChange = (
-    editorState: React.SetStateAction<EditorState>
-  ) => {
-    setEditorState(editorState);
-  };
   return (
     <MyBlock>
       <TestEdinfo>
         <p>공지제목</p>
+        <input></input>
         <TestEdinfosub>
           <FaUser></FaUser>
           <p>박서영</p>
@@ -44,35 +39,22 @@ const NoticeEditorForm = ({ subtogglePopup }: Props) => {
         </TestEdinfosub>
       </TestEdinfo>
       <HorizonLine></HorizonLine>
-      <p style={{ marginLeft: "1.5%" }}>공지내용</p>
-      <Editor
-        wrapperClassName="wrapper-class"
-        editorClassName="editor"
-        toolbarClassName="toolbar-class"
-        toolbar={{
-          list: { inDropdown: true },
-          textAlign: { inDropdown: true },
-          link: { inDropdown: true },
-          history: { inDropdown: false },
-        }}
-        localization={{
-          locale: "ko",
-        }}
-        editorState={editorState}
-        onEditorStateChange={onEditorStateChange}
-      />
+      <p style={{ marginLeft: "1.5%" }}>
+        <ReactQuill theme="snow" value={value} onChange={setValue} />
+      </p>
       <Button
         variant="contained"
         color="secondary"
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
         onClick={() => {
-          dispatch(
-            uploadNoticetAsync({
-              programId: 1,
-              title: "test",
-              content: "testcontent",
-            })
-          );
+          console.log(setValue);
+          // dispatch(
+          //   uploadNoticetAsync({
+          //     programId: 1,
+          //     title: "test0717",
+          //     content: "test0717",
+          //   })
+          // );
           // toast.success("게시글작성 성공");
           // subtogglePopup();
         }}

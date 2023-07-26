@@ -16,6 +16,7 @@ export const creationAsync = createAsyncThunk<creationSuccess, creationInfo>(
   "creationAsync",
   async (creationData) => {
     try {
+      console.log(creationData);
       const { data } = await axios({
         url: `/member/${creationData.userGB}`,
         headers: {

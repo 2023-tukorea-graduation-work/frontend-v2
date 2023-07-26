@@ -31,10 +31,16 @@ const Detail = (props: ButtonProps) => {
     control,
     name: "programWeeks",
   });
+  const programCategories = useAppSelector(
+    (state) => state.programCreation.programCategories
+  );
+  const memberId = useAppSelector((state) => state.login.object.USER_NO);
   const dispatch = useAppDispatch();
   const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
   // const mento_no = useAppSelector((state) => state.login.object.USER_NO);
   const onSubmit = (data: any) => {
+    data.memberId = memberId;
+    data.programCategories = programCategories;
     dispatch(programCreateAsync(data));
   };
   const onError = (error: any) => {
@@ -80,6 +86,9 @@ const Detail = (props: ButtonProps) => {
             fontSize: "0.8rem",
           }}
           placeholder=""
+          {...register("subject", {
+            required: "주제 필수입력입니다.",
+          })}
         />
         <p style={{ marginBottom: "1rem " }}>프로그램소개</p>
         <InformationBoxLine>
@@ -105,8 +114,8 @@ const Detail = (props: ButtonProps) => {
               },
             }}
             placeholder=""
-            {...register("subject", {
-              required: "주제 필수입력입니다.",
+            {...register("detail", {
+              required: "내용 필수입력입니다.",
             })}
           />
         </InformationBoxLine>

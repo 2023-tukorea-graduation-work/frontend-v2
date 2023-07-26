@@ -43,15 +43,20 @@ const Mentor = (props: any) => {
   } = useForm();
   const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
   const imageInput = useRef<HTMLInputElement>(null);
+  const certificationInput = useRef<HTMLInputElement>(null);
   const onSubmit = (data: any) => {
     const formData = new FormData();
-    if (imageInput.current?.files != null) {
-      formData.append("file", imageInput.current?.files[0]);
+    if (
+      imageInput.current?.files != null &&
+      certificationInput.current?.files != null
+    ) {
+      formData.append("image", imageInput.current?.files[0]);
+      formData.append("certification", certificationInput.current?.files[0]);
     }
     delete data.image;
+    delete data.certification;
     delete data.password2;
-    console.log(formData);
-    console.log(data);
+    console.log(formData.get("certification"));
     formData.append(
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
@@ -228,18 +233,31 @@ const Mentor = (props: any) => {
                 required: "학교는 필수입력입니다.",
               })}
             />
-            학교찾기
-            <Input
-              disableUnderline={true}
+            증명서 첨부
+            <Button
+              type="button"
+              variant="contained"
+              color="secondary"
               sx={{
-                height: "100%",
-                width: "22%",
-                borderRadius: "4.2px",
-                border: "solid 0.8px #d6d6d6",
+                width: "10%",
+                height: "13%",
+                fontSize: "70%",
+                fontWeight: "bold",
+                fontFamily: "NotoSansLight",
                 boxShadow: "0",
-                fontSize: "0.9rem",
               }}
-              placeholder="학교명 검색"
+              onClick={() => {
+                certificationInput.current?.click();
+              }}
+            >
+              PDF첨부
+            </Button>
+            <input
+              {...register("certification")}
+              type="file"
+              accept="pdf/*"
+              style={{ display: "none" }}
+              ref={certificationInput}
             />
           </InformationBoxLine>
           <InformationBoxLine style={{ justifyContent: "start" }}>
@@ -332,6 +350,7 @@ const Mentor = (props: any) => {
               ))}
             </div>
           </InformationBoxLine>
+
           <InformationBoxLine>
             한줄자기소개
             <Input
@@ -477,6 +496,7 @@ const InformationBoxLine = styled.div`
   align-items: center;
   margin-bottom: 2%;
 `;
+const InformationBoxContent = styled.div``;
 const IdWithPasswordBox = styled.div`
   margin-top: 3%;
   font-family: NotoSansRegular;

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 interface NoticeList {
   title: string;
@@ -11,8 +12,9 @@ interface NoticeForm {
   content: string;
 }
 const initialState: Array<NoticeList> = [];
+
 export const loadNoticeListAsync = createAsyncThunk<Array<NoticeList>>(
-  "loadNoticeListAsync",
+  "loadNoticeList",
   async () => {
     try {
       const { data } = await axios({
@@ -28,15 +30,16 @@ export const loadNoticeListAsync = createAsyncThunk<Array<NoticeList>>(
 );
 
 export const uploadNoticetAsync = createAsyncThunk<any, NoticeForm>(
-  "uploadNoticetAsync",
+  "uploadNotice",
   async (formData, { rejectWithValue }) => {
     try {
       const { data } = await axios({
         method: "post",
         url: "/notice",
         data: {
-          programId: 0,
-          title: "test",
+          programId: formData.programId,
+          title: `${formData.title}`,
+          content: `${formData.content}`,
         },
       });
       console.log(data);
@@ -53,7 +56,7 @@ export const uploadNoticetAsync = createAsyncThunk<any, NoticeForm>(
 );
 
 export const programNoticeSlice = createSlice({
-  name: "login",
+  name: "programNotice",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -63,9 +66,6 @@ export const programNoticeSlice = createSlice({
     });
     builder.addCase(uploadNoticetAsync.rejected, (state) => {
       console.log("업로드 실패");
-    });
-    builder.addCase(uploadNoticetAsync.fulfilled, (state, { payload }) => {
-      console.log("업로드 성공");
     });
   },
 });

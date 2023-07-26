@@ -1,22 +1,33 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
 import { TextField, Input } from "@mui/material";
 import { toast } from "react-toastify";
-import { useAppSelector } from "../../../../store/hooks";
 
-const FileUpload = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 
+
+import {
+  downloadMaterialAsync,
+  loadMaterialAsync,
+  uploadMaterialAsync,
+} from "../../../../slice/program/programProgressMaterial";
+
+interface Props {
+  selectedFile: File | null;
+  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
+}
+
+const FileUpload = (props: Props) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
-    setSelectedFile(file || null);
+    props.setSelectedFile(file || null);
   };
 
   const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (selectedFile) {
-      console.log("Selected file:", selectedFile);
+    if (props.selectedFile) {
+      console.log("Selected file:", props.selectedFile);
     }
   };
 
@@ -45,7 +56,9 @@ const HorizonLine = () => {
 
 const MaterialPopup = () => {
   const [isOpen, setIsOpen] = useState(true);
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const imageInput = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
@@ -82,7 +95,10 @@ const MaterialPopup = () => {
                 marginBottom: "0.5rem",
               }}
             ></Input>
-            <FileUpload></FileUpload>
+            <FileUpload
+              selectedFile={selectedFile}
+              setSelectedFile={setSelectedFile}
+            ></FileUpload>
             <HorizonLine></HorizonLine>
             <p
               style={{
@@ -92,7 +108,20 @@ const MaterialPopup = () => {
                 marginLeft: "47%",
               }}
               onClick={() => {
-                toast.success("자료올리기 성공");
+                const test = {
+                  programId: 1,
+                  title: "프로그램 자료 제목1",
+                  detail: "프로그램 자료 상세내용1",
+                };
+                const formData = new FormData();
+                formData.append(
+                  "data",
+                  new Blob([JSON.stringify(test)], { type: "application/json" })
+                );
+                if (selectedFile !== null) {
+                  formData.append("file", selectedFile);
+                }
+                dispatch(uploadMaterialAsync(formData));
                 togglePopup();
               }}
             >
@@ -160,12 +189,20 @@ const MaterialDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
+  const materialList = useAppSelector(
+    (state) => state.programMaterial.MaterialList
+  );
+  const dispatch = useAppDispatch();
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
   const subtogglePopup = () => {
     ssetIsOpen(!sisOpen);
   };
+  useEffect(() => {
+    dispatch(loadMaterialAsync());
+    console.log(materialList);
+  }, []);
   return (
     <MaterialForm>
       <p
@@ -177,6 +214,7 @@ const MaterialDetail = () => {
       >
         자료
       </p>
+
       <Materialbox>
         <Materialtext>
           <Materialtextinfo>
@@ -197,65 +235,53 @@ const MaterialDetail = () => {
             </div>
           )}
         </Materialtext>
-        <Materiallistbox>
-          <MaterialTotal>
-            <Materiallist>
-              <p>자료제목</p>
-            </Materiallist>
-            <MaterialStudent>
-              <p>박서영</p>
-              <p>
-                <FaUserCircle></FaUserCircle>
-              </p>
-              <p>2023.03.15</p>
-            </MaterialStudent>
-          </MaterialTotal>
-          <HorizonLine />
-          <p style={{ marginLeft: "1.5%" }}>자료내용</p>
-          {user_gb === "MEMTO" && (
-            <div>
-              <div>
-                <a
-                  href="#"
-                  style={{
-                    marginLeft: "93%",
-                    color: "#07858C",
-                  }}
-                  onClick={subtogglePopup}
-                >
-                  자세히보기
-                </a>
-                {sisOpen && <MaterialDetailPopup />}
-              </div>
-              <div style={{ marginTop: "0.5rem" }}>
-                <a
-                  href="#"
-                  style={{
-                    color: "#07858C",
-                    marginLeft: "93%",
-                  }}
-                >
-                  수정하기
-                </a>
-              </div>
-            </div>
-          )}
-          {user_gb === "MENTEE" && (
-            <div>
-              <a
-                href="#"
-                style={{
-                  marginLeft: "93%",
-                  color: "#FF8E41",
-                }}
-                onClick={subtogglePopup}
-              >
-                자료다운받기
-              </a>
-              {sisOpen && <MaterialDetailPopup />}
-            </div>
-          )}
-        </Materiallistbox>
+        <div>11111111111111111</div>
+        {materialList &&
+          materialList.map((value, index) => {
+            return (
+              <>
+                <Materiallistbox>
+                  <MaterialTotal>
+                    <Materiallist>
+                      <p>{value.title}</p>
+                    </Materiallist>
+                    <MaterialStudent>
+                      <p>박서영</p>
+                      <p>
+                        <FaUserCircle></FaUserCircle>
+                      </p>
+                      <p>2023.03.15</p>
+                    </MaterialStudent>
+                  </MaterialTotal>
+                  <HorizonLine />
+                  <p style={{ marginLeft: "1.5%" }}>{value.detail}</p>
+                  <div>
+                    <a
+                      href="#"
+                      style={{
+                        marginLeft: "93%",
+                        color: "#07858C",
+                      }}
+                      onClick={subtogglePopup}
+                    >
+                      자세히보기
+                    </a>
+                    {sisOpen && <MaterialDetailPopup />}
+                  </div>
+                  <div style={{ marginTop: "0.5rem" }}>
+                    <button
+                      onClick={() => {
+                        if (value.materialId)
+                          dispatch(downloadMaterialAsync(value.materialId));
+                      }}
+                    >
+                      수정하기
+                    </button>
+                  </div>
+                </Materiallistbox>
+              </>
+            );
+          })}
       </Materialbox>
     </MaterialForm>
   );
