@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-const UserProfileProgram = () => {
+import { profileProgramList } from "../../../slice/user/profileSlice";
+interface UserProfileProgramProps {
+  props: profileProgramList;
+}
+const UserProfileProgram = ({ props }: UserProfileProgramProps) => {
   const navigate = useNavigate();
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   return (
     <Preview>
       <Top>
-        <Title>프로그램 이름</Title>
-        <MentoInfo>멘토이름 | 멘토학교 | 멘토학과</MentoInfo>
+        <Title>{props.subject}</Title>
+        <MentoInfo>
+          {props.mentorName} |{props.mentorInstitution} | {props.mentorMajor}
+        </MentoInfo>
         <Link
           onClick={() => {
             navigate("/projectProgress");
@@ -29,10 +35,10 @@ const UserProfileProgram = () => {
       </Top>
       <Bottom>
         <BottomP>주제</BottomP>
-        <BottomP>장소</BottomP>
-        <BottomP>모집인원</BottomP>
-        <BottomP>모집기간</BottomP>
-        <BottomP>프로젝트기간</BottomP>
+        <BottomP>장소 :{props.programPlace}</BottomP>
+        <BottomP>모집인원 :{props.capacity}</BottomP>
+        <BottomP>모집기간 :{props.recruitPeriod}</BottomP>
+        <BottomP>프로젝트기간 :{props.programPeriod}</BottomP>
         <Link
           onClick={() => {
             navigate("/evaluation");

@@ -21,16 +21,14 @@ const Mentee = (props: any) => {
   const onSubmit = (data: any) => {
     const formData = new FormData();
     if (imageInput.current?.files != null) {
-      formData.append("file", imageInput.current?.files[0]);
+      formData.append("image", imageInput.current?.files[0]);
     }
     delete data.image;
     delete data.password2;
-    console.log(formData);
     formData.append(
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
-
     dispatch(creationAsync({ userInfo: formData, userGB: "mentee" }));
   };
 

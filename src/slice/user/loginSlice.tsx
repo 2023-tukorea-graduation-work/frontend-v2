@@ -59,6 +59,7 @@ export const loginSlice = createSlice({
   reducers: {
     logOut: (state) => {
       state.object = { USER_NO: null, user_gb: "MENTEE", error: null };
+      toast.success("로그아웃 완료");
     },
     changeUserGB: (state, { payload }) => {
       state.object.user_gb = payload;

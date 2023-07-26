@@ -96,10 +96,7 @@ const Header = () => {
                 >
                   플젝완료게시판
                 </div>
-                <div
-                  className="classpage"
-                  style={{ cursor: "pointer" }}
-                >
+                <div className="classpage" style={{ cursor: "pointer" }}>
                   과외구인게시판
                 </div>
               </NavStyle>
@@ -153,8 +150,7 @@ const Header = () => {
                         <ProfileModalLi
                           onClick={() => {
                             dispatch(logOut());
-                            toast.success("로그아웃 완료");
-                            navigate("/");
+                            navigate("/main");
                           }}
                         >
                           로그아웃
