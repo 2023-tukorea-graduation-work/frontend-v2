@@ -192,15 +192,49 @@ const TestDetail = () => {
                 <TestIcon></TestIcon>
               </Taskcheck>
               <Taskname>
-                <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                  [1차시]과제제목
-                </p>
-                {TaskScoreisOpen && <TaskscorePopup />}
+                {user_gb === "MENTO" && (
+                  <div>
+                    <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
+                      [1차시]과제제목
+                    </p>
+
+                    {TaskScoreisOpen && <TaskscorePopup />}
+                  </div>
+                )}
+                {user_gb === "MENTEE" && (
+                  <div>
+                    <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
+                      [1차시]과제제목
+                    </p>
+
+                    {TaskScoreisOpen && <TaskscorePopup />}
+                  </div>
+                )}
                 <Taskdetail>
                   <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  <p style={{ marginTop: "0.5rem" }}>
-                    과제제출자: 이름, 이름, 이름
-                  </p>
+                  {user_gb === "MENTO" && (
+                    <p style={{ marginTop: "0.5rem" }}>
+                      과제제출자: 이름, 이름, 이름
+                    </p>
+                  )}
+                  {user_gb === "MENTEE" && (
+                    <p style={{ marginTop: "0.5rem" }}>
+                      과제제출시간: 2023.03.03 10:30
+                    </p>
+                  )}
+                  {user_gb === "MENTEE" && (
+                    <p
+                      style={{
+                        textAlign: "right",
+                        marginRight: "1.5rem",
+                        color: "#FF8E41",
+                        fontSize: "0.8rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      제출완료
+                    </p>
+                  )}
                 </Taskdetail>
               </Taskname>
             </Tasklist>
@@ -209,12 +243,32 @@ const TestDetail = () => {
                 <TestIcon></TestIcon>
               </Taskcheck>
               <Taskname>
-                <p>[1차시]과제제목</p>
+                <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
+                  [1차시]과제제목
+                </p>
+                {TaskScoreisOpen && <TaskscorePopup />}
                 <Taskdetail>
                   <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  <p style={{ marginTop: "0.5rem" }}>
-                    과제제출자: 이름, 이름, 이름
-                  </p>
+                  {user_gb === "MENTO" && (
+                    <p style={{ marginTop: "0.5rem" }}>
+                      과제제출자: 이름, 이름, 이름
+                    </p>
+                  )}
+
+                  {user_gb === "MENTEE" && (
+                    <p
+                      style={{
+                        textAlign: "right",
+                        marginRight: "1.5rem",
+                        color: "#FF8E41",
+                        fontSize: "0.8rem",
+                        fontWeight: "bold",
+                        marginTop: "1rem",
+                      }}
+                    >
+                      과제제출하기
+                    </p>
+                  )}
                 </Taskdetail>
               </Taskname>
             </Tasklist>
@@ -354,6 +408,7 @@ const Taskname = styled.div`
   flex-direction: column;
   margin-top: 1.5rem;
   font-size: 1.1rem;
+  width: 100%;
 `;
 const Taskdetail = styled.div`
   font-size: 0.7rem;
@@ -421,7 +476,7 @@ const TestWriterPopupbox = styled.div`
   position: fixed;
   top: 8%;
   left: 0;
-  width: 76%;
+  width: 75%;
   height: 75%;
   margin-top: 2%;
   margin-left: 21%;
@@ -433,7 +488,7 @@ const TestWriterPopupbox = styled.div`
 `;
 const TestWriterPopupinner = styled.div`
   background-color: white;
-  width: 100%;
+  width: 99%;
   height: 100%;
   font-size: 0.8rem;
 `;

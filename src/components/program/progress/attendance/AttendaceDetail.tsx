@@ -24,105 +24,133 @@ const AttendenceDetail = () => {
         출석
       </p>
       <Attendbox>
-        <Studentbox>
-          <Studentlist>
-            <p>icon</p>
-            <p>박서영</p>
-            <p>숭의여자고등학교</p>
-            <p>25세</p>
-          </Studentlist>
-          <StudentAttend>
-            <p>현재 총 수업 수: 4회</p>
-            <p>출석 5회</p>
-            <p>지각 1회</p>
-            <p>결석 1회</p>
-          </StudentAttend>
-        </Studentbox>
+        {user_gb === "MENTO" && (
+          <p>
+            <Studentbox>
+              <Studentlist>
+                <p>icon</p>
+                <p>박서영</p>
+                <p>숭의여자고등학교</p>
+                <p>25세</p>
+              </Studentlist>
+              <StudentAttend>
+                <p>현재 총 수업 수: 4회</p>
+                <p>출석 5회</p>
+                <p>지각 1회</p>
+                <p>결석 1회</p>
+              </StudentAttend>
+            </Studentbox>
 
-        <Studentbox>
-          <Studentlist>
-            <p>icon</p>
-            <p>박서영</p>
-            <p>숭의여자고등학교</p>
-            <p>25세</p>
-          </Studentlist>
-          <StudentAttend>
-            <p>현재 총 수업 수: 4회</p>
-            <p>출석 5회</p>
-            <p>지각 1회</p>
-            <p>결석 1회</p>
-          </StudentAttend>
-        </Studentbox>
-
+            <Studentbox>
+              <Studentlist>
+                <p>icon</p>
+                <p>박서영</p>
+                <p>숭의여자고등학교</p>
+                <p>25세</p>
+              </Studentlist>
+              <StudentAttend>
+                <p>현재 총 수업 수: 4회</p>
+                <p>출석 5회</p>
+                <p>지각 1회</p>
+                <p>결석 1회</p>
+              </StudentAttend>
+            </Studentbox>
+          </p>
+        )}
+        {user_gb === "MENTEE" && (
+          <p>
+            <Studentbox>
+              <Studentlist>
+                <p>icon</p>
+                <p>박서영</p>
+                <p>숭의여자고등학교</p>
+                <p>25세</p>
+              </Studentlist>
+              <StudentAttend>
+                <p>현재 총 수업 수: 4회</p>
+                <p>출석 5회</p>
+                <p>지각 1회</p>
+                <p>결석 1회</p>
+              </StudentAttend>
+            </Studentbox>
+          </p>
+        )}
         <Checklist>
           <p style={{ fontSize: "0.8rem" }}>날짜 :</p>
           <p>2022.02.31</p>
           <p>진행차시 : 1차시 / 9차시</p>
           <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
         </Checklist>
-
-        <Studentbox>
-          <Studentlist>
-            <p>icon</p>
-            <p>박서영</p>
-            <p>숭의여자고등학교</p>
-            <p>25세</p>
-          </Studentlist>
-          <StudentAttendCheck>
-            <Attendanceicon>
-              <p style={{ lineHeight: "1.5rem" }}>출석</p>
-              <Icon></Icon>
-            </Attendanceicon>
-            <Perceiveicon>
-              <p style={{ lineHeight: "1.5rem" }}>지각</p>
-              <Icon></Icon>
-            </Perceiveicon>
-            <Absenticon>
-              <p style={{ lineHeight: "1.5rem" }}>결석</p>
-              <Icon></Icon>
-            </Absenticon>
-          </StudentAttendCheck>
-        </Studentbox>
-        <Studentbox>
-          <Studentlist>
-            <p>icon</p>
-            <p>박서영</p>
-            <p>숭의여자고등학교</p>
-            <p>25세</p>
-          </Studentlist>
-          <StudentAttendCheck>
-            <Attendanceicon>
-              <p style={{ lineHeight: "1.5rem" }}>출석</p>
-              <Icon></Icon>
-            </Attendanceicon>
-            <Perceiveicon>
-              <p style={{ lineHeight: "1.5rem" }}>지각</p>
-              <Icon></Icon>
-            </Perceiveicon>
-            <Absenticon>
-              <p style={{ lineHeight: "1.5rem" }}>결석</p>
-              <Icon></Icon>
-            </Absenticon>
-          </StudentAttendCheck>
-        </Studentbox>
+        {user_gb === "MENTO" && (
+          <Studentbox>
+            <Studentlist>
+              <p>icon</p>
+              <p>박서영</p>
+              <p>숭의여자고등학교</p>
+              <p>25세</p>
+            </Studentlist>
+            <StudentAttendCheck>
+              <Attendanceicon>
+                <p style={{ lineHeight: "1.5rem" }}>출석</p>
+                <Icon></Icon>
+              </Attendanceicon>
+              <Perceiveicon>
+                <p style={{ lineHeight: "1.5rem" }}>지각</p>
+                <Icon></Icon>
+              </Perceiveicon>
+              <Absenticon>
+                <p style={{ lineHeight: "1.5rem" }}>결석</p>
+                <Icon></Icon>
+              </Absenticon>
+            </StudentAttendCheck>
+          </Studentbox>
+        )}
+        {user_gb === "MENTEE" && (
+          <Studentbox>
+            <Studentlist>
+              <p>1차시</p>
+              <p>23.02.13</p>
+              <p>16:00 ~ 18:00</p>
+            </Studentlist>
+            <StudentAttendCheck>
+              <Attendanceicon>
+                <p style={{ lineHeight: "1.5rem", marginLeft: "9rem" }}>출석</p>
+                <Icon></Icon>
+                <p
+                  style={{
+                    marginLeft: "1rem",
+                    fontSize: "0.9rem",
+                    color: "#FF8E41",
+                    lineHeight: "1.5rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  문의하기
+                </p>
+              </Attendanceicon>
+            </StudentAttendCheck>
+          </Studentbox>
+        )}
       </Attendbox>
-      <div style={{ display: "inlineBlock", float: "right" }}>
-        <Button
-          variant="contained"
-          color={user_gb === "MENTEE" ? "primary" : "secondary"}
-          fullWidth={true}
-          sx={{
-            fontSize: "1rem",
-            fontFamily: "NotoSansMedium",
-            width: "1rem",
-            height: "2rem",
-            borderRadius: "20px",
-            float: "right",
-          }}
-        >
-          적용
-        </Button>
-      </div>
+      {user_gb === "MENTO" && (
+        <div style={{ display: "inlineBlock", float: "right" }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth={true}
+            sx={{
+              fontSize: "1rem",
+              fontFamily: "NotoSansMedium",
+              width: "1rem",
+              height: "2rem",
+              borderRadius: "20px",
+              float: "right",
+            }}
+          >
+            적용
+          </Button>
+        </div>
+      )}
     </AttendForm>
   );
 };

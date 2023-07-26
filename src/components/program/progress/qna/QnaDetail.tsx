@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { FaUserCircle, FaRegWindowClose } from "react-icons/fa";
+import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
 import TestEditorForm from "../qna/TestEditorForm";
 import QnaIcon from "./QnaIcon";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
@@ -121,8 +121,32 @@ const QnaDetail = () => {
             <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
           </Qnatextinfo>
           <Qnaiconbox>
-            <p style={{ lineHeight: "1.5rem" }}>답변안한 질문만 보기</p>
-            <QnaIcon></QnaIcon>
+            {user_gb === "MENTEE" && (
+              <p style={{ display: "flex" }}>
+                <p style={{ lineHeight: "1.5rem" }}>내 질문만 보기</p>
+                <QnaIcon></QnaIcon>
+              </p>
+            )}
+            {user_gb === "MENTEE" && (
+              <p style={{ display: "flex", marginLeft: "1rem" }}>
+                <p
+                  onClick={subtooglePopup}
+                  style={{
+                    lineHeight: "1.5rem",
+                    color: "#FF8E41",
+                    cursor: "pointer",
+                  }}
+                >
+                  질문하기 <FaPlus color="#FF8E41"></FaPlus>
+                </p>
+                {sisOpen && <SubmitPopup />}
+              </p>
+            )}
+            {user_gb === "MENTO" && (
+              <p style={{ display: "flex" }}>
+                <p style={{ lineHeight: "1.5rem" }}>답변안한 질문만 보기</p>
+              </p>
+            )}
           </Qnaiconbox>
         </Qnatext>
         <Qnalistbox>
@@ -140,16 +164,30 @@ const QnaDetail = () => {
           </QnaTotal>
           <HorizonLine />
           <p style={{ marginLeft: "1.5%" }}>질문에 대한 답변</p>
-          <div>
-            <a
-              href="#"
-              onClick={togglePopup}
-              style={{ marginLeft: "93%", color: "#07858C" }}
-            >
-              자세히보기
-            </a>
-            {isOpen && <Popup />}
-          </div>
+          {user_gb === "MENTO" && (
+            <div>
+              <a
+                href="#"
+                onClick={togglePopup}
+                style={{ marginLeft: "93%", color: "#07858C" }}
+              >
+                자세히보기
+              </a>
+              {isOpen && <Popup />}
+            </div>
+          )}
+          {user_gb === "MENTEE" && (
+            <div>
+              <a
+                href="#"
+                onClick={togglePopup}
+                style={{ marginLeft: "93%", color: "#FF8E41" }}
+              >
+                자세히보기
+              </a>
+              {isOpen && <Popup />}
+            </div>
+          )}
         </Qnalistbox>
         <Qnalistbox>
           <QnaTotal>
@@ -166,14 +204,30 @@ const QnaDetail = () => {
           </QnaTotal>
           <HorizonLine />
           <p style={{ marginLeft: "1.5%" }}>질문에 대한 답변</p>
-          <a
-            href="#"
-            onClick={subtooglePopup}
-            style={{ marginLeft: "93%", color: "#07858C" }}
-          >
-            답변작성하기{" "}
-          </a>
-          {sisOpen && <SubmitPopup />}
+          {user_gb === "MENTO" && (
+            <a>
+              <a
+                href="#"
+                onClick={subtooglePopup}
+                style={{ marginLeft: "93%", color: "#07858C" }}
+              >
+                답변작성하기{" "}
+              </a>
+              {sisOpen && <SubmitPopup />}
+            </a>
+          )}
+          {user_gb === "MENTEE" && (
+            <div>
+              <a
+                href="#"
+                onClick={togglePopup}
+                style={{ marginLeft: "93%", color: "#FF8E41" }}
+              >
+                자세히보기
+              </a>
+              {isOpen && <Popup />}
+            </div>
+          )}
         </Qnalistbox>
       </Qnabox>
     </QnaForm>

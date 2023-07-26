@@ -91,6 +91,12 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     name: "programWeeks",
   });
 
+  const [selectedButton, setSelectedButton] = useState("button1");
+
+  const handleButtonClick = (buttonId: any) => {
+    setSelectedButton(buttonId);
+  };
+
   return (
     <TestWriterform>
       <TestWriterbox>
@@ -203,6 +209,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                   variant="contained"
                   color="secondary"
                   sx={{ width: "5rem", height: "3vh" }}
+                  onClick={() => handleButtonClick("button1")}
                 >
                   객관식
                 </Button>
@@ -211,6 +218,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                   variant="contained"
                   color="secondary"
                   sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
+                  onClick={() => handleButtonClick("button2")}
                 >
                   주관식
                 </Button>
@@ -251,68 +259,99 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
             </TWselectscore>
           </TWselectbox>
 
-          <TestWrite>
-            <Testtext>
-              <Input
-                placeholder="문제를 입력하세요"
-                color="secondary"
-                style={{
-                  width: "100%",
-                  height: "10vh",
-                  marginBottom: "0.5rem",
-                }}
-              ></Input>
-            </Testtext>
-            <TestNumber1>
-              <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>A</p>
-              <Input
-                placeholder="선택답안을 입력하세요"
-                color="secondary"
-                style={{
-                  width: "100%",
-                  height: "5vh",
-                  marginBottom: "0.3rem",
-                }}
-              ></Input>
-            </TestNumber1>
-            <TestNumber2>
-              <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>B</p>
-              <Input
-                placeholder="선택답안을 입력하세요"
-                color="secondary"
-                style={{
-                  width: "100%",
-                  height: "5vh",
-                  marginBottom: "0.3rem",
-                }}
-              ></Input>
-            </TestNumber2>
-            <TestNumber3>
-              <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>C</p>
-              <Input
-                placeholder="선택답안을 입력하세요"
-                color="secondary"
-                style={{
-                  width: "100%",
-                  height: "5vh",
-                  marginBottom: "0.3rem",
-                }}
-              ></Input>
-            </TestNumber3>
-            <TestNumber4>
-              <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>D</p>
-              <Input
-                placeholder="선택답안을 입력하세요"
-                color="secondary"
-                style={{
-                  width: "100%",
-                  height: "5vh",
-                }}
-              ></Input>
-            </TestNumber4>
-          </TestWrite>
+          {selectedButton === "button1" && (
+            <TestWrite>
+              <Testtext>
+                <Input
+                  placeholder="문제를 입력하세요"
+                  color="secondary"
+                  style={{
+                    width: "100%",
+                    height: "10vh",
+                    marginBottom: "0.5rem",
+                  }}
+                ></Input>
+              </Testtext>
+              <TestNumber1>
+                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>A</p>
+                <Input
+                  placeholder="선택답안을 입력하세요"
+                  color="secondary"
+                  style={{
+                    width: "100%",
+                    height: "5vh",
+                    marginBottom: "0.3rem",
+                  }}
+                ></Input>
+              </TestNumber1>
+              <TestNumber2>
+                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>B</p>
+                <Input
+                  placeholder="선택답안을 입력하세요"
+                  color="secondary"
+                  style={{
+                    width: "100%",
+                    height: "5vh",
+                    marginBottom: "0.3rem",
+                  }}
+                ></Input>
+              </TestNumber2>
+              <TestNumber3>
+                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>C</p>
+                <Input
+                  placeholder="선택답안을 입력하세요"
+                  color="secondary"
+                  style={{
+                    width: "100%",
+                    height: "5vh",
+                    marginBottom: "0.3rem",
+                  }}
+                ></Input>
+              </TestNumber3>
+              <TestNumber4>
+                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>D</p>
+                <Input
+                  placeholder="선택답안을 입력하세요"
+                  color="secondary"
+                  style={{
+                    width: "100%",
+                    height: "5vh",
+                  }}
+                ></Input>
+              </TestNumber4>
+            </TestWrite>
+          )}
         </TestWriterlist>
       ))}
+
+      {selectedButton === "button2" && (
+        <TestWrite>
+          <Testtext>
+            <Input
+              placeholder="문제를 입력하세요"
+              color="secondary"
+              style={{
+                width: "100%",
+                height: "10vh",
+                marginBottom: "0.5rem",
+              }}
+            ></Input>
+          </Testtext>
+          <TestNumber1>
+            <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>A</p>
+            <Input
+              placeholder="선택답안을 입력하세요"
+              color="secondary"
+              style={{
+                width: "100%",
+                height: "5vh",
+                marginBottom: "0.3rem",
+              }}
+            ></Input>
+          </TestNumber1>
+        </TestWrite>
+      )}
+
       <TestWriterplus>
         <FaPlus
           size="20"
@@ -344,6 +383,7 @@ const Testdatebox = styled.div`
   flex-direction: row;
   margin-left: 1.5rem;
   margin-top: 1rem;
+  z-index: 2;
 `;
 const TestTitle = styled.div`
   width: 40%;

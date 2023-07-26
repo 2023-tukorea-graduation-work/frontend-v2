@@ -5,7 +5,32 @@ import { Button, FormControl, Input, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { creationAsync } from "../../../slice/user/creactionSlice";
 import { useAppDispatch } from "../../../store/hooks";
-import { CollegeMajor } from "../../../docs/Docs";
+import { Certificate } from "crypto";
+
+const FileUpload = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    setSelectedFile(file || null);
+  };
+
+  const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (selectedFile) {
+      console.log("Selected file:", selectedFile);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleFileSubmit}>
+        <input type="file" onChange={handleFileChange} />
+      </form>
+    </div>
+  );
+};
+
 const Mentor = (props: any) => {
   const [preImg, setPreImg]: any = useState(null);
   const dispatch = useAppDispatch();
@@ -140,7 +165,6 @@ const Mentor = (props: any) => {
                     {...field}
                     disableUnderline={true}
                     sx={{
-                      paddingLeft: "0.5rem",
                       width: "4.8rem",
                       height: "100%",
                       border: "solid 1px #d6d6d6",
@@ -237,48 +261,25 @@ const Mentor = (props: any) => {
             />
           </InformationBoxLine>
           <InformationBoxLine style={{ justifyContent: "start" }}>
-            학과
-            <FormControl>
-              <Controller
-                defaultValue=""
-                control={control}
-                name="major"
-                rules={{ required: "학과는 필수선택입니다." }}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    disableUnderline={true}
-                    sx={{
-                      paddingLeft: "0.5rem",
-                      height: "33px",
-                      width: "15rem",
-                      borderRadius: "4.2px",
-                      border: "solid 0.8px #d6d6d6",
-                      boxShadow: "0",
-                      fontSize: "0.9rem",
-                      marginLeft: "2.5rem",
-                    }}
-                    displayEmpty
-                    variant="standard"
-                  >
-                    <MenuItem
-                      disabled
-                      value=""
-                      sx={{
-                        display: "none",
-                      }}
-                    ></MenuItem>
-                    <em>전공</em>
-                    {CollegeMajor.map((value, index) => (
-                      <MenuItem key={index} value={value.value}>
-                        {value.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                )}
-              />
-            </FormControl>
-            <div style={{ marginLeft: "10px" }}> 학년</div>
+            희망 학과
+            <Input
+              disableUnderline={true}
+              sx={{
+                height: "100%",
+                width: "24%",
+                borderRadius: "4.2px",
+                border: "solid 0.8px #d6d6d6",
+                boxShadow: "0",
+                fontSize: "0.9rem",
+                marginLeft: "0.6rem",
+                marginRight: "0.8rem",
+              }}
+              placeholder="학과"
+              {...register("major", {
+                required: "희망학과는 필수입력입니다.",
+              })}
+            />
+            학년
             <FormControl>
               <Controller
                 defaultValue=""
@@ -290,13 +291,12 @@ const Mentor = (props: any) => {
                     {...field}
                     disableUnderline={true}
                     sx={{
-                      paddingLeft: "0.5rem",
                       height: "33px",
-                      width: "4rem",
+                      width: "120%",
                       border: "solid 1px #d6d6d6",
                       boxShadow: "0",
                       fontSize: "0.8rem",
-                      marginLeft: "1rem",
+                      marginLeft: "0.6rem",
                     }}
                     displayEmpty
                     variant="standard"
@@ -318,6 +318,8 @@ const Mentor = (props: any) => {
                 )}
               />
             </FormControl>
+            <MentorCertificate>재학증명서</MentorCertificate>
+            <FileUpload></FileUpload>
           </InformationBoxLine>
           <InformationBoxLine>
             활동장소
@@ -517,5 +519,9 @@ const SubmitButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+const MentorCertificate = styled.div`
+  margin-left: 4rem;
+  margin-right: 1rem;
 `;
 export default Mentor;
