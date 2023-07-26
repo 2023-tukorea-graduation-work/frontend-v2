@@ -37,7 +37,7 @@ interface ExamForm {
 const initialState = "";
 
 export const uploadExamAsync = createAsyncThunk<any, ExamForm>(
-  "uploadMaterial",
+  "uploadExam",
   async (examData, { rejectWithValue }) => {
     try {
       const { data } = await axios({
@@ -66,17 +66,17 @@ export const uploadExamAsync = createAsyncThunk<any, ExamForm>(
 );
 
 export const programExamSlice = createSlice({
-  name: "programMaterial",
+  name: "programExam",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(uploadExamAsync.fulfilled, (state, { payload }) => {
       state = payload;
-      console.log("자료올리기 성공");
-      toast.success("자료올리기 성공");
+      console.log("시험올리기 성공");
+      toast.success("시험올리기 성공");
     });
     builder.addCase(uploadExamAsync.rejected, (state) => {
-      console.log("업로드 실패");
+      console.log("시험 업로드 실패");
     });
   },
 });

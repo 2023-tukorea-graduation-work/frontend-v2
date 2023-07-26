@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../../../store/hooks";
+import { Editor, EditorState } from "draft-js";
 
 interface Props {
   subtogglePopup(): void;
@@ -62,22 +63,6 @@ const TestEditorForm = ({ subtogglePopup }: Props) => {
           <p style={{ marginLeft: "1.5%" }}>질문제목과 내용 입력</p>
         </p>
       )}
-      <Editor
-        wrapperClassName="wrapper-class"
-        editorClassName="editor"
-        toolbarClassName="toolbar-class"
-        toolbar={{
-          list: { inDropdown: true },
-          textAlign: { inDropdown: true },
-          link: { inDropdown: true },
-          history: { inDropdown: false },
-        }}
-        localization={{
-          locale: "ko",
-        }}
-        editorState={editorState}
-        onEditorStateChange={onEditorStateChange}
-      />
       <Button
         variant="contained"
         color={user_gb === "MENTEE" ? "primary" : "secondary"}

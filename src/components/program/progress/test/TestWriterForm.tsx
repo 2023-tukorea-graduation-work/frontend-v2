@@ -22,6 +22,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { useFieldArray, useForm } from "react-hook-form";
+import { useAppDispatch } from "../../../../store/hooks";
+import { uploadExamAsync } from "../../../../slice/program/programProgressExamSlice";
 
 interface Props {
   subtogglePopup(): void;
@@ -39,7 +41,11 @@ const SavemethodPopup = () => {
         <SavemethodPopupbox>
           <SavemethodPopupinner>
             <SavemethodPopupFrom>
-              <a href="https://ifh.cc/v-64M6vs" target="_blank">
+              <a
+                href="https://ifh.cc/v-64M6vs"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img
                   src="https://ifh.cc/g/64M6vs.jpg"
                   style={{
