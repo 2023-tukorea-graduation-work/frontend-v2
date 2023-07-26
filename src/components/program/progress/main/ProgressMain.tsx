@@ -5,8 +5,10 @@ import Qna from "./Qna";
 import Test from "./Test";
 import Onlineclass from "./Onlineclass";
 import Calendarmain from "./Calendar";
+import { useAppSelector } from "../../../../store/hooks";
 
 const ProgressMain = () => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const program_no = 6;
 
   return (
