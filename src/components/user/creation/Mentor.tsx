@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { creationAsync } from "../../../slice/user/creactionSlice";
 import { useAppDispatch } from "../../../store/hooks";
 import { Certificate } from "crypto";
-
+import { CollegeMajor } from "../../../docs/Docs";
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -135,238 +135,285 @@ const Mentor = (props: any) => {
         <InformationBox>
           <InformationBoxLine>
             이름
-            <Input
-              disableUnderline={true}
-              placeholder="이름입력"
-              sx={{
-                fontSize: "0.8rem",
-                height: "100%",
-                width: "20%",
-                boxShadow: "0",
-                border: "0",
-                borderRadius: "0",
-                borderBottom: "solid 2px",
-                borderBottomColor: "#d6d6d6",
-                marginLeft: "1rem",
-              }}
-              {...register("name", {
-                required: "이름은 필수입력입니다.",
-              })}
-            />
-            출생연도
-            <FormControl>
-              <Controller
-                defaultValue=""
-                control={control}
-                name="age"
-                rules={{ required: "출생년도는 필수선택입니다." }}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    disableUnderline={true}
-                    sx={{
-                      width: "4.8rem",
-                      height: "100%",
-                      border: "solid 1px #d6d6d6",
-                      boxShadow: "0",
-                      fontSize: "0.9rem",
-                    }}
-                    displayEmpty
-                    variant="standard"
-                    name="age"
-                  >
-                    <MenuItem
-                      disabled
-                      value=""
-                      sx={{
-                        display: "none",
-                      }}
-                    >
-                      <em>-</em>
-                    </MenuItem>
-                    <MenuItem value={2000}>2000</MenuItem>
-                    <MenuItem value={1999}>1999</MenuItem>
-                    <MenuItem value={1998}>1998</MenuItem>
-                    <MenuItem value={1997}>1997</MenuItem>
-                  </Select>
-                )}
+            <InformationBoxLine2>
+              <Input
+                disableUnderline={true}
+                placeholder="이름입력"
+                sx={{
+                  fontSize: "0.8rem",
+                  height: "100%",
+                  width: "20%",
+                  boxShadow: "0",
+                  border: "0",
+                  borderRadius: "0",
+                  borderBottom: "solid 2px",
+                  borderBottomColor: "#d6d6d6",
+                  marginRight: "2rem",
+                }}
+                {...register("name", {
+                  required: "이름은 필수입력입니다.",
+                })}
               />
-            </FormControl>
-            이메일
-            <Input
-              disableUnderline={true}
-              placeholder="이메일을 입력"
-              sx={{
-                fontSize: "0.8rem",
-                height: "100%",
-                width: "40%",
-                boxShadow: "0",
-                border: "0",
-                borderRadius: "0",
-                borderBottom: "solid 2px",
-                borderBottomColor: "#d6d6d6",
-              }}
-              {...register("email", {
-                required: "이메일은 필수입력입니다.",
-                // pattern: {
-                //   value: /\S+@\S+\.\S+/,
-                //   message: "이메일 형식에 맞지 않습니다.",
-                // },
-              })}
-            />
+              나이
+              <FormControl>
+                <Controller
+                  defaultValue=""
+                  control={control}
+                  name="age"
+                  rules={{ required: "출생년도는 필수선택입니다." }}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      disableUnderline={true}
+                      sx={{
+                        width: "4.8rem",
+                        height: "100%",
+                        border: "solid 1px #d6d6d6",
+                        boxShadow: "0",
+                        fontSize: "0.9rem",
+                        paddingLeft: "0.5rem",
+                        marginRight: "2rem",
+                        marginLeft: "1rem",
+                      }}
+                      displayEmpty
+                      variant="standard"
+                      name="age"
+                    >
+                      <MenuItem
+                        disabled
+                        value=""
+                        sx={{
+                          display: "none",
+                        }}
+                      >
+                        <em></em>
+                      </MenuItem>
+                      <MenuItem value={26}>26</MenuItem>
+                      <MenuItem value={25}>25</MenuItem>
+                      <MenuItem value={24}>24</MenuItem>
+                      <MenuItem value={23}>23</MenuItem>
+                      <MenuItem value={22}>22</MenuItem>
+                      <MenuItem value={21}>21</MenuItem>
+                      <MenuItem value={20}>20</MenuItem>
+                      <MenuItem value={19}>19</MenuItem>
+                      <MenuItem value={18}>18</MenuItem>
+                      <MenuItem value={17}>17</MenuItem>
+                      <MenuItem value={16}>16</MenuItem>
+                      <MenuItem value={15}>15</MenuItem>
+                      <MenuItem value={14}>14</MenuItem>
+                    </Select>
+                  )}
+                />
+              </FormControl>
+              이메일
+              <Input
+                disableUnderline={true}
+                placeholder="이메일을 입력"
+                sx={{
+                  fontSize: "0.8rem",
+                  height: "100%",
+                  width: "40%",
+                  boxShadow: "0",
+                  border: "0",
+                  borderRadius: "0",
+                  borderBottom: "solid 2px",
+                  borderBottomColor: "#d6d6d6",
+                  marginRight: "2rem",
+                  marginLeft: "1rem",
+                }}
+                {...register("email", {
+                  required: "이메일은 필수입력입니다.",
+                  // pattern: {
+                  //   value: /\S+@\S+\.\S+/,
+                  //   message: "이메일 형식에 맞지 않습니다.",
+                  // },
+                })}
+              />
+            </InformationBoxLine2>
           </InformationBoxLine>
           <InformationBoxLine>
             학교
-            <Input
-              disableUnderline={true}
-              sx={{
-                height: "100%",
-                width: "60%",
-                borderRadius: "4.2px",
-                border: "solid 0.8px #d6d6d6",
-                boxShadow: "0",
-                marginLeft: "1.5rem",
-                fontSize: "0.9rem",
-              }}
-              placeholder="직접입력"
-              {...register("college", {
-                required: "학교는 필수입력입니다.",
-              })}
-            />
-            증명서 첨부
-            <Button
-              type="button"
-              variant="contained"
-              color="secondary"
-              sx={{
-                width: "10%",
-                height: "13%",
-                fontSize: "70%",
-                fontWeight: "bold",
-                fontFamily: "NotoSansLight",
-                boxShadow: "0",
-              }}
-              onClick={() => {
-                certificationInput.current?.click();
-              }}
-            >
-              PDF첨부
-            </Button>
-            <input
-              {...register("certification")}
-              type="file"
-              accept="pdf/*"
-              style={{ display: "none" }}
-              ref={certificationInput}
-            />
+            <InformationBoxLine2>
+              <Input
+                disableUnderline={true}
+                sx={{
+                  height: "100%",
+                  width: "60%",
+                  borderRadius: "4.2px",
+                  border: "solid 0.8px #d6d6d6",
+                  boxShadow: "0",
+                  fontSize: "0.9rem",
+                  marginRight: "2rem",
+                }}
+                placeholder="직접입력"
+                {...register("college", {
+                  required: "학교는 필수입력입니다.",
+                })}
+              />
+              증명서 첨부
+              <Button
+                type="button"
+                variant="contained"
+                color="secondary"
+                sx={{
+                  width: "10%",
+                  height: "13%",
+                  fontSize: "70%",
+                  fontWeight: "bold",
+                  fontFamily: "NotoSansLight",
+                  boxShadow: "0",
+                  marginRight: "2rem",
+                  marginLeft: "1rem",
+                }}
+                onClick={() => {
+                  certificationInput.current?.click();
+                }}
+              >
+                PDF첨부
+              </Button>
+              <input
+                {...register("certification")}
+                type="file"
+                accept="pdf/*"
+                style={{ display: "none" }}
+                ref={certificationInput}
+              />
+            </InformationBoxLine2>
           </InformationBoxLine>
           <InformationBoxLine style={{ justifyContent: "start" }}>
-            희망 학과
-            <Input
-              disableUnderline={true}
-              sx={{
-                height: "100%",
-                width: "24%",
-                borderRadius: "4.2px",
-                border: "solid 0.8px #d6d6d6",
-                boxShadow: "0",
-                fontSize: "0.9rem",
-                marginLeft: "0.6rem",
-                marginRight: "0.8rem",
-              }}
-              placeholder="학과"
-              {...register("major", {
-                required: "희망학과는 필수입력입니다.",
-              })}
-            />
-            학년
-            <FormControl>
-              <Controller
-                defaultValue=""
-                control={control}
-                name="grade"
-                rules={{ required: "학년은 필수선택입니다." }}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    disableUnderline={true}
-                    sx={{
-                      height: "33px",
-                      width: "120%",
-                      border: "solid 1px #d6d6d6",
-                      boxShadow: "0",
-                      fontSize: "0.8rem",
-                      marginLeft: "0.6rem",
-                    }}
-                    displayEmpty
-                    variant="standard"
-                  >
-                    <MenuItem
-                      disabled
-                      value=""
+            학과
+            <InformationBoxLine2>
+              <FormControl>
+                <Controller
+                  defaultValue=""
+                  control={control}
+                  name="major"
+                  rules={{ required: "학과는 필수선택입니다." }}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      disableUnderline={true}
                       sx={{
-                        display: "none",
+                        paddingLeft: "0.5rem",
+                        height: "33px",
+                        width: "15rem",
+                        borderRadius: "4.2px",
+                        border: "solid 0.8px #d6d6d6",
+                        boxShadow: "0",
+                        fontSize: "0.9rem",
+                        marginRight: "2rem",
                       }}
+                      displayEmpty
+                      variant="standard"
                     >
-                      <em>학년</em>
-                    </MenuItem>
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                  </Select>
-                )}
-              />
-            </FormControl>
-            <MentorCertificate>재학증명서</MentorCertificate>
-            <FileUpload></FileUpload>
+                      <MenuItem
+                        disabled
+                        value=""
+                        sx={{
+                          display: "none",
+                        }}
+                      ></MenuItem>
+                      <em>희망전공</em>
+                      {CollegeMajor.map((value, index) => (
+                        <MenuItem key={index} value={value.value}>
+                          {value.label}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+              </FormControl>
+              학년
+              <FormControl>
+                <Controller
+                  defaultValue=""
+                  control={control}
+                  name="grade"
+                  rules={{ required: "학년은 필수선택입니다." }}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      disableUnderline={true}
+                      sx={{
+                        paddingLeft: "0.5rem",
+                        height: "33px",
+                        width: "120%",
+                        border: "solid 1px #d6d6d6",
+                        boxShadow: "0",
+                        fontSize: "0.8rem",
+                        marginLeft: "0.6rem",
+                      }}
+                      displayEmpty
+                      variant="standard"
+                    >
+                      <MenuItem
+                        disabled
+                        value=""
+                        sx={{
+                          display: "none",
+                        }}
+                      >
+                        <em>학년</em>
+                      </MenuItem>
+                      <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                      <MenuItem value={4}>4</MenuItem>
+                    </Select>
+                  )}
+                />
+              </FormControl>
+            </InformationBoxLine2>
           </InformationBoxLine>
           <InformationBoxLine>
             활동장소
-            <div
-              style={{
-                justifyContent: "space-evenly",
-                display: "flex",
-                width: "75%",
-                height: "100%",
-                paddingTop: "0.4rem",
-                paddingBottom: "0.4rem",
-                backgroundColor: "#f8f8f8",
-                fontSize: "0.8rem",
-                marginRight: "7.7rem",
-              }}
-            >
-              {teachingStyle.map((value, index) => (
-                <div key={index}>
-                  <input
-                    type="radio"
-                    value={value}
-                    {...register("lesson", {
-                      required: "활동장소는 필수입력입니다.",
-                    })}
-                  ></input>
-                  {value}
-                </div>
-              ))}
-            </div>
+            <InformationBoxLine2>
+              <div
+                style={{
+                  justifyContent: "space-evenly",
+                  display: "flex",
+                  width: "75%",
+                  height: "100%",
+                  paddingTop: "0.4rem",
+                  paddingBottom: "0.4rem",
+                  backgroundColor: "#f8f8f8",
+                  fontSize: "0.8rem",
+                  marginRight: "7.7rem",
+                }}
+              >
+                {teachingStyle.map((value, index) => (
+                  <div key={index}>
+                    <input
+                      type="radio"
+                      value={value}
+                      {...register("lesson", {
+                        required: "활동장소는 필수입력입니다.",
+                      })}
+                    ></input>
+                    {value}
+                  </div>
+                ))}
+              </div>
+            </InformationBoxLine2>
           </InformationBoxLine>
-
           <InformationBoxLine>
-            한줄자기소개
-            <Input
-              disableUnderline={true}
-              sx={{
-                height: "90%",
-                width: "88%",
-                borderRadius: "4.2px",
-                border: "solid 0.8px #d6d6d6",
-                boxShadow: "0",
-              }}
-              placeholder=""
-              {...register("introduce", {
-                required: "소개는 필수입력입니다.",
-              })}
-            />
+            한줄소개
+            <InformationBoxLine2>
+              <Input
+                disableUnderline={true}
+                sx={{
+                  height: "90%",
+                  width: "88%",
+                  borderRadius: "4.2px",
+                  border: "solid 0.8px #d6d6d6",
+                  boxShadow: "0",
+                }}
+                placeholder=""
+                {...register("introduce", {
+                  required: "소개는 필수입력입니다.",
+                })}
+              />
+            </InformationBoxLine2>
           </InformationBoxLine>
         </InformationBox>
       </div>
@@ -492,11 +539,16 @@ const InformationBox = styled.div`
 const InformationBoxLine = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 2%;
 `;
-const InformationBoxContent = styled.div``;
+const InformationBoxLine2 = styled.div`
+  margin-left: 3%;
+  width: 92%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+`;
 const IdWithPasswordBox = styled.div`
   margin-top: 3%;
   font-family: NotoSansRegular;
@@ -519,9 +571,5 @@ const SubmitButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-const MentorCertificate = styled.div`
-  margin-left: 4rem;
-  margin-right: 1rem;
 `;
 export default Mentor;

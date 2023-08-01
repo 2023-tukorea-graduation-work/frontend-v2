@@ -4,7 +4,6 @@ import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../../../store/hooks";
-import { Editor, EditorState } from "draft-js";
 
 interface Props {
   subtogglePopup(): void;
@@ -26,13 +25,6 @@ const HorizonLine = () => {
 
 const TestEditorForm = ({ subtogglePopup }: Props) => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
-  const onEditorStateChange = (
-    editorState: React.SetStateAction<EditorState>
-  ) => {
-    setEditorState(editorState);
-  };
 
   return (
     <MyBlock>

@@ -22,6 +22,7 @@ import programMaterialReducer from "../slice/program/programProgressMaterial";
 import programQuestionReducer from "../slice/program/programProgressQuestion";
 import programScheduleReducer from "../slice/program/programProgressSchedule";
 import profileReducer from "../slice/user/profileSlice";
+import programExamReducer from "../slice/program/programProgressExamSlice";
 const reducers = combineReducers({
   leftBar: leftbarReducer,
   programList: programListReducer,
@@ -35,6 +36,7 @@ const reducers = combineReducers({
   programQuestion: programQuestionReducer,
   programSchedule: programScheduleReducer,
   profile: profileReducer,
+  programProgressExam: programExamReducer,
 });
 
 const persistConfig = {
