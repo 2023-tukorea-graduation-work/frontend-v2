@@ -36,7 +36,11 @@ const Detail = (props: ButtonProps) => {
   );
   const memberId = useAppSelector((state) => state.login.object.USER_NO);
   const dispatch = useAppDispatch();
-  const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
+  const teachingStyle = [
+    { 한글: "온라인", 영어: "ONLINE" },
+    { 한글: "오프라인", 영어: "OFFLINE" },
+    { 한글: "온라인&오프라인 병행", 영어: "ONOFFLINE" },
+  ];
   // const mento_no = useAppSelector((state) => state.login.object.USER_NO);
   const onSubmit = (data: any) => {
     data.memberId = memberId;
@@ -178,12 +182,12 @@ const Detail = (props: ButtonProps) => {
               <div key={index}>
                 <input
                   type="radio"
-                  value={value}
+                  value={value.영어}
                   {...register("act_place", {
                     required: "활동장소는 필수입력입니다.",
                   })}
                 ></input>
-                {value}
+                {value.한글}
               </div>
             ))}
           </div>

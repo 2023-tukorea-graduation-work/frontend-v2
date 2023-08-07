@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
-import { toast } from "react-toastify";
-import { useAppSelector } from "../../../../store/hooks";
+
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { uploadQuestiontAsync } from "../../../../slice/program/programProgressQuestion";
 
 interface Props {
   subtogglePopup(): void;
@@ -27,11 +28,14 @@ const HorizonLine = () => {
 
 const TestEditorForm = ({ subtogglePopup }: Props) => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+
   const [editorHtml, setEditorHtml] = useState<string>("");
 
   const handleEditorChange = (value: string) => {
     setEditorHtml(value);
   };
+
+  const dispatch = useAppDispatch();
 
   return (
     <MyBlock>
@@ -70,11 +74,12 @@ const TestEditorForm = ({ subtogglePopup }: Props) => {
         color={user_gb === "MENTEE" ? "primary" : "secondary"}
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
         onClick={() => {
-          toast.success("답변제출 성공");
+          dispatch(uploadQuestiontAsync({}));
+          toast.success("질문제출 성공");
           subtogglePopup();
         }}
       >
-        답변제출하기
+        질문제출하기
       </Button>
     </MyBlock>
   );
