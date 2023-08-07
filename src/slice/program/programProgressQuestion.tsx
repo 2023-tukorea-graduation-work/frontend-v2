@@ -14,11 +14,16 @@ interface QustionForm {
   programId: number;
   question: string;
 }
-const initialState: Array<QuestionList> = [];
+interface initialType {
+  QuestionList: Array<QuestionList>;
+}
+const initialState: initialType = {
+  QuestionList: [],
+};
 
 export const loadQuestionListAsync = createAsyncThunk<Array<QuestionList>>(
   "loadQuestionList",
-  async () => {
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios({
         method: "get",
@@ -27,12 +32,17 @@ export const loadQuestionListAsync = createAsyncThunk<Array<QuestionList>>(
       console.log(data);
       return data;
     } catch (e) {
-      console.log(e);
+      let error: any = e;
+      console.log(error.response);
+      if (!error.response) {
+        throw error.response;
+      }
+      return rejectWithValue("No user found");
     }
   }
 );
 
-export const uploadQuestiontAsync = createAsyncThunk<any, QustionForm>(
+export const uploadQuestiontAsync = createAsyncThunk<any, any>(
   "uploadQuestiont",
   async (formData, { rejectWithValue }) => {
     try {
@@ -64,11 +74,18 @@ export const programQuestionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loadQuestionListAsync.fulfilled, (state, { payload }) => {
-      state = payload;
+      state.QuestionList = [...payload];
       console.log("질문리스트 로드 성공");
     });
     builder.addCase(loadQuestionListAsync.rejected, (state) => {
       console.log("질문 리스트실패");
+    });
+    builder.addCase(uploadQuestiontAsync.rejected, (state) => {
+      console.log("업로드 실패");
+    });
+    builder.addCase(uploadQuestiontAsync.fulfilled, (state, payload) => {
+      console.log(payload);
+      console.log("질문 업로드 성공");
     });
   },
 });

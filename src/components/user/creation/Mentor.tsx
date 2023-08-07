@@ -41,7 +41,11 @@ const Mentor = (props: any) => {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm();
-  const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
+  const teachingStyle = [
+    { 한글: "온라인", 영어: "ONLINE" },
+    { 한글: "오프라인", 영어: "OFFLINE" },
+    { 한글: "온라인&오프라인 병행", 영어: "ONOFFLINE" },
+  ];
   const imageInput = useRef<HTMLInputElement>(null);
   const certificationInput = useRef<HTMLInputElement>(null);
   const onSubmit = (data: any) => {
@@ -385,12 +389,12 @@ const Mentor = (props: any) => {
                   <div key={index}>
                     <input
                       type="radio"
-                      value={value}
+                      value={value.영어}
                       {...register("lesson", {
                         required: "활동장소는 필수입력입니다.",
                       })}
                     ></input>
-                    {value}
+                    {value.한글}
                   </div>
                 ))}
               </div>

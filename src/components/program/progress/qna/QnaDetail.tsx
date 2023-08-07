@@ -91,6 +91,9 @@ const QnaDetail = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
+  const questionlsit = useAppSelector(
+    (state) => state.programQuestion.QuestionList
+  );
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
@@ -100,6 +103,7 @@ const QnaDetail = () => {
   useEffect(() => {
     dispatch(loadQuestionListAsync());
   }, [isOpen]);
+  useEffect(() => {}, [questionlsit]);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   return (
     <QnaForm>
@@ -149,86 +153,54 @@ const QnaDetail = () => {
             )}
           </Qnaiconbox>
         </Qnatext>
-        <Qnalistbox>
-          <QnaTotal>
-            <Qnalist>
-              <p>질문제목</p>
-            </Qnalist>
-            <QnaStudent>
-              <p>박서영</p>
-              <p>
-                <FaUserCircle></FaUserCircle>
-              </p>
-              <p>2023.03.15</p>
-            </QnaStudent>
-          </QnaTotal>
-          <HorizonLine />
-          <p style={{ marginLeft: "1.5%" }}>질문에 대한 답변</p>
-          {user_gb === "MENTO" && (
-            <div>
-              <a
-                href="#"
-                onClick={togglePopup}
-                style={{ marginLeft: "93%", color: "#07858C" }}
-              >
-                자세히보기
-              </a>
-              {isOpen && <Popup />}
-            </div>
-          )}
-          {user_gb === "MENTEE" && (
-            <div>
-              <a
-                href="#"
-                onClick={togglePopup}
-                style={{ marginLeft: "93%", color: "#FF8E41" }}
-              >
-                자세히보기
-              </a>
-              {isOpen && <Popup />}
-            </div>
-          )}
-        </Qnalistbox>
-        <Qnalistbox>
-          <QnaTotal>
-            <Qnalist>
-              <p>질문제목</p>
-            </Qnalist>
-            <QnaStudent>
-              <p>박서영</p>
-              <p>
-                <FaUserCircle></FaUserCircle>
-              </p>
-              <p>2023.03.15</p>
-            </QnaStudent>
-          </QnaTotal>
-          <HorizonLine />
-          <p style={{ marginLeft: "1.5%" }}>질문에 대한 답변</p>
-          {user_gb === "MENTO" && (
-            <a>
-              <a
-                href="#"
-                onClick={subtooglePopup}
-                style={{ marginLeft: "93%", color: "#07858C" }}
-              >
-                답변작성하기{" "}
-              </a>
-              {sisOpen && <SubmitPopup />}
-            </a>
-          )}
-          {user_gb === "MENTEE" && (
-            <div>
-              <a
-                href="#"
-                onClick={togglePopup}
-                style={{ marginLeft: "93%", color: "#FF8E41" }}
-              >
-                자세히보기
-              </a>
-              {isOpen && <Popup />}
-            </div>
-          )}
-        </Qnalistbox>
+        {questionlsit.map((value, index) => {
+          return (
+            <>
+              <Qnalistbox>
+                <QnaTotal>
+                  <Qnalist>
+                    <p>{value.question}</p>
+                  </Qnalist>
+                  <QnaStudent>
+                    <p>박서영</p>
+                    <p>
+                      <FaUserCircle></FaUserCircle>
+                    </p>
+                    <p>2023.03.15</p>
+                  </QnaStudent>
+                </QnaTotal>
+                <HorizonLine />
+                <p style={{ marginLeft: "1.5%" }}>{value.answer}</p>
+                {value.answerCreatedAt}
+                {value.answerUpdatedAt}
+                {/* {user_gb === "MENTO" && (
+              <div>
+                <a
+                  href="#"
+                  onClick={togglePopup}
+                  style={{ marginLeft: "93%", color: "#07858C" }}
+                >
+                  자세히보기
+                </a>
+                {isOpen && <Popup />}
+              </div>
+            )}
+            {user_gb === "MENTEE" && (
+              <div>
+                <a
+                  href="#"
+                  onClick={togglePopup}
+                  style={{ marginLeft: "93%", color: "#FF8E41" }}
+                >
+                  자세히보기
+                </a>
+                {isOpen && <Popup />}
+              </div>
+            )} */}
+              </Qnalistbox>
+            </>
+          );
+        })}
       </Qnabox>
     </QnaForm>
   );
