@@ -119,6 +119,18 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     setMyTestType(updatedTestType);
   };
 
+  const handleWriterClick = () => {
+    append({});
+    // Create a new copy of myTestType
+    const updatedTestType = { ...myTestType };
+    // Update the testType at the specified index
+    updatedTestType.testType[updatedTestType.testType.length] = "객관식";
+    // Set the updated state
+    setMyTestType(updatedTestType);
+    console.log(updatedTestType)
+    
+  }
+
   return (
     <TestWriterform>
       <TestWriterbox>
@@ -378,7 +390,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
           size="20"
           color="#80b7d1"
           style={{ cursor: "pointer" }}
-          onClick={() => append({ detail: "" })}
+          onClick={() => handleWriterClick()}
         ></FaPlus>
       </TestWriterplus>
     </TestWriterform>
