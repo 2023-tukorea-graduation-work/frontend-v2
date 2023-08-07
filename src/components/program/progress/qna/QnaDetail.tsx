@@ -5,6 +5,8 @@ import TestEditorForm from "../qna/TestEditorForm";
 import QnaIcon from "./QnaIcon";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { loadQuestionListAsync } from "../../../../slice/program/programProgressQuestion";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const HorizonLine = () => {
   return (

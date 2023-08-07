@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
-import { toast } from "react-toastify";
+
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { uploadQuestiontAsync } from "../../../../slice/program/programProgressQuestion";
 
@@ -26,7 +28,15 @@ const HorizonLine = () => {
 
 const TestEditorForm = ({ subtogglePopup }: Props) => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+
+  const [editorHtml, setEditorHtml] = useState<string>("");
+
+  const handleEditorChange = (value: string) => {
+    setEditorHtml(value);
+  };
+
   const dispatch = useAppDispatch();
+
   return (
     <MyBlock>
       {user_gb === "MENTO" && (
@@ -53,9 +63,12 @@ const TestEditorForm = ({ subtogglePopup }: Props) => {
             </TestEdinfosub>
           </TestEdinfo>
           <HorizonLine></HorizonLine>
-          <p style={{ marginLeft: "1.5%" }}>질문제목과 내용 입력</p>
         </p>
       )}
+      <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+        <p style={{ marginBottom: "1rem" }}>질문제목과 내용 입력</p>
+        <ReactQuill value={editorHtml} onChange={handleEditorChange} />
+      </div>
       <Button
         variant="contained"
         color={user_gb === "MENTEE" ? "primary" : "secondary"}
