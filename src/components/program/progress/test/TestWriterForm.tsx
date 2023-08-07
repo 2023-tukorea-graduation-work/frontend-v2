@@ -327,36 +327,35 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
               </TestNumber4>
             </TestWrite>
           )}
+
+          {selectedButton === "button2" && (
+            <TestWrite>
+              <Testtext>
+                <Input
+                  placeholder="문제를 입력하세요"
+                  color="secondary"
+                  style={{
+                    width: "100%",
+                    height: "10vh",
+                    marginBottom: "0.5rem",
+                  }}
+                ></Input>
+              </Testtext>
+              <TestNumber1>
+                <Input
+                  placeholder="답안을 입력하세요"
+                  color="secondary"
+                  style={{
+                    width: "100%",
+                    height: "5vh",
+                    marginBottom: "0.3rem",
+                  }}
+                ></Input>
+              </TestNumber1>
+            </TestWrite>
+          )}
         </TestWriterlist>
       ))}
-
-      {selectedButton === "button2" && (
-        <TestWrite>
-          <Testtext>
-            <Input
-              placeholder="문제를 입력하세요"
-              color="secondary"
-              style={{
-                width: "100%",
-                height: "10vh",
-                marginBottom: "0.5rem",
-              }}
-            ></Input>
-          </Testtext>
-          <TestNumber1>
-            <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>A</p>
-            <Input
-              placeholder="선택답안을 입력하세요"
-              color="secondary"
-              style={{
-                width: "100%",
-                height: "5vh",
-                marginBottom: "0.3rem",
-              }}
-            ></Input>
-          </TestNumber1>
-        </TestWrite>
-      )}
 
       <TestWriterplus>
         <FaPlus

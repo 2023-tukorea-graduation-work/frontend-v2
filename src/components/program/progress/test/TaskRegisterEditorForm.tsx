@@ -7,6 +7,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { toast } from "react-toastify";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 interface Props {
   subtogglePopup(): void;
@@ -37,7 +39,11 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
   const handleEndDateChange = (date: any) => {
     setEndDate(date);
   };
+  const [editorHtml, setEditorHtml] = useState<string>("");
 
+  const handleEditorChange = (value: string) => {
+    setEditorHtml(value);
+  };
   return (
     <MyBlock>
       <TaskRegisterEdinfo>
@@ -70,7 +76,11 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
         />
       </TaskRegistersubmit>
       <HorizonLine></HorizonLine>
-      <p>과제작성칸</p>
+      <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+        <p style={{ marginBottom: "1rem" }}>과제제목과 내용 입력</p>
+        <ReactQuill value={editorHtml} onChange={handleEditorChange} />
+      </div>
+
       <Button
         variant="contained"
         color="secondary"
