@@ -6,6 +6,8 @@ import { Controller, useForm } from "react-hook-form";
 import { useAppDispatch } from "../../../store/hooks";
 import { creationAsync } from "../../../slice/user/creactionSlice";
 import { CollegeMajor } from "../../../docs/Docs";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const Mentee = (props: any) => {
   const [preImg, setPreImg]: any = useState(null);
   const dispatch = useAppDispatch();
@@ -18,6 +20,7 @@ const Mentee = (props: any) => {
   } = useForm();
   const teachingStyle = ["온라인", "오프라인", "온라인&오프라인 병행"];
   const imageInput = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
   const onSubmit = (data: any) => {
     const formData = new FormData();
     if (imageInput.current?.files != null) {
@@ -29,7 +32,17 @@ const Mentee = (props: any) => {
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
-    dispatch(creationAsync({ userInfo: formData, userGB: "mentee" }));
+    dispatch(creationAsync({ userInfo: formData, userGB: "mentee" })).then(
+      (a) => {
+        console.log(a);
+        if (a.payload.status === 200) {
+          toast.success("회원가입 완료");
+          navigate("/programList");
+        } else {
+          toast.warn("회원가입 실패");
+        }
+      }
+    );
   };
 
   const onError = (error: any) => {

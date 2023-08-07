@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { loadQuestionListAsync } from "../../../../slice/program/programProgressQuestion";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useParams } from "react-router-dom";
 
 const HorizonLine = () => {
   return (
@@ -93,6 +94,7 @@ const QnaDetail = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
+  const { programId } = useParams();
   const questionlsit = useAppSelector(
     (state) => state.programQuestion.QuestionList
   );
@@ -103,7 +105,7 @@ const QnaDetail = () => {
     ssetIsOpen(!sisOpen);
   };
   useEffect(() => {
-    dispatch(loadQuestionListAsync());
+    dispatch(loadQuestionListAsync(Number(programId)));
   }, [isOpen]);
   useEffect(() => {}, [questionlsit]);
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
@@ -172,7 +174,9 @@ const QnaDetail = () => {
                   </QnaStudent>
                 </QnaTotal>
                 <HorizonLine />
-                <p style={{ marginLeft: "1.5%" }}>{value.answer}</p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: `${value.answer}` }}
+                ></div>
                 {value.answerCreatedAt}
                 {value.answerUpdatedAt}
                 {/* {user_gb === "MENTO" && (

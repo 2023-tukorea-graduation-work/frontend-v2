@@ -7,6 +7,8 @@ import { creationAsync } from "../../../slice/user/creactionSlice";
 import { useAppDispatch } from "../../../store/hooks";
 import { Certificate } from "crypto";
 import { CollegeMajor } from "../../../docs/Docs";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -48,6 +50,7 @@ const Mentor = (props: any) => {
   ];
   const imageInput = useRef<HTMLInputElement>(null);
   const certificationInput = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
   const onSubmit = (data: any) => {
     const formData = new FormData();
     if (
@@ -65,7 +68,18 @@ const Mentor = (props: any) => {
       "data",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
-    dispatch(creationAsync({ userInfo: formData, userGB: "mentor" }));
+
+    dispatch(creationAsync({ userInfo: formData, userGB: "mentor" })).then(
+      (a) => {
+        console.log(a);
+        if (a.payload.status === 200) {
+          toast.success("회원가입 완료");
+          navigate("/programList");
+        } else {
+          toast.warn("회원가입 실패");
+        }
+      }
+    );
   };
 
   const onError = (error: any) => {

@@ -10,7 +10,11 @@ import TaskRegisterEditorForm from "./TaskRegisterEditorForm";
 import TestWriterForm from "./TestWriterForm";
 import TestScoreForm from "./TestScoreForm";
 import TestIcon from "./TestIcon";
-import { useAppSelector } from "../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { loadQuestionListAsync } from "../../../../slice/program/programProgressQuestion";
+import { loadExamListAsync } from "../../../../slice/program/programProgressExamSlice";
 
 const TaskRegisterPopup = () => {
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(true);
@@ -132,9 +136,17 @@ const TaskscorePopup = () => {
 
 const TestDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const examList = useAppSelector((state) => state.programProgressExam.list);
+  const dispatch = useAppDispatch();
+  const { programId } = useParams() as any;
+  useEffect(() => {
+    dispatch(loadExamListAsync(Number(programId)));
+  }, []);
+  useEffect(() => {}, [examList]);
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(false);
   const [TestWriterisOpen, TestWritersetIsOpen] = useState(false);
   const [TaskScoreisOpen, TaskScoresetIsOpen] = useState(false);
+
   const TaskRegistersPopup = () => {
     TaskRegistersetIsOpen(!TaskRegisterisOpen);
   };
@@ -274,74 +286,49 @@ const TestDetail = () => {
             </Tasklist>
           </Taskbox>
           <Testbox>
-            <Testlist user_gb={user_gb}>
-              <Testcheck>
-                <Testscore user_gb={user_gb}>
-                  <p
-                    style={{
-                      marginTop: "0.9rem",
-                      fontSize: "0.6rem",
-                      marginLeft: "0.7rem",
-                    }}
-                  >
-                    AVERAGE
-                  </p>
-                  <p
-                    style={{
-                      marginTop: "0.3rem",
-                      marginLeft: "1.3rem",
-                      fontSize: "1.4rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    85
-                  </p>
-                </Testscore>
-              </Testcheck>
-              <Testname>
-                <p>1차 시험</p>
-                <Testdetail>
-                  <p>시험시간: 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  <p style={{ marginTop: "0.5rem" }}>
-                    참여자: 이름, 이름, 이름
-                  </p>
-                </Testdetail>
-              </Testname>
-            </Testlist>
-            <Testlist user_gb={user_gb}>
-              <Testcheck>
-                <Testscore user_gb={user_gb}>
-                  <p
-                    style={{
-                      marginTop: "0.9rem",
-                      fontSize: "0.6rem",
-                      marginLeft: "0.7rem",
-                    }}
-                  >
-                    AVERAGE
-                  </p>
-                  <p
-                    style={{
-                      marginTop: "0.3rem",
-                      marginLeft: "1.3rem",
-                      fontSize: "1.4rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    85
-                  </p>
-                </Testscore>
-              </Testcheck>
-              <Testname>
-                <p>1차 시험</p>
-                <Testdetail>
-                  <p>시험시간: 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  <p style={{ marginTop: "0.5rem" }}>
-                    참여자: 이름, 이름, 이름
-                  </p>
-                </Testdetail>
-              </Testname>
-            </Testlist>
+            {examList.map((value, index) => {
+              return (
+                <>
+                  <Testlist user_gb={user_gb}>
+                    <Testcheck>
+                      <Testscore user_gb={user_gb}>
+                        <p
+                          style={{
+                            marginTop: "0.9rem",
+                            fontSize: "0.6rem",
+                            marginLeft: "0.7rem",
+                          }}
+                        >
+                          AVERAGE
+                        </p>
+                        <p
+                          style={{
+                            marginTop: "0.3rem",
+                            marginLeft: "1.3rem",
+                            fontSize: "1.4rem",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          85
+                        </p>
+                      </Testscore>
+                    </Testcheck>
+                    <Testname>
+                      <p>{value.examTitle}</p>
+                      <Testdetail>
+                        <p>
+                          시험시간: {value.examStartTime} ~
+                          {value.examFinishTime}
+                        </p>
+                        <p style={{ marginTop: "0.5rem" }}>
+                          참여자: 이름, 이름, 이름
+                        </p>
+                      </Testdetail>
+                    </Testname>
+                  </Testlist>
+                </>
+              );
+            })}
           </Testbox>
         </TestTaskbox>
       </BoxTotal>
