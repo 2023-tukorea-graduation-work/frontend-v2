@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
+import { ko } from "date-fns/esm/locale";
 
-<<<<<<< HEAD
 import {
   Button,
   FormControl,
@@ -13,9 +13,6 @@ import {
   Typography,
 } from "@mui/material";
 
-=======
-import { Button, Input, SelectChangeEvent } from "@mui/material";
->>>>>>> ba12192346d80cd784abf039757a6f90ac284b0d
 import {
   FaPlus,
   FaTrashAlt,
@@ -80,6 +77,7 @@ const SavemethodPopup = () => {
 };
 
 const TestWriterForm = ({ subtogglePopup }: Props) => {
+  const programId = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const programId = useParams();
 
@@ -131,11 +129,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
 
   // Define a function to handle state updates
   const handleButtonClick = (index: any, type: any) => {
-
-<<<<<<< HEAD
-=======
-    // Create a new copy of myTestType
->>>>>>> ba12192346d80cd784abf039757a6f90ac284b0d
     const updatedTestType = { ...myTestType };
     if (type == "MULTIPLE_CHOICE_QUESTION") {
       updatedTestType.testType[index] = {
@@ -169,10 +162,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
       subjectAnswer: null,
     };
     setMyTestType(updatedTestType);
-
-    console.log(updatedTestType);
-
-<<<<<<< HEAD
   };
 
   const onSubmit = (data: any) => {
@@ -214,9 +203,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     setMyTestType(updatedTestType);
 
     console.log(myTestType);
-=======
-    console.log(updatedTestType);
->>>>>>> ba12192346d80cd784abf039757a6f90ac284b0d
   };
 
   return (
@@ -249,7 +235,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                 marginLeft: "0.5rem",
                 lineHeight: "2.5rem",
               }}
-<<<<<<< HEAD
             >
               ~
             </p>
@@ -284,108 +269,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
             <TestMethod>
               <FaRegQuestionCircle
                 size="25"
-=======
-              onClick={togglePopup}
-            ></FaRegQuestionCircle>
-            {isOpen && <SavemethodPopup />}
-            <p>사용방법</p>
-          </TestMethod>
-          <TestSave>
-            <FaRegSave
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                toast.success("임시저장완료");
-                subtogglePopup();
-              }}
-            ></FaRegSave>
-            <p>임시저장</p>
-          </TestSave>
-
-          <TestSaveComplete>
-            <FaRegFileAlt
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                toast.success("시험출제완료");
-                subtogglePopup();
-              }}
-            ></FaRegFileAlt>
-            <p>저장(등록)</p>
-          </TestSaveComplete>
-
-          <TestDelete>
-            <FaTrashAlt
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
-              }}
-            ></FaTrashAlt>
-            <p>전체삭제</p>
-          </TestDelete>
-        </TWTitle>
-        {/* 아이콘 끝  */}
-      </TestWriterbox>
-      {fields.map((field, index) => (
-        <TestWriterlist>
-          <TWselectbox>
-            <p style={{ fontSize: "1.2rem" }}>1번문항</p>
-
-            <TWselect>
-              <TestSelect>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  sx={{ width: "5rem", height: "3vh" }}
-                  onClick={() => handleButtonClick(index, "객관식")}
-                >
-                  객관식
-                </Button>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
-                  onClick={() => handleButtonClick(index, "주관식")}
-                >
-                  주관식
-                </Button>
-              </TestSelect>
-              {/* <FormControl fullWidth>
-              <InputLabel color="secondary" id="demo-simple-select-label">
-                유형선택
-              </InputLabel>
-              <Select
-                color="secondary"
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={Number}
-                label="객관식"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>객관식</MenuItem>
-                <MenuItem value={20}>주관식</MenuItem>
-              </Select>
-            </FormControl> */}
-            </TWselect>
-
-            <TWselectscore>
-              <p
->>>>>>> ba12192346d80cd784abf039757a6f90ac284b0d
                 style={{
                   color: "#777777",
                   marginBottom: "0.3rem",
@@ -437,73 +320,9 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
               <p>저장(등록)</p>
             </TestSaveComplete>
 
-
-          <TestDelete>
-            <FaTrashAlt
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
-              }}
-            ></FaTrashAlt>
-            <p>전체삭제</p>
-          </TestDelete>
-        </TWTitle>
-        {/* 아이콘 끝  */}
-      </TestWriterbox>
-      {fields.map((field, index) => (
-        <TestWriterlist>
-          <TWselectbox>
-            <p style={{ fontSize: "1.2rem" }}>1번문항</p>
-
-            <TWselect>
-              <TestSelect>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  sx={{ width: "5rem", height: "3vh" }}
-                  onClick={() => handleButtonClick(index, "객관식")}
-                >
-                  객관식
-                </Button>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
-                  onClick={() => handleButtonClick(index, "주관식")}
-                >
-                  주관식
-                </Button>
-              </TestSelect>
-              {/* <FormControl fullWidth>
-              <InputLabel color="secondary" id="demo-simple-select-label">
-                유형선택
-              </InputLabel>
-              <Select
-                color="secondary"
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={Number}
-                label="객관식"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>객관식</MenuItem>
-                <MenuItem value={20}>주관식</MenuItem>
-              </Select>
-            </FormControl> */}
-            </TWselect>
-
-            <TWselectscore>
-              <p
-
             <TestDelete>
               <FaTrashAlt
                 size="25"
-
                 style={{
                   color: "#777777",
                   marginBottom: "0.3rem",

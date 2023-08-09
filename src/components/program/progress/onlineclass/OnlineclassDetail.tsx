@@ -6,8 +6,9 @@ import {
   FaCircle,
   FaCaretSquareRight,
   FaRegWindowClose,
+  FaUserCircle,
 } from "react-icons/fa";
-import { Checkbox, Input } from "@mui/material";
+import { TextField, Checkbox, Input } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../../store/hooks";

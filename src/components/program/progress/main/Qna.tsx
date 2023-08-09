@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { FaRegCommentDots, FaFileAlt, FaBullhorn } from "react-icons/fa";
+import {
+  FaRegCommentDots,
+  FaFileAlt,
+  FaBullhorn,
+  FaPlus,
+} from "react-icons/fa";
 
 const HorizonLine = () => {
   return (
