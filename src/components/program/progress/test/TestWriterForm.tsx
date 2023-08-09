@@ -21,11 +21,13 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useAppDispatch } from "../../../../store/hooks";
 import { uploadExamAsync } from "../../../../slice/program/programProgressExamSlice";
+import { ko } from "date-fns/esm/locale";
 // import { test, test } from "node:test";
 import { List } from "immutable";
+import { useParams } from "react-router";
 
 interface Props {
   subtogglePopup(): void;
@@ -66,6 +68,7 @@ const SavemethodPopup = () => {
 };
 
 const TestWriterForm = ({ subtogglePopup }: Props) => {
+  const programId = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -97,7 +100,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "programWeeks",
+    name: "examQuestionRegisterRequest",
   });
 
   // MyComponentState.ts
@@ -110,7 +113,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
   });
 
   // Define a function to handle state updates
-  const handleButtonClick = (index : any, type : any) => {
+  const handleButtonClick = (index: any, type: any) => {
     // Create a new copy of myTestType
     const updatedTestType = { ...myTestType };
     // Update the testType at the specified index
@@ -127,137 +130,162 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     updatedTestType.testType[updatedTestType.testType.length] = "객관식";
     // Set the updated state
     setMyTestType(updatedTestType);
-    console.log(updatedTestType)
-    
-  }
+    console.log(updatedTestType);
+  };
 
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+  const onError = (data: any) => {
+    console.log(data);
+  };
   return (
-    <TestWriterform>
-      <TestWriterbox>
-        <Testdatebox>
-          <StyledDatePicker
-            selected={startDate}
-            onChange={handleStartDateChange}
-            showTimeSelect
-            timeFormat="HH:mm"
-            dateFormat="yyyy-MM-dd HH:mm"
-          />
-          <p
-            style={{
-              marginRight: "0.5rem",
-              marginLeft: "0.5rem",
-              lineHeight: "2.5rem",
-            }}
-          >
-            ~
-          </p>
-          <StyledDatePicker
-            selected={endDate}
-            onChange={handleEndDateChange}
-            showTimeSelect
-            timeFormat="HH:mm"
-            dateFormat="yyyy-MM-dd HH:mm"
-          />
-        </Testdatebox>
-        <TestTitle>
-          <Input
-            placeholder="테스트제목을 입력하세요"
-            color="secondary"
-            style={{ width: "100%", height: "100%" }}
-          ></Input>
-        </TestTitle>
-        {/* 아이콘시작 */}
-        <TWTitle>
-          <TestMethod>
-            <FaRegQuestionCircle
-              size="25"
+    <form onSubmit={handleSubmit(onSubmit, onError)}>
+      <TestWriterform>
+        <TestWriterbox>
+          <Testdatebox>
+            <Controller
+              control={control}
+              name="examStartTime"
+              rules={{ required: "날짜는 필수선택입니다." }}
+              render={({ field }) => (
+                <StyledDatePicker
+                  {...field}
+                  dateFormat="yyyy년 MM월 dd일"
+                  disabledKeyboardNavigation
+                  placeholderText="날짜를 선택하세요"
+                  autoComplete="off"
+                  selected={field.value}
+                  onChange={(date: any) => field.onChange(date)}
+                  locale={ko}
+                />
+              )}
+            />
+            <p
               style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
+                marginRight: "0.5rem",
                 marginLeft: "0.5rem",
-                cursor: "pointer",
+                lineHeight: "2.5rem",
               }}
-              onClick={togglePopup}
-            ></FaRegQuestionCircle>
-            {isOpen && <SavemethodPopup />}
-            <p>사용방법</p>
-          </TestMethod>
-          <TestSave>
-            <FaRegSave
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                toast.success("임시저장완료");
-                subtogglePopup();
-              }}
-            ></FaRegSave>
-            <p>임시저장</p>
-          </TestSave>
+            >
+              ~
+            </p>
+            <Controller
+              control={control}
+              name="examFinishTime"
+              rules={{ required: "날짜는 필수선택입니다." }}
+              render={({ field }) => (
+                <StyledDatePicker
+                  {...field}
+                  dateFormat="yyyy년 MM월 dd일"
+                  disabledKeyboardNavigation
+                  placeholderText="날짜를 선택하세요"
+                  autoComplete="off"
+                  selected={field.value}
+                  onChange={(date: any) => field.onChange(date)}
+                  locale={ko}
+                />
+              )}
+            />
+          </Testdatebox>
+          <TestTitle>
+            <Input
+              placeholder="테스트제목을 입력하세요"
+              color="secondary"
+              style={{ width: "100%", height: "100%" }}
+              {...register("examTitle", {
+                required: "이메일은 필수입력입니다.",
+              })}
+            ></Input>
+          </TestTitle>
+          {/* 아이콘시작 */}
+          <TWTitle>
+            <TestMethod>
+              <FaRegQuestionCircle
+                size="25"
+                style={{
+                  color: "#777777",
+                  marginBottom: "0.3rem",
+                  marginLeft: "0.5rem",
+                  cursor: "pointer",
+                }}
+                onClick={togglePopup}
+              ></FaRegQuestionCircle>
+              {isOpen && <SavemethodPopup />}
+              <p>사용방법</p>
+            </TestMethod>
+            <TestSave>
+              <FaRegSave
+                size="25"
+                style={{
+                  color: "#777777",
+                  marginBottom: "0.3rem",
+                  marginLeft: "0.6rem",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  toast.success("임시저장완료");
+                  subtogglePopup();
+                }}
+              ></FaRegSave>
+              <p>임시저장</p>
+            </TestSave>
 
-          <TestSaveComplete>
-            <FaRegFileAlt
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                toast.success("시험출제완료");
-                subtogglePopup();
-              }}
-            ></FaRegFileAlt>
-            <p>저장(등록)</p>
-          </TestSaveComplete>
+            <TestSaveComplete>
+              <button
+                type="submit"
+                style={{
+                  color: "#777777",
+                  marginBottom: "0.3rem",
+                  marginLeft: "0.6rem",
+                  cursor: "pointer",
+                }}
+              ></button>
+              <p>저장(등록)</p>
+            </TestSaveComplete>
 
-          <TestDelete>
-            <FaTrashAlt
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
-              }}
-            ></FaTrashAlt>
-            <p>전체삭제</p>
-          </TestDelete>
-        </TWTitle>
-        {/* 아이콘 끝  */}
-      </TestWriterbox>
-      {fields.map((field, index) => (
-        <TestWriterlist >
-          <TWselectbox>
-            <p style={{ fontSize: "1.2rem" }}>1번문항</p>
+            <TestDelete>
+              <FaTrashAlt
+                size="25"
+                style={{
+                  color: "#777777",
+                  marginBottom: "0.3rem",
+                  marginLeft: "0.6rem",
+                  cursor: "pointer",
+                }}
+              ></FaTrashAlt>
+              <p>전체삭제</p>
+            </TestDelete>
+          </TWTitle>
+          {/* 아이콘 끝  */}
+        </TestWriterbox>
+        {fields.map((field, index) => (
+          <TestWriterlist>
+            <TWselectbox>
+              <p style={{ fontSize: "1.2rem" }}>1번문항</p>
 
-            <TWselect>
-              <TestSelect>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  sx={{ width: "5rem", height: "3vh" }}
-                  onClick={() => handleButtonClick(index, "객관식")}
-                >
-                  객관식
-                </Button>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
-                  onClick={() => handleButtonClick(index, "주관식")}
-                >
-                  주관식
-                </Button>
-              </TestSelect>
-              {/* <FormControl fullWidth>
+              <TWselect>
+                <TestSelect>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    sx={{ width: "5rem", height: "3vh" }}
+                    onClick={() => handleButtonClick(index, "객관식")}
+                  >
+                    객관식
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
+                    onClick={() => handleButtonClick(index, "주관식")}
+                  >
+                    주관식
+                  </Button>
+                </TestSelect>
+                {/* <FormControl fullWidth>
               <InputLabel color="secondary" id="demo-simple-select-label">
                 유형선택
               </InputLabel>
@@ -273,127 +301,137 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                 <MenuItem value={20}>주관식</MenuItem>
               </Select>
             </FormControl> */}
-            </TWselect>
+              </TWselect>
 
-            <TWselectscore>
-              <p
-                style={{
-                  fontSize: "0.9rem",
-                  marginTop: "0.8rem",
-                  marginRight: "0.3rem",
-                }}
-              >
-                배점
-              </p>
-              <Input
-                placeholder="점수입력"
-                color="secondary"
-                style={{ width: "9rem", height: "4vh" }}
-              ></Input>
-            </TWselectscore>
-          </TWselectbox>
+              <TWselectscore>
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    marginTop: "0.8rem",
+                    marginRight: "0.3rem",
+                  }}
+                >
+                  배점
+                </p>
+                <Input
+                  placeholder="점수입력"
+                  color="secondary"
+                  style={{ width: "9rem", height: "4vh" }}
+                ></Input>
+              </TWselectscore>
+            </TWselectbox>
 
-          {myTestType.testType[index] === "객관식" && (
-            <TestWrite>
-              <Testtext>
-                <Input
-                  placeholder="문제를 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "10vh",
-                    marginBottom: "0.5rem",
-                  }}
-                ></Input>
-              </Testtext>
-              <TestNumber1>
-                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>A</p>
-                <Input
-                  placeholder="선택답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                    marginBottom: "0.3rem",
-                  }}
-                ></Input>
-              </TestNumber1>
-              <TestNumber2>
-                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>B</p>
-                <Input
-                  placeholder="선택답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                    marginBottom: "0.3rem",
-                  }}
-                ></Input>
-              </TestNumber2>
-              <TestNumber3>
-                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>C</p>
-                <Input
-                  placeholder="선택답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                    marginBottom: "0.3rem",
-                  }}
-                ></Input>
-              </TestNumber3>
-              <TestNumber4>
-                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>D</p>
-                <Input
-                  placeholder="선택답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                  }}
-                ></Input>
-              </TestNumber4>
-            </TestWrite>
-          )}
+            {myTestType.testType[index] === "객관식" && (
+              <TestWrite>
+                <Testtext>
+                  <Input
+                    placeholder="문제를 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "10vh",
+                      marginBottom: "0.5rem",
+                    }}
+                    {...register("question", {
+                      required: "이메일은 필수입력입니다.",
+                    })}
+                  ></Input>
+                </Testtext>
+                <input
+                  type="checkbox"
+                  {...register("question", {
+                    required: "이메일은 필수입력입니다.",
+                  })}
+                ></input>
+                <TestNumber1>
+                  <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>A</p>
+                  <Input
+                    placeholder="선택답안을 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "5vh",
+                      marginBottom: "0.3rem",
+                    }}
+                  ></Input>
+                </TestNumber1>
+                <TestNumber2>
+                  <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>B</p>
+                  <Input
+                    placeholder="선택답안을 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "5vh",
+                      marginBottom: "0.3rem",
+                    }}
+                  ></Input>
+                </TestNumber2>
+                <TestNumber3>
+                  <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>C</p>
+                  <Input
+                    placeholder="선택답안을 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "5vh",
+                      marginBottom: "0.3rem",
+                    }}
+                  ></Input>
+                </TestNumber3>
+                <TestNumber4>
+                  <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>D</p>
+                  <Input
+                    placeholder="선택답안을 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "5vh",
+                    }}
+                  ></Input>
+                </TestNumber4>
+              </TestWrite>
+            )}
 
-          {myTestType.testType[index] === "주관식" && (
-            <TestWrite>
-              <Testtext>
-                <Input
-                  placeholder="문제를 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "10vh",
-                    marginBottom: "0.5rem",
-                  }}
-                ></Input>
-              </Testtext>
-              <TestNumber1>
-                <Input
-                  placeholder="답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                    marginBottom: "0.3rem",
-                  }}
-                ></Input>
-              </TestNumber1>
-            </TestWrite>
-          )}
-        </TestWriterlist>
-      ))}
+            {myTestType.testType[index] === "주관식" && (
+              <TestWrite>
+                <Testtext>
+                  <Input
+                    placeholder="문제를 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "10vh",
+                      marginBottom: "0.5rem",
+                    }}
+                  ></Input>
+                </Testtext>
+                <TestNumber1>
+                  <Input
+                    placeholder="답안을 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "5vh",
+                      marginBottom: "0.3rem",
+                    }}
+                  ></Input>
+                </TestNumber1>
+              </TestWrite>
+            )}
+          </TestWriterlist>
+        ))}
 
-      <TestWriterplus>
-        <FaPlus
-          size="20"
-          color="#80b7d1"
-          style={{ cursor: "pointer" }}
-          onClick={() => handleWriterClick()}
-        ></FaPlus>
-      </TestWriterplus>
-    </TestWriterform>
+        <TestWriterplus>
+          <FaPlus
+            size="20"
+            color="#80b7d1"
+            style={{ cursor: "pointer" }}
+            onClick={() => handleWriterClick()}
+          ></FaPlus>
+        </TestWriterplus>
+      </TestWriterform>
+    </form>
   );
 };
 const TestWriterform = styled.div`

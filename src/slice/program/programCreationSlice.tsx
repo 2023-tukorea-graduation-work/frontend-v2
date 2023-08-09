@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { creationSlice } from "../user/creactionSlice";
-import dateFormat from "../../utils/dateFormat";
+import { dateFormat } from "../../utils/dateFormat";
 import { toast } from "react-toastify";
 interface intial {
   programCategories: Array<FianlData> | null;
@@ -32,6 +32,7 @@ interface sendInfo {
 export const programCreateAsync = createAsyncThunk<any, sendInfo>(
   "programCreate",
   async (creationInfo, { rejectWithValue }) => {
+    console.log(`${dateFormat(creationInfo.pro_finish_date)}`);
     try {
       console.log(creationInfo);
       const data = await axios({

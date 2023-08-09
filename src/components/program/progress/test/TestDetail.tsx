@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { loadQuestionListAsync } from "../../../../slice/program/programProgressQuestion";
 import { loadExamListAsync } from "../../../../slice/program/programProgressExamSlice";
+import { loadTaskAsync } from "../../../../slice/program/programProgressTask";
 
 const TaskRegisterPopup = () => {
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(true);
@@ -137,12 +138,15 @@ const TaskscorePopup = () => {
 const TestDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const examList = useAppSelector((state) => state.programProgressExam.list);
+  const taskList = useAppSelector((state) => state.programProgressTask.list);
   const dispatch = useAppDispatch();
   const { programId } = useParams() as any;
   useEffect(() => {
+    dispatch(loadTaskAsync(Number(programId)));
     dispatch(loadExamListAsync(Number(programId)));
   }, []);
   useEffect(() => {}, [examList]);
+  useEffect(() => {}, [taskList]);
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(false);
   const [TestWriterisOpen, TestWritersetIsOpen] = useState(false);
   const [TaskScoreisOpen, TaskScoresetIsOpen] = useState(false);
@@ -199,91 +203,70 @@ const TestDetail = () => {
         </Boxtitle>
         <TestTaskbox>
           <Taskbox>
-            <Tasklist user_gb={user_gb}>
-              <Taskcheck>
-                <TestIcon></TestIcon>
-              </Taskcheck>
-              <Taskname>
-                {user_gb === "MENTO" && (
-                  <div>
-                    <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                      [1차시]과제제목
-                    </p>
+            {taskList.map((value, index) => {
+              return (
+                <Tasklist user_gb={user_gb} key={index}>
+                  <Taskcheck>
+                    <TestIcon></TestIcon>
+                  </Taskcheck>
+                  <Taskname>
+                    {user_gb === "MENTO" && (
+                      <div>
+                        <p
+                          style={{ cursor: "pointer" }}
+                          onClick={TaskScoresPopup}
+                        >
+                          [{value.taskId}차시]{value.title}
+                        </p>
 
-                    {TaskScoreisOpen && <TaskscorePopup />}
-                  </div>
-                )}
-                {user_gb === "MENTEE" && (
-                  <div>
-                    <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                      [1차시]과제제목
-                    </p>
+                        {TaskScoreisOpen && <TaskscorePopup />}
+                      </div>
+                    )}
+                    {user_gb === "MENTEE" && (
+                      <div>
+                        <p
+                          style={{ cursor: "pointer" }}
+                          onClick={TaskScoresPopup}
+                        >
+                          [{value.taskId}차시]{value.title}
+                        </p>
 
-                    {TaskScoreisOpen && <TaskscorePopup />}
-                  </div>
-                )}
-                <Taskdetail>
-                  <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  {user_gb === "MENTO" && (
-                    <p style={{ marginTop: "0.5rem" }}>
-                      과제제출자: 이름, 이름, 이름
-                    </p>
-                  )}
-                  {user_gb === "MENTEE" && (
-                    <p style={{ marginTop: "0.5rem" }}>
-                      과제제출시간: 2023.03.03 10:30
-                    </p>
-                  )}
-                  {user_gb === "MENTEE" && (
-                    <p
-                      style={{
-                        textAlign: "right",
-                        marginRight: "1.5rem",
-                        color: "#FF8E41",
-                        fontSize: "0.8rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      제출완료
-                    </p>
-                  )}
-                </Taskdetail>
-              </Taskname>
-            </Tasklist>
-            <Tasklist user_gb={user_gb}>
-              <Taskcheck>
-                <TestIcon></TestIcon>
-              </Taskcheck>
-              <Taskname>
-                <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                  [1차시]과제제목
-                </p>
-                {TaskScoreisOpen && <TaskscorePopup />}
-                <Taskdetail>
-                  <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  {user_gb === "MENTO" && (
-                    <p style={{ marginTop: "0.5rem" }}>
-                      과제제출자: 이름, 이름, 이름
-                    </p>
-                  )}
-
-                  {user_gb === "MENTEE" && (
-                    <p
-                      style={{
-                        textAlign: "right",
-                        marginRight: "1.5rem",
-                        color: "#FF8E41",
-                        fontSize: "0.8rem",
-                        fontWeight: "bold",
-                        marginTop: "1rem",
-                      }}
-                    >
-                      과제제출하기
-                    </p>
-                  )}
-                </Taskdetail>
-              </Taskname>
-            </Tasklist>
+                        {TaskScoreisOpen && <TaskscorePopup />}
+                      </div>
+                    )}
+                    <Taskdetail>
+                      <p>
+                        과제수행기간 {value.startTaskDateTime} ~
+                        {value.endTaskDateTime}
+                      </p>
+                      {user_gb === "MENTO" && (
+                        <p style={{ marginTop: "0.5rem" }}>
+                          과제제출자: 이름, 이름, 이름
+                        </p>
+                      )}
+                      {user_gb === "MENTEE" && (
+                        <p style={{ marginTop: "0.5rem" }}>
+                          과제제출시간: {value.endTaskDateTime}
+                        </p>
+                      )}
+                      {user_gb === "MENTEE" && (
+                        <p
+                          style={{
+                            textAlign: "right",
+                            marginRight: "1.5rem",
+                            color: "#FF8E41",
+                            fontSize: "0.8rem",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          제출완료
+                        </p>
+                      )}
+                    </Taskdetail>
+                  </Taskname>
+                </Tasklist>
+              );
+            })}
           </Taskbox>
           <Testbox>
             {examList.map((value, index) => {
