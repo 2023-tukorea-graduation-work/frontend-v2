@@ -26,7 +26,6 @@ import { toast } from "react-toastify";
 import { useFieldArray, useForm, Controller } from "react-hook-form";
 import { useAppDispatch } from "../../../../store/hooks";
 import { uploadExamAsync } from "../../../../slice/program/programProgressExamSlice";
-import { ko } from "date-fns/esm/locale";
 // import { test, test } from "node:test";
 import { List } from "immutable";
 
@@ -77,9 +76,9 @@ const SavemethodPopup = () => {
 };
 
 const TestWriterForm = ({ subtogglePopup }: Props) => {
-  const programId = useParams();
   const [isOpen, setIsOpen] = useState(false);
-  const programId = useParams();
+  const { programId } = useParams();
+  const dispatch = useAppDispatch();
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -119,14 +118,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     testType: [],
   });
 
-  // interface MyQuestionOptions {
-  //   options: Array<any>;
-  // }
-
-  // const [myQuestionOpions, setMyQuestionOptions] = useState<MyQuestionOptions>({
-  //   options: [],
-  // })
-
   // Define a function to handle state updates
   const handleButtonClick = (index: any, type: any) => {
     const updatedTestType = { ...myTestType };
@@ -164,14 +155,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     setMyTestType(updatedTestType);
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
-
-  const onError = (data: any) => {
-    console.log(data);
-  };
-
   const alphaList = ["A", "B", "C", "D"];
 
   const handleChange = (
@@ -184,8 +167,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
 
     updatedTestType.testType[index] = updatedQuestion; // Update the question in the array
     setMyTestType(updatedTestType);
-
-    console.log(myTestType);
   };
 
   const handleQuestionOptionChange = (
@@ -201,8 +182,46 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     };
 
     setMyTestType(updatedTestType);
+  };
 
-    console.log(myTestType);
+  const onSubmit = (data: any) => {
+    const questionList = myTestType.testType.map((question) => {
+      if (question.questionType === "MULTIPLE_CHOICE_QUESTION") {
+        return {
+          questionType: question.questionType,
+          question: question.question,
+          score: Number(question.score),
+          options: question.options,
+        };
+      } else {
+        return {
+          questionType: question.questionType,
+          question: question.question,
+          score: Number(question.score),
+          subjectAnswer: question.subjectAnswer,
+        };
+      }
+    });
+
+    const request = {
+      programId: Number(programId),
+      examTitle: data.examTitle,
+      examStartTime: data.examStartTime,
+      examFinishTime: data.examFinishTime,
+      isExamRegistered: isExamRegistered,
+      examQuestionRegisterRequest: questionList,
+    };
+
+    console.log(request);
+
+    dispatch(uploadExamAsync(request));
+
+    // toast.success("시험 문제 저장 완료");
+    // subtogglePopup();
+  };
+
+  const onError = (data: any) => {
+    console.log(data);
   };
 
   return (
@@ -290,8 +309,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                   cursor: "pointer",
                 }}
                 onClick={() => {
-                  toast.success("임시저장완료");
-                  subtogglePopup();
                   setIsExamRegistered(false);
                 }}
               ></FaRegSave>
@@ -299,8 +316,8 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
             </TestSave>
 
             <TestSaveComplete>
-              <FaRegFileAlt
-                size="25"
+              <button
+                type="submit"
                 style={{
                   color: "#777777",
                   marginBottom: "0.3rem",
@@ -308,16 +325,11 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                   cursor: "pointer",
                 }}
                 onClick={() => {
-                  toast.success("시험출제완료");
-                  subtogglePopup();
                   setIsExamRegistered(true);
-                  // uploadExamAsync({
-                  //   programId: Number(programId),
-                  //   examTitle:
-                  // })
                 }}
-              ></FaRegFileAlt>
-              <p>저장(등록)</p>
+              >
+                저장
+              </button>
             </TestSaveComplete>
 
             <TestDelete>
@@ -343,7 +355,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
               <TWselect>
                 <TestSelect>
                   <Button
-                    type="submit"
                     variant="contained"
                     color="secondary"
                     sx={{ width: "5rem", height: "3vh" }}
@@ -354,7 +365,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                     객관식
                   </Button>
                   <Button
-                    type="submit"
                     variant="contained"
                     color="secondary"
                     sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}

@@ -29,7 +29,7 @@ export interface ExamForm {
   examStartTime: string;
   examFinishTime: string;
   isExamRegistered: boolean;
-  examQuestionRegisterRequest: Array<Multiple | Subjects>;
+  examQuestionRegisterRequest: Array<any>;
 }
 
 export interface ExamList {
