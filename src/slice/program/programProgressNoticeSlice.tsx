@@ -13,13 +13,13 @@ interface NoticeForm {
 }
 const initialState: Array<NoticeList> = [];
 
-export const loadNoticeListAsync = createAsyncThunk<Array<NoticeList>>(
+export const loadNoticeListAsync = createAsyncThunk<Array<NoticeList>, number>(
   "loadNoticeList",
-  async () => {
+  async (number) => {
     try {
       const { data } = await axios({
         method: "get",
-        url: "/notice/program/1",
+        url: `/notice/program/${number}`,
       });
       console.log(data);
       return data;

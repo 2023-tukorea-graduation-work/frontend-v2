@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 
-
 import {
   downloadMaterialAsync,
   loadMaterialAsync,
@@ -57,6 +56,7 @@ const HorizonLine = () => {
 const MaterialPopup = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
   const imageInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const togglePopup = () => {
