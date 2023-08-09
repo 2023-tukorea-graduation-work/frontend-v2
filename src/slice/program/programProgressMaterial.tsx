@@ -2,11 +2,12 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-interface materialForm {
+export interface materialForm {
   materialId: number | null;
   title: string | null;
   detail: string | null;
   fileName: string | null;
+  filepath: string | null;
 }
 
 interface initialStateType {
@@ -58,12 +59,9 @@ export const downloadMaterialAsync = createAsyncThunk<any, number>(
   async (materailId) => {
     const data = await axios({
       method: "get",
-      url: "/material/download",
-      params: {
-        materialId: materailId,
-      },
+      url: `/material/download/${materailId}`,
     });
-    console.log(data);
+    console.log(data)
     return data;
   }
 );

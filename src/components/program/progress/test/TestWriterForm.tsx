@@ -24,6 +24,8 @@ import { toast } from "react-toastify";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useAppDispatch } from "../../../../store/hooks";
 import { uploadExamAsync } from "../../../../slice/program/programProgressExamSlice";
+// import { test, test } from "node:test";
+import { List } from "immutable";
 
 interface Props {
   subtogglePopup(): void;
@@ -92,16 +94,42 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm();
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "programWeeks",
   });
 
-  const [selectedButton, setSelectedButton] = useState("button1");
+  // MyComponentState.ts
+  interface MyComponentState {
+    testType: string[];
+  }
 
-  const handleButtonClick = (buttonId: any) => {
-    setSelectedButton(buttonId);
+  const [myTestType, setMyTestType] = useState<MyComponentState>({
+    testType: [],
+  });
+
+  // Define a function to handle state updates
+  const handleButtonClick = (index : any, type : any) => {
+    // Create a new copy of myTestType
+    const updatedTestType = { ...myTestType };
+    // Update the testType at the specified index
+    updatedTestType.testType[index] = type;
+    // Set the updated state
+    setMyTestType(updatedTestType);
   };
+
+  const handleWriterClick = () => {
+    append({});
+    // Create a new copy of myTestType
+    const updatedTestType = { ...myTestType };
+    // Update the testType at the specified index
+    updatedTestType.testType[updatedTestType.testType.length] = "객관식";
+    // Set the updated state
+    setMyTestType(updatedTestType);
+    console.log(updatedTestType)
+    
+  }
 
   return (
     <TestWriterform>
@@ -204,7 +232,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
         {/* 아이콘 끝  */}
       </TestWriterbox>
       {fields.map((field, index) => (
-        <TestWriterlist>
+        <TestWriterlist >
           <TWselectbox>
             <p style={{ fontSize: "1.2rem" }}>1번문항</p>
 
@@ -215,7 +243,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                   variant="contained"
                   color="secondary"
                   sx={{ width: "5rem", height: "3vh" }}
-                  onClick={() => handleButtonClick("button1")}
+                  onClick={() => handleButtonClick(index, "객관식")}
                 >
                   객관식
                 </Button>
@@ -224,7 +252,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                   variant="contained"
                   color="secondary"
                   sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
-                  onClick={() => handleButtonClick("button2")}
+                  onClick={() => handleButtonClick(index, "주관식")}
                 >
                   주관식
                 </Button>
@@ -265,7 +293,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
             </TWselectscore>
           </TWselectbox>
 
-          {selectedButton === "button1" && (
+          {myTestType.testType[index] === "객관식" && (
             <TestWrite>
               <Testtext>
                 <Input
@@ -328,7 +356,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
             </TestWrite>
           )}
 
-          {selectedButton === "button2" && (
+          {myTestType.testType[index] === "주관식" && (
             <TestWrite>
               <Testtext>
                 <Input
@@ -362,7 +390,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
           size="20"
           color="#80b7d1"
           style={{ cursor: "pointer" }}
-          onClick={() => append({ detail: "" })}
+          onClick={() => handleWriterClick()}
         ></FaPlus>
       </TestWriterplus>
     </TestWriterform>
