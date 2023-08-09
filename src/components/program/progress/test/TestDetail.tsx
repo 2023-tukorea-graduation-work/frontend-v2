@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { loadQuestionListAsync } from "../../../../slice/program/programProgressQuestion";
 import { loadExamListAsync } from "../../../../slice/program/programProgressExamSlice";
+import { loadTaskAsync } from "../../../../slice/program/programProgressTask";
 
 const TaskRegisterPopup = () => {
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(true);
@@ -137,12 +138,15 @@ const TaskscorePopup = () => {
 const TestDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const examList = useAppSelector((state) => state.programProgressExam.list);
+  const taskList = useAppSelector((state) => state.programProgressTask.list);
   const dispatch = useAppDispatch();
   const { programId } = useParams() as any;
   useEffect(() => {
     dispatch(loadExamListAsync(Number(programId)));
+    dispatch(loadTaskAsync(Number(programId)));
   }, []);
   useEffect(() => {}, [examList]);
+  useEffect(() => {}, [taskList]);
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(false);
   const [TestWriterisOpen, TestWritersetIsOpen] = useState(false);
   const [TaskScoreisOpen, TaskScoresetIsOpen] = useState(false);
@@ -199,16 +203,21 @@ const TestDetail = () => {
         </Boxtitle>
         <TestTaskbox>
           <Taskbox>
-            <Tasklist user_gb={user_gb}>
-              <Taskcheck>
-                <TestIcon></TestIcon>
-              </Taskcheck>
-              <Taskname>
-                {user_gb === "MENTO" && (
-                  <div>
-                    <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                      [1차시]과제제목
-                    </p>
+            {taskList.map((value, index) => {
+              return (
+                <Tasklist user_gb={user_gb}>
+                  <Taskcheck>
+                    <TestIcon></TestIcon>
+                  </Taskcheck>
+                  <Taskname>
+                    {user_gb === "MENTO" && (
+                      <div>
+                        <p
+                          style={{ cursor: "pointer" }}
+                          onClick={TaskScoresPopup}
+                        >
+                          [1차시]과제제목
+                        </p>
                         {TaskScoreisOpen && <TaskscorePopup />}
                       </div>
                     )}
@@ -257,7 +266,6 @@ const TestDetail = () => {
                 </Tasklist>
               );
             })}
->>>>>>> 6a9f3665450a5700cebbc59c3f07fafade979f13
           </Taskbox>
           <Testbox>
             {examList.map((value, index) => {
