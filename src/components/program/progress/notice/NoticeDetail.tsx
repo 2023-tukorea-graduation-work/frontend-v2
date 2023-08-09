@@ -4,13 +4,7 @@ import { FaUserCircle, FaPlus } from "react-icons/fa";
 import { loadNoticeListAsync } from "../../../../slice/program/programProgressNoticeSlice";
 import { useAppDispatch } from "../../../../store/hooks";
 import { useAppSelector } from "../../../../store/hooks";
-<<<<<<< HEAD
 import { useParams } from "react-router-dom";
-=======
-import NoticeSubmitPopup from "./NoticePopup/ NoticeSubmitPopup";
-import NoticePopup from "./NoticePopup/NoticeContentPopup";
-
->>>>>>> ba12192346d80cd784abf039757a6f90ac284b0d
 const HorizonLine = () => {
   return (
     <div

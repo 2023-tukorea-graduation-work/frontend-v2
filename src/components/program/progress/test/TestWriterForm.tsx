@@ -131,6 +131,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
 
   // Define a function to handle state updates
   const handleButtonClick = (index: any, type: any) => {
+
 <<<<<<< HEAD
 =======
     // Create a new copy of myTestType
@@ -168,6 +169,9 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
       subjectAnswer: null,
     };
     setMyTestType(updatedTestType);
+
+    console.log(updatedTestType);
+
 <<<<<<< HEAD
   };
 
@@ -433,9 +437,73 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
               <p>저장(등록)</p>
             </TestSaveComplete>
 
+
+          <TestDelete>
+            <FaTrashAlt
+              size="25"
+              style={{
+                color: "#777777",
+                marginBottom: "0.3rem",
+                marginLeft: "0.6rem",
+                cursor: "pointer",
+              }}
+            ></FaTrashAlt>
+            <p>전체삭제</p>
+          </TestDelete>
+        </TWTitle>
+        {/* 아이콘 끝  */}
+      </TestWriterbox>
+      {fields.map((field, index) => (
+        <TestWriterlist>
+          <TWselectbox>
+            <p style={{ fontSize: "1.2rem" }}>1번문항</p>
+
+            <TWselect>
+              <TestSelect>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  sx={{ width: "5rem", height: "3vh" }}
+                  onClick={() => handleButtonClick(index, "객관식")}
+                >
+                  객관식
+                </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
+                  onClick={() => handleButtonClick(index, "주관식")}
+                >
+                  주관식
+                </Button>
+              </TestSelect>
+              {/* <FormControl fullWidth>
+              <InputLabel color="secondary" id="demo-simple-select-label">
+                유형선택
+              </InputLabel>
+              <Select
+                color="secondary"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={Number}
+                label="객관식"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>객관식</MenuItem>
+                <MenuItem value={20}>주관식</MenuItem>
+              </Select>
+            </FormControl> */}
+            </TWselect>
+
+            <TWselectscore>
+              <p
+
             <TestDelete>
               <FaTrashAlt
                 size="25"
+
                 style={{
                   color: "#777777",
                   marginBottom: "0.3rem",

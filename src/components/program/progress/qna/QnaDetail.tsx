@@ -4,14 +4,14 @@ import { FaUserCircle, FaPlus } from "react-icons/fa";
 import QnaIcon from "./QnaIcon";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { loadQuestionListAsync } from "../../../../slice/program/programProgressQuestion";
-<<<<<<< HEAD
+
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useParams } from "react-router-dom";
-=======
+
 import SubmitPopup from "./Popup/QnasubmitPopup";
 import Popup from "./Popup/QnaContentPopup";
->>>>>>> ba12192346d80cd784abf039757a6f90ac284b0d
+
+import { useParams } from "react-router-dom";
 
 const HorizonLine = () => {
   return (

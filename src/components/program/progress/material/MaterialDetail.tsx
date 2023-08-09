@@ -4,7 +4,7 @@ import { FaUserCircle, FaPlus } from "react-icons/fa";
 import MaterialPopup from "./materialPopup/MaterialSubmitPopup";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 
-
+import materialForm from "../../../../slice/program/programProgressMaterial";
 import {
   // downloadMaterialAsync,
   loadMaterialAsync,
@@ -23,6 +23,27 @@ const HorizonLine = () => {
       }}
     ></div>
   );
+};
+
+const handleFileDownload = (value: any) => {
+  console.log(value);
+  fetch(value.filepath, { method: "GET" })
+    .then((res) => {
+      return res.blob();
+    })
+    .then((blob) => {
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "file1.pdf";
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    })
+    .catch((err) => {
+      console.error("err: ", err);
+    });
 };
 
 const MaterialPopup = () => {
@@ -242,8 +263,7 @@ const MaterialDetail = () => {
                   <div style={{ marginTop: "0.5rem" }}>
                     <button
                       onClick={() => {
-                        if (value.materialId)
-                          handleFileDownload(value);
+                        if (value.materialId) handleFileDownload(value);
                       }}
                     >
                       다운로드
