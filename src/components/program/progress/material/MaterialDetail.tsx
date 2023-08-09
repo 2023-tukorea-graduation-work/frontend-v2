@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 
-import materialForm from "../../../../slice/program/programProgressMaterial";
 
+import materialForm from "../../../../slice/program/programProgressMaterial";
 import {
   // downloadMaterialAsync,
   loadMaterialAsync,
@@ -80,6 +80,7 @@ const handleFileDownload = (value: any) => {
 const MaterialPopup = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
   const imageInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const togglePopup = () => {

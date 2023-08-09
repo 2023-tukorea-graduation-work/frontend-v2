@@ -27,7 +27,7 @@ function App() {
         <Routes>
           <Route path="/main" element={<MainPage />}></Route>
           <Route
-            path="/projectProgress"
+            path="/projectProgress/:programId"
             element={<ProgramProgressPage />}
           ></Route>
 

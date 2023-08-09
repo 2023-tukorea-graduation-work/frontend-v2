@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { loadNoticeListAsync } from "../../../../slice/program/programProgressNoticeSlice";
 import { useAppDispatch } from "../../../../store/hooks";
 import { useAppSelector } from "../../../../store/hooks";
+import { useParams } from "react-router-dom";
 const HorizonLine = () => {
   return (
     <div
@@ -94,6 +95,7 @@ const NoticeDetail = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
+  const { params } = useParams();
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
@@ -101,7 +103,7 @@ const NoticeDetail = () => {
     ssetIsOpen(!sisOpen);
   };
   useEffect(() => {
-    dispatch(loadNoticeListAsync());
+    dispatch(loadNoticeListAsync(Number(params)));
   }, [isOpen]);
   return (
     <NoticeForm>
