@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { ko } from "date-fns/esm/locale";
 
 import {
   Button,
@@ -77,7 +76,6 @@ const SavemethodPopup = () => {
 };
 
 const TestWriterForm = ({ subtogglePopup }: Props) => {
-  const programId = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const programId = useParams();
 
