@@ -2,44 +2,43 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-interface Multiple {
+export interface Multiple {
   questionType: string;
   question: string;
   score: number;
-  options: Array<MutlipleOption>;
-  subjectAnswer: null;
-  multipleChoiceType: boolean;
+  options: Array<MutlipleOption | null>;
+  subjectAnswer: string | null;
 }
 
-interface MutlipleOption {
+export interface MutlipleOption {
   choices: string;
   isCorrect: boolean;
 }
 
-interface Subject {
+export interface Subjects {
   questionType: string;
   question: string;
   score: number;
-  options: null;
-  subjectAnswer: string;
-  multipleChoiceType: boolean;
+  options: Array<MutlipleOption | null>;
+  subjectAnswer: string | null;
 }
 
-interface ExamForm {
+export interface ExamForm {
   programId: number;
   examTitle: string;
   examStartTime: string;
   examFinishTime: string;
   isExamRegistered: boolean;
-  examQuestionRegisterRequest: Array<Multiple | Subject>;
+  examQuestionRegisterRequest: Array<Multiple | Subjects>;
 }
 
-interface ExamList {
+export interface ExamList {
   examId: number;
   examTitle: string;
   examStartTime: string;
   examFinishTime: string;
 }
+
 interface initialStateType {
   list: Array<ExamList>;
 }

@@ -209,81 +209,55 @@ const TestDetail = () => {
                     <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
                       [1차시]과제제목
                     </p>
+                        {TaskScoreisOpen && <TaskscorePopup />}
+                      </div>
+                    )}
+                    {user_gb === "MENTEE" && (
+                      <div>
+                        <p
+                          style={{ cursor: "pointer" }}
+                          onClick={TaskScoresPopup}
+                        >
+                          [{value.taskId}차시]{value.title}
+                        </p>
 
-                    {TaskScoreisOpen && <TaskscorePopup />}
-                  </div>
-                )}
-                {user_gb === "MENTEE" && (
-                  <div>
-                    <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                      [1차시]과제제목
-                    </p>
-
-                    {TaskScoreisOpen && <TaskscorePopup />}
-                  </div>
-                )}
-                <Taskdetail>
-                  <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  {user_gb === "MENTO" && (
-                    <p style={{ marginTop: "0.5rem" }}>
-                      과제제출자: 이름, 이름, 이름
-                    </p>
-                  )}
-                  {user_gb === "MENTEE" && (
-                    <p style={{ marginTop: "0.5rem" }}>
-                      과제제출시간: 2023.03.03 10:30
-                    </p>
-                  )}
-                  {user_gb === "MENTEE" && (
-                    <p
-                      style={{
-                        textAlign: "right",
-                        marginRight: "1.5rem",
-                        color: "#FF8E41",
-                        fontSize: "0.8rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      제출완료
-                    </p>
-                  )}
-                </Taskdetail>
-              </Taskname>
-            </Tasklist>
-            <Tasklist user_gb={user_gb}>
-              <Taskcheck>
-                <TestIcon></TestIcon>
-              </Taskcheck>
-              <Taskname>
-                <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                  [1차시]과제제목
-                </p>
-                {TaskScoreisOpen && <TaskscorePopup />}
-                <Taskdetail>
-                  <p>과제수행기간 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  {user_gb === "MENTO" && (
-                    <p style={{ marginTop: "0.5rem" }}>
-                      과제제출자: 이름, 이름, 이름
-                    </p>
-                  )}
-
-                  {user_gb === "MENTEE" && (
-                    <p
-                      style={{
-                        textAlign: "right",
-                        marginRight: "1.5rem",
-                        color: "#FF8E41",
-                        fontSize: "0.8rem",
-                        fontWeight: "bold",
-                        marginTop: "1rem",
-                      }}
-                    >
-                      과제제출하기
-                    </p>
-                  )}
-                </Taskdetail>
-              </Taskname>
-            </Tasklist>
+                        {TaskScoreisOpen && <TaskscorePopup />}
+                      </div>
+                    )}
+                    <Taskdetail>
+                      <p>
+                        과제수행기간 {value.startTaskDateTime} ~
+                        {value.endTaskDateTime}
+                      </p>
+                      {user_gb === "MENTO" && (
+                        <p style={{ marginTop: "0.5rem" }}>
+                          과제제출자: 이름, 이름, 이름
+                        </p>
+                      )}
+                      {user_gb === "MENTEE" && (
+                        <p style={{ marginTop: "0.5rem" }}>
+                          과제제출시간: {value.endTaskDateTime}
+                        </p>
+                      )}
+                      {user_gb === "MENTEE" && (
+                        <p
+                          style={{
+                            textAlign: "right",
+                            marginRight: "1.5rem",
+                            color: "#FF8E41",
+                            fontSize: "0.8rem",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          제출완료
+                        </p>
+                      )}
+                    </Taskdetail>
+                  </Taskname>
+                </Tasklist>
+              );
+            })}
+>>>>>>> 6a9f3665450a5700cebbc59c3f07fafade979f13
           </Taskbox>
           <Testbox>
             {examList.map((value, index) => {
