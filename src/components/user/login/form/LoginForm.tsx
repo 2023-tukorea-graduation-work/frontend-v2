@@ -74,7 +74,7 @@ const LoginForm = () => {
           />
           <CheckStyled>
             <Checkbox color={user_gb === "MENTEE" ? "primary" : "secondary"} />
-            로그인 상태 유지
+            로그인 상태 유지123
           </CheckStyled>
           <Button
             type="submit"
