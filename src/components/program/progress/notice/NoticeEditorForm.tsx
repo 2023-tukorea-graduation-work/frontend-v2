@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Input } from "@mui/material";
 import { FaUser } from "react-icons/fa";
-import { useAppDispatch } from "../../../../../store/hooks";
+import { useAppDispatch } from "../../../../store/hooks";
 import "react-quill/dist/quill.snow.css";
 interface Props {
   subtogglePopup(): void;

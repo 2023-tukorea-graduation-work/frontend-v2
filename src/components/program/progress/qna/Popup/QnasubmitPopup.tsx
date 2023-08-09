@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FaRegWindowClose } from "react-icons/fa";
-import TestEditorForm from "./TestEditorForm";
+import TestEditorForm from "../TestEditorForm";
 
 const SubmitPopup = () => {
   const [sisOpen, ssetIsOpen] = useState(true);

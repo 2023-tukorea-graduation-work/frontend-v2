@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FaRegWindowClose } from "react-icons/fa";
-import NoticeEditorForm from "./NoticeEditorForm";
+import NoticeEditorForm from "../NoticeEditorForm";
 
 const NoticeSubmitPopup = () => {
   const [sisOpen, ssetIsOpen] = useState(true);
