@@ -1,22 +1,13 @@
 import { Calendar, momentLocalizer, Event } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import React, { useState, useRef, useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Button, Input, Switch, FormControlLabel } from "@mui/material";
+import { Button, Input } from "@mui/material";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../../../store/hooks";
-import { toast } from "react-toastify";
-import {
-  FaUserCircle,
-  FaRegWindowClose,
-  FaPlus,
-  FaCalendarAlt,
-} from "react-icons/fa";
-import { TextField } from "@mui/material";
-import zIndex from "@mui/material/styles/zIndex";
-import userEvent from "@testing-library/user-event";
+import { FaRegWindowClose, FaCalendarAlt } from "react-icons/fa";
 
 // --------------------------------------------------------다른사람 일정 가져오는거-----------
 // const fetchEvents = async (): Promise<any[]> => {

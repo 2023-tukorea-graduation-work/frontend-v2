@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
-import {
-  Button,
-  FormControl,
-  Input,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Typography,
-} from "@mui/material";
+import { Button, Input, SelectChangeEvent } from "@mui/material";
 import {
   FaPlus,
   FaTrashAlt,
@@ -110,7 +101,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
   });
 
   // Define a function to handle state updates
-  const handleButtonClick = (index : any, type : any) => {
+  const handleButtonClick = (index: any, type: any) => {
     // Create a new copy of myTestType
     const updatedTestType = { ...myTestType };
     // Update the testType at the specified index
@@ -127,9 +118,8 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     updatedTestType.testType[updatedTestType.testType.length] = "객관식";
     // Set the updated state
     setMyTestType(updatedTestType);
-    console.log(updatedTestType)
-    
-  }
+    console.log(updatedTestType);
+  };
 
   return (
     <TestWriterform>
@@ -232,7 +222,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
         {/* 아이콘 끝  */}
       </TestWriterbox>
       {fields.map((field, index) => (
-        <TestWriterlist >
+        <TestWriterlist>
           <TWselectbox>
             <p style={{ fontSize: "1.2rem" }}>1번문항</p>
 

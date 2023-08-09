@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
-import NoticeEditorForm from "./NoticeEditorForm";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { FaUserCircle, FaPlus } from "react-icons/fa";
 import { loadNoticeListAsync } from "../../../../slice/program/programProgressNoticeSlice";
 import { useAppDispatch } from "../../../../store/hooks";
 import { useAppSelector } from "../../../../store/hooks";
+import NoticeSubmitPopup from "./NoticePopup/ NoticeSubmitPopup";
+import NoticePopup from "./NoticePopup/NoticeContentPopup";
+
 const HorizonLine = () => {
   return (
     <div
@@ -18,74 +18,6 @@ const HorizonLine = () => {
         margin: "8px 0 10px",
       }}
     ></div>
-  );
-};
-
-const NoticeSubmitPopup = () => {
-  const [sisOpen, ssetIsOpen] = useState(true);
-  const subtogglePopup = () => {
-    ssetIsOpen(!sisOpen);
-  };
-  return (
-    <div>
-      {sisOpen && (
-        <NSubmitPopupbox>
-          <NSubmitPopupinner>
-            <FaRegWindowClose
-              size="15"
-              style={{ marginLeft: "99%" }}
-              cursor="pointer"
-              onClick={subtogglePopup}
-            ></FaRegWindowClose>
-            <NoticeEditorForm
-              subtogglePopup={subtogglePopup}
-            ></NoticeEditorForm>
-          </NSubmitPopupinner>
-        </NSubmitPopupbox>
-      )}
-    </div>
-  );
-};
-
-const NoticePopup = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
-  return (
-    <div>
-      {isOpen && (
-        <NPopupbox>
-          <NPopupinner>
-            <NPopupFrom>
-              <NPopupStudent>
-                <FaUserCircle size="20" color="#777777"></FaUserCircle>
-                <p>박서영</p>
-                <p style={{ fontSize: "0.6rem" }}>2023.03.15</p>
-              </NPopupStudent>
-              <FaRegWindowClose
-                cursor="pointer"
-                size="20"
-                color="#777777"
-                onClick={togglePopup}
-              ></FaRegWindowClose>
-            </NPopupFrom>
-            <HorizonLine></HorizonLine>
-            <p style={{ marginTop: "1rem" }}>공지123제목</p>
-            <p
-              style={{
-                marginTop: "1rem",
-                marginLeft: "1rem",
-                marginBottom: "6rem",
-              }}
-            >
-              공지내용
-            </p>
-          </NPopupinner>
-        </NPopupbox>
-      )}
-    </div>
   );
 };
 
@@ -253,54 +185,5 @@ const Noticetextinfo = styled.div`
   justify-content: space-between;
   width: 40%;
 `;
-const NPopupbox = styled.div`
-  position: fixed;
-  top: 10%;
-  left: 0;
-  width: 100%;
-  height: 90%;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(3px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const NPopupFrom = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-`;
-const NPopupinner = styled.div`
-  background-color: white;
-  width: 50%;
-  height: 50%;
-  padding: 1rem;
-  border-radius: 20px;
-`;
-const NPopupStudent = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 13%;
-  margin-right: 84%;
-  color: #777777;
-`;
-const NSubmitPopupbox = styled.div`
-  position: fixed;
-  top: 8%;
-  left: 0;
-  width: 74%;
-  height: 75%;
-  margin-top: 4%;
-  margin-left: 21%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const NSubmitPopupinner = styled.div`
-  background-color: white;
-  width: 100%;
-  height: 100%;
-`;
+
 export default NoticeDetail;

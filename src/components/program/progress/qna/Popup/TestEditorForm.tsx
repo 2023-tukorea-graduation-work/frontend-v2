@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { uploadQuestiontAsync } from "../../../../slice/program/programProgressQuestion";
-import {toast} from 'react-toastify'
+import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
+import { uploadQuestiontAsync } from "../../../../../slice/program/programProgressQuestion";
+import { toast } from "react-toastify";
 
 interface Props {
   subtogglePopup(): void;

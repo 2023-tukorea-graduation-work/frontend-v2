@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import {
   FaPlus,
-  FaCheckCircle,
   FaRegWindowClose,
   FaAngleDoubleLeft,
+  FaUserCircle,
 } from "react-icons/fa";
 import TaskRegisterEditorForm from "./TaskRegisterEditorForm";
 import TestWriterForm from "./TestWriterForm";
@@ -17,6 +17,7 @@ const TaskRegisterPopup = () => {
   const TaskRegistertogglePopup = () => {
     TaskRegistersetIsOpen(!TaskRegisterisOpen);
   };
+
   return (
     <div>
       {TaskRegisterisOpen && (
@@ -46,6 +47,46 @@ const TaskRegisterPopup = () => {
             ></TaskRegisterEditorForm>
           </TaskRegisterPopupinner>
         </TaskRegisterPopupbox>
+      )}
+    </div>
+  );
+};
+
+const MenteeTaskRegisterPopup = () => {
+  const [MenteeTaskRegisterisOpen, MenteeTaskRegistersetIsOpen] =
+    useState(true);
+  const MenteeTaskRegistertogglePopup = () => {
+    MenteeTaskRegistersetIsOpen(!MenteeTaskRegisterisOpen);
+  };
+  return (
+    <div>
+      {MenteeTaskRegisterisOpen && (
+        <MenteeTaskRegisterPopupbox>
+          <MenteeTaskRegisterPopupinner>
+            <p
+              style={{
+                marginTop: "2rem",
+                fontSize: "1.1rem",
+                fontWeight: "bold",
+              }}
+            >
+              <FaAngleDoubleLeft
+                style={{ marginRight: "0.5rem" }}
+              ></FaAngleDoubleLeft>
+              과제등록하기
+            </p>
+
+            <FaRegWindowClose
+              size="15"
+              style={{ marginLeft: "99%" }}
+              cursor="pointer"
+              onClick={MenteeTaskRegistertogglePopup}
+            ></FaRegWindowClose>
+            <TaskRegisterEditorForm
+              subtogglePopup={MenteeTaskRegistertogglePopup}
+            ></TaskRegisterEditorForm>
+          </MenteeTaskRegisterPopupinner>
+        </MenteeTaskRegisterPopupbox>
       )}
     </div>
   );
@@ -86,6 +127,66 @@ const TestWritePopup = () => {
             ></TestWriterForm>
           </TestWriterPopupinner>
         </TestWriterPopupbox>
+      )}
+    </div>
+  );
+};
+
+const HorizonLine = () => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        textAlign: "center",
+        borderBottom: "1px solid #d6d6d6",
+        lineHeight: "0.1em",
+        margin: "8px 0 10px",
+      }}
+    ></div>
+  );
+};
+
+const MenteeTaskConfirmPopup = () => {
+  const [MenteeTaskConfirmisOpen, MenteeTaskConfirmsetIsOpen] = useState(true);
+  const MenteeTaskConfirmtogglePopup = () => {
+    MenteeTaskConfirmsetIsOpen(!MenteeTaskConfirmisOpen);
+  };
+  return (
+    <div>
+      {MenteeTaskConfirmisOpen && (
+        <MenteeTaskConfirmPopupbox>
+          <MenteeTaskConfirmPopupinner>
+            <MenteeTaskConfirmForm>
+              <MenteeTaskConfirmStudent>
+                <FaUserCircle size="20" color="#777777"></FaUserCircle>
+                <p style={{ lineHeight: "1.3rem" }}>박서영</p>
+              </MenteeTaskConfirmStudent>
+              <FaRegWindowClose
+                cursor="pointer"
+                size="15"
+                color="#777777"
+                onClick={MenteeTaskConfirmtogglePopup}
+              ></FaRegWindowClose>
+            </MenteeTaskConfirmForm>
+            <HorizonLine></HorizonLine>
+
+            <p style={{ marginLeft: "1.5rem", fontSize: "0.9rem" }}>
+              [1차시]과제제목
+            </p>
+
+            <HorizonLine></HorizonLine>
+            <MenteeTaskDetailbox>
+              <p>과제 상세 내용</p>
+              <p style={{ marginTop: "1rem" }}>업로드한 파일명</p>
+            </MenteeTaskDetailbox>
+            <HorizonLine></HorizonLine>
+            <MenteeTaskScorebox>
+              <p style={{ marginBottom: "0.7rem" }}>평가점수</p>
+              <p style={{ fontWeight: "bold" }}>100</p>
+              <p style={{ marginTop: "1.5rem" }}>평가의견</p>
+            </MenteeTaskScorebox>
+          </MenteeTaskConfirmPopupinner>
+        </MenteeTaskConfirmPopupbox>
       )}
     </div>
   );
@@ -135,6 +236,9 @@ const TestDetail = () => {
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(false);
   const [TestWriterisOpen, TestWritersetIsOpen] = useState(false);
   const [TaskScoreisOpen, TaskScoresetIsOpen] = useState(false);
+  const [MenteeTaskConfirmisOpen, MenteeTaskConfirmsetIsOpen] = useState(false);
+  const [MenteeTaskRegisterisOpen, MenteeTaskRegistersetIsOpen] =
+    useState(false);
   const TaskRegistersPopup = () => {
     TaskRegistersetIsOpen(!TaskRegisterisOpen);
   };
@@ -143,6 +247,12 @@ const TestDetail = () => {
   };
   const TaskScoresPopup = () => {
     TaskScoresetIsOpen(!TaskScoreisOpen);
+  };
+  const MenteeTaskConfirmsPopup = () => {
+    MenteeTaskConfirmsetIsOpen(!MenteeTaskConfirmisOpen);
+  };
+  const MenteeTaskRegistersPopup = () => {
+    MenteeTaskRegistersetIsOpen(!MenteeTaskRegisterisOpen);
   };
   return (
     <TestForm>
@@ -223,17 +333,22 @@ const TestDetail = () => {
                     </p>
                   )}
                   {user_gb === "MENTEE" && (
-                    <p
-                      style={{
-                        textAlign: "right",
-                        marginRight: "1.5rem",
-                        color: "#FF8E41",
-                        fontSize: "0.8rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      제출완료
-                    </p>
+                    <div>
+                      <p
+                        style={{
+                          textAlign: "right",
+                          marginRight: "1.5rem",
+                          color: "#FF8E41",
+                          fontSize: "0.8rem",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                        }}
+                        onClick={MenteeTaskConfirmsPopup}
+                      >
+                        제출완료
+                      </p>
+                      {MenteeTaskConfirmisOpen && <MenteeTaskConfirmPopup />}
+                    </div>
                   )}
                 </Taskdetail>
               </Taskname>
@@ -256,18 +371,23 @@ const TestDetail = () => {
                   )}
 
                   {user_gb === "MENTEE" && (
-                    <p
-                      style={{
-                        textAlign: "right",
-                        marginRight: "1.5rem",
-                        color: "#FF8E41",
-                        fontSize: "0.8rem",
-                        fontWeight: "bold",
-                        marginTop: "1rem",
-                      }}
-                    >
-                      과제제출하기
-                    </p>
+                    <div>
+                      <p
+                        style={{
+                          textAlign: "right",
+                          marginRight: "1.5rem",
+                          color: "#FF8E41",
+                          fontSize: "0.8rem",
+                          fontWeight: "bold",
+                          marginTop: "1rem",
+                          cursor: "pointer",
+                        }}
+                        onClick={MenteeTaskRegistersPopup}
+                      >
+                        과제제출하기
+                      </p>
+                      {MenteeTaskRegisterisOpen && <MenteeTaskRegisterPopup />}
+                    </div>
                   )}
                 </Taskdetail>
               </Taskname>
@@ -505,6 +625,74 @@ const TaskScorePopupbox = styled.div`
   align-items: center;
 `;
 const TaskScorePopupinner = styled.div`
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  font-size: 0.8rem;
+`;
+
+const MenteeTaskConfirmPopupbox = styled.div`
+  position: fixed;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+`;
+const MenteeTaskConfirmPopupinner = styled.div`
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  border-radius: 20px;
+`;
+
+const MenteeTaskConfirmForm = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 1.5rem;
+  margin-left: 1rem;
+  font-size: 0.8rem;
+`;
+const MenteeTaskConfirmStudent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 7%;
+  margin-right: 90%;
+  color: #777777;
+`;
+const MenteeTaskDetailbox = styled.div`
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
+  width: 92%;
+  height: 20%;
+`;
+const MenteeTaskScorebox = styled.div`
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+`;
+
+const MenteeTaskRegisterPopupbox = styled.div`
+  position: fixed;
+  top: 8%;
+  left: 0;
+  width: 74%;
+  height: 75%;
+  margin-top: 2%;
+  margin-left: 21%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const MenteeTaskRegisterPopupinner = styled.div`
   background-color: white;
   width: 100%;
   height: 100%;
