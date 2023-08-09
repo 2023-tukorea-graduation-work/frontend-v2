@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { ko } from "date-fns/esm/locale";
 import DatePicker from "react-datepicker";
@@ -15,6 +15,8 @@ import axios from "axios";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { programCreateAsync } from "../../../slice/program/programCreationSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface ButtonProps {
   increaseStep: () => void;
@@ -34,6 +36,7 @@ const Detail = (props: ButtonProps) => {
   const programCategories = useAppSelector(
     (state) => state.programCreation.programCategories
   );
+  const status = useAppSelector((state) => state.programCreation.status);
   const memberId = useAppSelector((state) => state.login.object.USER_NO);
   const dispatch = useAppDispatch();
   const teachingStyle = [
@@ -45,11 +48,20 @@ const Detail = (props: ButtonProps) => {
   const onSubmit = (data: any) => {
     data.memberId = memberId;
     data.programCategories = programCategories;
-    dispatch(programCreateAsync(data));
+    dispatch(programCreateAsync(data)).then((a) => {
+      console.log(a.payload.status);
+      if (a.payload.status === 200) {
+        toast.success("작성완료");
+        navigate("/programList");
+      } else {
+        toast.warn("작성실패");
+      }
+    });
   };
   const onError = (error: any) => {
     console.log(error);
   };
+  const navigate = useNavigate();
 
   return (
     <form

@@ -6,6 +6,7 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { useAppSelector } from "../../../../store/hooks";
 import NoticeSubmitPopup from "./NoticePopup/ NoticeSubmitPopup";
 import NoticePopup from "./NoticePopup/NoticeContentPopup";
+import { useParams } from "react-router-dom";
 
 const HorizonLine = () => {
   return (
@@ -26,6 +27,7 @@ const NoticeDetail = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
+  const { params } = useParams();
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
@@ -33,7 +35,7 @@ const NoticeDetail = () => {
     ssetIsOpen(!sisOpen);
   };
   useEffect(() => {
-    dispatch(loadNoticeListAsync());
+    dispatch(loadNoticeListAsync(Number(params)));
   }, [isOpen]);
   return (
     <NoticeForm>

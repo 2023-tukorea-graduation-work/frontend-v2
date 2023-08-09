@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { creationSlice } from "../user/creactionSlice";
-import dateFormat from "../../utils/dateFormat";
-
+import { dateFormat } from "../../utils/dateFormat";
+import { toast } from "react-toastify";
 interface intial {
   programCategories: Array<FianlData> | null;
+  status: number | null;
 }
 const initialState: intial = {
   programCategories: null,
+  status: null,
 };
 interface FianlData {
   parent: string;
@@ -29,10 +31,11 @@ interface sendInfo {
 
 export const programCreateAsync = createAsyncThunk<any, sendInfo>(
   "programCreate",
-  async (creationInfo) => {
+  async (creationInfo, { rejectWithValue }) => {
+    console.log(`${dateFormat(creationInfo.pro_finish_date)}`);
     try {
       console.log(creationInfo);
-      const { data } = await axios({
+      const data = await axios({
         method: "post",
         url: "/program",
         data: {
@@ -52,7 +55,12 @@ export const programCreateAsync = createAsyncThunk<any, sendInfo>(
       console.log(data);
       return data;
     } catch (e) {
-      console.log(e);
+      let error: any = e;
+      console.log(error.response);
+      if (!error.response) {
+        throw error.response;
+      }
+      return rejectWithValue("No user found");
     }
   }
 );
@@ -66,7 +74,17 @@ export const programCreationSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(programCreateAsync.fulfilled, (state, { payload }) => {});
+    builder.addCase(programCreateAsync.pending, (state, { payload }) => {
+      state.status = null;
+    });
+    builder.addCase(programCreateAsync.fulfilled, (state, { payload }) => {
+      state.status = payload.status;
+      console.log(state);
+      toast.done("프로그램 생성성공");
+    });
+    builder.addCase(programCreateAsync.rejected, (state, { payload }) => {
+      toast.error("프로그램 생성실패");
+    });
   },
 });
 export const { addCategories } = programCreationSlice.actions;

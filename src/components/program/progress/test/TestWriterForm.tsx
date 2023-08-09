@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
-import { Button, Input, SelectChangeEvent } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Input,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
+
 import {
   FaPlus,
   FaTrashAlt,
@@ -12,11 +22,20 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm, Controller } from "react-hook-form";
 import { useAppDispatch } from "../../../../store/hooks";
 import { uploadExamAsync } from "../../../../slice/program/programProgressExamSlice";
+import { ko } from "date-fns/esm/locale";
 // import { test, test } from "node:test";
 import { List } from "immutable";
+
+import {
+  Multiple,
+  Subjects,
+  MutlipleOption,
+} from "../../../../slice/program/programProgressExamSlice";
+import { Subject } from "@mui/icons-material";
+import { useParams } from "react-router-dom";
 
 interface Props {
   subtogglePopup(): void;
@@ -58,6 +77,8 @@ const SavemethodPopup = () => {
 
 const TestWriterForm = ({ subtogglePopup }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const programId = useParams();
+
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
@@ -73,11 +94,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
     setEndDate(date);
   };
 
-  const [Number, setNumber] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setNumber(event.target.value as string);
-  };
+  const [isExamRegistered, setIsExamRegistered] = useState(false);
 
   const {
     control,
@@ -88,123 +105,223 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "programWeeks",
+    name: "examQuestionRegisterRequest",
   });
 
   // MyComponentState.ts
-  interface MyComponentState {
-    testType: string[];
+  interface MyTestType {
+    testType: Array<any>;
   }
 
-  const [myTestType, setMyTestType] = useState<MyComponentState>({
+  const [myTestType, setMyTestType] = useState<MyTestType>({
     testType: [],
   });
 
+  // interface MyQuestionOptions {
+  //   options: Array<any>;
+  // }
+
+  // const [myQuestionOpions, setMyQuestionOptions] = useState<MyQuestionOptions>({
+  //   options: [],
+  // })
+
   // Define a function to handle state updates
   const handleButtonClick = (index: any, type: any) => {
-    // Create a new copy of myTestType
+
     const updatedTestType = { ...myTestType };
-    // Update the testType at the specified index
-    updatedTestType.testType[index] = type;
-    // Set the updated state
+    if (type == "MULTIPLE_CHOICE_QUESTION") {
+      updatedTestType.testType[index] = {
+        questionType: type,
+        question: "",
+        score: 0,
+        options: [],
+        subjectAnswer: null,
+      };
+    } else {
+      updatedTestType.testType[index] = {
+        questionType: type,
+        question: "",
+        score: 0,
+        options: [],
+        subjectAnswer: "",
+      };
+    }
     setMyTestType(updatedTestType);
   };
 
   const handleWriterClick = () => {
     append({});
-    // Create a new copy of myTestType
+
     const updatedTestType = { ...myTestType };
-    // Update the testType at the specified index
-    updatedTestType.testType[updatedTestType.testType.length] = "객관식";
-    // Set the updated state
+    updatedTestType.testType[updatedTestType.testType.length] = {
+      questionType: "MULTIPLE_CHOICE_QUESTION",
+      question: "",
+      score: 0,
+      options: [],
+      subjectAnswer: null,
+    };
     setMyTestType(updatedTestType);
+
     console.log(updatedTestType);
+
+  };
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  const onError = (data: any) => {
+    console.log(data);
+  };
+
+  const alphaList = ["A", "B", "C", "D"];
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    index: number
+  ) => {
+    const updatedTestType = { ...myTestType };
+    const updatedQuestion = { ...updatedTestType.testType[index] }; // Create a copy of the question object
+    updatedQuestion[e.target.name] = e.target.value;
+
+    updatedTestType.testType[index] = updatedQuestion; // Update the question in the array
+    setMyTestType(updatedTestType);
+
+    console.log(myTestType);
+  };
+
+  const handleQuestionOptionChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    index: number,
+    alpha_index: number
+  ) => {
+    const updatedTestType = { ...myTestType };
+    const updatedQuestion = { ...updatedTestType.testType[index] }; // Create a copy of the question object
+
+    updatedQuestion.options[alpha_index] = {
+      [e.target.name]: e.target.value,
+    };
+
+    setMyTestType(updatedTestType);
+
+    console.log(myTestType);
   };
 
   return (
-    <TestWriterform>
-      <TestWriterbox>
-        <Testdatebox>
-          <StyledDatePicker
-            selected={startDate}
-            onChange={handleStartDateChange}
-            showTimeSelect
-            timeFormat="HH:mm"
-            dateFormat="yyyy-MM-dd HH:mm"
-          />
-          <p
-            style={{
-              marginRight: "0.5rem",
-              marginLeft: "0.5rem",
-              lineHeight: "2.5rem",
-            }}
-          >
-            ~
-          </p>
-          <StyledDatePicker
-            selected={endDate}
-            onChange={handleEndDateChange}
-            showTimeSelect
-            timeFormat="HH:mm"
-            dateFormat="yyyy-MM-dd HH:mm"
-          />
-        </Testdatebox>
-        <TestTitle>
-          <Input
-            placeholder="테스트제목을 입력하세요"
-            color="secondary"
-            style={{ width: "100%", height: "100%" }}
-          ></Input>
-        </TestTitle>
-        {/* 아이콘시작 */}
-        <TWTitle>
-          <TestMethod>
-            <FaRegQuestionCircle
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.5rem",
-                cursor: "pointer",
-              }}
-              onClick={togglePopup}
-            ></FaRegQuestionCircle>
-            {isOpen && <SavemethodPopup />}
-            <p>사용방법</p>
-          </TestMethod>
-          <TestSave>
-            <FaRegSave
-              size="25"
-              style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                toast.success("임시저장완료");
-                subtogglePopup();
-              }}
-            ></FaRegSave>
-            <p>임시저장</p>
-          </TestSave>
+    <form onSubmit={handleSubmit(onSubmit, onError)}>
+      <button type="submit" value="테스트"></button>
 
-          <TestSaveComplete>
-            <FaRegFileAlt
-              size="25"
+      <TestWriterform>
+        <TestWriterbox>
+          <Testdatebox>
+            <Controller
+              control={control}
+              name="examStartTime"
+              rules={{ required: "날짜는 필수선택입니다." }}
+              render={({ field }) => (
+                <StyledDatePicker
+                  {...field}
+                  dateFormat="yyyy년 MM월 dd일"
+                  disabledKeyboardNavigation
+                  placeholderText="날짜를 선택하세요"
+                  autoComplete="off"
+                  selected={field.value}
+                  onChange={(date: any) => field.onChange(date)}
+                  locale={ko}
+                />
+              )}
+            />
+            <p
               style={{
-                color: "#777777",
-                marginBottom: "0.3rem",
-                marginLeft: "0.6rem",
-                cursor: "pointer",
+                marginRight: "0.5rem",
+                marginLeft: "0.5rem",
+                lineHeight: "2.5rem",
               }}
-              onClick={() => {
-                toast.success("시험출제완료");
-                subtogglePopup();
-              }}
-            ></FaRegFileAlt>
-            <p>저장(등록)</p>
-          </TestSaveComplete>
+            >
+              ~
+            </p>
+            <Controller
+              control={control}
+              name="examFinishTime"
+              rules={{ required: "날짜는 필수선택입니다." }}
+              render={({ field }) => (
+                <StyledDatePicker
+                  {...field}
+                  dateFormat="yyyy년 MM월 dd일"
+                  disabledKeyboardNavigation
+                  placeholderText="날짜를 선택하세요"
+                  autoComplete="off"
+                  selected={field.value}
+                  onChange={(date: any) => field.onChange(date)}
+                  locale={ko}
+                />
+              )}
+            />
+          </Testdatebox>
+          <TestTitle>
+            <Input
+              {...register("examTitle")}
+              placeholder="테스트제목을 입력하세요"
+              color="secondary"
+              style={{ width: "100%", height: "100%" }}
+            ></Input>
+          </TestTitle>
+          {/* 아이콘시작 */}
+          <TWTitle>
+            <TestMethod>
+              <FaRegQuestionCircle
+                size="25"
+                style={{
+                  color: "#777777",
+                  marginBottom: "0.3rem",
+                  marginLeft: "0.5rem",
+                  cursor: "pointer",
+                }}
+                onClick={togglePopup}
+              ></FaRegQuestionCircle>
+              {isOpen && <SavemethodPopup />}
+              <p>사용방법</p>
+            </TestMethod>
+            <TestSave>
+              <FaRegSave
+                size="25"
+                style={{
+                  color: "#777777",
+                  marginBottom: "0.3rem",
+                  marginLeft: "0.6rem",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  toast.success("임시저장완료");
+                  subtogglePopup();
+                  setIsExamRegistered(false);
+                }}
+              ></FaRegSave>
+              <p>임시저장</p>
+            </TestSave>
+
+            <TestSaveComplete>
+              <FaRegFileAlt
+                size="25"
+                style={{
+                  color: "#777777",
+                  marginBottom: "0.3rem",
+                  marginLeft: "0.6rem",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  toast.success("시험출제완료");
+                  subtogglePopup();
+                  setIsExamRegistered(true);
+                  // uploadExamAsync({
+                  //   programId: Number(programId),
+                  //   examTitle:
+                  // })
+                }}
+              ></FaRegFileAlt>
+              <p>저장(등록)</p>
+            </TestSaveComplete>
+
 
           <TestDelete>
             <FaTrashAlt
@@ -267,123 +384,154 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
 
             <TWselectscore>
               <p
+
+            <TestDelete>
+              <FaTrashAlt
+                size="25"
+
                 style={{
-                  fontSize: "0.9rem",
-                  marginTop: "0.8rem",
-                  marginRight: "0.3rem",
+                  color: "#777777",
+                  marginBottom: "0.3rem",
+                  marginLeft: "0.6rem",
+                  cursor: "pointer",
                 }}
-              >
-                배점
-              </p>
-              <Input
-                placeholder="점수입력"
-                color="secondary"
-                style={{ width: "9rem", height: "4vh" }}
-              ></Input>
-            </TWselectscore>
-          </TWselectbox>
+              ></FaTrashAlt>
+              <p>전체삭제</p>
+            </TestDelete>
+          </TWTitle>
+          {/* 아이콘 끝  */}
+        </TestWriterbox>
+        {fields.map((field, index) => (
+          <TestWriterlist>
+            <TWselectbox>
+              <p style={{ fontSize: "1.2rem" }}>1번문항</p>
 
-          {myTestType.testType[index] === "객관식" && (
-            <TestWrite>
-              <Testtext>
-                <Input
-                  placeholder="문제를 입력하세요"
-                  color="secondary"
+              <TWselect>
+                <TestSelect>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    sx={{ width: "5rem", height: "3vh" }}
+                    onClick={() =>
+                      handleButtonClick(index, "MULTIPLE_CHOICE_QUESTION")
+                    }
+                  >
+                    객관식
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    sx={{ width: "5rem", height: "3vh", marginLeft: "0.5rem" }}
+                    onClick={() => handleButtonClick(index, "SUBJECT_QUESTION")}
+                  >
+                    주관식
+                  </Button>
+                </TestSelect>
+              </TWselect>
+              <TWselectscore>
+                <p
                   style={{
-                    width: "100%",
-                    height: "10vh",
-                    marginBottom: "0.5rem",
+                    fontSize: "0.9rem",
+                    marginTop: "0.8rem",
+                    marginRight: "0.3rem",
                   }}
-                ></Input>
-              </Testtext>
-              <TestNumber1>
-                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>A</p>
+                >
+                  배점
+                </p>
                 <Input
-                  placeholder="선택답안을 입력하세요"
+                  name="score"
+                  placeholder="점수입력"
                   color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                    marginBottom: "0.3rem",
-                  }}
+                  style={{ width: "9rem", height: "4vh" }}
+                  onChange={(e) => handleChange(e, index)}
                 ></Input>
-              </TestNumber1>
-              <TestNumber2>
-                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>B</p>
-                <Input
-                  placeholder="선택답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                    marginBottom: "0.3rem",
-                  }}
-                ></Input>
-              </TestNumber2>
-              <TestNumber3>
-                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>C</p>
-                <Input
-                  placeholder="선택답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                    marginBottom: "0.3rem",
-                  }}
-                ></Input>
-              </TestNumber3>
-              <TestNumber4>
-                <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>D</p>
-                <Input
-                  placeholder="선택답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                  }}
-                ></Input>
-              </TestNumber4>
-            </TestWrite>
-          )}
+              </TWselectscore>
+            </TWselectbox>
 
-          {myTestType.testType[index] === "주관식" && (
-            <TestWrite>
-              <Testtext>
-                <Input
-                  placeholder="문제를 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "10vh",
-                    marginBottom: "0.5rem",
-                  }}
-                ></Input>
-              </Testtext>
-              <TestNumber1>
-                <Input
-                  placeholder="답안을 입력하세요"
-                  color="secondary"
-                  style={{
-                    width: "100%",
-                    height: "5vh",
-                    marginBottom: "0.3rem",
-                  }}
-                ></Input>
-              </TestNumber1>
-            </TestWrite>
-          )}
-        </TestWriterlist>
-      ))}
+            {myTestType.testType[index].questionType ===
+              "MULTIPLE_CHOICE_QUESTION" && (
+              <TestWrite>
+                <Testtext>
+                  <Input
+                    name="question"
+                    placeholder="문제를 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "10vh",
+                      marginBottom: "0.5rem",
+                    }}
+                    onChange={(e) => handleChange(e, index)}
+                  ></Input>
+                </Testtext>
+                {alphaList.map((alpha, alpha_index) => (
+                  <TestNumber key={alpha_index}>
+                    <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>
+                      {alpha}
+                    </p>
+                    <Input
+                      name="choices"
+                      placeholder="선택답안을 입력하세요"
+                      color="secondary"
+                      style={{
+                        width: "100%",
+                        height: "5vh",
+                        marginBottom: "0.3rem",
+                      }}
+                      onChange={(e) =>
+                        handleQuestionOptionChange(e, index, alpha_index)
+                      }
+                    ></Input>
+                  </TestNumber>
+                ))}
+              </TestWrite>
+            )}
 
-      <TestWriterplus>
-        <FaPlus
-          size="20"
-          color="#80b7d1"
-          style={{ cursor: "pointer" }}
-          onClick={() => handleWriterClick()}
-        ></FaPlus>
-      </TestWriterplus>
-    </TestWriterform>
+            {myTestType.testType[index].questionType === "SUBJECT_QUESTION" && (
+              <TestWrite>
+                <Testtext>
+                  <Input
+                    name="question"
+                    placeholder="문제를 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "10vh",
+                      marginBottom: "0.5rem",
+                    }}
+                    onChange={(e) => handleChange(e, index)}
+                  ></Input>
+                </Testtext>
+                <TestNumber>
+                  <Input
+                    name="subjectAnswer"
+                    placeholder="답안을 입력하세요"
+                    color="secondary"
+                    style={{
+                      width: "100%",
+                      height: "5vh",
+                      marginBottom: "0.3rem",
+                    }}
+                    onChange={(e) => handleChange(e, index)}
+                  ></Input>
+                </TestNumber>
+              </TestWrite>
+            )}
+          </TestWriterlist>
+        ))}
+
+        <TestWriterplus>
+          <FaPlus
+            size="20"
+            color="#80b7d1"
+            style={{ cursor: "pointer" }}
+            onClick={() => handleWriterClick()}
+          ></FaPlus>
+        </TestWriterplus>
+      </TestWriterform>
+    </form>
   );
 };
 const TestWriterform = styled.div`
@@ -473,22 +621,7 @@ const TestDelete = styled.div`
   flex-direction: column;
 `;
 const Testtext = styled.div``;
-const TestNumber1 = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-size: 1rem;
-`;
-const TestNumber2 = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-size: 1rem;
-`;
-const TestNumber3 = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-size: 1rem;
-`;
-const TestNumber4 = styled.div`
+const TestNumber = styled.div`
   display: flex;
   flex-direction: row;
   font-size: 1rem;

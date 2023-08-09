@@ -3,8 +3,9 @@ import styled from "@emotion/styled";
 import { FaUserCircle, FaPlus } from "react-icons/fa";
 import MaterialPopup from "./materialPopup/MaterialSubmitPopup";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import materialForm from "../../../../slice/program/programProgressMaterial";
 import {
-  downloadMaterialAsync,
+  // downloadMaterialAsync,
   loadMaterialAsync,
 } from "../../../../slice/program/programProgressMaterial";
 import MaterialDetailPopup from "./materialPopup/MaterialConentPopup";
@@ -20,6 +21,161 @@ const HorizonLine = () => {
         margin: "8px 0 10px",
       }}
     ></div>
+  );
+};
+
+
+const handleFileDownload = (value: any) => {
+  console.log(value);
+  fetch(value.filepath
+    , {method: 'GET'})
+      .then(res => {
+        return res.blob();
+      })
+      .then(blob => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'file1.pdf';
+        document.body.appendChild(a); 
+        a.click();  
+        window.URL.revokeObjectURL(url);
+        a.remove(); 
+      })
+      .catch(err => {
+        console.error('err: ', err);
+      })
+}
+
+const MaterialPopup = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const imageInput = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+  return (
+    <div>
+      {isOpen && (
+        <MPopupbox>
+          <MPopupinner>
+            <MPopupFrom>
+              <MPopupStudent>
+                <FaUserCircle size="20" color="#777777"></FaUserCircle>
+                <p>박서영</p>
+              </MPopupStudent>
+              <FaRegWindowClose
+                cursor="pointer"
+                size="20"
+                color="#777777"
+                onClick={togglePopup}
+              ></FaRegWindowClose>
+            </MPopupFrom>
+            <HorizonLine></HorizonLine>
+            <Input
+              placeholder="자료제목입력"
+              color="secondary"
+              sx={{ width: "100%", height: "14%", border: "none" }}
+            ></Input>
+            <Input
+              placeholder="자료내용입력"
+              color="secondary"
+              sx={{
+                width: "100%",
+                height: "45%",
+                border: "none",
+                marginBottom: "0.5rem",
+              }}
+            ></Input>
+            <FileUpload
+              selectedFile={selectedFile}
+              setSelectedFile={setSelectedFile}
+            ></FileUpload>
+            <HorizonLine></HorizonLine>
+            <p
+              style={{
+                color: "#07858C",
+                cursor: "pointer",
+                marginTop: "1rem",
+                marginLeft: "47%",
+              }}
+              onClick={() => {
+                const test = {
+                  programId: 1,
+                  title: "프로그램 자료 제목1",
+                  detail: "프로그램 자료 상세내용1",
+                };
+                const formData = new FormData();
+                formData.append(
+                  "data",
+                  new Blob([JSON.stringify(test)], { type: "application/json" })
+                );
+                if (selectedFile !== null) {
+                  formData.append("file", selectedFile);
+                }
+                dispatch(uploadMaterialAsync(formData));
+                togglePopup();
+              }}
+            >
+              자료올리기
+            </p>
+          </MPopupinner>
+        </MPopupbox>
+      )}
+    </div>
+  );
+};
+
+const MaterialDetailPopup = () => {
+  const [sisOpen, ssetIsOpen] = useState(true);
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const subtogglePopup = () => {
+    ssetIsOpen(!sisOpen);
+  };
+  return (
+    <div>
+      {sisOpen && (
+        <MdetailPopupbox>
+          <MdetailPopupinner>
+            <MdetailPopupFrom>
+              <MdetailPopupStudent>
+                <FaUserCircle size="20" color="#777777"></FaUserCircle>
+                <p>박서영</p>
+                <p style={{ fontSize: "0.6rem" }}>2023.03.15</p>
+              </MdetailPopupStudent>
+              <FaRegWindowClose
+                cursor="pointer"
+                size="20"
+                color="#777777"
+                onClick={subtogglePopup}
+              ></FaRegWindowClose>
+            </MdetailPopupFrom>
+            <HorizonLine></HorizonLine>
+            <p style={{ marginTop: "1rem" }}>자료제목</p>
+            <p
+              style={{
+                marginTop: "1rem",
+                marginLeft: "1rem",
+                marginBottom: "6rem",
+              }}
+            >
+              자료내용
+            </p>
+
+            {user_gb === "MENTEE" && (
+              <div>
+                <HorizonLine></HorizonLine>
+                <a href="#" style={{ color: "#FF8E41" }}>
+                  자료다운받기
+                </a>
+              </div>
+            )}
+          </MdetailPopupinner>
+        </MdetailPopupbox>
+      )}
+    </div>
   );
 };
 
@@ -110,10 +266,10 @@ const MaterialDetail = () => {
                     <button
                       onClick={() => {
                         if (value.materialId)
-                          dispatch(downloadMaterialAsync(value.materialId));
+                          handleFileDownload(value);
                       }}
                     >
-                      수정하기
+                      다운로드
                     </button>
                   </div>
                 </Materiallistbox>

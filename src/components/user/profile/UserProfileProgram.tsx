@@ -18,7 +18,7 @@ const UserProfileProgram = ({ props }: UserProfileProgramProps) => {
         </MentoInfo>
         <Link
           onClick={() => {
-            navigate("/projectProgress");
+            navigate(`/projectProgress/${props.programId}`);
           }}
           color={user_gb === "MENTEE" ? "primary" : "secondary"}
         >

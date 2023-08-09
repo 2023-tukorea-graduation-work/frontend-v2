@@ -10,7 +10,12 @@ import TaskRegisterEditorForm from "./TaskRegisterEditorForm";
 import TestWriterForm from "./TestWriterForm";
 import TestScoreForm from "./TestScoreForm";
 import TestIcon from "./TestIcon";
-import { useAppSelector } from "../../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { loadQuestionListAsync } from "../../../../slice/program/programProgressQuestion";
+import { loadExamListAsync } from "../../../../slice/program/programProgressExamSlice";
+import { loadTaskAsync } from "../../../../slice/program/programProgressTask";
 
 const TaskRegisterPopup = () => {
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(true);
@@ -233,6 +238,16 @@ const TaskscorePopup = () => {
 
 const TestDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const examList = useAppSelector((state) => state.programProgressExam.list);
+  const taskList = useAppSelector((state) => state.programProgressTask.list);
+  const dispatch = useAppDispatch();
+  const { programId } = useParams() as any;
+  useEffect(() => {
+    dispatch(loadTaskAsync(Number(programId)));
+    dispatch(loadExamListAsync(Number(programId)));
+  }, []);
+  useEffect(() => {}, [examList]);
+  useEffect(() => {}, [taskList]);
   const [TaskRegisterisOpen, TaskRegistersetIsOpen] = useState(false);
   const [TestWriterisOpen, TestWritersetIsOpen] = useState(false);
   const [TaskScoreisOpen, TaskScoresetIsOpen] = useState(false);
@@ -297,25 +312,22 @@ const TestDetail = () => {
         </Boxtitle>
         <TestTaskbox>
           <Taskbox>
-            <Tasklist user_gb={user_gb}>
-              <Taskcheck>
-                <TestIcon></TestIcon>
-              </Taskcheck>
-              <Taskname>
-                {user_gb === "MENTO" && (
-                  <div>
-                    <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                      [1차시]과제제목
-                    </p>
+            {taskList.map((value, index) => {
+              return (
+                <Tasklist user_gb={user_gb} key={index}>
+                  <Taskcheck>
+                    <TestIcon></TestIcon>
+                  </Taskcheck>
+                  <Taskname>
+                    {user_gb === "MENTO" && (
+                      <div>
+                        <p
+                          style={{ cursor: "pointer" }}
+                          onClick={TaskScoresPopup}
+                        >
+                          [{value.taskId}차시]{value.title}
+                        </p>
 
-                    {TaskScoreisOpen && <TaskscorePopup />}
-                  </div>
-                )}
-                {user_gb === "MENTEE" && (
-                  <div>
-                    <p style={{ cursor: "pointer" }} onClick={TaskScoresPopup}>
-                      [1차시]과제제목
-                    </p>
 
                     {TaskScoreisOpen && <TaskscorePopup />}
                   </div>
@@ -392,76 +404,99 @@ const TestDetail = () => {
                 </Taskdetail>
               </Taskname>
             </Tasklist>
+                        {TaskScoreisOpen && <TaskscorePopup />}
+                      </div>
+                    )}
+                    {user_gb === "MENTEE" && (
+                      <div>
+                        <p
+                          style={{ cursor: "pointer" }}
+                          onClick={TaskScoresPopup}
+                        >
+                          [{value.taskId}차시]{value.title}
+                        </p>
+
+                        {TaskScoreisOpen && <TaskscorePopup />}
+                      </div>
+                    )}
+                    <Taskdetail>
+                      <p>
+                        과제수행기간 {value.startTaskDateTime} ~
+                        {value.endTaskDateTime}
+                      </p>
+                      {user_gb === "MENTO" && (
+                        <p style={{ marginTop: "0.5rem" }}>
+                          과제제출자: 이름, 이름, 이름
+                        </p>
+                      )}
+                      {user_gb === "MENTEE" && (
+                        <p style={{ marginTop: "0.5rem" }}>
+                          과제제출시간: {value.endTaskDateTime}
+                        </p>
+                      )}
+                      {user_gb === "MENTEE" && (
+                        <p
+                          style={{
+                            textAlign: "right",
+                            marginRight: "1.5rem",
+                            color: "#FF8E41",
+                            fontSize: "0.8rem",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          제출완료
+                        </p>
+                      )}
+                    </Taskdetail>
+                  </Taskname>
+                </Tasklist>
+              );
+            })}
           </Taskbox>
           <Testbox>
-            <Testlist user_gb={user_gb}>
-              <Testcheck>
-                <Testscore user_gb={user_gb}>
-                  <p
-                    style={{
-                      marginTop: "0.9rem",
-                      fontSize: "0.6rem",
-                      marginLeft: "0.7rem",
-                    }}
-                  >
-                    AVERAGE
-                  </p>
-                  <p
-                    style={{
-                      marginTop: "0.3rem",
-                      marginLeft: "1.3rem",
-                      fontSize: "1.4rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    85
-                  </p>
-                </Testscore>
-              </Testcheck>
-              <Testname>
-                <p>1차 시험</p>
-                <Testdetail>
-                  <p>시험시간: 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  <p style={{ marginTop: "0.5rem" }}>
-                    참여자: 이름, 이름, 이름
-                  </p>
-                </Testdetail>
-              </Testname>
-            </Testlist>
-            <Testlist user_gb={user_gb}>
-              <Testcheck>
-                <Testscore user_gb={user_gb}>
-                  <p
-                    style={{
-                      marginTop: "0.9rem",
-                      fontSize: "0.6rem",
-                      marginLeft: "0.7rem",
-                    }}
-                  >
-                    AVERAGE
-                  </p>
-                  <p
-                    style={{
-                      marginTop: "0.3rem",
-                      marginLeft: "1.3rem",
-                      fontSize: "1.4rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    85
-                  </p>
-                </Testscore>
-              </Testcheck>
-              <Testname>
-                <p>1차 시험</p>
-                <Testdetail>
-                  <p>시험시간: 2023.03.03 10:00 ~ 2023.03.03 10:00</p>
-                  <p style={{ marginTop: "0.5rem" }}>
-                    참여자: 이름, 이름, 이름
-                  </p>
-                </Testdetail>
-              </Testname>
-            </Testlist>
+            {examList.map((value, index) => {
+              return (
+                <>
+                  <Testlist user_gb={user_gb}>
+                    <Testcheck>
+                      <Testscore user_gb={user_gb}>
+                        <p
+                          style={{
+                            marginTop: "0.9rem",
+                            fontSize: "0.6rem",
+                            marginLeft: "0.7rem",
+                          }}
+                        >
+                          AVERAGE
+                        </p>
+                        <p
+                          style={{
+                            marginTop: "0.3rem",
+                            marginLeft: "1.3rem",
+                            fontSize: "1.4rem",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          85
+                        </p>
+                      </Testscore>
+                    </Testcheck>
+                    <Testname>
+                      <p>{value.examTitle}</p>
+                      <Testdetail>
+                        <p>
+                          시험시간: {value.examStartTime} ~
+                          {value.examFinishTime}
+                        </p>
+                        <p style={{ marginTop: "0.5rem" }}>
+                          참여자: 이름, 이름, 이름
+                        </p>
+                      </Testdetail>
+                    </Testname>
+                  </Testlist>
+                </>
+              );
+            })}
           </Testbox>
         </TestTaskbox>
       </BoxTotal>

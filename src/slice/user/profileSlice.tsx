@@ -12,6 +12,7 @@ export interface profileProgramList {
   recruitPeriod: string;
   programPeriod: string;
   state: string;
+  programId: number;
 }
 interface profileInfo {
   name: string | null;
@@ -47,6 +48,7 @@ export const profileSlice = createSlice({
     builder.addCase(
       loadProfileProgramListAsync.fulfilled,
       (state, { payload }) => {
+        console.log(payload);
         state.age = payload.age;
         state.email = payload.email;
         state.imgUrl = payload.imgUrl;

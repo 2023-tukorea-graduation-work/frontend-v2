@@ -12,12 +12,12 @@ const initialState: creationSuccess = {
   message: "",
   status: "",
 };
-export const creationAsync = createAsyncThunk<creationSuccess, creationInfo>(
+export const creationAsync = createAsyncThunk<any, creationInfo>(
   "creationAsync",
   async (creationData) => {
     try {
       console.log(creationData);
-      const { data } = await axios({
+      const data = await axios({
         url: `/member/${creationData.userGB}`,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -37,7 +37,7 @@ export const creationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(creationAsync.fulfilled, (state, { payload }) => {
+    builder.addCase(creationAsync.fulfilled, (state, payload) => {
       console.log(payload);
     });
   },

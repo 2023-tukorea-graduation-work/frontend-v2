@@ -7,7 +7,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { uploadQuestiontAsync } from "../../../../slice/program/programProgressQuestion";
-import { toast } from "react-toastify";
+
+import { useParams } from "react-router-dom";
+
 
 interface Props {
   subtogglePopup(): void;
@@ -28,8 +30,9 @@ const HorizonLine = () => {
 };
 
 const TestEditorForm = ({ subtogglePopup }: Props) => {
+  const { programId } = useParams();
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
-
+  const memberId = useAppSelector((state) => state.login.object.USER_NO);
   const [editorHtml, setEditorHtml] = useState<string>("");
 
   const handleEditorChange = (value: string) => {
@@ -75,7 +78,13 @@ const TestEditorForm = ({ subtogglePopup }: Props) => {
         color={user_gb === "MENTEE" ? "primary" : "secondary"}
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
         onClick={() => {
-          dispatch(uploadQuestiontAsync({}));
+          dispatch(
+            uploadQuestiontAsync({
+              programId: programId,
+              memberId: memberId,
+              editorHtml: editorHtml,
+            })
+          );
           toast.success("질문제출 성공");
           subtogglePopup();
         }}

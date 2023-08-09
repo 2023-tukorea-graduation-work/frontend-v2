@@ -6,6 +6,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../../../store/hooks";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useAppDispatch } from "../../../../store/hooks";
+import { useParams } from "react-router";
+import { uploadTaskAsync } from "../../../../slice/program/programProgressTask";
 
 interface Props {
   subtogglePopup(): void;
@@ -53,7 +58,10 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const dispatch = useAppDispatch();
+  const { programId } = useParams();
   const handleStartDateChange = (date: any) => {
     setStartDate(date);
   };
@@ -153,6 +161,72 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
           </Button>
         </div>
       )}
+=======
+      <p>과제제출기간</p>
+      <TaskRegistersubmit>
+        <DatePicker
+          selected={startDate}
+          onChange={handleStartDateChange}
+          selectsStart
+          startDate={startDate}
+          endDate={endDate}
+          placeholderText="Start Date"
+        />
+        <p style={{ marginRight: "0.5rem", lineHeight: "1.5rem" }}>~</p>
+        <DatePicker
+          selected={endDate}
+          onChange={handleEndDateChange}
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          placeholderText="End Date"
+        />
+      </TaskRegistersubmit>
+      <HorizonLine></HorizonLine>
+      <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+        <p style={{ marginBottom: "1rem" }}>과제제목과 내용 입력</p>
+        <input
+          value={title}
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        ></input>
+        <input
+          value={content}
+          onChange={(event) => {
+            setContent(event.target.value);
+          }}
+        ></input>
+      </div>
+
+      <Button
+        variant="contained"
+        color="secondary"
+        sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
+        onClick={() => {
+          const formData = new FormData();
+          const data = {
+            startTaskDateTime: startDate,
+            endTaskDateTime: endDate,
+            programId: Number(programId),
+            title: title,
+            content: content,
+          };
+          formData.append(
+            "data",
+            new Blob([JSON.stringify(data)], { type: "application/json" })
+          );
+          if (startDate && endDate) {
+            dispatch(uploadTaskAsync(formData));
+            // toast.success("과제등록 완료");
+            // subtogglePopup();
+          } else {
+            toast.warn("양식을 채워주세요");
+          }
+        }}
+      >
+        과제등록하기
+      </Button>
     </MyBlock>
   );
 };
