@@ -1,21 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FaUser } from "react-icons/fa";
-
-import { Button } from "@mui/material";
+import { Button, Input } from "@mui/material";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import { toast } from "react-toastify";
+<<<<<<< HEAD
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useAppDispatch } from "../../../../store/hooks";
 import { useParams } from "react-router";
 import { uploadTaskAsync } from "../../../../slice/program/programProgressTask";
+=======
+import { useAppSelector } from "../../../../store/hooks";
+>>>>>>> ba12192346d80cd784abf039757a6f90ac284b0d
 
 interface Props {
   subtogglePopup(): void;
 }
+
+const TaskRegisterFileUpload = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    setSelectedFile(file || null);
+  };
+
+  const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (selectedFile) {
+      console.log("Selected file:", selectedFile);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleFileSubmit}>
+        <input type="file" onChange={handleFileChange} />
+      </form>
+    </div>
+  );
+};
 
 const HorizonLine = () => {
   return (
@@ -32,6 +58,7 @@ const HorizonLine = () => {
 };
 
 const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [title, setTitle] = useState("");
@@ -50,6 +77,7 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
   const handleEditorChange = (value: string) => {
     setEditorHtml(value);
   };
+
   return (
     <MyBlock>
       <TaskRegisterEdinfo>
@@ -61,6 +89,7 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
         </TaskRegisterEdinfosub>
       </TaskRegisterEdinfo>
       <HorizonLine></HorizonLine>
+<<<<<<< HEAD
       <p>과제제출기간</p>
       <TaskRegistersubmit>
         <DatePicker
@@ -126,6 +155,83 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
       >
         과제등록하기
       </Button>
+=======
+      {user_gb === "MENTO" && (
+        <div>
+          <p>과제제출기간</p>
+          <TaskRegistersubmit>
+            <DatePicker
+              selected={startDate}
+              onChange={handleStartDateChange}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              placeholderText="Start Date"
+            />
+            <p style={{ marginRight: "0.5rem", lineHeight: "1.5rem" }}>~</p>
+            <DatePicker
+              selected={endDate}
+              onChange={handleEndDateChange}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              placeholderText="End Date"
+            />
+          </TaskRegistersubmit>
+          <HorizonLine></HorizonLine>
+        </div>
+      )}
+      {user_gb === "MENTO" && (
+        <div>
+          <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+            <p style={{ marginBottom: "1rem" }}>과제제목과 내용 입력</p>
+            <Input sx={{ width: "100%", height: "24vh" }}></Input>
+            {/* <ReactQuill value={editorHtml} onChange={handleEditorChange} /> */}
+          </div>
+
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
+            onClick={() => {
+              toast.success("과제등록 완료");
+              subtogglePopup();
+            }}
+          >
+            과제등록하기
+          </Button>
+        </div>
+      )}
+      {user_gb === "MENTEE" && (
+        <div>
+          <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+            <p style={{ marginBottom: "1rem" }}>과제 내용 입력</p>
+            <Input
+              sx={{ width: "100%", height: "24vh", marginBottom: "1rem" }}
+            ></Input>
+            <TaskRegisterFileUpload></TaskRegisterFileUpload>
+            {/* <ReactQuill value={editorHtml} onChange={handleEditorChange} /> */}
+          </div>
+
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              height: "2.2rem",
+              width: "9rem",
+              marginLeft: "40%",
+              marginTop: "1rem",
+            }}
+            onClick={() => {
+              toast.success("과제등록 완료");
+              subtogglePopup();
+            }}
+          >
+            과제제출하기
+          </Button>
+        </div>
+      )}
+>>>>>>> ba12192346d80cd784abf039757a6f90ac284b0d
     </MyBlock>
   );
 };

@@ -1,45 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
-import { TextField, Input } from "@mui/material";
-import { toast } from "react-toastify";
-
+import { FaUserCircle, FaPlus } from "react-icons/fa";
+import MaterialPopup from "./materialPopup/MaterialSubmitPopup";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 
 
-import materialForm from "../../../../slice/program/programProgressMaterial";
 import {
   // downloadMaterialAsync,
   loadMaterialAsync,
-  uploadMaterialAsync,
 } from "../../../../slice/program/programProgressMaterial";
-
-interface Props {
-  selectedFile: File | null;
-  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
-}
-
-const FileUpload = (props: Props) => {
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
-    props.setSelectedFile(file || null);
-  };
-
-  const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (props.selectedFile) {
-      console.log("Selected file:", props.selectedFile);
-    }
-  };
-
-  return (
-    <div>
-      <form onSubmit={handleFileSubmit}>
-        <input type="file" onChange={handleFileChange} />
-      </form>
-    </div>
-  );
-};
+import MaterialDetailPopup from "./materialPopup/MaterialConentPopup";
 
 const HorizonLine = () => {
   return (
@@ -55,32 +25,9 @@ const HorizonLine = () => {
   );
 };
 
-const handleFileDownload = (value: any) => {
-  console.log(value);
-  fetch(value.filepath
-    , {method: 'GET'})
-      .then(res => {
-        return res.blob();
-      })
-      .then(blob => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'file1.pdf';
-        document.body.appendChild(a); 
-        a.click();  
-        window.URL.revokeObjectURL(url);
-        a.remove(); 
-      })
-      .catch(err => {
-        console.error('err: ', err);
-      })
-}
-
 const MaterialPopup = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const imageInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const togglePopup = () => {
@@ -365,70 +312,4 @@ const Materialtextinfo = styled.div`
   width: 40%;
 `;
 
-const MPopupbox = styled.div`
-  position: fixed;
-  top: 10%;
-  left: 0;
-  width: 100%;
-  height: 90%;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(3px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const MPopupFrom = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-`;
-const MPopupinner = styled.div`
-  background-color: white;
-  width: 50%;
-  height: 35%;
-  padding: 1rem;
-  border-radius: 20px;
-`;
-const MPopupStudent = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 7%;
-  margin-right: 90%;
-  color: #777777;
-`;
-const MdetailPopupbox = styled.div`
-  position: fixed;
-  top: 10%;
-  left: 0;
-  width: 100%;
-  height: 90%;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(3px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const MdetailPopupFrom = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-`;
-const MdetailPopupinner = styled.div`
-  background-color: white;
-  width: 50%;
-  height: 40%;
-  padding: 1rem;
-  border-radius: 20px;
-`;
-const MdetailPopupStudent = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 13%;
-  margin-right: 85%;
-  color: #777777;
-`;
 export default MaterialDetail;
