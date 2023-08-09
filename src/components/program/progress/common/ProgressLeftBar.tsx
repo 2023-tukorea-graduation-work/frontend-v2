@@ -3,9 +3,6 @@ import styled from "@emotion/styled";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { indexChange } from "../../../../slice/common/leftBarSlice";
 import {
-  FaRegCheckCircle,
-  FaUserCircle,
-  FaRegWindowClose,
   FaUserCheck,
   FaRegCommentDots,
   FaBorderAll,

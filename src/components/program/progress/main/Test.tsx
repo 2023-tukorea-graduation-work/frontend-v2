@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { FaEdit, FaPlus, FaListOl } from "react-icons/fa";
+import { FaEdit, FaListOl } from "react-icons/fa";
 const HorizonLine = () => {
   return (
     <div
