@@ -21,26 +21,26 @@ const initialState: initialType = {
   QuestionList: [],
 };
 
-export const loadQuestionListAsync = createAsyncThunk<Array<QuestionList>>(
-  "loadQuestionList",
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await axios({
-        method: "get",
-        url: "/question/program/1",
-      });
-      console.log(data);
-      return data;
-    } catch (e) {
-      let error: any = e;
-      console.log(error.response);
-      if (!error.response) {
-        throw error.response;
-      }
-      return rejectWithValue("No user found");
+export const loadQuestionListAsync = createAsyncThunk<
+  Array<QuestionList>,
+  number
+>("loadQuestionList", async (programId, { rejectWithValue }) => {
+  try {
+    const { data } = await axios({
+      method: "get",
+      url: `/question/program/${programId}`,
+    });
+    console.log(data);
+    return data;
+  } catch (e) {
+    let error: any = e;
+    console.log(error.response);
+    if (!error.response) {
+      throw error.response;
     }
+    return rejectWithValue("No user found");
   }
-);
+});
 
 export const uploadQuestiontAsync = createAsyncThunk<any, any>(
   "uploadQuestiont",
@@ -50,9 +50,9 @@ export const uploadQuestiontAsync = createAsyncThunk<any, any>(
         method: "post",
         url: "/question",
         data: {
-          menteeId: 1,
-          programId: 1,
-          question: "123",
+          menteeId: formData.memberId,
+          programId: formData.programId,
+          question: `${formData.editorHtml}`,
         },
       });
       console.log(data);
