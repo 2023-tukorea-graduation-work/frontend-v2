@@ -4,6 +4,7 @@ import { ko } from "date-fns/esm/locale";
 
 import {
   Button,
+  Checkbox,
   FormControl,
   Input,
   InputLabel,
@@ -35,7 +36,7 @@ import {
   Subjects,
   MutlipleOption,
 } from "../../../../slice/program/programProgressExamSlice";
-import { Subject } from "@mui/icons-material";
+import { CheckBox, Subject } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 
 interface Props {
@@ -80,7 +81,19 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { programId } = useParams();
   const dispatch = useAppDispatch();
+  const [check, setCheckList] = useState([[false, false, false, false]]);
+  const checkChange = (e: any, index: number, alpha_index: number) => {
+    const updatedCheckList = check.map((subArray, i) =>
+      i === index
+        ? subArray.map((isChecked, j) =>
+            j === alpha_index ? e.target.checked : isChecked
+          )
+        : subArray
+    );
 
+    setCheckList(updatedCheckList);
+    console.log(check);
+  };
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
@@ -186,13 +199,16 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
   };
 
   const onSubmit = (data: any) => {
-    const questionList = myTestType.testType.map((question) => {
+    const questionList = myTestType.testType.map((question, index) => {
       if (question.questionType === "MULTIPLE_CHOICE_QUESTION") {
         return {
           questionType: question.questionType,
           question: question.question,
           score: Number(question.score),
-          options: question.options,
+          options: question.options.map((value: any, listIndex: any) => ({
+            choices: value.choices,
+            isCorrect: check[index][listIndex],
+          })),
         };
       } else {
         return {
@@ -313,7 +329,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                   setIsExamRegistered(false);
                 }}
               ></FaRegSave>
-              <p>임시저장</p>
+              <p>임시저장.</p>
             </TestSave>
 
             <TestSaveComplete>
@@ -425,6 +441,9 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                     <p style={{ marginRight: "0.6rem", marginTop: "1rem" }}>
                       {alpha}
                     </p>
+                    <Checkbox
+                      onChange={(e) => checkChange(e, index, alpha_index)}
+                    />
                     <Input
                       name="choices"
                       placeholder="선택답안을 입력하세요"

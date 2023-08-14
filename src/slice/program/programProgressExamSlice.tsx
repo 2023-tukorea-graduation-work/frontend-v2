@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { dateFormat } from "../../utils/dateFormat";
 
 export interface Multiple {
   questionType: string;
@@ -49,24 +50,25 @@ const initialState: initialStateType = {
 export const uploadExamAsync = createAsyncThunk<any, ExamForm>(
   "uploadExam",
   async (examData, { rejectWithValue }) => {
+    console.log(examData);
     try {
-      const { data } = await axios({
+      const { data, status } = await axios({
         method: "post",
         url: "/exam",
         data: {
           programId: `${examData.programId}`,
           examTitle: `${examData.examTitle}`,
-          examStartTime: `${examData.examStartTime}`,
-          examFinishTime: `${examData.examFinishTime}`,
+          examStartTime: `${dateFormat(examData.examStartTime)}`,
+          examFinishTime: `${dateFormat(examData.examFinishTime)}`,
           isExamRegistered: `${examData.isExamRegistered}`,
           examQuestionRegisterRequest: examData.examQuestionRegisterRequest,
         },
       });
-      console.log(data);
+      console.log(data, status);
       return data;
     } catch (e) {
       let error: any = e;
-      console.log(error.response);
+      console.log(error);
       if (!error.response) {
         throw error.response;
       }
@@ -99,8 +101,7 @@ export const programExamSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(uploadExamAsync.fulfilled, (state, { payload }) => {
-      state = payload;
+    builder.addCase(uploadExamAsync.fulfilled, (state, payload) => {
       console.log("시험올리기 성공");
       toast.success("시험올리기 성공");
     });
