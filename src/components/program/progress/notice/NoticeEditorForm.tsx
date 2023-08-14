@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { uploadNoticetAsync } from "../../../../slice/program/programProgressNoticeSlice";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { event } from "jquery";
 interface Props {
   subtogglePopup(): void;
 }
@@ -27,21 +28,36 @@ const HorizonLine = () => {
 const NoticeEditorForm = ({ subtogglePopup }: Props) => {
   const [value, setValue] = useState("");
   const dispatch = useAppDispatch();
+
   return (
     <MyBlock>
       <TestEdinfo>
-        <p>공지제목</p>
-        <input></input>
+        <p>공지제목을 입력하세요</p>
         <TestEdinfosub>
           <FaUser></FaUser>
           <p>박서영</p>
           <p>2023.03.15</p>
         </TestEdinfosub>
       </TestEdinfo>
-      <HorizonLine></HorizonLine>
-      <p style={{ marginLeft: "1.5%" }}>
+      <input
+        style={{ height: "4vh", width: "100%", marginTop: "2rem" }}
+      ></input>
+      <p style={{ marginTop: "2rem" }}>공지내용을 입력하세요</p>
+      {/* <p style={{ marginLeft: "1.5%" }}>
         <ReactQuill theme="snow" value={value} onChange={setValue} />
-      </p>
+      </p> */}
+      <input
+        style={{
+          width: "100%",
+          height: "20vh",
+          marginBottom: "2rem",
+          marginTop: "1rem",
+        }}
+        value={value}
+        onChange={(event) => {
+          setValue(event.target.value);
+        }}
+      ></input>
       <Button
         variant="contained"
         color="secondary"
@@ -88,6 +104,6 @@ const TestEdinfosub = styled.div`
   flex-direction: row;
   width: 10%;
   justify-content: space-between;
-  margin-left: 86%;
+  margin-left: 80%;
 `;
 export default NoticeEditorForm;

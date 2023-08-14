@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
+import {
+  FaUserCircle,
+  FaRegWindowClose,
+  FaPlus,
+  FaCheckCircle,
+} from "react-icons/fa";
 import TestEditorForm from "../qna/TestEditorForm";
 import QnaIcon from "./QnaIcon";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
@@ -8,6 +13,12 @@ import { loadQuestionListAsync } from "../../../../slice/program/programProgress
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useParams } from "react-router-dom";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
 const HorizonLine = () => {
   return (
@@ -152,7 +163,19 @@ const QnaDetail = () => {
             )}
             {user_gb === "MENTO" && (
               <p style={{ display: "flex" }}>
-                <p style={{ lineHeight: "1.5rem" }}>답변안한 질문만 보기</p>
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="답변안한질문"
+                      control={<Radio color="secondary" />}
+                      label="답변안한질문만보기"
+                    />
+                  </RadioGroup>
+                </FormControl>
               </p>
             )}
           </Qnaiconbox>
