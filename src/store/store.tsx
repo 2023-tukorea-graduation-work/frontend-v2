@@ -25,6 +25,7 @@ import profileReducer from "../slice/user/profileSlice";
 import programExamReducer from "../slice/program/programProgressExamSlice";
 import progressReducer from "../slice/program/programProgress";
 import programTaskReducer from "../slice/program/programProgressTask";
+import adminReducer from "../slice/user/adminSlice";
 const reducers = combineReducers({
   leftBar: leftbarReducer,
   programList: programListReducer,
@@ -41,6 +42,7 @@ const reducers = combineReducers({
   programProgressExam: programExamReducer,
   programProgress: progressReducer,
   programProgressTask: programTaskReducer,
+  admin: adminReducer,
 });
 
 const persistConfig = {
