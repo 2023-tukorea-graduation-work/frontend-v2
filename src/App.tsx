@@ -19,6 +19,7 @@ import AdminLoginPage from "./page/admin/AdminLoginPage";
 import ProgramListDetailPage from "./page/program/ProgramDetailPage";
 import ProgramCompletionListPage from "./page/program/ProgramCompletionListPage";
 import { Outlet } from "react-router-dom";
+import ProgramMenteeTestForm from "./page/program/ProgramMenteeTestForm";
 function App() {
   return (
     <>
@@ -59,6 +60,7 @@ function App() {
           ></Route>
 
           <Route path="onlineLive" element={<ProgramOnlineLivePage />} />
+          <Route path="MenteeTestForm" element={<ProgramMenteeTestForm />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer
