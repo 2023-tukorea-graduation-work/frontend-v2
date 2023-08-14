@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import {
   Button,
@@ -11,6 +11,12 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import SearchIcon from "@mui/icons-material/Search";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import {
+  adminLoadAsync,
+  admindecisionAsync,
+} from "../../../slice/user/adminSlice";
+import axios from "axios";
 
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
@@ -26,12 +32,52 @@ const Management = () => {
     handleSubmit,
   } = useForm();
   const [btnSelect, setBtnSelect] = useState("TheWhole");
+  const dispatch = useAppDispatch();
+  const adminList = useAppSelector((state) => state.admin.list2);
   const onChangeBtn = (event: React.MouseEvent<HTMLElement>, value: string) => {
     if (value == null) {
       return;
     }
     setBtnSelect(value);
   };
+  useEffect(() => {
+    dispatch(adminLoadAsync());
+  }, []);
+
+  const handleDecision = async (id: number, type: boolean) => {
+    try {
+      await dispatch(admindecisionAsync({ id: id, type: type }));
+      dispatch(adminLoadAsync());
+      console.log("결정 완료 및 페이지 새로고침");
+    } catch (error) {
+      console.error("결정 처리 중 에러 발생: ", error);
+    }
+  };
+  const handleFileDownload = (value: any, name: string) => {
+    console.log(value);
+    axios({
+      method: "get",
+      url: value,
+      responseType: "blob",
+    })
+      .then((response) => {
+        const contentType = response.headers["content-type"]; // MIME 타입 확인
+        const blob = new Blob([response.data], { type: contentType });
+
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${name}_Student_Certificate.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      })
+      .catch((error) => {
+        console.error("error: ", error);
+      });
+  };
+  useEffect(() => {}, [adminList]);
   return (
     <GrayBox>
       <Tite>USER Management</Tite>
@@ -145,23 +191,69 @@ const Management = () => {
         <CERTIFICATE>CERTIFICATE</CERTIFICATE>
         <ACCEPTDENY>ACCEPT/DENY</ACCEPTDENY>
       </ListTitle>
-      <List>
-        <DATE>2023.03.03</DATE>
-        <ID>IDIDIDIDIDIDIDID</ID>
-        <NAME>홍길동</NAME>
-        <YEARBIRTH>3000</YEARBIRTH>
-        <SCHOOL>한국공학대학교/IT경영학과</SCHOOL>
-        <STYLE>온라인&오프라인 병행</STYLE>
-        <CERTIFICATE>재학증명서_홍길동.PDF</CERTIFICATE>
-        <ACCEPTDENY>
-          <DenyWithAcceptButton variant="contained" color="accept">
-            ACCEPT
-          </DenyWithAcceptButton>
-          <DenyWithAcceptButton variant="contained" color="deny">
-            DENY
-          </DenyWithAcceptButton>
-        </ACCEPTDENY>
-      </List>
+      {adminList?.map((value, index) => {
+        return (
+          <List key={index}>
+            <DATE>{value?.createdAt}</DATE>
+            <ID>{value?.email}</ID>
+            <NAME>{value?.name}</NAME>
+            <YEARBIRTH>{value?.age}</YEARBIRTH>
+            <SCHOOL>{value?.college}</SCHOOL>
+            <STYLE>{value?.lesson}</STYLE>
+            <CERTIFICATE
+              onClick={() => {
+                handleFileDownload(value.filepath, value.name);
+              }}
+            >
+              재학증명서.PDF
+            </CERTIFICATE>
+            <ACCEPTDENY>
+              {value.isPassed ? (
+                <></>
+              ) : (
+                <>
+                  <DenyWithAcceptButton
+                    onClick={() => {
+                      handleDecision(value.memberId, true);
+                    }}
+                    variant="contained"
+                    color="accept"
+                  >
+                    ACCEPT
+                  </DenyWithAcceptButton>
+                  <DenyWithAcceptButton
+                    onClick={() => {
+                      handleDecision(value.memberId, false);
+                    }}
+                    variant="contained"
+                    color="deny"
+                  >
+                    DENY
+                  </DenyWithAcceptButton>
+                </>
+              )}
+              {/* <DenyWithAcceptButton
+                onClick={() => {
+                  handleDecision(value.memberId, true);
+                }}
+                variant="contained"
+                color="accept"
+              >
+                ACCEPT
+              </DenyWithAcceptButton>
+              <DenyWithAcceptButton
+                onClick={() => {
+                  handleDecision(value.memberId, false);
+                }}
+                variant="contained"
+                color="deny"
+              >
+                DENY
+              </DenyWithAcceptButton> */}
+            </ACCEPTDENY>
+          </List>
+        );
+      })}
     </GrayBox>
   );
 };
@@ -249,6 +341,7 @@ const STYLE = styled.p`
   width: 10rem;
 `;
 const CERTIFICATE = styled.p`
+  cursor: pointer;
   width: 17rem;
 `;
 const ACCEPTDENY = styled.p`
