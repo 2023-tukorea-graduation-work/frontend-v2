@@ -17,6 +17,7 @@ import {
   FaPlus,
   FaTrashAlt,
   FaRegSave,
+  FaSave,
   FaRegFileAlt,
   FaRegQuestionCircle,
 } from "react-icons/fa";
@@ -316,12 +317,21 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
             </TestSave>
 
             <TestSaveComplete>
-              <button
-                type="submit"
+              <FaSave
+                size="25"
                 style={{
                   color: "#777777",
                   marginBottom: "0.3rem",
                   marginLeft: "0.6rem",
+                }}
+              ></FaSave>
+              <button
+                type="submit"
+                style={{
+                  color: "#777777",
+                  marginBottom: "0.8rem",
+
+                  fontWeight: "bold",
                   cursor: "pointer",
                 }}
                 onClick={() => {

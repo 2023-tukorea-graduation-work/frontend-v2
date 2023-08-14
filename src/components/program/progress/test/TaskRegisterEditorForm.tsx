@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 import { Button } from "@mui/material";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import { useAppSelector } from "../../../../store/hooks";
 import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -31,7 +31,32 @@ const HorizonLine = () => {
   );
 };
 
+const TaskRegisterFileUpload = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    setSelectedFile(file || null);
+  };
+
+  const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (selectedFile) {
+      console.log("Selected file:", selectedFile);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleFileSubmit}>
+        <input type="file" onChange={handleFileChange} />
+      </form>
+    </div>
+  );
+};
+
 const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
+  const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [title, setTitle] = useState("");
@@ -61,71 +86,121 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
         </TaskRegisterEdinfosub>
       </TaskRegisterEdinfo>
       <HorizonLine></HorizonLine>
-      <p>과제제출기간</p>
-      <TaskRegistersubmit>
-        <DatePicker
-          selected={startDate}
-          onChange={handleStartDateChange}
-          selectsStart
-          startDate={startDate}
-          endDate={endDate}
-          placeholderText="Start Date"
-        />
-        <p style={{ marginRight: "0.5rem", lineHeight: "1.5rem" }}>~</p>
-        <DatePicker
-          selected={endDate}
-          onChange={handleEndDateChange}
-          selectsEnd
-          startDate={startDate}
-          endDate={endDate}
-          placeholderText="End Date"
-        />
-      </TaskRegistersubmit>
-      <HorizonLine></HorizonLine>
-      <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
-        <p style={{ marginBottom: "1rem" }}>과제제목과 내용 입력</p>
-        <input
-          value={title}
-          onChange={(event) => {
-            setTitle(event.target.value);
-          }}
-        ></input>
-        <input
-          value={content}
-          onChange={(event) => {
-            setContent(event.target.value);
-          }}
-        ></input>
-      </div>
+      {user_gb === "MENTO" && (
+        <div>
+          <p>과제제출기간</p>
+          <TaskRegistersubmit>
+            <DatePicker
+              selected={startDate}
+              onChange={handleStartDateChange}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              placeholderText="Start Date"
+            />
+            <p style={{ marginRight: "0.5rem", lineHeight: "1.5rem" }}>~</p>
+            <DatePicker
+              selected={endDate}
+              onChange={handleEndDateChange}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              placeholderText="End Date"
+            />
+          </TaskRegistersubmit>
+          <HorizonLine></HorizonLine>
+        </div>
+      )}
 
-      <Button
-        variant="contained"
-        color="secondary"
-        sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
-        onClick={() => {
-          const formData = new FormData();
-          const data = {
-            startTaskDateTime: startDate,
-            endTaskDateTime: endDate,
-            programId: Number(programId),
-            title: title,
-            content: content,
-          };
-          formData.append(
-            "data",
-            new Blob([JSON.stringify(data)], { type: "application/json" })
-          );
-          if (startDate && endDate) {
-            dispatch(uploadTaskAsync(formData));
-            // toast.success("과제등록 완료");
-            // subtogglePopup();
-          } else {
-            toast.warn("양식을 채워주세요");
-          }
-        }}
-      >
-        과제등록하기
-      </Button>
+      {user_gb === "MENTO" && (
+        <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+          <p style={{ marginBottom: "1rem" }}>과제제목입력</p>
+          <input
+            style={{ width: "100%", height: "4vh" }}
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+          ></input>
+          <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            과제내용입력
+          </p>
+          <input
+            style={{ width: "100%", height: "10vh" }}
+            value={content}
+            onChange={(event) => {
+              setContent(event.target.value);
+            }}
+          ></input>
+          <TaskRegisterFileUpload></TaskRegisterFileUpload>
+        </div>
+      )}
+      {user_gb === "MENTEE" && (
+        <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+          <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            과제제출파일과 내용을 입력해주세요
+          </p>
+          <input
+            style={{ width: "100%", height: "10vh" }}
+            value={content}
+            onChange={(event) => {
+              setContent(event.target.value);
+            }}
+          ></input>
+          <TaskRegisterFileUpload></TaskRegisterFileUpload>
+        </div>
+      )}
+      {user_gb === "MENTO" && (
+        <Button
+          variant="contained"
+          color="secondary"
+          sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
+          onClick={() => {
+            const formData = new FormData();
+            const data = {
+              startTaskDateTime: startDate,
+              endTaskDateTime: endDate,
+              programId: Number(programId),
+              title: title,
+              content: content,
+            };
+            formData.append(
+              "data",
+              new Blob([JSON.stringify(data)], { type: "application/json" })
+            );
+            if (startDate && endDate) {
+              dispatch(uploadTaskAsync(formData));
+              // toast.success("과제등록 완료");
+              // subtogglePopup();
+            } else {
+              toast.warn("양식을 채워주세요");
+            }
+          }}
+        >
+          과제등록하기
+        </Button>
+      )}
+      {user_gb === "MENTEE" && (
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
+          onClick={() => {
+            const formData = new FormData();
+            const data = {
+              programId: Number(programId),
+              title: title,
+              content: content,
+            };
+            formData.append(
+              "data",
+              new Blob([JSON.stringify(data)], { type: "application/json" })
+            );
+          }}
+        >
+          과제제출하기
+        </Button>
+      )}
     </MyBlock>
   );
 };
