@@ -312,7 +312,7 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
                   setIsExamRegistered(false);
                 }}
               ></FaRegSave>
-              <p>임시저장</p>
+              <p>임시저장.</p>
             </TestSave>
 
             <TestSaveComplete>
