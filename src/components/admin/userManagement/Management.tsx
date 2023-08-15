@@ -13,6 +13,7 @@ import { Controller, useForm } from "react-hook-form";
 import SearchIcon from "@mui/icons-material/Search";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
+  adminList,
   adminLoadAsync,
   admindecisionAsync,
 } from "../../../slice/user/adminSlice";
@@ -32,11 +33,24 @@ const Management = () => {
     handleSubmit,
   } = useForm();
   const [btnSelect, setBtnSelect] = useState("TheWhole");
+
   const dispatch = useAppDispatch();
   const adminList = useAppSelector((state) => state.admin.list2);
+  const newList = useAppSelector((state) => state.admin.newList);
+  const denyList = useAppSelector((state) => state.admin.denyList);
+  const [nowList, setNowList] = useState<Array<adminList> | null>(adminList);
   const onChangeBtn = (event: React.MouseEvent<HTMLElement>, value: string) => {
     if (value == null) {
       return;
+    }
+    if (value === "TheWhole") {
+      setNowList(adminList);
+    }
+    if (value === "New") {
+      setNowList(newList);
+    }
+    if (value === "Deny") {
+      setNowList(denyList);
     }
     setBtnSelect(value);
   };
@@ -63,7 +77,6 @@ const Management = () => {
       .then((response) => {
         const contentType = response.headers["content-type"]; // MIME 타입 확인
         const blob = new Blob([response.data], { type: contentType });
-
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
@@ -77,7 +90,16 @@ const Management = () => {
         console.error("error: ", error);
       });
   };
-  useEffect(() => {}, [adminList]);
+  useEffect(() => {
+    if (btnSelect === "TheWhole") setNowList(adminList);
+    console.log(1);
+  }, [adminList, btnSelect]);
+  useEffect(() => {
+    if (btnSelect === "New") setNowList(newList);
+  }, [newList, btnSelect]);
+  useEffect(() => {
+    if (btnSelect === "Deny") setNowList(denyList);
+  }, [denyList, btnSelect]);
   return (
     <GrayBox>
       <Tite>USER Management</Tite>
@@ -90,21 +112,21 @@ const Management = () => {
         <Custom value="TheWhole">
           <img alt="icon" src="img/whole.png" />
           <CustomWrite>
-            <div>100</div>
+            <div>{adminList.length}</div>
             <p>전체/The Whole</p>
           </CustomWrite>
         </Custom>
         <Custom value="New">
           <img alt="icon" src="img/new.png" />
           <CustomWrite>
-            <div>50</div>
+            <div>{newList.length}</div>
             <p>신규등록/New</p>
           </CustomWrite>
         </Custom>
         <Custom value="Deny">
           <img alt="icon" src="img/deny.png" />
           <CustomWrite>
-            <div>10</div>
+            <div>{denyList.length}</div>
             <div>거절/Deny</div>
           </CustomWrite>
         </Custom>
@@ -191,7 +213,7 @@ const Management = () => {
         <CERTIFICATE>CERTIFICATE</CERTIFICATE>
         <ACCEPTDENY>ACCEPT/DENY</ACCEPTDENY>
       </ListTitle>
-      {adminList?.map((value, index) => {
+      {nowList?.map((value, index) => {
         return (
           <List key={index}>
             <DATE>{value?.createdAt}</DATE>
@@ -209,8 +231,6 @@ const Management = () => {
             </CERTIFICATE>
             <ACCEPTDENY>
               {value.isPassed ? (
-                <></>
-              ) : (
                 <>
                   <DenyWithAcceptButton
                     onClick={() => {
@@ -218,18 +238,57 @@ const Management = () => {
                     }}
                     variant="contained"
                     color="accept"
+                    disabled
                   >
                     ACCEPT
                   </DenyWithAcceptButton>
-                  <DenyWithAcceptButton
-                    onClick={() => {
-                      handleDecision(value.memberId, false);
-                    }}
-                    variant="contained"
-                    color="deny"
-                  >
-                    DENY
-                  </DenyWithAcceptButton>
+                </>
+              ) : (
+                <>
+                  {value.isPassed === null ? (
+                    <>
+                      <DenyWithAcceptButton
+                        onClick={() => {
+                          handleDecision(value.memberId, true);
+                        }}
+                        variant="contained"
+                        color="accept"
+                      >
+                        ACCEPT
+                      </DenyWithAcceptButton>
+                      <DenyWithAcceptButton
+                        onClick={() => {
+                          handleDecision(value.memberId, false);
+                        }}
+                        variant="contained"
+                        color="deny"
+                      >
+                        DENY
+                      </DenyWithAcceptButton>
+                    </>
+                  ) : (
+                    <>
+                      <DenyWithAcceptButton
+                        onClick={() => {
+                          handleDecision(value.memberId, true);
+                        }}
+                        variant="contained"
+                        color="accept"
+                      >
+                        ACCEPT
+                      </DenyWithAcceptButton>
+                      <DenyWithAcceptButton
+                        onClick={() => {
+                          handleDecision(value.memberId, false);
+                        }}
+                        variant="contained"
+                        color="deny"
+                        disabled
+                      >
+                        DENY
+                      </DenyWithAcceptButton>
+                    </>
+                  )}
                 </>
               )}
               {/* <DenyWithAcceptButton

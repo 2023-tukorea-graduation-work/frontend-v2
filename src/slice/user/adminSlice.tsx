@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-interface adminList {
+export interface adminList {
   memberId: number;
   createdAt: string;
   email: string;
@@ -14,12 +14,14 @@ interface adminList {
   isPassed: boolean;
 }
 interface initialStateType {
-  list: Array<adminList>;
   list2: Array<adminList>;
+  newList: Array<adminList>;
+  denyList: Array<adminList>;
 }
 const initialState: initialStateType = {
-  list: [],
   list2: [],
+  newList: [],
+  denyList: [],
 };
 
 export const adminLoadAsync = createAsyncThunk<any>(
@@ -64,14 +66,18 @@ export const adminSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(adminLoadAsync.fulfilled, (state, payload) => {
-      state.list = payload.payload;
-      state.list2 = state.list.filter((item) => item !== null);
+      state.list2 = payload.payload.filter((item: adminList) => item !== null);
       state.list2.map((value) => {
         value.email = value.email.split("@")[0];
         if (value.createdAt) value.createdAt = value.createdAt.split("T")[0];
         return value;
       });
-      console.log(state.list);
+      state.newList = payload.payload.filter(
+        (item: adminList) => item !== null && item.isPassed === null
+      );
+      state.denyList = payload.payload.filter(
+        (item: adminList) => item !== null && item.isPassed === false
+      );
       console.log("리스트 조회 성공");
     });
     builder.addCase(adminLoadAsync.rejected, (state, { payload }) => {
