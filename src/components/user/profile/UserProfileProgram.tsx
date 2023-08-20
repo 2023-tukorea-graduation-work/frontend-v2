@@ -24,14 +24,18 @@ const UserProfileProgram = ({ props }: UserProfileProgramProps) => {
         >
           프로젝트관리하기
         </Link>
-        <Link
-          onClick={() => {
-            navigate("/programCompletion");
-          }}
-          color={user_gb === "MENTEE" ? "primary" : "secondary"}
-        >
-          결과보기
-        </Link>
+        {props.state === "ProgressEnd" ? (
+          <Link
+            onClick={() => {
+              navigate("/programCompletion");
+            }}
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
+          >
+            결과보기
+          </Link>
+        ) : (
+          <></>
+        )}
       </Top>
       <Bottom>
         <BottomP>주제</BottomP>
@@ -39,14 +43,18 @@ const UserProfileProgram = ({ props }: UserProfileProgramProps) => {
         <BottomP>모집인원 :{props.capacity}</BottomP>
         <BottomP>모집기간 :{props.recruitPeriod}</BottomP>
         <BottomP>프로젝트기간 :{props.programPeriod}</BottomP>
-        <Link
-          onClick={() => {
-            navigate("/evaluation");
-          }}
-          color={user_gb === "MENTEE" ? "primary" : "secondary"}
-        >
-          후기작성하기{`->`}
-        </Link>
+        {props.state === "ProgressEnd" ? (
+          <Link
+            onClick={() => {
+              navigate("/evaluation");
+            }}
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
+          >
+            후기작성하기{`->`}
+          </Link>
+        ) : (
+          <></>
+        )}
       </Bottom>
     </Preview>
   );

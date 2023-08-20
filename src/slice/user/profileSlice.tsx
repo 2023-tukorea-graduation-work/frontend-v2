@@ -19,14 +19,18 @@ interface profileInfo {
   age: number | null;
   email: string | null;
   imgUrl: string | null;
-  programList: Array<profileProgramList> | null;
+  programRecruitList: Array<profileProgramList> | null;
+  programOpenList: Array<profileProgramList> | null;
+  programCloseList: Array<profileProgramList> | null;
 }
 const initialState: profileInfo = {
   name: null,
   age: null,
   email: null,
   imgUrl: null,
-  programList: null,
+  programRecruitList: null,
+  programOpenList: null,
+  programCloseList: null,
 };
 
 export const loadProfileProgramListAsync = createAsyncThunk<any, number | null>(
@@ -53,7 +57,15 @@ export const profileSlice = createSlice({
         state.email = payload.email;
         state.imgUrl = payload.imgUrl;
         state.name = payload.name;
-        state.programList = payload.programList;
+        state.programRecruitList = payload.programList.filter(
+          (value: profileProgramList) => value.state === "RECRUIT"
+        );
+        state.programOpenList = payload.programList.filter(
+          (value: profileProgramList) => value.state === "OPEN"
+        );
+        state.programCloseList = payload.programList.filter(
+          (value: profileProgramList) => value.state === "CLOSE"
+        );
         console.log("프로필 프로그램 리스트 불러오기 성공");
       }
     );

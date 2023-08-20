@@ -28,8 +28,10 @@ const Profile = () => {
   }, []);
   useEffect(() => {
     console.log(profile.imgUrl);
-    console.log(profile.programList);
   }, [profile]);
+  useEffect(() => {
+    console.log(btnSelect);
+  }, [btnSelect]);
   return (
     <WhiteBox>
       <LeftNav></LeftNav>
@@ -86,15 +88,49 @@ const Profile = () => {
           </Custom>
         </ToggleButtonGroup>
         <MyProjectList>
-          {profile.programList?.map((value: profileProgramList, index) => (
+          {btnSelect === "ProgressBefore" ? (
             <>
-              <UserProfileProgram
-                props={value}
-                key={index}
-              ></UserProfileProgram>
+              {profile.programRecruitList?.map(
+                (value: profileProgramList, index: number) => (
+                  <UserProfileProgram
+                    props={value}
+                    key={index}
+                  ></UserProfileProgram>
+                )
+              )}
             </>
-          ))}
-          {((Array.isArray(profile.programList) &&
+          ) : (
+            <></>
+          )}
+          {btnSelect === "Progressing" ? (
+            <>
+              {profile.programOpenList?.map(
+                (value: profileProgramList, index: number) => (
+                  <UserProfileProgram
+                    props={value}
+                    key={index}
+                  ></UserProfileProgram>
+                )
+              )}
+            </>
+          ) : (
+            <></>
+          )}
+          {btnSelect === "ProgressEnd" ? (
+            <>
+              {profile.programCloseList?.map(
+                (value: profileProgramList, index: number) => (
+                  <UserProfileProgram
+                    props={value}
+                    key={index}
+                  ></UserProfileProgram>
+                )
+              )}
+            </>
+          ) : (
+            <></>
+          )}
+          {/* {((Array.isArray(profile.programList) &&
             profile.programList.length === 0) ||
             profile.programList === null) && (
             <>
@@ -103,7 +139,7 @@ const Profile = () => {
               <div>프로젝트 리스트가 없습니다</div>
               <div>프로젝트 리스트가 없습니다</div>
             </>
-          )}
+          )} */}
         </MyProjectList>
       </MyProject>
 
