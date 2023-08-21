@@ -237,7 +237,9 @@ const MenteeTaskConfirmPopup = () => {
 
 const TestDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
-  const examList = useAppSelector((state) => state.programProgressExam.list);
+  const examList = useAppSelector(
+    (state) => state.programProgressExam.Examlist
+  );
   const taskList = useAppSelector((state) => state.programProgressTask.list);
   const dispatch = useAppDispatch();
   const { programId } = useParams() as any;

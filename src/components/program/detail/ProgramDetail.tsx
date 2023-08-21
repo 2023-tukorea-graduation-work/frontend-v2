@@ -127,10 +127,9 @@ const ProgramDetail = () => {
               {programDetail.programWeeks.map((value: any, index: number) => {
                 return (
                   <TableRow sx={{ height: "10vh" }} key={index}>
-                    <TableCell align="center" width="10%">
-                      {index}주차
-                    </TableCell>
-                    <TableCell align="left">{value.DETAIL}</TableCell>
+                    <TableCell width="10%">{value.registerDate}</TableCell>
+                    <TableCell width="10%">{index + 1}주차</TableCell>
+                    <TableCell align="center">{value.content}</TableCell>
                   </TableRow>
                 );
               })}

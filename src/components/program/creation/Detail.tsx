@@ -207,7 +207,22 @@ const Detail = (props: ButtonProps) => {
         <InformationBoxLine>
           모집인원
           <div style={{ width: "5rem", marginLeft: "4.5%", marginRight: "1%" }}>
-            <FormControl>
+            <Input
+              disableUnderline={true}
+              sx={{
+                height: "30px",
+                width: "100%",
+                border: "solid 1px #d6d6d6",
+                boxShadow: "0",
+                paddingLeft: "10%",
+                fontSize: "0.8rem",
+              }}
+              placeholder="인원수"
+              {...register("capacity", {
+                required: "인원수는 필수입력입니다.",
+              })}
+            />
+            {/* <FormControl>
               <Controller
                 defaultValue=""
                 control={control}
@@ -252,7 +267,7 @@ const Detail = (props: ButtonProps) => {
                   </Select>
                 )}
               />
-            </FormControl>
+            </FormControl> */}
           </div>
           <div style={{ width: "5rem" }}>모집기간</div>
           <div style={{ width: "8rem", marginRight: "1rem" }}>
@@ -312,7 +327,7 @@ const Detail = (props: ButtonProps) => {
                       verticalAlign: "middle",
                     }}
                   >
-                    <p>{index}주차</p>
+                    <p>{index + 1}주차</p>
                     <Controller
                       control={control}
                       name={`programWeeks.${index}.registerDate`}

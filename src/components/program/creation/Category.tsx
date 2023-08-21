@@ -68,6 +68,7 @@ const Category = (props: ButtonProps) => {
         <p style={{ marginTop: "5rem", marginLeft: "3rem", fontSize: "1rem" }}>
           카테고리 선택하기
         </p>
+
         <div style={{ marginTop: "1rem", marginLeft: "3rem" }}>
           {/* <Select
             isMulti
@@ -80,6 +81,9 @@ const Category = (props: ButtonProps) => {
           <Controller
             control={control}
             name="category"
+            rules={{
+              required: "반드시 선택해주세요",
+            }}
             render={({ field: { onChange, value, ...field } }) => (
               <Select
                 {...field}
@@ -117,7 +121,16 @@ const Category = (props: ButtonProps) => {
             )}
           />
         </div>
-
+        <p
+          style={{
+            marginTop: ".5rem",
+            marginLeft: "3rem",
+            fontSize: "1rem",
+            color: "red",
+          }}
+        >
+          {errors.category?.message?.toString()}
+        </p>
         <p style={{ marginTop: "3rem", marginLeft: "3rem", fontSize: "1rem" }}>
           선택한 대표 카테고리들의 관심사를 선택해주세요
         </p>
@@ -137,6 +150,9 @@ const Category = (props: ButtonProps) => {
               <Controller
                 control={control}
                 name={value.label}
+                rules={{
+                  required: "항목을 선택해주세요",
+                }}
                 render={({ field: { onChange, ...field } }) => (
                   <Select
                     {...field}

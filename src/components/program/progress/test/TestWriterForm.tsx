@@ -243,8 +243,6 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)}>
-      <button type="submit" value="테스트"></button>
-
       <TestWriterform>
         <TestWriterbox>
           <Testdatebox>
@@ -333,20 +331,11 @@ const TestWriterForm = ({ subtogglePopup }: Props) => {
             </TestSave>
 
             <TestSaveComplete>
-              <FaSave
-                size="25"
-                style={{
-                  color: "#777777",
-                  marginBottom: "0.3rem",
-                  marginLeft: "0.6rem",
-                }}
-              ></FaSave>
               <button
                 type="submit"
                 style={{
                   color: "#777777",
                   marginBottom: "0.8rem",
-
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}

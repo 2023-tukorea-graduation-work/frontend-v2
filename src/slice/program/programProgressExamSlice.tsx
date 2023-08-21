@@ -41,10 +41,10 @@ export interface ExamList {
 }
 
 interface initialStateType {
-  list: Array<ExamList>;
+  Examlist: Array<ExamList>;
 }
 const initialState: initialStateType = {
-  list: [],
+  Examlist: [],
 };
 
 export const uploadExamAsync = createAsyncThunk<any, ExamForm>(
@@ -58,8 +58,8 @@ export const uploadExamAsync = createAsyncThunk<any, ExamForm>(
         data: {
           programId: `${examData.programId}`,
           examTitle: `${examData.examTitle}`,
-          examStartTime: `${dateFormat(examData.examStartTime)}`,
-          examFinishTime: `${dateFormat(examData.examFinishTime)}`,
+          examStartDate: `${dateFormat(examData.examStartTime)}`,
+          examFinishDate: `${dateFormat(examData.examFinishTime)}`,
           isExamRegistered: `${examData.isExamRegistered}`,
           examQuestionRegisterRequest: examData.examQuestionRegisterRequest,
         },
@@ -109,7 +109,7 @@ export const programExamSlice = createSlice({
       console.log("시험 업로드 실패");
     });
     builder.addCase(loadExamListAsync.fulfilled, (state, payload) => {
-      console.log(payload);
+      state.Examlist = [...payload.payload];
       console.log("리스트 조회성공");
     });
     builder.addCase(loadExamListAsync.rejected, (state, payload) => {

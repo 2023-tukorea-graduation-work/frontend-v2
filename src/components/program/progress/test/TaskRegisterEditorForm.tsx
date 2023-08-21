@@ -12,6 +12,7 @@ import "react-quill/dist/quill.snow.css";
 import { useAppDispatch } from "../../../../store/hooks";
 import { useParams } from "react-router";
 import { uploadTaskAsync } from "../../../../slice/program/programProgressTask";
+import { dateFormat } from "../../../../utils/dateFormat";
 
 interface Props {
   subtogglePopup(): void;
@@ -32,11 +33,13 @@ const HorizonLine = () => {
 };
 
 const TaskRegisterFileUpload = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState<Array<File>>([]);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
-    setSelectedFile(file || null);
+  const handleFileChange = (event: any) => {
+    if (event.target.files) {
+      const updatedFiles = event.target.files;
+      setSelectedFile([...selectedFile, ...updatedFiles]);
+    }
   };
 
   const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,13 +52,20 @@ const TaskRegisterFileUpload = () => {
   return (
     <div>
       <form onSubmit={handleFileSubmit}>
-        <input type="file" onChange={handleFileChange} />
+        <input type="file" onChange={handleFileChange} multiple />
       </form>
     </div>
   );
 };
 
 const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
+  const [selectedFile, setSelectedFile] = useState<Array<File>>([]);
+  const handleFileChange = (event: any) => {
+    if (event.target.files) {
+      const updatedFiles = event.target.files;
+      setSelectedFile([...selectedFile, ...updatedFiles]);
+    }
+  };
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -132,7 +142,7 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
               setContent(event.target.value);
             }}
           ></input>
-          <TaskRegisterFileUpload></TaskRegisterFileUpload>
+          <input type="file" onChange={handleFileChange} multiple />
         </div>
       )}
       {user_gb === "MENTEE" && (
@@ -157,9 +167,10 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
           sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
           onClick={() => {
             const formData = new FormData();
+            console.log(selectedFile);
             const data = {
-              startTaskDateTime: startDate,
-              endTaskDateTime: endDate,
+              startTaskDateTime: dateFormat(startDate),
+              endTaskDateTime: dateFormat(endDate),
               programId: Number(programId),
               title: title,
               content: content,
@@ -168,6 +179,9 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
               "data",
               new Blob([JSON.stringify(data)], { type: "application/json" })
             );
+            for (let i = 0; i < selectedFile.length; i++) {
+              formData.append(`file`, selectedFile[i]);
+            }
             if (startDate && endDate) {
               dispatch(uploadTaskAsync(formData));
               // toast.success("과제등록 완료");

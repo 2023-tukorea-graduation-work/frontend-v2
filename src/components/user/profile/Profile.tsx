@@ -156,7 +156,7 @@ const Profile = () => {
           <ImageStyle>
             <img
               referrerPolicy="no-referrer"
-              src={test}
+              src={profile.imgUrl ? profile.imgUrl : ""}
               alt="logo"
               style={{ width: "3rem", height: "3rem", objectFit: "fill" }}
             />
