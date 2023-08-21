@@ -30,7 +30,7 @@ export const loadTaskAsync = createAsyncThunk<Array<TaskList>, number>(
     try {
       const { data } = await axios({
         method: "get",
-        url: `/schedule/${programId}`,
+        url: `/task/program/${programId}`,
       });
       console.log(data);
       return data;
@@ -74,13 +74,12 @@ export const programTaskSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(loadTaskAsync.fulfilled, (state, { payload }) => {
       state.list = [...payload];
-      console.log("과제 리스트로드 성공");
+      console.log(payload, "과제 리스트로드 성공");
     });
     builder.addCase(uploadTaskAsync.rejected, (state) => {
       console.log("과제 업로드 실패");
     });
-    builder.addCase(uploadTaskAsync.fulfilled, (state, payload) => {
-      console.log(payload);
+    builder.addCase(uploadTaskAsync.fulfilled, (state, action) => {
       console.log("과제 업로드 성공");
     });
   },

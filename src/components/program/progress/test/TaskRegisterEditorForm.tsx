@@ -89,11 +89,7 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
     <MyBlock>
       <TaskRegisterEdinfo>
         <p>[1차시] 과제 제목</p>
-        <TaskRegisterEdinfosub>
-          <FaUser></FaUser>
-          <p>박서영</p>
-          <p>2023.03.15</p>
-        </TaskRegisterEdinfosub>
+        <TaskRegisterEdinfosub></TaskRegisterEdinfosub>
       </TaskRegisterEdinfo>
       <HorizonLine></HorizonLine>
       {user_gb === "MENTO" && (
@@ -169,8 +165,8 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
             const formData = new FormData();
             console.log(selectedFile);
             const data = {
-              startTaskDateTime: dateFormat(startDate),
-              endTaskDateTime: dateFormat(endDate),
+              startTaskDate: dateFormat(startDate),
+              endTaskDate: dateFormat(endDate),
               programId: Number(programId),
               title: title,
               content: content,
@@ -180,7 +176,7 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
               new Blob([JSON.stringify(data)], { type: "application/json" })
             );
             for (let i = 0; i < selectedFile.length; i++) {
-              formData.append(`file`, selectedFile[i]);
+              formData.append(`files`, selectedFile[i]);
             }
             if (startDate && endDate) {
               dispatch(uploadTaskAsync(formData));
