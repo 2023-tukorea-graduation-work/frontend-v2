@@ -13,12 +13,16 @@ import Pagination from "react-js-pagination";
 import FilterButton from "./Filter";
 import ProgramListProgram from "./ProgramListProgram";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { loadItemListAsync } from "../../../slice/program/programListSlice";
+import {
+  loadItemListAsync,
+  search,
+} from "../../../slice/program/programListSlice";
 import dummy from "../../../docs/DummyList.json";
 const ProgramList = () => {
   const dispatch = useAppDispatch();
   const postList = useAppSelector((state) => state.programList.post);
   const [page, setPage] = useState<number>(1);
+  const [searchInput, setSearchInput] = useState("");
   const handlePageChange = (page: number) => {
     setPage(page);
   };
@@ -30,6 +34,9 @@ const ProgramList = () => {
   const handlePageDown = () => {
     if (page !== 1) setPage((state) => (state = state - 1));
     console.log(page);
+  };
+  const handleSearch = (e: any) => {
+    setSearchInput(e.target.value);
   };
   useEffect(() => {
     dispatch(loadItemListAsync(""));
@@ -43,6 +50,10 @@ const ProgramList = () => {
       <SearchForm>
         <TextField
           color={user_gb === "MENTEE" ? "primary" : "secondary"}
+          value={searchInput}
+          onChange={(e) => {
+            handleSearch(e);
+          }}
           sx={{
             width: "90%",
             fontSize: "0.8rem",
@@ -50,7 +61,16 @@ const ProgramList = () => {
           size="small"
         ></TextField>
         <FaSearch
-          style={{ width: "5%", marginTop: "0.8rem", marginLeft: "0.8rem" }}
+          style={{
+            width: "5%",
+            marginTop: "0.8rem",
+            marginLeft: "0.8rem",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            dispatch(search(searchInput));
+            setPage(1);
+          }}
           size="40%"
         ></FaSearch>
       </SearchForm>

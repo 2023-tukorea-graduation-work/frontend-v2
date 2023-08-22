@@ -25,6 +25,7 @@ interface totalState {
   post: itemBox[];
   postData: itemBox[];
   filterAll: filterList;
+  searchContent: string;
 }
 const initialState: totalState = {
   post: [],
@@ -33,6 +34,7 @@ const initialState: totalState = {
     place: "ONOFFLINE",
     interest: "interestAll",
   },
+  searchContent: "",
 };
 export const loadItemListAsync = createAsyncThunk<itemBox[], string>(
   "loadItemList",
@@ -64,6 +66,15 @@ export const programListSlice = createSlice({
     interestSelect: (state, action: PayloadAction<string>) => {
       state.filterAll.interest = action.payload;
     },
+    search: (state, action: PayloadAction<string>) => {
+      if (action.payload) {
+        state.post = state.postData.filter((value) =>
+          value.subject.includes(action.payload)
+        );
+      } else {
+        state.post = state.postData;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(loadItemListAsync.fulfilled, (state, { payload }) => {
@@ -73,5 +84,5 @@ export const programListSlice = createSlice({
     });
   },
 });
-export const { placeSelect, interestSelect } = programListSlice.actions;
+export const { placeSelect, interestSelect, search } = programListSlice.actions;
 export default programListSlice.reducer;
