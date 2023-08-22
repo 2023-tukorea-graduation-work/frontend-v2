@@ -19,7 +19,6 @@ interface itemBox {
 }
 interface filterList {
   place: string;
-  teach: string;
   interest: string;
 }
 interface totalState {
@@ -31,8 +30,7 @@ const initialState: totalState = {
   post: [],
   postData: [],
   filterAll: {
-    place: "onlineWithOffline",
-    teach: "typeAll",
+    place: "ONOFFLINE",
     interest: "interestAll",
   },
 };
@@ -58,12 +56,10 @@ export const programListSlice = createSlice({
   reducers: {
     placeSelect: (state, action: PayloadAction<string>) => {
       state.filterAll.place = action.payload;
-      console.log(state.filterAll.place);
-      console.log(state.filterAll.teach);
-      console.log(state.filterAll.interest);
-    },
-    teachTypeSelect: (state, action: PayloadAction<string>) => {
-      state.filterAll.teach = action.payload;
+      state.post = state.postData.filter(
+        (value) => value.programPlace === state.filterAll.place
+      );
+      console.log(state.post);
     },
     interestSelect: (state, action: PayloadAction<string>) => {
       state.filterAll.interest = action.payload;
@@ -77,6 +73,5 @@ export const programListSlice = createSlice({
     });
   },
 });
-export const { placeSelect, teachTypeSelect, interestSelect } =
-  programListSlice.actions;
+export const { placeSelect, interestSelect } = programListSlice.actions;
 export default programListSlice.reducer;

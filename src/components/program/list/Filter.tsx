@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
   interestSelect,
   placeSelect,
-  teachTypeSelect,
 } from "../../../slice/program/programListSlice";
 
 const Filter = () => {
@@ -13,15 +12,11 @@ const Filter = () => {
   const filterAll = useAppSelector((state) => state.programList.filterAll);
   const dispatch = useAppDispatch();
   const place = [
-    ["온라인", "online"],
-    ["오프라인", "offline"],
-    ["온라인 & 오프라인 병행", "onlineWithOffline"],
+    ["온라인", "ONLINE"],
+    ["오프라인", "OFFLINE"],
+    ["온라인 & 오프라인 병행", "ONOFFLINE"],
   ];
-  const teachType = [
-    ["전체", "typeAll"],
-    ["과외", "tutoring"],
-    ["멘토 & 멘티", "mentoWithMentee"],
-  ];
+
   const interest = [
     ["전체", "interestAll"],
     ["학습", "learning"],
@@ -74,28 +69,7 @@ const Filter = () => {
             })}
           </Placebox>
         </PlaceForm>
-        <KindForm>
-          <Title>종류</Title>
-          <Kindbox>
-            {teachType.map((value: string[], index: number) => {
-              return (
-                <div
-                  key={index}
-                  className={`${value[1]} ${
-                    filterAll.teach === value[1]
-                      ? userGb === "MENTO"
-                        ? "active2"
-                        : "active"
-                      : ""
-                  }`}
-                  onClick={() => dispatch(teachTypeSelect(`${value[1]}`))}
-                >
-                  {`${value[0]}`}
-                </div>
-              );
-            })}
-          </Kindbox>
-        </KindForm>
+
         <FieldForm>
           <Title>관심분야</Title>
           <Fieldbox>

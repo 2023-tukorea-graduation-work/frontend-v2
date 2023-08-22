@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import {
   interestSelect,
   placeSelect,
-  teachTypeSelect,
 } from "../../../../slice/program/programListSlice";
 
 const CompletionFilter = () => {
@@ -74,28 +73,7 @@ const CompletionFilter = () => {
             })}
           </Placebox>
         </PlaceForm>
-        <KindForm>
-          <Title>종류</Title>
-          <Kindbox>
-            {teachType.map((value: string[], index: number) => {
-              return (
-                <div
-                  key={index}
-                  className={`${value[1]} ${
-                    filterAll.teach === value[1]
-                      ? userGb === "MENTO"
-                        ? "active2"
-                        : "active"
-                      : ""
-                  }`}
-                  onClick={() => dispatch(teachTypeSelect(`${value[1]}`))}
-                >
-                  {`${value[0]}`}
-                </div>
-              );
-            })}
-          </Kindbox>
-        </KindForm>
+
         <FieldForm>
           <Title>관심분야</Title>
           <Fieldbox>
