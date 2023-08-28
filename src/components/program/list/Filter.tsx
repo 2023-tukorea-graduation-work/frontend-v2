@@ -78,13 +78,13 @@ const Filter = () => {
                 <div
                   key={index}
                   className={`${value[1]} ${
-                    filterAll.interest === value[1]
+                    filterAll.interest === value[0]
                       ? userGb === "MENTO"
                         ? "active2"
                         : "active"
                       : ""
                   }`}
-                  onClick={() => dispatch(interestSelect(`${value[1]}`))}
+                  onClick={() => dispatch(interestSelect(`${value[0]}`))}
                 >
                   {`${value[0]}`}
                 </div>
