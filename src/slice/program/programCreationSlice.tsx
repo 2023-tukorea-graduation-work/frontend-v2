@@ -11,7 +11,7 @@ const initialState: intial = {
   programCategories: null,
   status: null,
 };
-interface FianlData {
+export interface FianlData {
   parent: string;
   child: string;
 }
