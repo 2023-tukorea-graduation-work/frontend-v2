@@ -33,6 +33,18 @@ const ProgramListProgram = ({
   lesson,
 }: Props) => {
   const navigate = useNavigate();
+  const startDateForm = programStartDate;
+  const todayDate = new Date();
+  const todayDateForm = `${todayDate.getFullYear()}-${
+    todayDate.getMonth() + 1
+  }-${todayDate.getDate()}`;
+
+  const today = new Date(todayDateForm);
+  const start = new Date(startDateForm);
+
+  const timeDiff = Math.ceil(
+    Math.abs(today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+  );
   return (
     <Box
       onClick={() => {
@@ -80,7 +92,6 @@ const ProgramListProgram = ({
             color: "#777777",
           }}
         >
-          <p>그룹 종류: 과외 or 프로젝트-추가필요</p>
           <p>모집인원: {`${capacity}`}명</p>
           <p>현재 모집된 구성원: {`${totalParticipants}`}명</p>
         </div>
@@ -100,22 +111,12 @@ const ProgramListProgram = ({
             fontWeight: "bold",
             fontSize: "1rem",
             color: "#FF8E41",
-            marginRight: "10rem",
+            width: "15rem",
           }}
         >
-          D데드라인추가해야함
+          {today.getTime() > start.getTime() ? "모집날짜마감" : `D-${timeDiff}`}
         </p>
 
-        <FaEye size="5%" style={{ marginTop: "0.1rem" }}></FaEye>
-        <p
-          style={{
-            fontSize: "0.7rem",
-            marginRight: "0.6rem",
-            marginTop: "0.1rem",
-          }}
-        >
-          701
-        </p>
         <FaRegEnvelope
           size="5%"
           style={{ marginRight: "1rem", marginTop: "0.1rem" }}

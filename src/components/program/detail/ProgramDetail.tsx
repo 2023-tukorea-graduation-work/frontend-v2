@@ -39,6 +39,18 @@ const ProgramDetail = () => {
     console.log(programId);
     dispatch(programParticipateAsync(menteeWithProgram));
   };
+  const startDateForm = programDetail.programStartDate;
+  const todayDate = new Date();
+  const todayDateForm = `${todayDate.getFullYear()}-${
+    todayDate.getMonth() + 1
+  }-${todayDate.getDate()}`;
+
+  const today = new Date(todayDateForm);
+  const start = new Date(startDateForm);
+
+  const timeDiff = Math.ceil(
+    Math.abs(today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+  );
   return (
     <DetailForm>
       <Detailbox>
@@ -90,19 +102,11 @@ const ProgramDetail = () => {
               width: "100%",
             }}
           >
-            D-1
+            {today.getTime() > start.getTime()
+              ? "모집날짜마감"
+              : `D-${timeDiff}`}
           </p>
 
-          <FaEye size="10%" color="#8E8E8E"></FaEye>
-          <p
-            style={{
-              fontSize: "0.8rem",
-              marginRight: "0.3rem",
-              color: "#8E8E8E",
-            }}
-          >
-            701
-          </p>
           <FaRegEnvelope
             size="10%"
             style={{
