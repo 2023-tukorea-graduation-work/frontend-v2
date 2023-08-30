@@ -1,46 +1,49 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# 한국공학대학교 - 멘토멘티 매칭&관리 사이트
 
-In the project directory, you can run:
+멘토 & 멘티 매칭과 더불어 매칭이 된후 멘토링프로그램관리 (출석,질문,공지,자료,화상회의,시험,과제)까지 한번에 관리할수있는 사이트입니다.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 선정배경
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+최근, 멘토링 프로그램이 학교, 기업, 대학기관, 청소년 기관 등 다양한 기관에서 적극 도입되어 활용되고 있어
+대학생과 연계하여 청소년에게 역할모델 제시하고 정서적 지지와 격려를 제공해 관계를 구축하는 프로그램 확대하고자 사이트를 제작하게되었습니다.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 📆 개발기간
 
-### `npm run build`
+2023.01.01 ~ 2023.08.30
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
+### 👤 멤버구성
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+정민창 - 백엔드
+유제빈 - 프론트엔드
+박서영 - 디자인 & 프론트엔드
+이혜연 - 디자인 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
+### 💻 개발환경
 
-### `npm run eject`
+프론트앤드 : <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+백엔드 : 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
+### 📌 주요기능
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+맨토 & 멘티 매칭
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+멘토링관리
 
-## Learn More
+완료된 멘토링프로젝트 보고서
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+관리자모드
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+### 시연영상
+
+
+
+
