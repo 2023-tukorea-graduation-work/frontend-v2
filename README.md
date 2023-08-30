@@ -74,6 +74,7 @@
 <img width="1189" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/2d439851-6f71-4533-b568-088ff25c5916">
 🔻 멘티 - 프로젝트관리 ( 시험보기 )
 <img width="596" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/2d2c3423-3f8f-44bd-b6eb-f5503a6afcbf">
+
 🔻 멘토 - 프로젝트관리 ( 전체 / 공지올리기 / 출석 / 일정 )
 <img width="1183" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/bd63bdfe-cb6d-4d57-89d2-0ee6863fe96b">
 🔻 멘토 - 프로젝트관리 ( 질문 / 화상통화방생성 / 자료올리기 / 녹화강의올리기 )
