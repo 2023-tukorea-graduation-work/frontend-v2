@@ -13,7 +13,7 @@ import {
   uploadMaterialAsync,
 } from "../../../../slice/program/programProgressMaterial";
 import { useParams } from "react-router-dom";
-
+import download from "../../../../assets/download.png";
 interface Props {
   selectedFile: File | null;
   setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
@@ -77,6 +77,8 @@ const handleFileDownload = (value: any) => {
 };
 
 const MaterialPopup = () => {
+  const [title, setTitle] = useState("");
+  const [detail, setDetail] = useState("");
   const [isOpen, setIsOpen] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { programId } = useParams();
@@ -93,7 +95,7 @@ const MaterialPopup = () => {
             <MPopupFrom>
               <MPopupStudent>
                 <FaUserCircle size="20" color="#777777"></FaUserCircle>
-                <p>박서영</p>
+                <p>홍길동</p>
               </MPopupStudent>
               <FaRegWindowClose
                 cursor="pointer"
@@ -107,9 +109,17 @@ const MaterialPopup = () => {
               placeholder="자료제목입력"
               color="secondary"
               sx={{ width: "100%", height: "14%", border: "none" }}
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
             ></Input>
             <Input
               placeholder="자료내용입력"
+              value={detail}
+              onChange={(e) => {
+                setDetail(e.target.value);
+              }}
               color="secondary"
               sx={{
                 width: "100%",
@@ -133,8 +143,8 @@ const MaterialPopup = () => {
               onClick={async () => {
                 const test = {
                   programId: Number(programId),
-                  title: "프로그램 자료 제목1",
-                  detail: "프로그램 자료 상세내용1",
+                  title: title,
+                  detail: detail,
                 };
                 const formData = new FormData();
                 formData.append(
@@ -318,16 +328,14 @@ const MaterialDetail = () => {
 
                   <div style={{ marginTop: "0.5rem" }}>
                     <ButtonBox>
-                      <ButtonStyle
-                        style={{ width: "10rem", height: "1.5rem" }}
-                        variant="contained"
-                        color="primary"
+                      <p style={{ textAlign: "right" }}>자료</p>
+                      <DownloadStyle
+                        src={download}
+                        alt="오류"
                         onClick={() => {
                           if (value.materialId) handleFileDownload(value);
                         }}
-                      >
-                        자료 다운로드
-                      </ButtonStyle>
+                      ></DownloadStyle>
                     </ButtonBox>
                   </div>
                 </Materiallistbox>
@@ -461,9 +469,17 @@ const MdetailPopupStudent = styled.div`
 `;
 const ButtonBox = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-top: 2rem;
 `;
-const ButtonStyle = styled(Button)`
+const DownloadStyle = styled.img`
   float: right;
   margin-right: 1rem;
+  margin-left: 0.3rem;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
 `;
 export default MaterialDetail;

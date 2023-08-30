@@ -94,7 +94,6 @@ const Header = () => {
                 >
                   플젝완료게시판
                 </NaviStyle>
-                <NaviStyle className="classpage">과외구인게시판</NaviStyle>
               </NavStyle>
               <AlertWithLogin>
                 <AlertModal />
