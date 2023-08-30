@@ -57,6 +57,7 @@
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/26b1cbca-6c75-4c80-96f5-51ef0ab7b534">
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/3489d160-2d0e-46e3-85b8-452eafe22452">
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/a1675500-95b6-465f-8704-02b41fe4f52e">
+<img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/6776144a-b335-4979-9536-4dce112827fc">
 
 
 
