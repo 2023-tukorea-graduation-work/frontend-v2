@@ -42,12 +42,12 @@ export const uploadMaterialAsync = createAsyncThunk<any, any>(
   }
 );
 
-export const loadMaterialAsync = createAsyncThunk<any>(
+export const loadMaterialAsync = createAsyncThunk<any, number>(
   "loadMaterial",
-  async () => {
+  async (programId) => {
     const { data } = await axios({
       method: "get",
-      url: "/material/program/1",
+      url: `/material/program/${programId}`,
     });
     console.log(data);
     return data;
@@ -61,7 +61,7 @@ export const downloadMaterialAsync = createAsyncThunk<any, number>(
       method: "get",
       url: `/material/download/${materailId}`,
     });
-    console.log(data)
+    console.log(data);
     return data;
   }
 );

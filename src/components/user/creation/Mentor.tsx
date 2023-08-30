@@ -108,14 +108,11 @@ const Mentor = (props: any) => {
 
       <div
         style={{
-          backgroundColor: "skyblue",
-          height: "10rem",
+          height: "2rem",
           fontFamily: "NotoSansRegular",
           marginBottom: "1rem",
         }}
-      >
-        관심분야 선택
-      </div>
+      ></div>
 
       {/* ---------------2번째칸 프로필사진 & 정보입력---------------  */}
 
@@ -442,6 +439,7 @@ const Mentor = (props: any) => {
         <IdWithPasswordLine>
           비밀번호
           <Input
+            type="password"
             disableUnderline={true}
             placeholder="비밀번호입력"
             sx={{
@@ -467,6 +465,7 @@ const Mentor = (props: any) => {
         <IdWithPasswordLine>
           비밀번호 확인
           <Input
+            type="password"
             disableUnderline={true}
             placeholder="비밀번호확인"
             sx={{

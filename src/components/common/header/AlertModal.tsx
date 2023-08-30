@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { alertModalChange } from "../../../slice/common/headerSlice";
 
 const AlertModal = () => {
+  const date = new Date();
   const dispatch = useAppDispatch();
   const alertModalState = useAppSelector((state) => state.header.alertModal);
   const customStyles = {
@@ -56,7 +57,9 @@ const AlertModal = () => {
         />
       </ModalodalHeader>
       <ModalDate>
-        <p>2023.03.15 목요일</p>
+        <p>
+          {date.getFullYear()}.{date.getMonth() + 1}.{date.getDate()}
+        </p>
       </ModalDate>
     </Modal>
   );

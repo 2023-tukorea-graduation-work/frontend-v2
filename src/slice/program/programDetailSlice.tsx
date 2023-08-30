@@ -99,10 +99,12 @@ export const programListDetalSlice = createSlice({
     });
     builder.addCase(programParticipateAsync.fulfilled, (state) => {
       console.log("신청완료");
+      toast.success("신청완료");
     });
     builder.addCase(programParticipateAsync.rejected, (state, action) => {
       console.log(action);
       toast.error("신청실패");
+      toast.success("신청완료");
     });
   },
 });

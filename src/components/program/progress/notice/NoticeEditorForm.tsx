@@ -4,10 +4,14 @@ import { Button } from "@mui/material";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "../../../../store/hooks";
-import { uploadNoticetAsync } from "../../../../slice/program/programProgressNoticeSlice";
+import {
+  loadNoticeListAsync,
+  uploadNoticetAsync,
+} from "../../../../slice/program/programProgressNoticeSlice";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { event } from "jquery";
+import { useParams } from "react-router-dom";
 interface Props {
   subtogglePopup(): void;
 }
@@ -26,27 +30,29 @@ const HorizonLine = () => {
 };
 
 const NoticeEditorForm = ({ subtogglePopup }: Props) => {
+  const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const dispatch = useAppDispatch();
-
+  const { programId } = useParams();
   return (
     <MyBlock>
       <TestEdinfo>
-        <p>공지제목을 입력하세요</p>
-        <TestEdinfosub>
-          <FaUser></FaUser>
-          <p>박서영</p>
-          <p>2023.03.15</p>
-        </TestEdinfosub>
+        <p style={{ width: "12rem" }}>공지제목을 입력하세요</p>
+        <TestEdinfosub></TestEdinfosub>
       </TestEdinfo>
       <input
+        placeholder="제목"
+        onChange={(event) => {
+          setTitle(event.target.value);
+        }}
         style={{ height: "4vh", width: "100%", marginTop: "2rem" }}
       ></input>
       <p style={{ marginTop: "2rem" }}>공지내용을 입력하세요</p>
       {/* <p style={{ marginLeft: "1.5%" }}>
         <ReactQuill theme="snow" value={value} onChange={setValue} />
       </p> */}
-      <input
+      <textarea
+        placeholder="공지내용"
         style={{
           width: "100%",
           height: "20vh",
@@ -57,22 +63,30 @@ const NoticeEditorForm = ({ subtogglePopup }: Props) => {
         onChange={(event) => {
           setValue(event.target.value);
         }}
-      ></input>
+      ></textarea>
       <Button
         variant="contained"
         color="secondary"
         sx={{ height: "2.2rem", width: "9rem", marginLeft: "40%" }}
-        onClick={() => {
-          console.log(setValue);
-          // dispatch(
-          //   uploadNoticetAsync({
-          //     programId: 1,
-          //     title: "test0717",
-          //     content: "test0717",
-          //   })
-          // );
-          // toast.success("게시글작성 성공");
-          // subtogglePopup();
+        onClick={async () => {
+          console.log(value);
+
+          try {
+            await dispatch(
+              uploadNoticetAsync({
+                programId: Number(programId),
+                title: title,
+                content: value,
+              })
+            );
+
+            await dispatch(loadNoticeListAsync(Number(programId)));
+
+            toast.success("게시글작성 성공");
+            subtogglePopup();
+          } catch (error) {
+            console.error("에러 발생:", error);
+          }
         }}
       >
         공지올리기
