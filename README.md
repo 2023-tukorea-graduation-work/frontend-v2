@@ -52,11 +52,17 @@
 
 ### 시연영상
 
+🔻 회원가입 
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/f9e3de52-8581-4096-8f30-041951881a2e">
+🔻 관리자페이지
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/eec91246-99e1-4b48-ad52-2fdcefa12efa">
+🔻 멘티 -멘티모집글작성페이지
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/26b1cbca-6c75-4c80-96f5-51ef0ab7b534">
+🔻 멘토 - 멘토링 신청하기
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/3489d160-2d0e-46e3-85b8-452eafe22452">
+🔻 멘토 - 공지글 올리기
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/a1675500-95b6-465f-8704-02b41fe4f52e">
+🔻 멘토 - 자료 올리기
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/6776144a-b335-4979-9536-4dce112827fc">
 
 
