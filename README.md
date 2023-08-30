@@ -44,6 +44,6 @@
 
 ### 시연영상
 
-
+<img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/f9e3de52-8581-4096-8f30-041951881a2e">
 
 
