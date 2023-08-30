@@ -93,9 +93,10 @@ const NoticePopup = () => {
 const NoticeDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const dispatch = useAppDispatch();
+  const noticeList = useAppSelector((state) => state.programNotice.list);
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
-  const { params } = useParams();
+  const { programId } = useParams();
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
@@ -103,8 +104,14 @@ const NoticeDetail = () => {
     ssetIsOpen(!sisOpen);
   };
   useEffect(() => {
-    dispatch(loadNoticeListAsync(Number(params)));
+    console.log(programId);
+    dispatch(loadNoticeListAsync(Number(programId)));
   }, [isOpen]);
+  useEffect(() => {
+    console.log(programId);
+    dispatch(loadNoticeListAsync(Number(programId)));
+  }, [sisOpen]);
+  useEffect(() => {}, [noticeList]);
   return (
     <NoticeForm>
       <p
@@ -118,12 +125,7 @@ const NoticeDetail = () => {
       </p>
       <Noticebox>
         <Noticetext>
-          <Noticetextinfo>
-            <p style={{ fontSize: "0.9rem" }}>날짜 :</p>
-            <p>2022.02.31</p>
-            <p>진행차시 : 1차시 / 9차시</p>
-            <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
-          </Noticetextinfo>
+          <Noticetextinfo></Noticetextinfo>
           {user_gb === "MENTO" && (
             <div>
               <p
@@ -139,65 +141,31 @@ const NoticeDetail = () => {
             </div>
           )}
         </Noticetext>
-        <Noticelistbox>
-          <NoticeTotal>
-            <Noticelist>
-              <p>공지제목</p>
-            </Noticelist>
-            <NoticeStudent>
-              <p>박서영</p>
-              <p>
-                <FaUserCircle></FaUserCircle>
-              </p>
-              <p>2023.03.15</p>
-            </NoticeStudent>
-          </NoticeTotal>
-          <HorizonLine />
-          <p style={{ marginLeft: "1.5%" }}>공지내용</p>
-          {user_gb === "MENTO" && (
-            <div>
+        {noticeList.map((value, index) => (
+          <Noticelistbox key={index}>
+            <NoticeTotal>
+              <Noticelist>
+                <p>{value.title}</p>
+              </Noticelist>
+              <NoticeStudent>
+                <p>홍길동</p>
+                <p>
+                  <FaUserCircle></FaUserCircle>
+                </p>
+                <p>2023.08.30</p>
+              </NoticeStudent>
+            </NoticeTotal>
+            <HorizonLine />
+            <p style={{ marginLeft: "1.5%" }}>{value.content}</p>
+            {user_gb === "MENTO" && (
               <div>
-                <a
-                  href="#"
-                  style={{
-                    marginLeft: "93%",
-                    color: "#07858C",
-                  }}
-                  onClick={togglePopup}
-                >
-                  자세히보기
-                </a>
-                {isOpen && <NoticePopup />}
+                <div>{isOpen && <NoticePopup />}</div>
+                <div style={{ marginTop: "0.5rem" }}></div>
               </div>
-              <div style={{ marginTop: "0.5rem" }}>
-                <a
-                  href="#"
-                  style={{
-                    color: "#07858C",
-                    marginLeft: "93%",
-                  }}
-                >
-                  수정하기
-                </a>
-              </div>
-            </div>
-          )}
-          {user_gb === "MENTEE" && (
-            <div>
-              <a
-                href="#"
-                style={{
-                  marginLeft: "93%",
-                  color: "#FF8E41",
-                }}
-                onClick={togglePopup}
-              >
-                자세히보기
-              </a>
-              {isOpen && <NoticePopup />}
-            </div>
-          )}
-        </Noticelistbox>
+            )}
+            {user_gb === "MENTEE" && <div>{isOpen && <NoticePopup />}</div>}
+          </Noticelistbox>
+        ))}
       </Noticebox>
     </NoticeForm>
   );

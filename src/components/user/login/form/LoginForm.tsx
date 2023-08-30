@@ -57,6 +57,7 @@ const LoginForm = () => {
             })}
           />
           <Input
+            type="password"
             id="passWord"
             placeholder="비밀번호 입력"
             sx={{ marginTop: "1rem" }}
@@ -74,7 +75,7 @@ const LoginForm = () => {
           />
           <CheckStyled>
             <Checkbox color={user_gb === "MENTEE" ? "primary" : "secondary"} />
-            로그인 상태 유지123
+            로그인 상태 유지
           </CheckStyled>
           <Button
             type="submit"

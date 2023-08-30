@@ -25,7 +25,7 @@ const UserType = (props: any) => {
         >
           <ImageStyle>
             <img
-              src="/images/mento.png"
+              src="/img/mento.png"
               alt="logo"
               style={{ height: "24vh", objectFit: "contain" }}
             />
@@ -42,7 +42,7 @@ const UserType = (props: any) => {
         >
           <ImageStyle>
             <img
-              src="/images/mentee.png"
+              src="/img/mentee.png"
               alt="logo"
               style={{ height: "24vh", objectFit: "contain" }}
             />

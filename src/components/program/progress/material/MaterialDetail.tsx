@@ -1,11 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { FaUserCircle, FaRegWindowClose, FaPlus } from "react-icons/fa";
-import { TextField, Input } from "@mui/material";
+import { TextField, Input, Button } from "@mui/material";
 import { toast } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-
 
 import materialForm from "../../../../slice/program/programProgressMaterial";
 import {
@@ -13,6 +12,7 @@ import {
   loadMaterialAsync,
   uploadMaterialAsync,
 } from "../../../../slice/program/programProgressMaterial";
+import { useParams } from "react-router-dom";
 
 interface Props {
   selectedFile: File | null;
@@ -57,30 +57,29 @@ const HorizonLine = () => {
 
 const handleFileDownload = (value: any) => {
   console.log(value);
-  fetch(value.filepath
-    , {method: 'GET'})
-      .then(res => {
-        return res.blob();
-      })
-      .then(blob => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'file1.pdf';
-        document.body.appendChild(a); 
-        a.click();  
-        window.URL.revokeObjectURL(url);
-        a.remove(); 
-      })
-      .catch(err => {
-        console.error('err: ', err);
-      })
-}
+  fetch(value.filepath, { method: "GET" })
+    .then((res) => {
+      return res.blob();
+    })
+    .then((blob) => {
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "file1.pdf";
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    })
+    .catch((err) => {
+      console.error("err: ", err);
+    });
+};
 
 const MaterialPopup = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
+  const { programId } = useParams();
   const imageInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const togglePopup = () => {
@@ -131,9 +130,9 @@ const MaterialPopup = () => {
                 marginTop: "1rem",
                 marginLeft: "47%",
               }}
-              onClick={() => {
+              onClick={async () => {
                 const test = {
-                  programId: 1,
+                  programId: Number(programId),
                   title: "프로그램 자료 제목1",
                   detail: "프로그램 자료 상세내용1",
                 };
@@ -145,14 +144,39 @@ const MaterialPopup = () => {
                 if (selectedFile !== null) {
                   formData.append("file", selectedFile);
                 }
-                dispatch(uploadMaterialAsync(formData));
-                togglePopup();
+                try {
+                  await dispatch(uploadMaterialAsync(formData));
+                  await dispatch(loadMaterialAsync(Number(programId)));
+                  togglePopup();
+                } catch (error) {
+                  console.log(error);
+                }
               }}
             >
               자료올리기
             </p>
           </MPopupinner>
         </MPopupbox>
+        // onClick={async () => {
+        //   console.log(value);
+
+        //   try {
+        //     await dispatch(
+        //       uploadNoticetAsync({
+        //         programId: Number(programId),
+        //         title: title,
+        //         content: value,
+        //       })
+        //     );
+
+        //     await dispatch(loadNoticeListAsync(Number(programId)));
+
+        //     toast.success("게시글작성 성공");
+        //     subtogglePopup();
+        //   } catch (error) {
+        //     console.error("에러 발생:", error);
+        //   }
+        // }}
       )}
     </div>
   );
@@ -213,6 +237,7 @@ const MaterialDetail = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
   const [isOpen, setIsOpen] = useState(false);
   const [sisOpen, ssetIsOpen] = useState(false);
+  const { programId } = useParams();
   const materialList = useAppSelector(
     (state) => state.programMaterial.MaterialList
   );
@@ -224,9 +249,10 @@ const MaterialDetail = () => {
     ssetIsOpen(!sisOpen);
   };
   useEffect(() => {
-    dispatch(loadMaterialAsync());
+    dispatch(loadMaterialAsync(Number(programId)));
     console.log(materialList);
   }, []);
+  useEffect(() => {}, [materialList]);
   return (
     <MaterialForm>
       <p
@@ -241,16 +267,19 @@ const MaterialDetail = () => {
 
       <Materialbox>
         <Materialtext>
-          <Materialtextinfo>
+          {/* <Materialtextinfo>
             <p style={{ fontSize: "0.9rem" }}>날짜 :</p>
             <p>2022.02.31</p>
             <p>진행차시 : 1차시 / 9차시</p>
             <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
-          </Materialtextinfo>
+          </Materialtextinfo> */}
           {user_gb === "MENTO" && (
-            <div>
+            <div style={{ width: "100%", textAlign: "right" }}>
               <p
-                style={{ color: "#07858C", cursor: "pointer" }}
+                style={{
+                  color: "#07858C",
+                  cursor: "pointer",
+                }}
                 onClick={togglePopup}
               >
                 자료올리기 <FaPlus color="#07858C"></FaPlus>
@@ -259,7 +288,7 @@ const MaterialDetail = () => {
             </div>
           )}
         </Materialtext>
-        <div>11111111111111111</div>
+
         {materialList &&
           materialList.map((value, index) => {
             return (
@@ -269,18 +298,12 @@ const MaterialDetail = () => {
                     <Materiallist>
                       <p>{value.title}</p>
                     </Materiallist>
-                    <MaterialStudent>
-                      <p>박서영</p>
-                      <p>
-                        <FaUserCircle></FaUserCircle>
-                      </p>
-                      <p>2023.03.15</p>
-                    </MaterialStudent>
+                    <MaterialStudent></MaterialStudent>
                   </MaterialTotal>
                   <HorizonLine />
                   <p style={{ marginLeft: "1.5%" }}>{value.detail}</p>
                   <div>
-                    <a
+                    {/* <a
                       href="#"
                       style={{
                         marginLeft: "93%",
@@ -289,18 +312,23 @@ const MaterialDetail = () => {
                       onClick={subtogglePopup}
                     >
                       자세히보기
-                    </a>
+                    </a> */}
                     {sisOpen && <MaterialDetailPopup />}
                   </div>
+
                   <div style={{ marginTop: "0.5rem" }}>
-                    <button
-                      onClick={() => {
-                        if (value.materialId)
-                          handleFileDownload(value);
-                      }}
-                    >
-                      다운로드
-                    </button>
+                    <ButtonBox>
+                      <ButtonStyle
+                        style={{ width: "10rem", height: "1.5rem" }}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          if (value.materialId) handleFileDownload(value);
+                        }}
+                      >
+                        자료 다운로드
+                      </ButtonStyle>
+                    </ButtonBox>
                   </div>
                 </Materiallistbox>
               </>
@@ -430,5 +458,12 @@ const MdetailPopupStudent = styled.div`
   width: 13%;
   margin-right: 85%;
   color: #777777;
+`;
+const ButtonBox = styled.div`
+  width: 100%;
+`;
+const ButtonStyle = styled(Button)`
+  float: right;
+  margin-right: 1rem;
 `;
 export default MaterialDetail;

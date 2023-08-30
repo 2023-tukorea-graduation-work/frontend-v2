@@ -11,7 +11,12 @@ interface NoticeForm {
   title: string;
   content: string;
 }
-const initialState: Array<NoticeList> = [];
+interface initialStateType {
+  list: Array<NoticeList>;
+}
+const initialState: initialStateType = {
+  list: [],
+};
 
 export const loadNoticeListAsync = createAsyncThunk<Array<NoticeList>, number>(
   "loadNoticeList",
@@ -61,7 +66,7 @@ export const programNoticeSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loadNoticeListAsync.fulfilled, (state, { payload }) => {
-      state = payload;
+      state.list = [...payload];
       console.log("리스트로드 성공");
     });
     builder.addCase(uploadNoticetAsync.rejected, (state) => {

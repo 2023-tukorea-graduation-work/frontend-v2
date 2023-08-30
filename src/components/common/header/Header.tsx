@@ -16,6 +16,7 @@ import {
 import ProfileModal from "./ProfileModal";
 import bell3 from "../../../assets/bell3.png";
 import testLogo from "../../../assets/testLogo.png";
+import Logo2 from "../../../assets/Logo2.png";
 import { toast } from "react-toastify";
 
 const Header = () => {
@@ -64,46 +65,38 @@ const Header = () => {
               <LogoStyle>
                 <img
                   alt="iconError"
-                  src={testLogo}
+                  src={Logo2}
                   style={{ width: "6rem", height: "5rem" }}
                 ></img>
               </LogoStyle>
               <NavStyle>
-                <div
+                <NaviStyle
                   className="mainpage"
                   onClick={() => {
                     navigate("/main");
                   }}
-                  style={{ cursor: "pointer" }}
                 >
                   메인페이지
-                </div>
-                <div
+                </NaviStyle>
+                <NaviStyle
                   className="programlistpage"
                   onClick={() => {
                     navigate("/programList");
                   }}
-                  style={{ cursor: "pointer" }}
                 >
                   플젝구인게시판
-                </div>
-                <div
+                </NaviStyle>
+                <NaviStyle
                   className="programcompletionlistpage"
                   onClick={() => {
                     navigate("/ProgramCompletionList");
                   }}
-                  style={{ cursor: "pointer" }}
                 >
                   플젝완료게시판
-                </div>
-                <div className="classpage" style={{ cursor: "pointer" }}>
-                  과외구인게시판
-                </div>
+                </NaviStyle>
+                <NaviStyle className="classpage">과외구인게시판</NaviStyle>
               </NavStyle>
               <AlertWithLogin>
-                <CircleStyle onClick={modalOn}>
-                  <img alt="iconError" src={bell3} />
-                </CircleStyle>
                 <AlertModal />
                 {userNo === null ? (
                   <>
@@ -142,11 +135,11 @@ const Header = () => {
                     >
                       <ul>
                         <li>&nbsp;</li>
+                        <ProfileModalLi onClick={modalOn}>알림</ProfileModalLi>
                         <ProfileModalLi onClick={() => navigate("/profile")}>
                           내 프로필
                         </ProfileModalLi>
-                        <ProfileModalLi>item 2</ProfileModalLi>
-                        <ProfileModalLi>item 3</ProfileModalLi>
+
                         <ProfileModalLi
                           onClick={() => {
                             dispatch(logOut());
@@ -155,6 +148,7 @@ const Header = () => {
                         >
                           로그아웃
                         </ProfileModalLi>
+
                         <li>&nbsp;</li>
                       </ul>
                     </ProfileModal>
@@ -206,5 +200,20 @@ const AlertWithLogin = styled.div`
 `;
 const ProfileModalLi = styled.li`
   cursor: pointer;
+  line-height: 2rem;
+  padding-left: 1rem;
+  margin-right: 1rem;
+  &:hover {
+    background-color: #dedede;
+    border-radius: 15px;
+  }
+`;
+const NaviStyle = styled.div`
+  cursor: pointer;
+  width: 10rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export default Header;
