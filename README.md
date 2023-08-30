@@ -49,7 +49,7 @@
 ✓ 관리자모드 - 멘토정보에 대한 신뢰성을 관리하여 사이트내에 멘토로써의 자격을 관리하는 기능이다.
 
 
-
+---
 ### 시연영상
 
 🔻 회원가입 
@@ -65,5 +65,14 @@
 🔻 멘토 - 자료 올리기
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/6776144a-b335-4979-9536-4dce112827fc">
 
+---
+### 사이트 사진
+
+🔻 멘티 - 프로젝트관리 ( 전체 / 출석 / 질문 / 질문올리기 )
+<img width="1189" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/c39cc54d-15d7-493e-bc97-101dc04c65af">
+🔻 멘티 - 프로젝트관리 (일정 / 활동일지올리기 / 온라인강의 / 실시간회의 )
+<img width="1189" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/2d439851-6f71-4533-b568-088ff25c5916">
+🔻 멘티 - 프로젝트관리 ( 시험보기 )
+<img width="596" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/2d2c3423-3f8f-44bd-b6eb-f5503a6afcbf">
 
 
