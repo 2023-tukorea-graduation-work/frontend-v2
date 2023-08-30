@@ -19,9 +19,12 @@
 ### 👤 멤버구성
 
 정민창 - 백엔드
+
 유제빈 - 프론트엔드
+
 박서영 - 디자인 & 프론트엔드
-이혜연 - 디자인 
+
+인혜연 - 디자인 
 
 ---
 ### 💻 개발환경
@@ -33,17 +36,27 @@
 ---
 ### 📌 주요기능
 
-맨토 & 멘티 매칭
+맨토 & 멘티 매칭 - 멘토가 프로그램 모집글을 작성하여 모집글들을 보고 멘티들이 신청하여 매칭된다.
 
-멘토링관리
+멘토링관리 - 매칭이 완료된 후 멘토링프로그램이 진행될때 필요한 (과제,공지,출석,질문,자료,화상회의,시험) 것들을 관리할 수 있다.
 
-완료된 멘토링프로젝트 보고서
+완료된 멘토링프로젝트 보고서 - 멘토멘티프로그램이 완료된 후 멘토링관리페이지에서 모든 정보들을 가져와 완료프로젝트게시글에 정리하여 올려준다. 또한 정리된 정보들을 pdf로 변환하여 다운로드가 가능하다.
 
-관리자모드
+마이페이지 - 진행 중, 진행완료 , 진행예정 프로젝트들의 정보를 한번에 나열하여 볼 수 있다.
+
+카테고리 필터링 - 메인화면 , 멘토링 모집 글작성 , 멘토링모집게시판 페이지내에 카테고리를 나누고 필터링 할 수 있는 기능이 있다.
+
+관리자모드 - 멘토정보에 대한 신뢰성을 관리하여 사이트내에 멘토로써의 자격을 관리하는 기능이다.
+
 
 
 ### 시연영상
 
 <img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/f9e3de52-8581-4096-8f30-041951881a2e">
+<img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/eec91246-99e1-4b48-ad52-2fdcefa12efa">
+<img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/26b1cbca-6c75-4c80-96f5-51ef0ab7b534">
+<img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/3489d160-2d0e-46e3-85b8-452eafe22452">
+<img src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/a1675500-95b6-465f-8704-02b41fe4f52e">
+
 
 
