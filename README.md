@@ -70,12 +70,12 @@
 
 🔻 멘티 - 프로젝트관리 ( 전체 / 출석 / 질문 / 질문올리기 )
 <img width="1189" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/c39cc54d-15d7-493e-bc97-101dc04c65af">
-🔻 멘티 - 프로젝트관리 (일정 / 활동일지올리기 / 온라인강의 / 실시간회의 )
+🔻 멘티 - 프로젝트관리 ( 일정 / 활동일지올리기 / 온라인강의 / 실시간회의 )
 <img width="1189" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/2d439851-6f71-4533-b568-088ff25c5916">
 🔻 멘티 - 프로젝트관리 ( 시험보기 )
 <img width="596" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/2d2c3423-3f8f-44bd-b6eb-f5503a6afcbf">
-멘토 - 
+🔻 멘토 - 프로젝트관리 ( 전체 / 공지올리기 / 출석 / 일정 )
 <img width="1183" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/bd63bdfe-cb6d-4d57-89d2-0ee6863fe96b">
-멘토 -
+🔻 멘토 - 프로젝트관리 ( 질문 / 화상통화방생성 / 자료올리기 / 녹화강의올리기 )
 <img width="1183" alt="image" src="https://github.com/2023-tukorea-graduation-work/frontend-v2/assets/76784522/f0a672ee-4b22-414b-9fae-92838b5e6b37">
 
