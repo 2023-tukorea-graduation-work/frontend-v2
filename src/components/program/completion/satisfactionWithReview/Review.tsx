@@ -22,7 +22,7 @@ const Review = () => {
             <p style={{ fontSize: "1rem" }}>멘티</p>
           </ReviewName>
           <ReviewComment>
-            "가나다라마바사아자차타카파하기니디리미비시이지"
+            ""
           </ReviewComment>
         </ReviewOutSide>
       </ReviewBox>

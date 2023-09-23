@@ -29,7 +29,7 @@ const Test = () => {
             과제수행기간:2023.05.12 ~ 2023.05.13
           </p>
           <p style={{ marginLeft: "0.5rem", marginTop: "0.5rem" }}>
-            과제제출자이름:박서영,김민수.정여원
+            과제제출자이름: 미제출
           </p>
         </Taskmaindetial>
       </Taskmainbox>
@@ -45,7 +45,7 @@ const Test = () => {
             시험시간:2023.05.12 10:00 ~ 2023.05.13 14:00
           </p>
           <p style={{ marginLeft: "0.5rem", marginTop: "0.5rem" }}>
-            참여자:박서영,김민수.정여원
+            참여자: 미제출
           </p>
         </Testmaindetial>
       </Testmainbox>

@@ -27,8 +27,6 @@ const ProgramDetail = () => {
   const mentee_no = useAppSelector((state) => state.login.object.USER_NO);
   useEffect(() => {
     dispatch(loadItemDetailAsync(programId));
-    console.log(programDetail);
-    console.log(programId);
   }, []);
   const Submit = () => {
     const menteeWithProgram = {
@@ -60,24 +58,11 @@ const ProgramDetail = () => {
             color="#777777"
             style={{ marginTop: "1rem" }}
           ></FaHome>
-          <p
-            style={{
-              marginTop: "2.2rem",
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-            }}
-          >
-            카테고리명
-          </p>
-          <p style={{ marginTop: "0.3rem", fontSize: "0.8rem" }}>
-            -세부 카테고리
-          </p>
         </Detailca>
 
         <DetailIntro>
-          <p style={{ width: "6%" }}>{programDetail.mentorName}</p>
-          <p style={{ width: "15%" }}>{programDetail.institution}</p>
-          <p style={{ width: "74%" }}>{programDetail.major}</p>
+          <p style={{ width: "30%" }}>멘토명: {programDetail.mentorName}</p>
+          <p style={{ width: "100%" }}>멘토 상세 정보: {programDetail.institution} / {programDetail.major}</p>
           <p style={{ width: "50%" }}>모집인원 : {programDetail.capacity}</p>
           <p style={{ width: "50%" }}>
             활동기간 : {programDetail.programStartDate} ~
@@ -90,32 +75,10 @@ const ProgramDetail = () => {
           <p style={{ width: "50%" }}>
             수업장소 : {programDetail.programPlace}
           </p>
-        </DetailIntro>
-
-        <DetailIcon>
-          <p
-            style={{
-              fontWeight: "bold",
-              fontSize: "1.2rem",
-              color: "#FF8E41",
-              marginRight: "11rem",
-              width: "100%",
-            }}
-          >
-            {today.getTime() > start.getTime()
-              ? "모집날짜마감"
-              : `D-${timeDiff}`}
+          <p style={{ width: "50%" }}>
+            모집 마감 : D-{timeDiff}          
           </p>
-
-          <FaRegEnvelope
-            size="10%"
-            style={{
-              marginRight: "0.1rem",
-            }}
-            color="#8E8E8E"
-          ></FaRegEnvelope>
-          <FaRegBookmark size="10%" color="#8E8E8E"></FaRegBookmark>
-        </DetailIcon>
+        </DetailIntro>
       </Detailbox>
 
       <Programintro>

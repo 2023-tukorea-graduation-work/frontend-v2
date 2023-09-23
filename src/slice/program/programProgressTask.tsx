@@ -7,15 +7,15 @@ interface TaskForm {
   programId: number;
   title: string;
   content: string;
-  startTaskDateTime: string;
-  endTaskDateTime: string;
+  startTaskDate: string;
+  endTaskDate: string;
 }
 interface TaskList {
   taskId: number;
   title: string;
   content: string;
-  startTaskDateTime: string;
-  endTaskDateTime: string;
+  startTaskDate: string;
+  endTaskDate: string;
 }
 interface initialStateType {
   list: Array<TaskList>;

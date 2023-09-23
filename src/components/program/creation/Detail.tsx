@@ -80,15 +80,6 @@ const Detail = (props: ButtonProps) => {
       }}
     >
       <InformationBox>
-        <p
-          style={{
-            marginBottom: "0.9rem",
-            fontSize: "0.7rem",
-            color: "#777777",
-          }}
-        >
-          선택한 카테고리 - 카테고리세부주제
-        </p>
         <p>주제</p>
         <Input
           disableUnderline={true}
@@ -116,7 +107,7 @@ const Detail = (props: ButtonProps) => {
               borderRadius: "3px",
               border: "solid 1px #d6d6d6",
               boxShadow: "0",
-              fontSize: "0.8rem",
+              font: "0.8rem",
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: "white", // default

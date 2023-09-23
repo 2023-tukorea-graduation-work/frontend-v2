@@ -101,9 +101,9 @@ const AttendenceDetail = () => {
         )}
         <Checklist>
           <p style={{ fontSize: "0.8rem" }}>날짜 :</p>
-          <p>2023.08.13</p>
+          <p style={{ marginRight: "0.5rem" }}>2023.09.07</p>
           <p>진행차시 : 6차시 / 9차시</p>
-          <p>프로그램기간 : 2023.08.13 ~ 2023.09.21</p>
+          <p>프로그램기간 : 2023.09.07 ~ 2023.09.30</p>
         </Checklist>
         {user_gb === "MENTO" && (
           <>
@@ -222,7 +222,7 @@ const Checklist = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 45%;
+  width: 50%;
   margin-top: 3.5%;
   margin-bottom: 2%;
   font-size: 0.9rem;

@@ -62,7 +62,7 @@ const NoticePopup = () => {
             <NPopupFrom>
               <NPopupStudent>
                 <FaUserCircle size="20" color="#777777"></FaUserCircle>
-                <p>박서영</p>
+                <p>정민창</p>
                 <p style={{ fontSize: "0.6rem" }}>2023.03.15</p>
               </NPopupStudent>
               <FaRegWindowClose

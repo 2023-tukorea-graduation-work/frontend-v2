@@ -27,7 +27,7 @@ const Profile = () => {
     dispatch(loadProfileProgramListAsync(userId));
   }, []);
   useEffect(() => {
-    console.log(profile.imgUrl);
+    console.log(profile);
   }, [profile]);
   useEffect(() => {
     console.log(btnSelect);
@@ -148,34 +148,22 @@ const Profile = () => {
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             marginTop: "10%",
             marginBottom: "10%",
             marginRight: "30%",
           }}
         >
-          <ImageStyle>
-            <img
-              referrerPolicy="no-referrer"
-              src={profile.imgUrl ? profile.imgUrl : ""}
-              alt="logo"
-              style={{ width: "3rem", height: "3rem", objectFit: "fill" }}
-            />
-          </ImageStyle>
-          &nbsp;&nbsp;&nbsp;YOUR PROFILE
+          <img
+            referrerPolicy="no-referrer"
+            src={profile.imgUrl ? profile.imgUrl : ""}
+            alt="logo"
+            style={{ width: "6rem", height: "8rem", objectFit: "fill" }}
+          />
         </div>
         <div style={{ marginRight: "20%", lineHeight: "2rem" }}>
-          <p>NAME: {`${profile.name}`}</p>
-          <p>AGE: {`${profile.age}`}</p>
-          <p>EMAIL: {`${profile.email}`}</p>
-        </div>
-        <div
-          style={{ marginLeft: "60%", color: "#777777", cursor: "pointer" }}
-          onClick={() => {
-            dispatch(logOut());
-            navigate("/main");
-          }}
-        >
-          LOGOUT
+          <p style={{ fontSize: "0.8rem" }}>안녕하세요 {`${profile.name}`}님</p>          
+          <p style={{ fontSize: "0.8rem" }}>이메일: {`${profile.email}`}</p>
         </div>
         {user_gb === "MENTEE" ? (
           <></>
@@ -195,7 +183,7 @@ const Profile = () => {
                 navigate("/programCreation");
               }}
             >
-              프로젝트 생성하기+
+              멘토링 프로그램 생성하기+
             </Button>
           </>
         )}

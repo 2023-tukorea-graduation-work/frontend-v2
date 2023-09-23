@@ -180,8 +180,8 @@ const TaskRegisterEditorForm = ({ subtogglePopup }: Props) => {
             }
             if (startDate && endDate) {
               dispatch(uploadTaskAsync(formData));
-              // toast.success("과제등록 완료");
-              // subtogglePopup();
+              toast.success("과제등록 완료");
+              subtogglePopup();
             } else {
               toast.warn("양식을 채워주세요");
             }

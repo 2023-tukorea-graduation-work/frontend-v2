@@ -71,7 +71,7 @@ const Popup = () => {
             <PopupFrom>
               <PopupStudent>
                 <FaUserCircle size="20" color="#777777"></FaUserCircle>
-                <p>박서영</p>
+                <p>정민창</p>
                 <p style={{ fontSize: "0.6rem" }}>2023.03.15</p>
               </PopupStudent>
               <FaRegWindowClose
@@ -135,9 +135,9 @@ const QnaDetail = () => {
         <Qnatext>
           <Qnatextinfo>
             <p style={{ fontSize: "0.9rem" }}>날짜 :</p>
-            <p>2022.02.31</p>
-            <p>진행차시 : 1차시 / 9차시</p>
-            <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
+            <p>2023.09.07</p>
+            <p>진행차시 : 6차시 / 9차시</p>
+            <p>프로그램기간 : 2023.09.07 ~ 2022.09.21</p>
           </Qnatextinfo>
           <Qnaiconbox>
             {user_gb === "MENTEE" && (
@@ -169,11 +169,6 @@ const QnaDetail = () => {
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                   >
-                    <FormControlLabel
-                      value="답변안한질문"
-                      control={<Radio color="secondary" />}
-                      label="답변안한질문만보기"
-                    />
                   </RadioGroup>
                 </FormControl>
               </p>
@@ -189,7 +184,7 @@ const QnaDetail = () => {
                     <p>{value.question}</p>
                   </Qnalist>
                   <QnaStudent>
-                    <p>박서영</p>
+                    <p>정민창</p>
                     <p>
                       <FaUserCircle></FaUserCircle>
                     </p>
@@ -336,7 +331,7 @@ const Qnatextinfo = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 40%;
+  width: 50%;
 `;
 const Qnaiconbox = styled.div`
   display: flex;

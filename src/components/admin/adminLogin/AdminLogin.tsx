@@ -54,7 +54,7 @@ const AdminLogin = () => {
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <Input
           id="email"
-          placeholder="아아디 입력"
+          placeholder="아이디 입력"
           fullWidth={true}
           color={user_gb === "MENTEE" ? "primary" : "secondary"}
           startAdornment={

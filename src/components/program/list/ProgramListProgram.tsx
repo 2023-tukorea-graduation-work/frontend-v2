@@ -61,8 +61,10 @@ const ProgramListProgram = ({
         </ItemImage>
         <ItemInfo>
           <p>
-            {`${programId}`}
-            {`${memberName}`}/{`${institution}`}/{`${major}`}
+            {`${memberName}`} / {`${institution}`}
+          </p>
+          <p>
+            {`${major}`}
           </p>
           <p>{`${programPlace}`}</p>
           <p>
@@ -81,9 +83,9 @@ const ProgramListProgram = ({
         >
           {`${subject}`}
         </p>
-        <p style={{ fontSize: "0.9rem", marginBottom: "0.6rem" }}>
+        {/* <p style={{ fontSize: "0.9rem", marginBottom: "0.6rem" }}>
           프로그램 카테고리(추가필요)
-        </p>
+        </p> */}
 
         <div
           style={{
@@ -114,14 +116,8 @@ const ProgramListProgram = ({
             width: "15rem",
           }}
         >
-          {today.getTime() > start.getTime() ? "모집날짜마감" : `D-${timeDiff}`}
+          D-{timeDiff}
         </p>
-
-        <FaRegEnvelope
-          size="5%"
-          style={{ marginRight: "1rem", marginTop: "0.1rem" }}
-        ></FaRegEnvelope>
-        <FaRegBookmark size="5%"></FaRegBookmark>
       </ItemDday>
     </Box>
   );
@@ -165,5 +161,6 @@ const ItemDday = styled.div`
   flex-direction: row;
   margin-left: 5%;
   margin-top: 4.5%;
+  margin-bottom: 4.5%;
 `;
 export default ProgramListProgram;

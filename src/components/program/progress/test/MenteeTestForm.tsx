@@ -11,9 +11,7 @@ interface Question {
 const MenteeTestForm: React.FC = () => {
   const navigate = useNavigate();
   const questions: Question[] = [
-    { id: 1, text: "첫 번째 문제: ..." },
-    { id: 2, text: "두 번째 문제: ..." },
-    { id: 3, text: "세 번째 문제: ..." },
+    { id: 1, text: "SW 프레임워크 기초" }
     // 추가예시문제
   ];
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -43,7 +41,7 @@ const MenteeTestForm: React.FC = () => {
   return (
     <MenteeTestFormbox>
       <MenteeTestName>
-        <p>수학/1차시험</p>
+        <p>SW 프레임워크 기초</p>
       </MenteeTestName>
       <MenteeTestNumber>
         <p
@@ -63,9 +61,7 @@ const MenteeTestForm: React.FC = () => {
             marginLeft: "3rem",
           }}
         >
-          문제내용~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~dkssuddafaaefdkssudgktpdy
-          wjdld agkkdfjk;addksdugktpdy sodlfmadms rlatkstn ssjsms rlatkatnsdm
-          dksl sksms raltfdnf ahffk slrk sodlfmadmf dkfEoaus
+        문제1: Spring 빈을 등록하는 방법으로 맞는 것을 고르시오.
         </p>
         <p
           style={{ marginLeft: "3rem", fontSize: "0.8rem", marginTop: "1rem" }}
@@ -76,24 +72,24 @@ const MenteeTestForm: React.FC = () => {
       <MenteeTestAnswerAB>
         <AnswerA>
           <Button variant="outlined" style={{ width: "100%", height: "100%" }}>
-            <p style={{ color: "black" }}>a.정답</p>
+            <p style={{ color: "black" }}>@Bean</p>
           </Button>
         </AnswerA>
         <AnswerB>
           <Button variant="outlined" style={{ width: "100%", height: "100%" }}>
-            <p style={{ color: "black" }}>b.정답</p>
+            <p style={{ color: "black" }}>@Autowired</p>
           </Button>
         </AnswerB>
       </MenteeTestAnswerAB>
       <MenteeTestAnswerCD>
         <AnswerC>
           <Button variant="outlined" style={{ width: "100%", height: "100%" }}>
-            <p style={{ color: "black" }}>c.정답</p>
+            <p style={{ color: "black" }}>@Component</p>
           </Button>
         </AnswerC>
         <AnswerD>
           <Button variant="outlined" style={{ width: "100%", height: "100%" }}>
-            <p style={{ color: "black" }}>d.정답</p>
+            <p style={{ color: "black" }}>@Configuration</p>
           </Button>
         </AnswerD>
       </MenteeTestAnswerCD>
@@ -131,10 +127,9 @@ const MenteeTestForm: React.FC = () => {
           <MenteeTestPopupbox>
             <MenteeTestPopupinner>
               <h2>시험 문제를 모두 푸셨습니다!</h2>
-              <p>축하합니다!</p>
               <button
                 onClick={() => {
-                  navigate("/projectProgress");
+                  navigate("/projectProgress/1");
                 }}
               >
                 닫기
@@ -252,5 +247,9 @@ const MenteeTestPopupinner = styled.div`
   height: 35%;
   padding: 1rem;
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 export default MenteeTestForm;

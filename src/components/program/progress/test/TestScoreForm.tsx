@@ -55,7 +55,7 @@ const TestScoreForm = ({ subtogglePopup }: Props) => {
         <TSprofile>
           <FaUserCircle size="32"></FaUserCircle>
           <TSinfo>
-            <p style={{ fontWeight: "bold" }}>박서영</p>
+            <p style={{ fontWeight: "bold" }}>정민창</p>
             <p
               style={{
                 fontSize: "0.6rem",
@@ -69,9 +69,8 @@ const TestScoreForm = ({ subtogglePopup }: Props) => {
         </TSprofile>
         <HorizonLine></HorizonLine>
         <TSdetail>
-          <p>과제 상세 내용</p>
           <p style={{ marginTop: "0.3rem", marginBottom: "2.5rem" }}>
-            내용내요애요용~~
+            금주에 학습한 MVC 패턴을 구현하는 것이 과제입니다. 게시글 등록/수정/삭제/조회를 구현해서 github 주소를 첨부해주세요.
           </p>
           <p style={{ color: "#777777", fontSize: "0.7rem" }}>파일이름.pdf</p>
         </TSdetail>
@@ -123,7 +122,7 @@ const TestScoreForm = ({ subtogglePopup }: Props) => {
         <TScprofile>
           <FaUserCircle size="32"></FaUserCircle>
           <TScinfo>
-            <p style={{ fontWeight: "bold" }}>박서영</p>
+            <p style={{ fontWeight: "bold" }}>정민창</p>
             <p
               style={{
                 fontSize: "0.6rem",

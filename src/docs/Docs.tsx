@@ -13,14 +13,11 @@ export interface StateOption {
 }
 
 export const StudyOptions: readonly lowOption[] = [
-  { value: "국어", label: "국어" },
-  { value: "영어", label: "영어" },
-  { value: "수학", label: "수학" },
-  { value: "그외과목", label: "그외과목" },
-  { value: "중국어", label: "중국어" },
-  { value: "일본어", label: "일본어" },
-  { value: "스페인어", label: "스페인어" },
-  { value: "그외언어", label: "그외언어" },
+  { value: "프로그래밍", label: "프로그래밍" },
+  { value: "전기", label: "전기" },
+  { value: "전자", label: "전자" },
+  { value: "기계", label: "기계" },
+  { value: "디자인", label: "디자인" },
 ];
 
 export interface HobbyOption {
@@ -66,11 +63,11 @@ export const stateOptions: readonly StateOption[] = [
   { value: StudyOptions, label: "학습" },
   { value: HobbyOptions, label: "취미" },
   { value: MajorOptions, label: "전공" },
-  // { value: "진로", label: "진로" },
-  // { value: "자소서", label: "자소서" },
-  // { value: "진학관련", label: "진학관련" },
-  // { value: "창업관련", label: "창업관련" },
-  // { value: "자격증", label: "자격증" },
+  { value: MajorOptions, label: "진로" },
+  { value: MajorOptions, label: "자소서" },
+  { value: MajorOptions, label: "진학관련" },
+  { value: MajorOptions, label: "창업관련" },
+  { value: MajorOptions, label: "자격증" },
 ];
 export const classSatisfaction = [
   "주제에 알맞은 교육매체를 적절히 활용하였다.",
@@ -119,7 +116,7 @@ export const CollegeMajor: readonly lowOption[] = [
   { value: "AI_ROBOTICS", label: "AI로봇전공" },
   { value: "ELECTRONIC", label: "전자공학전공" },
   { value: "EMBEDDED_SYSTEM", label: "임베디드시스템전공" },
-  { value: "MATERIALS_SCIENCE", label: "시노재공학과" },
+  { value: "MATERIALS_SCIENCE", label: "신소재공학전공" },
   { value: "BIOCHEMICAL", label: "생명화학공학과" },
   { value: "NANO_SEMICONDUCTOR", label: "나노반도체공학과" },
   { value: "ENERGY_ELECTRICAL", label: "에너지전기공학과" },

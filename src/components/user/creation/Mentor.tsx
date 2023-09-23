@@ -74,7 +74,7 @@ const Mentor = (props: any) => {
         console.log(a);
         if (a.payload.status === 200) {
           toast.success("회원가입 완료");
-          navigate("/programList");
+          navigate("/");
         } else {
           toast.warn("회원가입 실패");
         }
@@ -328,7 +328,6 @@ const Mentor = (props: any) => {
                           display: "none",
                         }}
                       ></MenuItem>
-                      <em>희망전공</em>
                       {CollegeMajor.map((value, index) => (
                         <MenuItem key={index} value={value.value}>
                           {value.label}
@@ -381,7 +380,9 @@ const Mentor = (props: any) => {
             </InformationBoxLine2>
           </InformationBoxLine>
           <InformationBoxLine>
-            활동장소
+            <span style={{
+                  width: "10%",
+                }}>활동장소</span>
             <InformationBoxLine2>
               <div
                 style={{
@@ -412,7 +413,9 @@ const Mentor = (props: any) => {
             </InformationBoxLine2>
           </InformationBoxLine>
           <InformationBoxLine>
-            한줄소개
+          <span style={{
+                  width: "10%",
+                }}>한 줄 소개</span>
             <InformationBoxLine2>
               <Input
                 disableUnderline={true}

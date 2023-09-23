@@ -66,18 +66,10 @@ const Category = (props: ButtonProps) => {
     <BasicForm>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <p style={{ marginTop: "5rem", marginLeft: "3rem", fontSize: "1rem" }}>
-          카테고리 선택하기
+          멘토링 대분류를 선택해주세요. 
         </p>
 
         <div style={{ marginTop: "1rem", marginLeft: "3rem" }}>
-          {/* <Select
-            isMulti
-            name="colors"
-            options={stateOptions}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={(change) => firstCategoryChange(change)}
-          /> */}
           <Controller
             control={control}
             name="category"
@@ -132,7 +124,7 @@ const Category = (props: ButtonProps) => {
           {errors.category?.message?.toString()}
         </p>
         <p style={{ marginTop: "3rem", marginLeft: "3rem", fontSize: "1rem" }}>
-          선택한 대표 카테고리들의 관심사를 선택해주세요
+          멘토링 소분류를 선택해주세요.
         </p>
         {firstCategory.map((value: CategoryValue, index: number) => {
           return (

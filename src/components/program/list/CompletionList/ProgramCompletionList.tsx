@@ -57,50 +57,16 @@ const ProgramCompletionList = () => {
       </SearchForm>
       {/* 프로그램나열칸 ------------------------------------------------------------------------ */}
       <ListTotalBox>
-        <FaChevronLeft
-          style={{ width: "2%", marginRight: "2rem", cursor: "pointer" }}
-          size="4%"
-          color="#dddddd"
-          onClick={handlePageDown}
-        ></FaChevronLeft>
         <ListItem>
-          {/* {postList.length !== 0 ? (
-            <>
-              {postList.slice((page - 1) * 8, 8 * page).map((value) => {
-                return (
-                  <ProgramListProgram
-                    key={value.PROGRAM_NO}
-                    PROGRAM_NO={value.PROGRAM_NO}
-                    ACT_PLACE={value.ACT_PLACE}
-                    CAPACITY={value.CAPACITY}
-                    COLLEGE={value.COLLEGE}
-                    DEADLINE={value.DEADLINE}
-                    DETAIL={value.DETAIL}
-                    MAJOR={value.MAJOR}
-                    NAME={value.NAME}
-                    PARTICIPANT={value.PARTICIPANT}
-                    PRO_FINISH_DATE={value.PRO_FINISH_DATE}
-                    PRO_START_DATE={value.PRO_START_DATE}
-                    ROW_NUM={value.ROW_NUM}
-                    SUBJECT={value.SUBJECT}
-                  ></ProgramListProgram>
-                );
-              })}
-            </>
-          ) : (
-            <></>
-          )} */}
           {dummy.data.length !== 0 ? (
             <>
               {dummy.data.slice((page - 1) * 8, 8 * page).map((value) => {
                 return (
                   <ProgramListProgram
-                    key={value.PROGRAM_NO}
                     PROGRAM_NO={value.PROGRAM_NO}
                     ACT_PLACE={value.ACT_PLACE}
                     CAPACITY={value.CAPACITY}
                     COLLEGE={value.COLLEGE}
-                    DEADLINE={value.DEADLINE}
                     DETAIL={value.DETAIL}
                     MAJOR={value.MAJOR}
                     NAME={value.NAME}
@@ -117,12 +83,6 @@ const ProgramCompletionList = () => {
             <></>
           )}
         </ListItem>
-        <FaChevronRight
-          style={{ width: "2%", marginLeft: "2rem", cursor: "pointer" }}
-          size="4%"
-          color="#dddddd"
-          onClick={handlePageUp}
-        ></FaChevronRight>
       </ListTotalBox>
       <PaginationBox>
         <Pagination
@@ -157,17 +117,17 @@ const ListForm = styled.div`
 const SearchForm = styled.div`
   width: 32%;
   height: 3.4%;
-  margin-left: 63.5rem;
+  margin-left: 40.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  border: 1px solid #d9d9d9;
+
 `;
 const ListItem = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-content: start;
   height: 75vh;
-  width: 100%;
+  width: %;
   margin-bottom: 4%;
 `;
 

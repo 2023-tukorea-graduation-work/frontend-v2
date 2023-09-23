@@ -76,7 +76,7 @@ const Header = () => {
                     navigate("/main");
                   }}
                 >
-                  메인페이지
+                  메인
                 </NaviStyle>
                 <NaviStyle
                   className="programlistpage"
@@ -84,7 +84,7 @@ const Header = () => {
                     navigate("/programList");
                   }}
                 >
-                  플젝구인게시판
+                  멘토링
                 </NaviStyle>
                 <NaviStyle
                   className="programcompletionlistpage"
@@ -92,9 +92,15 @@ const Header = () => {
                     navigate("/ProgramCompletionList");
                   }}
                 >
-                  플젝완료게시판
+                  멘토링 미리보기
                 </NaviStyle>
-                <NaviStyle className="classpage">과외구인게시판</NaviStyle>
+                <NaviStyle 
+                  className="classpage"
+                  onClick={() => {
+                    navigate("/profile");
+                  }}>
+                  내 정보
+                </NaviStyle>
               </NavStyle>
               <AlertWithLogin>
                 <AlertModal />
@@ -136,10 +142,6 @@ const Header = () => {
                       <ul>
                         <li>&nbsp;</li>
                         <ProfileModalLi onClick={modalOn}>알림</ProfileModalLi>
-                        <ProfileModalLi onClick={() => navigate("/profile")}>
-                          내 프로필
-                        </ProfileModalLi>
-
                         <ProfileModalLi
                           onClick={() => {
                             dispatch(logOut());

@@ -1,64 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import LoginForm from "../../components/user/login/form/LoginForm";
 import LoginMenu from "../../components/user/login/menu/LoginMenu";
 import styled from "@emotion/styled";
-import { useAppSelector } from "../../store/hooks";
 import Topic from "../../components/program/completion/topic/Topic";
 import PlanWithActivitie from "../../components/program/completion/planWithActivitie/PlanWithActivitie";
 import Satisfaction from "../../components/program/completion/satisfactionWithReview/Satisfaction";
 import Review from "../../components/program/completion/satisfactionWithReview/Review";
+
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  loadItemDetailAsync,
+  programParticipateAsync,
+} from "../../slice/program/programDetailSlice";
+
+import programIMG from "../../assets/program.png";
+
 const ProgramCompletion = () => {
+
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  
   return (
     <>
-      <BackgroundColor user_gb={user_gb}>
-        <Topic></Topic>
-      </BackgroundColor>
-      <Title>
-        {/* 01,02,03을 왼쪽 간격을 맞추기 위함 */}
-        <div style={{ width: "30rem" }}>
-          <p>02</p>
-          <p
-            style={{
-              fontFamily: "NotoSansBold",
-              fontSize: "2rem",
-              lineHeight: "4rem",
-              width: "20rem",
-            }}
-          >
-            학습 계획 & 활동
-          </p>
-        </div>
-        {/* 01,02,03을 왼쪽 간격을 맞추기 위함 */}
-        <div style={{ width: "50rem" }}></div>
-      </Title>
-      <PlanWithActivitieList>
-        <PlanWithActivitie></PlanWithActivitie>
-        <PlanWithActivitie></PlanWithActivitie>
-      </PlanWithActivitieList>
-      <Title>
-        {/* 01,02,03을 왼쪽 간격을 맞추기 위함 */}
-        <div style={{ width: "30rem" }}>
-          <p>03</p>
-          <p
-            style={{
-              fontFamily: "NotoSansBold",
-              fontSize: "2rem",
-              lineHeight: "4rem",
-              width: "20rem",
-            }}
-          >
-            만족도 조사 & 소감
-          </p>
-        </div>
-        {/* 01,02,03을 왼쪽 간격을 맞추기 위함 */}
-        <div style={{ width: "50rem" }}></div>
-      </Title>
-      <SatisfactionWithReviewList>
-        <Satisfaction></Satisfaction>
-        <Review></Review>
-      </SatisfactionWithReviewList>
+      <img
+                  alt="iconError"
+                  src={programIMG}
+                  style={{ width: "100%", height: "100%" }}
+                ></img>
+      {/* <BackgroundColor user_gb={user_gb}>
+        <Topic />
+      </BackgroundColor> */}
     </>
   );
 };

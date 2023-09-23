@@ -36,8 +36,8 @@ export interface ExamForm {
 export interface ExamList {
   examId: number;
   examTitle: string;
-  examStartTime: string;
-  examFinishTime: string;
+  examStartDate: string;
+  examFinishDate: string;
 }
 
 interface initialStateType {

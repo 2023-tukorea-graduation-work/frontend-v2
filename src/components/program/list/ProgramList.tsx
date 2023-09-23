@@ -76,12 +76,6 @@ const ProgramList = () => {
       </SearchForm>
       {/* 프로그램나열칸 ------------------------------------------------------------------------ */}
       <ListTotalBox>
-        <FaChevronLeft
-          style={{ width: "2%", marginRight: "2rem", cursor: "pointer" }}
-          size="4%"
-          color="#dddddd"
-          onClick={handlePageDown}
-        ></FaChevronLeft>
         <ListItem>
           {postList.length !== 0 ? (
             <>
@@ -109,12 +103,6 @@ const ProgramList = () => {
             <></>
           )}
         </ListItem>
-        <FaChevronRight
-          style={{ width: "2%", marginLeft: "2rem", cursor: "pointer" }}
-          size="4%"
-          color="#dddddd"
-          onClick={handlePageUp}
-        ></FaChevronRight>
       </ListTotalBox>
       <PaginationBox>
         <Pagination
@@ -148,10 +136,9 @@ const ListForm = styled.div`
 const SearchForm = styled.div`
   width: 32%;
   height: 3.4%;
-  margin-left: 63.5rem;
+  margin-left: 40.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  border: 1px solid #d9d9d9;
 `;
 const ListItem = styled.div`
   display: flex;

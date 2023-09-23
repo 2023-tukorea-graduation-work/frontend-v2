@@ -8,12 +8,13 @@ import {
   ImUserTie,
   ImUsers,
 } from "react-icons/im";
-import { FormControl, Input, MenuItem, Select } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useAppSelector } from "../../store/hooks";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const user_gb = useAppSelector((state) => state.login.object.user_gb);
+  const navigate = useNavigate();
   const {
     control,
     register,
@@ -27,98 +28,8 @@ const Main = () => {
         <SubTitle>
           나와 가까운 곳에서 진행하는 멘토링을 찾아 수업을 받아보세요!
         </SubTitle>
-        <SearchArea>
-          <FormControl>
-            <Controller
-              defaultValue=""
-              control={control}
-              name="capacity"
-              rules={{ required: "옵션은 필수선택입니다." }}
-              render={({ field }) => (
-                <Select
-                  MenuProps={{
-                    PaperProps: {
-                      sx: {
-                        backgroundColor:
-                          user_gb === "MENTEE"
-                            ? "rgba(255, 142, 65, 0.15)"
-                            : "rgba(7, 133, 140, 0.15)",
-                        color: "white",
-                        // "& :focus": {
-                        //   bgcolor: "red",
-                        // },
-                      },
-                    },
-                  }}
-                  disableUnderline
-                  {...field}
-                  sx={{
-                    height: "3rem",
-                    width: "12rem",
-                    boxShadow: "0",
-                    paddingLeft: "20%",
-                    border: "solid 1px rgba(7, 133, 140, 0.05)",
-                    fontSize: "1.2rem",
-                    backgroundColor:
-                      user_gb === "MENTEE"
-                        ? "rgba(255, 142, 65, 0.15)"
-                        : "rgba(7, 133, 140, 0.15)",
-                    color: "white",
-                    borderRadius: "50px",
-                  }}
-                  displayEmpty
-                  variant="standard"
-                >
-                  <MenuItem
-                    disabled
-                    value=""
-                    sx={{
-                      display: "none",
-                    }}
-                  >
-                    <em>지역</em>
-                  </MenuItem>
-                  <MenuItem sx={{ fontSize: "0.8rem" }} value={1}>
-                    날짜
-                  </MenuItem>
-                  <MenuItem sx={{ fontSize: "0.8rem" }} value={2}>
-                    이름
-                  </MenuItem>
-                  <MenuItem sx={{ fontSize: "0.8rem" }} value={3}>
-                    아이디
-                  </MenuItem>
-                  <MenuItem sx={{ fontSize: "0.8rem" }} value={4}>
-                    년도
-                  </MenuItem>
-                </Select>
-              )}
-            />
-          </FormControl>
-          <Input
-            sx={{
-              height: "3rem",
-              width: "40rem",
-              border: "solid 1px rgba(7, 133, 140, 0.05)",
-              boxShadow: "0",
-              paddingLeft: "2%",
-              paddingRight: "2%",
-              fontSize: "1.2rem",
-              backgroundColor:
-                user_gb === "MENTEE"
-                  ? "rgba(255, 142, 65, 0.15)"
-                  : "rgba(7, 133, 140, 0.15)",
-              marginLeft: "0.5rem",
-              marginRight: "0.2rem",
-              color: "white",
-              borderRadius: "50px",
-            }}
-            placeholder="SEARCH"
-            disableUnderline={true}
-          />
-        </SearchArea>
-
         <IconList>
-          <IconBox user_gb={user_gb}>
+          <IconBox user_gb={user_gb} onClick={() => {navigate("/programList");}}>
             <div className="hoverBefore">
               <ImBooks
                 size="5rem"
@@ -272,18 +183,15 @@ const SubTitle = styled.p`
   font-family: "NotoSansLight";
   color: white;
 `;
-const SearchArea = styled.div`
-  margin-top: 3rem;
-  margin-bottom: 7rem;
-`;
 const IconList = styled.div`
   width: 80rem;
   height: 30rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 1.2rem;
 `;
 const IconBox = styled.div<{ user_gb: string }>`
   display: flex;
@@ -291,7 +199,7 @@ const IconBox = styled.div<{ user_gb: string }>`
   width: 12rem;
   height: 11rem;
   background-color: #f3f3f3;
-  margin-left: 7rem;
+  margin-left: 5rem;
   margin-top: 1rem;
   border-radius: 0px 30px 0px 0px;
   justify-content: center;

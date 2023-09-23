@@ -16,7 +16,7 @@ const UserProfileProgram = ({ props }: UserProfileProgramProps) => {
         <MentoInfo>
           {props.mentorName} |{props.mentorInstitution} | {props.mentorMajor}
         </MentoInfo>
-        <Link
+        {/* <Link
           onClick={() => {
             navigate(`/projectProgress/${props.programId}`);
           }}
@@ -35,7 +35,7 @@ const UserProfileProgram = ({ props }: UserProfileProgramProps) => {
           </Link>
         ) : (
           <></>
-        )}
+        )} */}
       </Top>
       <Bottom>
         <BottomP>주제</BottomP>
@@ -55,6 +55,14 @@ const UserProfileProgram = ({ props }: UserProfileProgramProps) => {
         ) : (
           <></>
         )}
+        <Link
+            onClick={() => {
+              navigate("/evaluation");
+            }}
+            color={user_gb === "MENTEE" ? "primary" : "secondary"}
+          >
+            후기작성하기{`->`}
+          </Link>
       </Bottom>
     </Preview>
   );

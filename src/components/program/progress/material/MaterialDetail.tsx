@@ -80,6 +80,10 @@ const MaterialPopup = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { programId } = useParams();
+  const [title, setTitle] = useState("");
+  const [detail, setDetail] = useState("");
+
+
   const imageInput = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const togglePopup = () => {
@@ -93,7 +97,7 @@ const MaterialPopup = () => {
             <MPopupFrom>
               <MPopupStudent>
                 <FaUserCircle size="20" color="#777777"></FaUserCircle>
-                <p>박서영</p>
+                <p>정민창</p>
               </MPopupStudent>
               <FaRegWindowClose
                 cursor="pointer"
@@ -104,11 +108,17 @@ const MaterialPopup = () => {
             </MPopupFrom>
             <HorizonLine></HorizonLine>
             <Input
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
               placeholder="자료제목입력"
               color="secondary"
               sx={{ width: "100%", height: "14%", border: "none" }}
             ></Input>
             <Input
+              onChange={(e) => {
+                setDetail(e.target.value);
+              }}
               placeholder="자료내용입력"
               color="secondary"
               sx={{
@@ -133,8 +143,8 @@ const MaterialPopup = () => {
               onClick={async () => {
                 const test = {
                   programId: Number(programId),
-                  title: "프로그램 자료 제목1",
-                  detail: "프로그램 자료 상세내용1",
+                  title: title,
+                  detail: detail,
                 };
                 const formData = new FormData();
                 formData.append(
@@ -196,7 +206,7 @@ const MaterialDetailPopup = () => {
             <MdetailPopupFrom>
               <MdetailPopupStudent>
                 <FaUserCircle size="20" color="#777777"></FaUserCircle>
-                <p>박서영</p>
+                <p>정민창</p>
                 <p style={{ fontSize: "0.6rem" }}>2023.03.15</p>
               </MdetailPopupStudent>
               <FaRegWindowClose
@@ -267,12 +277,6 @@ const MaterialDetail = () => {
 
       <Materialbox>
         <Materialtext>
-          {/* <Materialtextinfo>
-            <p style={{ fontSize: "0.9rem" }}>날짜 :</p>
-            <p>2022.02.31</p>
-            <p>진행차시 : 1차시 / 9차시</p>
-            <p>프로그램기간 : 2022.02.01 ~ 2022.09.21</p>
-          </Materialtextinfo> */}
           {user_gb === "MENTO" && (
             <div style={{ width: "100%", textAlign: "right" }}>
               <p

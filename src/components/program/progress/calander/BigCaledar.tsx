@@ -55,9 +55,6 @@ const CalRecrodPopup = () => {
           <CPopupinner>
             <CPopupFrom>
               <CPopupStudent>
-                <FaCalendarAlt size="20" color="#777777"></FaCalendarAlt>
-                <p style={{ fontSize: "1rem" }}>활동일지작성하기</p>
-                <p>2023.05.23</p>
               </CPopupStudent>
               <FaRegWindowClose
                 cursor="pointer"
@@ -68,7 +65,7 @@ const CalRecrodPopup = () => {
             </CPopupFrom>
             <HorizonLine></HorizonLine>
             <p style={{ fontSize: "0.9rem", color: "#777777" }}>
-              [2차시] 수학1 멘토링
+              스프링 프레임워크 멘토링
             </p>
             <HorizonLine></HorizonLine>
             <Redetailbox>
@@ -120,7 +117,9 @@ const CalRecrodPopup = () => {
                 color: "#d6d6d6",
               }}
             ></hr>
-            <Redetailbutton>활동일지 등록하기</Redetailbutton>
+            <Redetailbutton
+              onClick={RetogglePopup}
+            >활동일지 등록하기</Redetailbutton>
           </CPopupinner>
         </CPopupbox>
       )}
@@ -230,7 +229,7 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
             fontSize: "0.9rem",
           }}
         >
-          일정제목&내용:
+          일정
         </p>
         <Input
           type="text"
@@ -241,7 +240,7 @@ const EventForm: React.FC<EventFormProps> = ({ onSubmit }) => {
           onChange={handleChange}
           style={{
             backgroundColor: "white",
-            width: "28.5rem",
+            width: "20.5rem",
             height: "2.5rem",
             marginRight: "2rem",
             marginLeft: "0.5rem",
@@ -512,7 +511,7 @@ const Redtailnext = styled.div`
 const Redetailbutton = styled.div`
   color: #07858c;
   cursor: pointer;
-  margin-top: 2.3%;
+  margin-top: 2%;
   margin-left: 44%;
 `;
 const Selecteddate = styled.div``;

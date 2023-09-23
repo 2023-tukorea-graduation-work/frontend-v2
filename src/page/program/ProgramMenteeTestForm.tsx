@@ -24,7 +24,7 @@ const ProgramMenteeTestForm = () => {
           <Grid xs={10} sx={{ display: "flex" }}>
             <LeftBar
               countStep={countStep}
-              orderProcess={["01~", "05~", "10~"]}
+              orderProcess={["01"]}
             />
             <WhiteBox>
               <MenteeTestForm></MenteeTestForm>

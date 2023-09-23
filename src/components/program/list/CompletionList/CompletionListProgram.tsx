@@ -8,7 +8,6 @@ type Props = {
   ACT_PLACE: string;
   CAPACITY: number;
   COLLEGE: string;
-  DEADLINE: number;
   DETAIL: string;
   MAJOR: string;
   NAME: string;
@@ -24,14 +23,12 @@ const CompletionListProgram = ({
   ACT_PLACE,
   CAPACITY,
   COLLEGE,
-  DEADLINE,
   DETAIL,
   MAJOR,
   NAME,
   PARTICIPANT,
   PRO_FINISH_DATE,
   PRO_START_DATE,
-  ROW_NUM,
   SUBJECT,
 }: Props) => {
   const navigate = useNavigate();
@@ -51,7 +48,6 @@ const CompletionListProgram = ({
         </ItemImage>
         <ItemInfo>
           <p>
-            {`${PROGRAM_NO}`}
             {`${NAME}`}/{`${COLLEGE}`}/{`${MAJOR}`}
           </p>
           <p>{`${ACT_PLACE}`}</p>
@@ -65,14 +61,12 @@ const CompletionListProgram = ({
         <p
           style={{
             fontSize: "1.2rem",
+            marginTop: "1.2rem",
             marginBottom: "1.2rem",
             fontWeight: "bold",
           }}
         >
           {`${SUBJECT}`}
-        </p>
-        <p style={{ fontSize: "0.9rem", marginBottom: "0.6rem" }}>
-          프로그램 카테고리(추가필요)
         </p>
 
         <div
@@ -82,7 +76,6 @@ const CompletionListProgram = ({
             color: "#777777",
           }}
         >
-          <p>그룹 종류: 과외 or 프로젝트-추가필요</p>
           <p>모집인원: {`${CAPACITY}`}명</p>
           <p>현재 모집된 구성원: {`${PARTICIPANT}`}명</p>
         </div>
@@ -100,29 +93,13 @@ const CompletionListProgram = ({
         <p
           style={{
             fontWeight: "bold",
-            fontSize: "1rem",
+            fontSize: "0.7rem",
             color: "#FF8E41",
             marginRight: "10rem",
           }}
         >
-          D{DEADLINE}
+          모집 종료
         </p>
-
-        <FaEye size="5%" style={{ marginTop: "0.1rem" }}></FaEye>
-        <p
-          style={{
-            fontSize: "0.7rem",
-            marginRight: "0.6rem",
-            marginTop: "0.1rem",
-          }}
-        >
-          701
-        </p>
-        <FaRegEnvelope
-          size="5%"
-          style={{ marginRight: "1rem", marginTop: "0.1rem" }}
-        ></FaRegEnvelope>
-        <FaRegBookmark size="5%"></FaRegBookmark>
       </ItemDday>
     </Box>
   );

@@ -37,7 +37,7 @@ const Mentee = (props: any) => {
         console.log(a);
         if (a.payload.status === 200) {
           toast.success("회원가입 완료");
-          navigate("/programList");
+          navigate("/");
         } else {
           toast.warn("회원가입 실패");
         }
@@ -263,7 +263,6 @@ const Mentee = (props: any) => {
                           display: "none",
                         }}
                       ></MenuItem>
-                      <em>희망전공</em>
                       {CollegeMajor.map((value, index) => (
                         <MenuItem key={index} value={value.value}>
                           {value.label}

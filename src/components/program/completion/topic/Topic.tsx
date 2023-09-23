@@ -16,7 +16,7 @@ const Topic = () => {
             width: "40rem",
           }}
         >
-          PROGRAM(주제)
+        SW 프레임워크 기초
         </p>
         <p
           style={{
@@ -25,36 +25,36 @@ const Topic = () => {
             lineHeight: "4rem",
           }}
         >
-          주제설명~
+          - Java/Spring 기초를 학습합니다. 
         </p>
         <Mentor>
-          <p>활동기간</p>
-          <p>멘토이름</p>
-          <p>멘토학교, 학과</p>
+          <p>2023-09-01 ~ 2023-09-30</p>
+          <p>정민창</p>
+          <p>한국공학대학교 / IT 경영학과</p>
         </Mentor>
-        <Category>카테고리</Category>
+        <Category>학습</Category>
       </Title>
       <ReviewBox>
         <ReviewOutSide>
           <ReviewProfile></ReviewProfile>
           <ReviewName>
             <p style={{ fontSize: "0.8rem" }}>01</p>
-            <p style={{ fontSize: "1.1rem" }}>학생이름</p>
-            <p style={{ fontSize: "1rem" }}>학교</p>
+            <p style={{ fontSize: "1.1rem" }}>인혜연</p>
+            <p style={{ fontSize: "1rem" }}>정왕고등학교</p>
           </ReviewName>
           <ReviewComment>
-            "가나다라마바사아자차타카파하기니디리미비시이지"
+            "Java가 익숙한 학생이라면 이 멘토링을 적극 추천합니다."
           </ReviewComment>
         </ReviewOutSide>
         <ReviewOutSide>
           <ReviewProfile></ReviewProfile>
           <ReviewName>
-            <p style={{ fontSize: "0.8rem" }}>01</p>
-            <p style={{ fontSize: "1.1rem" }}>학생이름</p>
-            <p style={{ fontSize: "1rem" }}>학교</p>
+            <p style={{ fontSize: "0.8rem" }}>02</p>
+            <p style={{ fontSize: "1.1rem" }}>정동훈</p>
+            <p style={{ fontSize: "1rem" }}>정왕고등학교</p>
           </ReviewName>
           <ReviewComment>
-            "가나다라마바사아자차타카파하기니디리미비시이지"
+            "Spring 기초를 탄탄히 다질 수 있었습니다. "
           </ReviewComment>
         </ReviewOutSide>
       </ReviewBox>
@@ -110,6 +110,8 @@ const ReviewComment = styled.div`
 `;
 
 const Entire = styled.div`
+  // width: 50%;
+  // height: 50%;
   display: flex;
   justify-content: space-around;
   padding-top: 8rem;
